@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:login_register_methods/module/onboarding_screen/onboarding_screen.dart';
+import 'package:login_register_methods/shared/bloc_observer.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  Bloc.observer = MyBlocObserver();
+
   runApp(const MyApp());
 }
 

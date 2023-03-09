@@ -38,7 +38,8 @@ dependencies:
   smooth_page_indicator: ^1.0.1
   colorful_safe_area: ^1.0.0
   flutter_tabler_icons: ^1.1.2
-  flag: ^6.0.0
+  flutter_bloc: ^8.1.2
+  provider: ^6.0.5
 
 dev_dependencies:
   flutter_test:
