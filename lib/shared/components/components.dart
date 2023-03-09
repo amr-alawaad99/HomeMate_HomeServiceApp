@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:login_register_methods/shared/components/constants.dart';
 
 Widget defaultButton({
@@ -42,8 +41,13 @@ Widget defaultButton({
 
 Widget defaultTextFromField({
   required String hintText,
+  required TextEditingController controller,
+  required TextInputType keyboardType,
   String? Function(String? value)? validator,
   bool isSuffix = false,
+  bool isObscure = false,
+  IconData? suffixIcon,
+  Function()? suffixPressFunction,
 }) => Container(
       decoration: const BoxDecoration(
         color: Colors.white,
@@ -62,20 +66,21 @@ Widget defaultTextFromField({
               fontFamily: "Roboto",
               fontSize: 18.0,
           ),
+          obscureText: isObscure,
+          validator: validator,
+          controller: controller,
+          keyboardType: keyboardType,
           decoration: InputDecoration(
             hintStyle: const TextStyle(
               color: Colors.grey,
             ),
             hintText: hintText,
             border: InputBorder.none,
-            suffixIcon: IconButton(
-              onPressed: () {},
-              icon: Icon(
-                isSuffix == true? TablerIcons.eye : null,
-              ),
-            ),
+            suffixIcon: suffixIcon != null ? IconButton(
+              icon: Icon(suffixIcon),
+              onPressed: suffixPressFunction,
+            ) : null,
           ),
-          validator: validator,
         ),
       ),
     );

@@ -1,6 +1,7 @@
 import 'package:colorful_safe_area/colorful_safe_area.dart';
 import 'package:flutter/material.dart';
-import 'package:login_register_methods/module/sign_up_screen/sign_up_screen.dart';
+import 'package:flutter/services.dart';
+import 'package:login_register_methods/module/pre_sign_up_screen/sign_up_screen.dart';
 import 'package:login_register_methods/shared/components/components.dart';
 import 'package:login_register_methods/shared/components/constants.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -41,6 +42,7 @@ class OnBoardingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     return ColorfulSafeArea(
       color: Colors.white,
       child: Scaffold(
