@@ -1,6 +1,7 @@
 import 'package:colorful_safe_area/colorful_safe_area.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:login_register_methods/layout/main_layout_screen.dart';
 import 'package:login_register_methods/module/pre_sign_up_screen/sign_up_screen.dart';
 import 'package:login_register_methods/shared/components/components.dart';
 import 'package:login_register_methods/shared/components/constants.dart';
@@ -90,7 +91,7 @@ class OnBoardingScreen extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => SignUpScreen(),
+                              builder: (context) => PreSignUpScreen(),
                             ));
                       },
                       text: "Sign Up",
@@ -148,7 +149,9 @@ class OnBoardingScreen extends StatelessWidget {
                     ],
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => MainLayoutScreen(),), (route) => false);
+                    },
                     child: const Text(
                       "Login as a Guest",
                       style: TextStyle(

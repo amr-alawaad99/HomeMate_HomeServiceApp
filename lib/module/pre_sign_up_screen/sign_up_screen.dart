@@ -18,7 +18,7 @@ class AccountTypeModel{
 });
 }
 
-class SignUpScreen extends StatelessWidget {
+class PreSignUpScreen extends StatelessWidget {
 
 
   @override
@@ -89,11 +89,12 @@ class SignUpScreen extends StatelessWidget {
                   SizedBox(height: MediaQuery.of(context).size.height * 0.15,
                   ),
                   /// Choose User or Technical
-                  Expanded(
+                  Container(
+                    height: MediaQuery.of(context).size.width * 0.43,
                     child: ListView.separated(
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) => buildAccountTypeCard(accountTypeList[index], index, context),
-                      separatorBuilder: (context, index) => SizedBox(width: MediaQuery.of(context).size.width * 0.05,),
+                      separatorBuilder: (context, index) => SizedBox(width: MediaQuery.of(context).size.width * 0.065,),
                       itemCount: SignupCubit.get(context).isSelected.length,
                     ),
                   ),

@@ -1,3 +1,4 @@
+import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:login_register_methods/shared/components/constants.dart';
 
@@ -84,3 +85,5 @@ Widget defaultTextFromField({
         ),
       ),
     );
+
+
