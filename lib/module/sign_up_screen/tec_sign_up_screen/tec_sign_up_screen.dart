@@ -21,7 +21,6 @@ class Services {
 
 class TecSignUpScreen extends StatelessWidget {
 
-
   List<Services> serviceList = [
     Services(icon: "assets/images/carpentry.png", job: "Carpentry"),
     Services(icon: "assets/images/cleaning.png", job: "Cleaning"),
@@ -55,11 +54,7 @@ class TecSignUpScreen extends StatelessWidget {
 
 
         return Scaffold(
-          appBar: AppBar(
-            backgroundColor: Colors.white,
-            elevation: 0,
-            foregroundColor: Colors.black,
-          ),
+          appBar: AppBar(),
           body: Center(
             child: SingleChildScrollView(
               child: Padding(

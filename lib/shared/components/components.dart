@@ -1,7 +1,7 @@
-import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:login_register_methods/shared/components/constants.dart';
 
+/// BUTTON
 Widget defaultButton({
   double height = 60.0,
   double width = double.infinity,
@@ -11,7 +11,8 @@ Widget defaultButton({
   bool isBold = false,
   double fontSize = 18.0,
   required Function() onPress,
-}) => Container(
+}) =>
+    Container(
       height: height,
       width: width,
       decoration: BoxDecoration(
@@ -21,9 +22,10 @@ Widget defaultButton({
         ),
         boxShadow: const <BoxShadow>[
           BoxShadow(
-              color: Colors.black26,
-              blurRadius: 10.0,
-              offset: Offset(0.0, 0.75),),
+            color: Colors.black26,
+            blurRadius: 10.0,
+            offset: Offset(0.0, 0.75),
+          ),
         ],
       ),
       child: MaterialButton(
@@ -40,6 +42,7 @@ Widget defaultButton({
       ),
     );
 
+/// TEXT FROM FIELD
 Widget defaultTextFromField({
   required String hintText,
   required TextEditingController controller,
@@ -49,7 +52,8 @@ Widget defaultTextFromField({
   bool isObscure = false,
   IconData? suffixIcon,
   Function()? suffixPressFunction,
-}) => Container(
+}) =>
+    Container(
       decoration: const BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.all(Radius.circular(10.0)),
@@ -64,8 +68,8 @@ Widget defaultTextFromField({
         padding: const EdgeInsets.all(10.0),
         child: TextFormField(
           style: const TextStyle(
-              fontFamily: "Roboto",
-              fontSize: 18.0,
+            fontFamily: "Roboto",
+            fontSize: 18.0,
           ),
           obscureText: isObscure,
           validator: validator,
@@ -77,13 +81,35 @@ Widget defaultTextFromField({
             ),
             hintText: hintText,
             border: InputBorder.none,
-            suffixIcon: suffixIcon != null ? IconButton(
-              icon: Icon(suffixIcon),
-              onPressed: suffixPressFunction,
-            ) : null,
+            suffixIcon: suffixIcon != null
+                ? IconButton(
+                    icon: Icon(suffixIcon),
+                    onPressed: suffixPressFunction,
+                  )
+                : null,
           ),
         ),
       ),
     );
 
+/// NAVIGATE AND PUSH (KEEPS PREVIOUS PAGE OPENED)
+Future navigateAndPush(context, {
+  required Widget widget,
+}) =>
+    Navigator.push(
+        context,
+        DialogRoute(
+          context: context,
+          builder: (context) => widget,
+        ));
 
+/// NAVIGATE AND PUSH THEN DELETE (DELETES PREVIOUS PAGE)
+Future navigatePushDelete(context, {
+  required Widget widget,
+}) =>
+    Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(
+          builder: (context) => widget,
+        ),
+        (route) => false);

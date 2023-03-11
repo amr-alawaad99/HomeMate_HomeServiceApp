@@ -9,18 +9,17 @@ import 'package:login_register_methods/shared/components/components.dart';
 import 'package:login_register_methods/shared/components/constants.dart';
 import 'package:provider/provider.dart';
 
-class AccountTypeModel{
+class AccountTypeModel {
   final IconData icon;
   final String text;
+
   AccountTypeModel({
     required this.icon,
     required this.text,
-});
+  });
 }
 
 class PreSignUpScreen extends StatelessWidget {
-
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -36,11 +35,7 @@ class PreSignUpScreen extends StatelessWidget {
           var cubit = SignupCubit.get(context);
 
           return Scaffold(
-            appBar: AppBar(
-              backgroundColor: Colors.white,
-              elevation: 0,
-              foregroundColor: Colors.black,
-            ),
+            appBar: AppBar(),
             body: Padding(
               padding: const EdgeInsets.all(15.0),
               child: Column(
@@ -73,6 +68,7 @@ class PreSignUpScreen extends StatelessWidget {
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.02,
                   ),
+
                   /// "Start by creating an account."
                   const Text(
                     "Start by creating an account.",
@@ -80,56 +76,82 @@ class PreSignUpScreen extends StatelessWidget {
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.01,
                   ),
+
                   /// Caption Text
                   Text(
                     "Choose your account type to complete the registration process.",
-                    style:
-                    Theme.of(context).textTheme.caption!.copyWith(fontSize: 15.0),
+                    style: Theme.of(context)
+                        .textTheme
+                        .caption!
+                        .copyWith(fontSize: 15.0),
                   ),
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.15,
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.15,
                   ),
+
                   /// Choose User or Technical
                   Container(
                     height: MediaQuery.of(context).size.width * 0.43,
                     child: ListView.separated(
                       scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) => buildAccountTypeCard(accountTypeList[index], index, context),
-                      separatorBuilder: (context, index) => SizedBox(width: MediaQuery.of(context).size.width * 0.065,),
+                      itemBuilder: (context, index) => buildAccountTypeCard(
+                          accountTypeList[index], index, context),
+                      separatorBuilder: (context, index) => SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.065,
+                      ),
                       itemCount: SignupCubit.get(context).isSelected.length,
                     ),
                   ),
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.08,
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.08,
                   ),
+
                   /// Next Button
                   Container(
                     child: defaultButton(
                       text: "Next",
-                      buttonColor: cubit.isSelected[0] == false && cubit.isSelected[1] == false? Colors.deepPurple.shade100 : primaryColor,
-                      textColor: cubit.isSelected[0] == false && cubit.isSelected[1] == false? primaryColor : Colors.white,
+                      buttonColor: cubit.isSelected[0] == false &&
+                              cubit.isSelected[1] == false
+                          ? Colors.deepPurple.shade100
+                          : primaryColor,
+                      textColor: cubit.isSelected[0] == false &&
+                              cubit.isSelected[1] == false
+                          ? primaryColor
+                          : Colors.white,
                       onPress: () {
-                        if(cubit.isSelected[0] == true){
-                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => Provider(
-                            create: (context) => SignupCubit(),
-                            builder: (context, child) => UserSignUpScreen(),
-                          ),));
-                        } else if(cubit.isSelected[1] == true){
-                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => Provider(
-                            create: (context) => SignupCubit(),
-                            builder: (context, child) => TecSignUpScreen(),
-                          ),));
+                        if (cubit.isSelected[0] == true) {
+                          navigateAndPush(
+                            context,
+                            widget: Provider(
+                              create: (context) => SignupCubit(),
+                              builder: (context, child) => UserSignUpScreen(),
+                            ),
+                          );
+                        } else if (cubit.isSelected[1] == true) {
+                          navigateAndPush(
+                            context,
+                            widget: Provider(
+                              create: (context) => SignupCubit(),
+                              builder: (context, child) => TecSignUpScreen(),
+                            ),
+                          );
                         } else {
                           print("Toast");
                         }
                       },
                     ),
                   ),
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.05,
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.05,
                   ),
+
                   /// Text and TextButton
                   Center(
                     child: Column(
                       children: [
-                        const Text("Already have an account?",),
+                        const Text(
+                          "Already have an account?",
+                        ),
                         TextButton(
                           onPressed: () {},
                           child: const Text(
@@ -152,53 +174,60 @@ class PreSignUpScreen extends StatelessWidget {
     );
   }
 
-  Widget buildAccountTypeCard(AccountTypeModel model,int index, context) => InkWell(
-    onTap: () {
-      SignupCubit.get(context).changeSelected(index);
-    },
-    borderRadius: BorderRadius.circular(10.0),
-    child: Stack(
-      alignment: AlignmentDirectional.topEnd,
-      children: [
-        if(SignupCubit.get(context).isSelected[index] == true)
-          const Padding(
-            padding: EdgeInsets.all(10.0),
-            child: Icon(
-              TablerIcons.circle_check,
-              color: successColor,
-            ),
-          ),
-        Container(
-          width: MediaQuery.of(context).size.width * 0.43,
-          height: MediaQuery.of(context).size.width * 0.43,
-          clipBehavior: Clip.antiAliasWithSaveLayer,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15.0),
-            border: Border.all(
-              color: SignupCubit.get(context).isSelected[index] == true? successColor : Colors.grey.shade300,
-            ),
-            color: SignupCubit.get(context).isSelected[index] == true? Colors.greenAccent.withOpacity(0.2) : Colors.grey.withOpacity(0.1),
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(
-                model.icon,
-                size: 50,
-                color: Colors.grey,
-              ),
-              const SizedBox(height: 20.0,),
-              Text(
-                model.text,
-                style: const TextStyle(
-                  color: Colors.grey,
-                  fontSize: 18.0,
+  Widget buildAccountTypeCard(AccountTypeModel model, int index, context) =>
+      InkWell(
+        onTap: () {
+          SignupCubit.get(context).changeSelected(index);
+        },
+        borderRadius: BorderRadius.circular(10.0),
+        child: Stack(
+          alignment: AlignmentDirectional.topEnd,
+          children: [
+            if (SignupCubit.get(context).isSelected[index] == true)
+              const Padding(
+                padding: EdgeInsets.all(10.0),
+                child: Icon(
+                  TablerIcons.circle_check,
+                  color: successColor,
                 ),
               ),
-            ],
-          ),
+            Container(
+              width: MediaQuery.of(context).size.width * 0.43,
+              height: MediaQuery.of(context).size.width * 0.43,
+              clipBehavior: Clip.antiAliasWithSaveLayer,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15.0),
+                border: Border.all(
+                  color: SignupCubit.get(context).isSelected[index] == true
+                      ? successColor
+                      : Colors.grey.shade300,
+                ),
+                color: SignupCubit.get(context).isSelected[index] == true
+                    ? Colors.greenAccent.withOpacity(0.2)
+                    : Colors.grey.withOpacity(0.1),
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    model.icon,
+                    size: 50,
+                    color: Colors.grey,
+                  ),
+                  const SizedBox(
+                    height: 20.0,
+                  ),
+                  Text(
+                    model.text,
+                    style: const TextStyle(
+                      color: Colors.grey,
+                      fontSize: 18.0,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
-      ],
-    ),
-  );
+      );
 }

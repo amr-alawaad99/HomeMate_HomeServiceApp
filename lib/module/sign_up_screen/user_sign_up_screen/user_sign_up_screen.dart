@@ -28,11 +28,7 @@ class UserSignUpScreen extends StatelessWidget {
         var cubit = SignupCubit.get(context);
 
         return Scaffold(
-          appBar: AppBar(
-            backgroundColor: Colors.white,
-            elevation: 0,
-            foregroundColor: Colors.black,
-          ),
+          appBar: AppBar(),
           body: Center(
             child: SingleChildScrollView(
               child: Padding(

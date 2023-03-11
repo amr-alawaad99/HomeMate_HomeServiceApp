@@ -14,7 +14,6 @@ class LayoutCubit extends Cubit<LayoutStates>{
 
   //  Cubit for BottomNavBar
   int currentIndex = 0;
-
   void changeBottomNav(int index){
     currentIndex = index;
     emit(ChatChangeBottomNavState());
@@ -26,5 +25,6 @@ class LayoutCubit extends Cubit<LayoutStates>{
     const SuppliersScreen(),
     const AppointmentsScreen(),
   ];
+  //////////////////////////////////
 
 }

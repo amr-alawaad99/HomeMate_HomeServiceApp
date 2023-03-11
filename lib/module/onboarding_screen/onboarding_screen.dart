@@ -45,7 +45,7 @@ class OnBoardingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     return ColorfulSafeArea(
-      color: Colors.white,
+      color: Colors.grey.shade100,
       child: Scaffold(
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -88,11 +88,7 @@ class OnBoardingScreen extends StatelessWidget {
                   Container(
                     child: defaultButton(
                       onPress: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => PreSignUpScreen(),
-                            ));
+                        navigateAndPush(context, widget: PreSignUpScreen());
                       },
                       text: "Sign Up",
                     ),
@@ -150,7 +146,7 @@ class OnBoardingScreen extends StatelessWidget {
                   ),
                   TextButton(
                     onPressed: () {
-                      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => MainLayoutScreen(),), (route) => false);
+                      navigatePushDelete(context, widget: MainLayoutScreen());
                     },
                     child: const Text(
                       "Login as a Guest",

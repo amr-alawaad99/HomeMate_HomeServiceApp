@@ -4,7 +4,6 @@ import 'package:login_register_methods/module/onboarding_screen/onboarding_scree
 import 'package:login_register_methods/shared/bloc_observer.dart';
 import 'package:login_register_methods/shared/components/constants.dart';
 
-import 'layout/main_layout_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,8 +21,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      // TO BE EDITED!!
       theme: ThemeData(
-        scaffoldBackgroundColor: Colors.white,
+        appBarTheme: AppBarTheme(
+          backgroundColor: scaffoldLightColor,
+          elevation: 0,
+          foregroundColor: Colors.black,
+        ),
+        scaffoldBackgroundColor: scaffoldLightColor,
         textTheme: const TextTheme(
           bodyMedium: TextStyle(
             fontSize: 18.0,
