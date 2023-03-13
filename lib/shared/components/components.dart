@@ -93,7 +93,8 @@ Widget defaultTextFromField({
     );
 
 /// NAVIGATE AND PUSH (KEEPS PREVIOUS PAGE OPENED)
-Future navigateAndPush(context, {
+Future navigateAndPush(
+  context, {
   required Widget widget,
 }) =>
     Navigator.push(
@@ -104,7 +105,8 @@ Future navigateAndPush(context, {
         ));
 
 /// NAVIGATE AND PUSH THEN DELETE (DELETES PREVIOUS PAGE)
-Future navigatePushDelete(context, {
+Future navigatePushDelete(
+  context, {
   required Widget widget,
 }) =>
     Navigator.pushAndRemoveUntil(

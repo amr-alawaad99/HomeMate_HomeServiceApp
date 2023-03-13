@@ -13,199 +13,229 @@ class CategoriesScreen extends StatelessWidget {
           Row(
             children: [
               Expanded(
-                child: Material(
-                  elevation: 3,
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(10),
-                  ),
-                  child: Container(
-                    height: 120,
-                    width: 100.0,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image(
-                          image: AssetImage('assets/images/cleaning.png'),
-                          width: 50,
-                          height: 50,
-                        ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Text('Cleaning'),
-                      ],
+                child: GestureDetector(
+                  onTap: () {
+                    /**navigateAndPush(context, widget: );**/
+                  },
+                  child: Material(
+                    elevation: 3,
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(10),
                     ),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10.0)),
+                    child: Container(
+                      height: 120,
+                      width: 100.0,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image(
+                            image: AssetImage('assets/images/cleaning.png'),
+                            width: 50,
+                            height: 50,
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Text('Cleaning'),
+                        ],
+                      ),
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10.0)),
+                    ),
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 15,
               ),
               Expanded(
-                child: Material(
-                  elevation: 3,
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(10),
-                  ),
-                  child: Container(
-                    height: 120,
-                    width: 100.0,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image(
-                          image: AssetImage('assets/images/kitchen.png'),
-                          width: 50,
-                          height: 50,
-                        ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Text('Kitchen'),
-                      ],
+                child: GestureDetector(
+                  onTap: () {
+                    /**navigateAndPush(context, widget: );**/
+                  },
+                  child: Material(
+                    elevation: 3,
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(10),
                     ),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10.0)),
+                    child: Container(
+                      height: 120,
+                      width: 100.0,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image(
+                            image: AssetImage('assets/images/kitchen.png'),
+                            width: 50,
+                            height: 50,
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Text('Kitchen'),
+                        ],
+                      ),
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10.0)),
+                    ),
                   ),
                 ),
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 15,
           ),
           Row(
             children: [
               Expanded(
-                child: Material(
-                  elevation: 3,
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(10),
-                  ),
-                  child: Container(
-                    height: 120,
-                    width: 100.0,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image(
-                          image: AssetImage('assets/images/plumbing.png'),
-                          width: 50,
-                          height: 50,
-                        ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Text('Plumbing'),
-                      ],
+                child: GestureDetector(
+                  onTap: () {
+                    /**navigateAndPush(context, widget: );**/
+                  },
+                  child: Material(
+                    elevation: 3,
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(10),
                     ),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10.0)),
+                    child: Container(
+                      height: 120,
+                      width: 100.0,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image(
+                            image: AssetImage('assets/images/plumbing.png'),
+                            width: 50,
+                            height: 50,
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Text('Plumbing'),
+                        ],
+                      ),
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10.0)),
+                    ),
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 15,
               ),
               Expanded(
-                child: Material(
-                  elevation: 3,
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(10),
-                  ),
-                  child: Container(
-                    height: 120,
-                    width: 100.0,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image(
-                          image: AssetImage('assets/images/paint.png'),
-                          width: 50,
-                          height: 50,
-                        ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Text('Paint'),
-                      ],
+                child: GestureDetector(
+                  onTap: () {
+                    /**navigateAndPush(context, widget: );**/
+                  },
+                  child: Material(
+                    elevation: 3,
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(10),
                     ),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10.0)),
+                    child: Container(
+                      height: 120,
+                      width: 100.0,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image(
+                            image: AssetImage('assets/images/paint.png'),
+                            width: 50,
+                            height: 50,
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Text('Paint'),
+                        ],
+                      ),
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10.0)),
+                    ),
                   ),
                 ),
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 15,
           ),
           Row(
             children: [
               Expanded(
-                child: Material(
-                  elevation: 3,
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(10),
-                  ),
-                  child: Container(
-                    height: 120,
-                    width: 100.0,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image(
-                          image: AssetImage('assets/images/carpentry.png'),
-                          width: 50,
-                          height: 50,
-                        ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Text('Carpentry'),
-                      ],
+                child: GestureDetector(
+                  onTap: () {
+                    /**navigateAndPush(context, widget: );**/
+                  },
+                  child: Material(
+                    elevation: 3,
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(10),
                     ),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10.0)),
+                    child: Container(
+                      height: 120,
+                      width: 100.0,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image(
+                            image: AssetImage('assets/images/carpentry.png'),
+                            width: 50,
+                            height: 50,
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Text('Carpentry'),
+                        ],
+                      ),
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10.0)),
+                    ),
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 15,
               ),
               Expanded(
-                child: Material(
-                  elevation: 3,
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(10),
-                  ),
-                  child: Container(
-                    height: 120,
-                    width: 100.0,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image(
-                          image: AssetImage('assets/images/electrician.png'),
-                          width: 50,
-                          height: 50,
-                        ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Text('Electricity'),
-                      ],
+                child: GestureDetector(
+                  onTap: () {
+                    /**navigateAndPush(context, widget: );**/
+                  },
+                  child: Material(
+                    elevation: 3,
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(10),
                     ),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10.0)),
+                    child: Container(
+                      height: 120,
+                      width: 100.0,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image(
+                            image: AssetImage('assets/images/electrician.png'),
+                            width: 50,
+                            height: 50,
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Text('Electricity'),
+                        ],
+                      ),
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10.0)),
+                    ),
                   ),
                 ),
               ),
