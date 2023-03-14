@@ -13,8 +13,7 @@ class SignupCubit extends Cubit<SignupStates>{
   bool isInvisible = true;
   void changePasswordVisibility() {
     isInvisible = !isInvisible;
-    passSuffix =
-    isInvisible ? TablerIcons.eye_off : TablerIcons.eye;
+    passSuffix = isInvisible ? TablerIcons.eye_off : TablerIcons.eye;
 
     emit(PasswordVisibilityChangeState());
   }
