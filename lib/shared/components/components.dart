@@ -115,3 +115,38 @@ Future navigatePushDelete(
           builder: (context) => widget,
         ),
         (route) => false);
+
+Widget defaultCategoriesBox({required String img, required String text}) =>
+    Expanded(
+      child: GestureDetector(
+        onTap: () {
+          /**navigateAndPush(context, widget: );**/
+        },
+        child: Material(
+          elevation: 3,
+          borderRadius: const BorderRadius.all(
+            Radius.circular(10),
+          ),
+          child: Container(
+            height: 120,
+            width: 100.0,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image(
+                  image: AssetImage(img),
+                  width: 50,
+                  height: 50,
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                Text(text),
+              ],
+            ),
+            decoration: BoxDecoration(
+                color: Colors.white, borderRadius: BorderRadius.circular(10.0)),
+          ),
+        ),
+      ),
+    );

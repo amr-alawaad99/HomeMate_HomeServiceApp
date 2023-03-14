@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:login_register_methods/shared/components/components.dart';
 
 class CategoriesScreen extends StatelessWidget {
   const CategoriesScreen({Key? key}) : super(key: key);
@@ -12,76 +12,16 @@ class CategoriesScreen extends StatelessWidget {
         children: [
           Row(
             children: [
-              Expanded(
-                child: GestureDetector(
-                  onTap: () {
-                    /**navigateAndPush(context, widget: );**/
-                  },
-                  child: Material(
-                    elevation: 3,
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(10),
-                    ),
-                    child: Container(
-                      height: 120,
-                      width: 100.0,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image(
-                            image: AssetImage('assets/images/cleaning.png'),
-                            width: 50,
-                            height: 50,
-                          ),
-                          SizedBox(
-                            height: 5,
-                          ),
-                          Text('Cleaning'),
-                        ],
-                      ),
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10.0)),
-                    ),
-                  ),
-                ),
+              defaultCategoriesBox(
+                img: 'assets/images/cleaning.png',
+                text: 'Cleaning',
               ),
               const SizedBox(
                 width: 15,
               ),
-              Expanded(
-                child: GestureDetector(
-                  onTap: () {
-                    /**navigateAndPush(context, widget: );**/
-                  },
-                  child: Material(
-                    elevation: 3,
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(10),
-                    ),
-                    child: Container(
-                      height: 120,
-                      width: 100.0,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image(
-                            image: AssetImage('assets/images/kitchen.png'),
-                            width: 50,
-                            height: 50,
-                          ),
-                          SizedBox(
-                            height: 5,
-                          ),
-                          Text('Kitchen'),
-                        ],
-                      ),
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10.0)),
-                    ),
-                  ),
-                ),
+              defaultCategoriesBox(
+                img: 'assets/images/kitchen.png',
+                text: 'Kitchen',
               ),
             ],
           ),
@@ -90,76 +30,16 @@ class CategoriesScreen extends StatelessWidget {
           ),
           Row(
             children: [
-              Expanded(
-                child: GestureDetector(
-                  onTap: () {
-                    /**navigateAndPush(context, widget: );**/
-                  },
-                  child: Material(
-                    elevation: 3,
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(10),
-                    ),
-                    child: Container(
-                      height: 120,
-                      width: 100.0,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image(
-                            image: AssetImage('assets/images/plumbing.png'),
-                            width: 50,
-                            height: 50,
-                          ),
-                          SizedBox(
-                            height: 5,
-                          ),
-                          Text('Plumbing'),
-                        ],
-                      ),
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10.0)),
-                    ),
-                  ),
-                ),
+              defaultCategoriesBox(
+                img: 'assets/images/plumbing.png',
+                text: 'Plumbing',
               ),
               const SizedBox(
                 width: 15,
               ),
-              Expanded(
-                child: GestureDetector(
-                  onTap: () {
-                    /**navigateAndPush(context, widget: );**/
-                  },
-                  child: Material(
-                    elevation: 3,
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(10),
-                    ),
-                    child: Container(
-                      height: 120,
-                      width: 100.0,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image(
-                            image: AssetImage('assets/images/paint.png'),
-                            width: 50,
-                            height: 50,
-                          ),
-                          SizedBox(
-                            height: 5,
-                          ),
-                          Text('Paint'),
-                        ],
-                      ),
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10.0)),
-                    ),
-                  ),
-                ),
+              defaultCategoriesBox(
+                img: 'assets/images/paint.png',
+                text: 'Paint',
               ),
             ],
           ),
@@ -168,76 +48,16 @@ class CategoriesScreen extends StatelessWidget {
           ),
           Row(
             children: [
-              Expanded(
-                child: GestureDetector(
-                  onTap: () {
-                    /**navigateAndPush(context, widget: );**/
-                  },
-                  child: Material(
-                    elevation: 3,
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(10),
-                    ),
-                    child: Container(
-                      height: 120,
-                      width: 100.0,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image(
-                            image: AssetImage('assets/images/carpentry.png'),
-                            width: 50,
-                            height: 50,
-                          ),
-                          SizedBox(
-                            height: 5,
-                          ),
-                          Text('Carpentry'),
-                        ],
-                      ),
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10.0)),
-                    ),
-                  ),
-                ),
+              defaultCategoriesBox(
+                img: 'assets/images/carpentry.png',
+                text: 'Carpentry',
               ),
               const SizedBox(
                 width: 15,
               ),
-              Expanded(
-                child: GestureDetector(
-                  onTap: () {
-                    /**navigateAndPush(context, widget: );**/
-                  },
-                  child: Material(
-                    elevation: 3,
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(10),
-                    ),
-                    child: Container(
-                      height: 120,
-                      width: 100.0,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image(
-                            image: AssetImage('assets/images/electrician.png'),
-                            width: 50,
-                            height: 50,
-                          ),
-                          SizedBox(
-                            height: 5,
-                          ),
-                          Text('Electricity'),
-                        ],
-                      ),
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10.0)),
-                    ),
-                  ),
-                ),
+              defaultCategoriesBox(
+                img: 'assets/images/electrician.png',
+                text: 'Electricity',
               ),
             ],
           ),
