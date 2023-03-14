@@ -166,7 +166,8 @@ class OnBoardingScreen extends StatelessWidget {
     );
   }
 
-  Widget onBoardingItem(BoardingModel model, context) => Column(
+  Widget onBoardingItem(BoardingModel model, context) =>
+      Column(
         children: [
           //OnBoarding Text
           Padding(

@@ -7,10 +7,12 @@ import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:login_register_methods/layout/cubit/cubit.dart';
 import 'package:login_register_methods/layout/cubit/states.dart';
 import 'package:login_register_methods/module/drawer/my_drawer.dart';
+import 'package:login_register_methods/shared/components/components.dart';
 import 'package:login_register_methods/shared/components/constants.dart';
 
 class MainLayoutScreen extends StatelessWidget {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+  var searchController = TextEditingController();
 
   MainLayoutScreen({super.key});
 
@@ -32,81 +34,159 @@ class MainLayoutScreen extends StatelessWidget {
                 headerSliverBuilder: (context, innerBoxIsScrolled) => <Widget>[
                   SliverAppBar(
                     backgroundColor: primaryColor,
-                    shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(bottom: Radius.circular(15))),
+                    shape: const RoundedRectangleBorder(
+                        borderRadius:
+                            BorderRadius.vertical(bottom: Radius.circular(15))),
                     automaticallyImplyLeading: false,
                     flexibleSpace: Padding(
-                      padding: const EdgeInsetsDirectional.fromSTEB(15, 25, 15, 25),
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(15, 25, 15, 25),
                       child: InkWell(
                         onTap: () {
                           scaffoldKey.currentState!.openDrawer();
                         },
-                        child: Row(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            CircleAvatar(
-                              backgroundImage: NetworkImage(tempImage),
-                              radius: 25,
-                            ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            // NAME AND LOCATION
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  // PROFILE NAME
-                                  Text(
-                                    "Hi, Rodina",
-                                    style: TextStyle(
-                                      fontFamily: "Roboto",
-                                      color: Colors.white,
-                                      fontSize: 15.0,
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    height: 2,
-                                  ),
-                                  // LOCATION ICON AND LOCATION TEXT
-                                  Row(
-                                    crossAxisAlignment: CrossAxisAlignment.end,
+                            Row(
+                              children: [
+                                CircleAvatar(
+                                  backgroundImage: NetworkImage(tempImage),
+                                  radius: 25,
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                // NAME AND LOCATION
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Icon(
-                                        TablerIcons.map_pin,
-                                        color: Colors.grey.shade400,
-                                        size: 18,
-                                      ),
-                                      const SizedBox(
-                                        width: 5,
-                                      ),
-                                      Text(
-                                        "Location should be, here!",
+                                      // PROFILE NAME
+                                      const Text(
+                                        "Hi, Rodina",
                                         style: TextStyle(
                                           fontFamily: "Roboto",
-                                          color: Colors.grey.shade400,
-                                          fontSize: 12,
+                                          color: Colors.white,
+                                          fontSize: 15.0,
                                         ),
+                                      ),
+                                      const SizedBox(
+                                        height: 2,
+                                      ),
+                                      // LOCATION ICON AND LOCATION TEXT
+                                      Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.end,
+                                        children: [
+                                          Icon(
+                                            TablerIcons.map_pin,
+                                            color: Colors.grey.shade400,
+                                            size: 18,
+                                          ),
+                                          const SizedBox(
+                                            width: 5,
+                                          ),
+                                          Text(
+                                            "Location should be, here!",
+                                            style: TextStyle(
+                                              fontFamily: "Roboto",
+                                              color: Colors.grey.shade400,
+                                              fontSize: 12,
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ],
                                   ),
+                                ),
+                                // NOTIFICATION ICON
+                                IconButton(
+                                  onPressed: () {
+                                    print("N");
+                                  },
+                                  icon: const Icon(
+                                    TablerIcons.bell,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            if (LayoutCubit.get(context).currentIndex == 0)
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 2),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const SizedBox(
+                                      height: 15,
+                                    ),
+                                    const Text(
+                                      'What You are',
+                                      style: TextStyle(
+                                        fontFamily: "Roboto",
+                                        fontSize: 22.0,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      height: 5,
+                                    ),
+                                    const Text(
+                                      'Looking for?',
+                                      style: TextStyle(
+                                        fontFamily: "Roboto",
+                                        fontSize: 22.0,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      height: 15,
+                                    ),
+                                    defaultTextFromField(
+                                      prefixIcon: Icons.search,
+                                      hintText:
+                                          'Search for services or suppliers',
+                                      controller: searchController,
+                                      keyboardType: TextInputType.text,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            if (LayoutCubit.get(context).currentIndex == 1)
+                              Column(
+                                children: [
+                                  SizedBox(
+                                    height: 15,
+                                  ),
+                                  defaultTextFromField(
+                                    prefixIcon: Icons.search,
+                                    hintText: 'What service do you need',
+                                    controller: searchController,
+                                    keyboardType: TextInputType.text,
+                                  ),
                                 ],
                               ),
-                            ),
-                            // NOTIFICATION ICON
-                            IconButton(
-                              onPressed: () {
-                                print("N");
-                              },
-                              icon: const Icon(
-                                TablerIcons.bell,
-                                color: Colors.white,
-                              ),
-                            ),
                           ],
                         ),
                       ),
                     ),
-                    bottom: const PreferredSize(preferredSize: Size.fromHeight(50), child: SizedBox()),
+                    bottom: LayoutCubit.get(context).currentIndex == 0
+                        ? const PreferredSize(
+                            preferredSize: Size.fromHeight(200),
+                            child: SizedBox())
+                        : LayoutCubit.get(context).currentIndex == 1
+                            ? PreferredSize(
+                                preferredSize: Size.fromHeight(130),
+                                child: SizedBox())
+                            : PreferredSize(
+                                preferredSize: Size.fromHeight(50),
+                                child: SizedBox()),
                   ),
                 ],
                 body: SingleChildScrollView(
@@ -122,7 +202,8 @@ class MainLayoutScreen extends StatelessWidget {
                 backgroundColor: secondaryColor,
                 child: const Icon(TablerIcons.plus),
               ),
-              floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+              floatingActionButtonLocation:
+                  FloatingActionButtonLocation.endDocked,
               bottomNavigationBar: BubbleBottomBar(
                 opacity: 0.2,
                 currentIndex: LayoutCubit.get(context).currentIndex,
@@ -132,9 +213,14 @@ class MainLayoutScreen extends StatelessWidget {
                 fabLocation: BubbleBottomBarFabLocation.end,
                 items: [
                   defaultBottomBarItem(context, "Home", TablerIcons.smart_home),
-                  defaultBottomBarItem(context, "Categories", TablerIcons.layout_grid),
+                  defaultBottomBarItem(
+                      context, "Categories", TablerIcons.layout_grid),
                   defaultBottomBarItem(context, "Suppliers", TablerIcons.users),
-                  defaultBottomBarItem(context, "Appointment", TablerIcons.clipboard,),
+                  defaultBottomBarItem(
+                    context,
+                    "Appointment",
+                    TablerIcons.clipboard,
+                  ),
                 ],
                 onTap: (value) {
                   LayoutCubit.get(context).changeBottomNav(value!);
@@ -257,7 +343,7 @@ class MainLayoutScreen extends StatelessWidget {
                 text,
                 style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     color: primaryColor,
-                    fontSize: MediaQuery.of(context).size.width * 0.04,
+                    fontSize: MediaQuery.of(context).size.width * 0.03,
                     fontWeight: FontWeight.bold,
                     overflow: TextOverflow.ellipsis),
               ),
