@@ -51,7 +51,9 @@ Widget defaultTextFromField({
   bool isSuffix = false,
   bool isObscure = false,
   IconData? suffixIcon,
+  IconData? prefixIcon,
   Function()? suffixPressFunction,
+  Function()? prefixPressFunction,
 }) =>
     Container(
       decoration: const BoxDecoration(
@@ -69,7 +71,7 @@ Widget defaultTextFromField({
         child: TextFormField(
           style: const TextStyle(
             fontFamily: "Roboto",
-            fontSize: 18.0,
+            fontSize: 16.0,
           ),
           obscureText: isObscure,
           validator: validator,
@@ -81,6 +83,11 @@ Widget defaultTextFromField({
             ),
             hintText: hintText,
             border: InputBorder.none,
+            prefixIcon: prefixIcon !=null ? IconButton(
+              icon: Icon(prefixIcon),
+              onPressed: prefixPressFunction,
+            )
+                : null,
             suffixIcon: suffixIcon != null
                 ? IconButton(
                     icon: Icon(suffixIcon),
