@@ -127,7 +127,7 @@ Future navigatePushDelete(
 
 Widget defaultCategoriesBox({required String img, required String text}) =>
     Expanded(
-      child: GestureDetector(
+      child: InkWell(
         onTap: () {
           /**navigateAndPush(context, widget: );**/
         },
