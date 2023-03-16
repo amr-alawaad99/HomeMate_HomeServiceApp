@@ -27,6 +27,7 @@ class TecSignUpScreen extends StatelessWidget {
     Services(icon: "assets/images/electrician.png", job: "Electrician"),
     Services(icon: "assets/images/kitchen.png", job: "Kitchen"),
     Services(icon: "assets/images/plumbing.png", job: "Plumbing"),
+    Services(icon: "assets/images/paint.png", job: "Painting"),
   ];
 
   bool value = false;
@@ -95,7 +96,7 @@ class TecSignUpScreen extends StatelessWidget {
                       Text(
                         "Create your account now and be a service provider",
                         style:
-                        Theme.of(context).textTheme.caption!.copyWith(fontSize: 18.0),
+                        Theme.of(context).textTheme.bodySmall!.copyWith(fontSize: 18.0),
                       ),
                       SizedBox(
                         height: screenHeight * 0.04,
@@ -122,7 +123,7 @@ class TecSignUpScreen extends StatelessWidget {
                       Text(
                         "Choose a service",
                         style:
-                        Theme.of(context).textTheme.caption!.copyWith(fontSize: 18.0),
+                        Theme.of(context).textTheme.bodySmall!.copyWith(fontSize: 18.0),
                       ),
                       SizedBox(
                         height: screenHeight * 0.02,

@@ -1,13 +1,11 @@
 import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
 import 'package:colorful_safe_area/colorful_safe_area.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:login_register_methods/layout/cubit/cubit.dart';
 import 'package:login_register_methods/layout/cubit/states.dart';
 import 'package:login_register_methods/module/drawer/my_drawer.dart';
-import 'package:login_register_methods/shared/components/components.dart';
 import 'package:login_register_methods/shared/components/constants.dart';
 
 class MainLayoutScreen extends StatelessWidget {
@@ -41,14 +39,14 @@ class MainLayoutScreen extends StatelessWidget {
                     flexibleSpace: Padding(
                       padding:
                           const EdgeInsetsDirectional.fromSTEB(15, 25, 15, 25),
-                      child: InkWell(
-                        onTap: () {
-                          scaffoldKey.currentState!.openDrawer();
-                        },
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          InkWell(
+                            onTap: () {
+                              scaffoldKey.currentState!.openDrawer();
+                            },
+                            child: Row(
                               children: [
                                 CircleAvatar(
                                   backgroundImage: NetworkImage(tempImage),
@@ -114,77 +112,115 @@ class MainLayoutScreen extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            if (LayoutCubit.get(context).currentIndex == 0)
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 2),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    const SizedBox(
-                                      height: 15,
-                                    ),
-                                    const Text(
-                                      'What You are',
-                                      style: TextStyle(
-                                        fontFamily: "Roboto",
-                                        fontSize: 22.0,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      height: 5,
-                                    ),
-                                    const Text(
-                                      'Looking for?',
-                                      style: TextStyle(
-                                        fontFamily: "Roboto",
-                                        fontSize: 22.0,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      height: 15,
-                                    ),
-                                    defaultTextFromField(
-                                      prefixIcon: Icons.search,
-                                      hintText:
-                                          'Search for services or suppliers',
-                                      controller: searchController,
-                                      keyboardType: TextInputType.text,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            if (LayoutCubit.get(context).currentIndex == 1)
-                              Column(
+                          ),
+                          if (LayoutCubit.get(context).currentIndex == 0)
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 2),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 15,
                                   ),
-                                  defaultTextFromField(
-                                    prefixIcon: Icons.search,
-                                    hintText: 'What service do you need',
-                                    controller: searchController,
-                                    keyboardType: TextInputType.text,
+                                  const Text(
+                                    'What are you\nlooking for?',
+                                    style: TextStyle(
+                                      fontFamily: "Roboto",
+                                      fontSize: 22.0,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      height: 1.5,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 15,
+                                  ),
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      color: scaffoldLightColor,
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(10.0)),
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(10.0),
+                                      child: TextFormField(
+                                        style: const TextStyle(
+                                          fontFamily: "Roboto",
+                                          fontSize: 16.0,
+                                        ),
+                                        controller: searchController,
+                                        keyboardType: TextInputType.text,
+                                        decoration: const InputDecoration(
+                                          hintStyle: TextStyle(
+                                            color: Colors.grey,
+                                          ),
+                                          hintText:
+                                              "Search for services or suppliers",
+                                          border: InputBorder.none,
+                                          prefixIcon:
+                                              Padding(
+                                                padding: EdgeInsets.only(bottom: 5),
+                                                child: Icon(TablerIcons.search),
+                                              ),
+                                        ),
+                                      ),
+                                    ),
                                   ),
                                 ],
                               ),
-                          ],
-                        ),
+                            ),
+                          if (LayoutCubit.get(context).currentIndex == 1)
+                            Column(
+                              children: [
+                                const SizedBox(
+                                  height: 15,
+                                ),
+                                Container(
+                                  decoration: BoxDecoration(
+                                    color: scaffoldLightColor,
+                                    borderRadius: const BorderRadius.all(
+                                        Radius.circular(10.0)),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: TextFormField(
+                                      style: const TextStyle(
+                                        fontFamily: "Roboto",
+                                        fontSize: 16.0,
+                                      ),
+                                      controller: searchController,
+                                      keyboardType: TextInputType.text,
+                                      decoration: const InputDecoration(
+                                        hintStyle: TextStyle(
+                                          color: Colors.grey,
+                                        ),
+                                        hintText:
+                                        "What service do you need",
+                                        border: InputBorder.none,
+                                        prefixIcon:
+                                        Padding(
+                                          padding: EdgeInsets.only(bottom: 5),
+                                          child: Icon(TablerIcons.search),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                        ],
                       ),
                     ),
                     bottom: LayoutCubit.get(context).currentIndex == 0
                         ? const PreferredSize(
-                            preferredSize: Size.fromHeight(200),
+                            preferredSize: Size.fromHeight(210),
                             child: SizedBox())
                         : LayoutCubit.get(context).currentIndex == 1
-                            ? PreferredSize(
+                            ? const PreferredSize(
                                 preferredSize: Size.fromHeight(130),
                                 child: SizedBox())
-                            : PreferredSize(
+                            : const PreferredSize(
                                 preferredSize: Size.fromHeight(50),
                                 child: SizedBox()),
                   ),

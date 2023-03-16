@@ -20,6 +20,8 @@ class AccountTypeModel {
 }
 
 class PreSignUpScreen extends StatelessWidget {
+  const PreSignUpScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -82,7 +84,7 @@ class PreSignUpScreen extends StatelessWidget {
                     "Choose your account type to complete the registration process.",
                     style: Theme.of(context)
                         .textTheme
-                        .caption!
+                        .bodySmall!
                         .copyWith(fontSize: 15.0),
                   ),
                   SizedBox(
@@ -90,17 +92,12 @@ class PreSignUpScreen extends StatelessWidget {
                   ),
 
                   /// Choose User or Technical
-                  Container(
-                    height: MediaQuery.of(context).size.width * 0.43,
-                    child: ListView.separated(
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) => buildAccountTypeCard(
-                          accountTypeList[index], index, context),
-                      separatorBuilder: (context, index) => SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.065,
-                      ),
-                      itemCount: SignupCubit.get(context).isSelected.length,
-                    ),
+                  Row(
+                    children: [
+                      buildAccountTypeCard(accountTypeList[0], 0, context),
+                      Spacer(),
+                      buildAccountTypeCard(accountTypeList[1], 1, context),
+                    ],
                   ),
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.08,
