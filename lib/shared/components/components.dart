@@ -417,7 +417,7 @@ Widget defaultAppointmentCard(
     );
 
 Widget defaultSuppliersItem({
-  required String Mark,
+  required String mark,
   required String agentName,
   required String jop,
   required String address,
@@ -510,7 +510,7 @@ Widget defaultSuppliersItem({
                                 width: 8,
                               ),
                               Text(
-                                Mark,
+                                mark,
                                 style: TextStyle(
                                   fontSize: 20,
                                 ),
