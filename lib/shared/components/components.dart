@@ -1,3 +1,4 @@
+import 'dart:js';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
@@ -208,7 +209,8 @@ Widget defaultAppointmentCard(
         required String time,
         required String status,
         required String cost,
-        required int count,required BuildContext context}) =>
+        required int count,
+        required BuildContext context}) =>
     Padding(
       padding: const EdgeInsets.all(20.0),
       child: SizedBox(
@@ -413,3 +415,125 @@ Widget defaultAppointmentCard(
             itemCount: count),
       ),
     );
+
+Widget defaultSuppliersItem({
+  required String mark,
+  required String agentName,
+  required String jop,
+  required String address,
+  required String distance,
+  required int Count,
+  required BuildContext context,
+}) {
+  return ListView.separated(
+      itemBuilder: (BuildContext context,int index) {
+        return InkWell(
+          onTap: () {
+            /**navigateAndPush(context, widget: );**/
+          },
+          child: Container(
+            height: 150,
+            child: Padding(
+              padding:
+                  const EdgeInsets.only(bottom: 8, top: 8, right: 16, left: 16),
+              child: Material(
+                elevation: 3,
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Image(
+                        image: AssetImage('assets/images/paint.png'),
+                        height: 60,
+                        width: 60,
+                      ),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(agentName,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                )),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Text(jop,
+                                style: TextStyle(
+                                  fontSize: 15,
+                                )),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Icon(
+                                  TablerIcons.map_pin,
+                                  size: 20,
+                                  color: secondaryColor,
+                                ),
+                                Expanded(
+                                  child: Text(address,
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                        fontSize: 15,
+                                      )),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Column(
+                        children: [
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Icon(
+                                TablerIcons.star,
+                                size: 20,
+                                color: secondaryColor,
+                              ),
+                              SizedBox(
+                                width: 8,
+                              ),
+                              Text(
+                                mark,
+                                style: TextStyle(
+                                  fontSize: 20,
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 30,
+                          ),
+                          Text(distance,
+                              style: TextStyle(
+                                fontSize: 20,
+                              )),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+        );
+      },
+      separatorBuilder: (context, index) => SizedBox(),
+      itemCount: Count);
+}
