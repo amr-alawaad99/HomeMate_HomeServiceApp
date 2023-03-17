@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:login_register_methods/shared/components/components.dart';
-import 'package:login_register_methods/shared/components/constants.dart';
+
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -11,10 +10,13 @@ class HomeScreen extends StatelessWidget {
       padding: const EdgeInsets.all(15.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [
+        children:  [
 
-          SizedBox(
-            height: 10,
+          ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: Container(
+              child: Image(image: AssetImage('assets/images/carpenter.jpg'),),
+            ),
           ),
 
         ],
