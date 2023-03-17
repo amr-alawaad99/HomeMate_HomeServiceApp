@@ -57,6 +57,8 @@ Widget defaultTextFromField({
   IconData? prefixIcon,
   Function()? suffixPressFunction,
   Function()? prefixPressFunction,
+  Function()? onTapFunction,
+
 }) =>
     Container(
       decoration: const BoxDecoration(
@@ -72,6 +74,7 @@ Widget defaultTextFromField({
       child: Padding(
         padding: const EdgeInsets.all(10.0),
         child: TextFormField(
+          onTap: onTapFunction,
           style: const TextStyle(
             fontFamily: "Roboto",
             fontSize: 16.0,
@@ -127,7 +130,7 @@ Future navigatePushDelete(
         ),
         (route) => false);
 
-Widget defaultCategoriesBox({required String img, required String text}) =>
+Widget defaultCategoriesBox({ String img = '',  String text = '',double width = 100,double height = 120}) =>
     Expanded(
       child: InkWell(
         onTap: () {
@@ -139,8 +142,8 @@ Widget defaultCategoriesBox({required String img, required String text}) =>
             Radius.circular(10),
           ),
           child: Container(
-            height: 120,
-            width: 100.0,
+            height: height,
+            width: width,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
