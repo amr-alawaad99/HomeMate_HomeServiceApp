@@ -426,7 +426,7 @@ Widget defaultSuppliersItem({
   required BuildContext context,
 }) {
   return ListView.separated(
-      itemBuilder: (BuildContext context,int index) {
+      itemBuilder: (BuildContext context, int index) {
         return InkWell(
           onTap: () {
             /**navigateAndPush(context, widget: );**/
