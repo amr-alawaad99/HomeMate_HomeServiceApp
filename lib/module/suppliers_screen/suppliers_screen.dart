@@ -17,7 +17,7 @@ class SuppliersScreen extends StatelessWidget {
         Container(
             height: MediaQuery.of(context).size.height,
             child: defaultSuppliersItem(context:context ,
-                mark: 'mark',
+                mark: '5.4.3',
                 agentName: 'agentName',
                 jop: 'jopp',
                 address: 'address',
