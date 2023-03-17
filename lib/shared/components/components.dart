@@ -444,10 +444,15 @@ Widget defaultSuppliersItem({
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Image(
-                        image: AssetImage('assets/images/paint.png'),
-                        height: 60,
-                        width: 60,
+                      ClipRRect(
+                        borderRadius:
+                        BorderRadius.circular(5),
+                        child: Image(
+                          image: NetworkImage(tempImage),
+                          height: 60,
+                          width: 60,
+
+                        ),
                       ),
                       SizedBox(
                         width: 20,
@@ -502,17 +507,17 @@ Widget defaultSuppliersItem({
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               Icon(
-                                TablerIcons.star,
+                                Icons.star,
                                 size: 20,
-                                color: secondaryColor,
+                                color: Colors.amber,
                               ),
                               SizedBox(
-                                width: 8,
+                                width: 4,
                               ),
                               Text(
                                 mark,
                                 style: TextStyle(
-                                  fontSize: 20,
+                                  fontSize: 15,
                                 ),
                               ),
                             ],
@@ -522,7 +527,7 @@ Widget defaultSuppliersItem({
                           ),
                           Text(distance,
                               style: TextStyle(
-                                fontSize: 20,
+                                fontSize: 15,
                               )),
                         ],
                       )
