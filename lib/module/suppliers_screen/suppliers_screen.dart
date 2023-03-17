@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
-import 'package:login_register_methods/shared/components/constants.dart';
 
 import '../../shared/components/components.dart';
 
