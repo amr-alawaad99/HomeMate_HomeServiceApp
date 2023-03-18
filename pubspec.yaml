@@ -41,6 +41,8 @@ dependencies:
   flutter_bloc: ^8.1.2
   provider: ^6.0.5
   bubble_bottom_bar: ^2.0.0
+  intl: ^0.18.0
+
 
 
 dev_dependencies:

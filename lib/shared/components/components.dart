@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:login_register_methods/shared/components/constants.dart';
@@ -58,7 +56,6 @@ Widget defaultTextFromField({
   Function()? suffixPressFunction,
   Function()? prefixPressFunction,
   Function()? onTapFunction,
-
 }) =>
     Container(
       decoration: const BoxDecoration(
@@ -130,7 +127,12 @@ Future navigatePushDelete(
         ),
         (route) => false);
 
-Widget defaultCategoriesBox({ String img = '',  String text = '',double width = 100,double height = 120}) =>
+Widget defaultCategoriesBox({
+  String img = '',
+  String text = '',
+  double width = 100,
+  double height = 120,
+}) =>
     Expanded(
       child: InkWell(
         onTap: () {
@@ -167,7 +169,7 @@ Widget defaultCategoriesBox({ String img = '',  String text = '',double width = 
 
 Widget defaultCategoryChooser({required String text}) => Padding(
       padding: const EdgeInsets.only(top: 20, right: 20, left: 20),
-      child: Container(
+      child: SizedBox(
         width: double.infinity,
         height: 30,
         child: ListView.separated(
@@ -195,7 +197,7 @@ Widget defaultCategoryChooser({required String text}) => Padding(
               ),
             ),
           ),
-          separatorBuilder: (context, index) => SizedBox(
+          separatorBuilder: (context, index) => const SizedBox(
             width: 5,
           ),
           itemCount: 6,
@@ -540,3 +542,5 @@ Widget defaultSuppliersItem({
       separatorBuilder: (context, index) => SizedBox(),
       itemCount: Count);
 }
+
+
