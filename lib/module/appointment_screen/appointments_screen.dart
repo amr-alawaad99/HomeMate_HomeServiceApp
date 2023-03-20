@@ -1,26 +1,136 @@
 import 'package:flutter/material.dart';
-
+import 'package:login_register_methods/models/appointment.dart';
 
 import '../../shared/components/components.dart';
+import '../../shared/components/constants.dart';
 
 class AppointmentsScreen extends StatelessWidget {
-  const AppointmentsScreen({Key? key}) : super(key: key);
+  List<Appointment> appointments = [
+    Appointment(
+      serviceName: 'Cleaning',
+      userName: 'Mohamed',
+      date: '21-10-2023',
+      time: '12:50 AM',
+      status: 'Finished',
+      cost: '250 EGP',
+    ),
+    Appointment(
+      serviceName: 'Kitchen',
+      userName: 'Ahmed',
+      date: '21-10-2023',
+      time: '12:50 AM',
+      status: 'Underway',
+      cost: '250 EGP',
+    ),
+    Appointment(
+      serviceName: 'Plumbing',
+      userName: 'Ibrahim',
+      date: '21-10-2023',
+      time: '12:50 AM',
+      status: 'Waiting',
+      cost: '250 EGP',
+    ),
+    Appointment(
+      serviceName: 'Paint',
+      userName: 'Aly',
+      date: '21-10-2023',
+      time: '12:50 AM',
+      status: 'Finished',
+      cost: '250 EGP',
+    ),
+    Appointment(
+      serviceName: 'Carpentry',
+      userName: 'Saad',
+      date: '21-10-2023',
+      time: '12:50 AM',
+      status: 'Finished',
+      cost: '250 EGP',
+    ),
+    Appointment(
+      serviceName: 'Electricity',
+      userName: 'Mostafa',
+      date: '21-10-2023',
+      time: '12:50 AM',
+      status: 'Finished',
+      cost: '250 EGP',
+    ),
+  ];
+  List<ChooseCategory> categories = [
+    ChooseCategory(category: 'All'),
+    ChooseCategory(category: 'Finished'),
+    ChooseCategory(category: 'Underway'),
+    ChooseCategory(category: 'Waiting'),
+  ];
+
+  AppointmentsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        defaultCategoryChooser(text: 'Cleaning'),
-        defaultAppointmentCard(context: context,
-            serviceName: 'serviceName',
-            userName: 'userName',
-            date: 'date',
-            time: 'time',
-            status: 'status',
-            cost: 'cost',
-            count: 10),
-      ],
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 20, right: 20, left: 20),
+            child: SizedBox(
+              height: 30,
+              width: double.infinity,
+              child: ListView.separated(
+                scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) => InkWell(
+                        onTap: () {},
+                        child: Container(
+                          width: 95,
+                          height: 100,
+                          child: Center(
+                            child: Text(
+                              categories[index].category,
+                              style: TextStyle(
+                                color: secondaryColor,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ),
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              width: 1.5,
+                              color: secondaryColor,
+                            ),
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                        ),
+                      ),
+                  separatorBuilder: (context, index) => SizedBox(
+                        width: 10,
+                      ),
+                  itemCount: categories.length),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: SizedBox(
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
+              child: ListView.separated(
+                shrinkWrap: true,
+                itemBuilder: (context, index) => defaultAppointmentCard(
+                  serviceName: appointments[index].serviceName,
+                  userName: appointments[index].userName,
+                  date: appointments[index].date,
+                  time: appointments[index].time,
+                  status: appointments[index].status,
+                  cost: appointments[index].cost,
+                ),
+                separatorBuilder: (context, index) => const SizedBox(
+                  height: 15,
+                ),
+                itemCount: appointments.length,
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

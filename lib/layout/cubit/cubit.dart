@@ -23,7 +23,7 @@ class LayoutCubit extends Cubit<LayoutStates>{
     const  HomeScreen(),
     const CategoriesScreen(),
     const SuppliersScreen(),
-    const AppointmentsScreen(),
+     AppointmentsScreen(),
   ];
   //////////////////////////////////
 

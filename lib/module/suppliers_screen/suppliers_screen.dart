@@ -22,7 +22,7 @@ class SuppliersScreen extends StatelessWidget {
                 jop: 'jopp',
                 address: 'address',
                 distance: 'distance',
-                Count: 10)),
+                count: 10)),
       ],
     );
   }
