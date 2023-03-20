@@ -13,6 +13,7 @@ class AppointmentsScreen extends StatelessWidget {
       time: '12:50 AM',
       status: 'Finished',
       cost: '250 EGP',
+      image: tempImage,
     ),
     Appointment(
       serviceName: 'Kitchen',
@@ -21,6 +22,8 @@ class AppointmentsScreen extends StatelessWidget {
       time: '12:50 AM',
       status: 'Underway',
       cost: '250 EGP',
+      image: tempImage,
+
     ),
     Appointment(
       serviceName: 'Plumbing',
@@ -29,6 +32,8 @@ class AppointmentsScreen extends StatelessWidget {
       time: '12:50 AM',
       status: 'Waiting',
       cost: '250 EGP',
+      image: tempImage,
+
     ),
     Appointment(
       serviceName: 'Paint',
@@ -37,6 +42,8 @@ class AppointmentsScreen extends StatelessWidget {
       time: '12:50 AM',
       status: 'Finished',
       cost: '250 EGP',
+      image: tempImage,
+
     ),
     Appointment(
       serviceName: 'Carpentry',
@@ -45,6 +52,8 @@ class AppointmentsScreen extends StatelessWidget {
       time: '12:50 AM',
       status: 'Finished',
       cost: '250 EGP',
+      image: tempImage,
+
     ),
     Appointment(
       serviceName: 'Electricity',
@@ -53,6 +62,8 @@ class AppointmentsScreen extends StatelessWidget {
       time: '12:50 AM',
       status: 'Finished',
       cost: '250 EGP',
+      image: tempImage,
+
     ),
   ];
   List<ChooseCategory> categories = [
@@ -121,6 +132,8 @@ class AppointmentsScreen extends StatelessWidget {
                   time: appointments[index].time,
                   status: appointments[index].status,
                   cost: appointments[index].cost,
+                  image: appointments[index].image,
+
                 ),
                 separatorBuilder: (context, index) => const SizedBox(
                   height: 15,

@@ -46,7 +46,7 @@ class ProfileScreen extends StatelessWidget {
                   alignment: Alignment.bottomCenter,
                   heightFactor: 1.8,
                   child: CircleAvatar(
-                    backgroundImage: NetworkImage(tempImage),
+                    backgroundImage: tempImage,
                     radius: 55,
                   ),
                 ),

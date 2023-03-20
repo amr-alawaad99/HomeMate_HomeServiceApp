@@ -51,7 +51,7 @@ class MainLayoutScreen extends StatelessWidget {
                             child: Row(
                               children: [
                                 CircleAvatar(
-                                  backgroundImage: NetworkImage(tempImage),
+                                  backgroundImage: tempImage,
                                   radius: 25,
                                 ),
                                 const SizedBox(
