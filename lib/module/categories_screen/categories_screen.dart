@@ -4,7 +4,6 @@ import 'package:login_register_methods/shared/components/components.dart';
 import '../../models/category_model.dart';
 
 class CategoriesScreen extends StatelessWidget {
-
   List<Categories> categories = [
     Categories(
       title: 'Cleaning',
@@ -39,13 +38,16 @@ class CategoriesScreen extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: GridView.builder(
-        shrinkWrap: true,
-        itemCount: categories.length,
+          shrinkWrap: true,
+          itemCount: categories.length,
           scrollDirection: Axis.vertical,
-          gridDelegate:
-              SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,crossAxisSpacing: 15,mainAxisSpacing: 15),
-          itemBuilder: (context, index) =>
-              defaultCategoriesBox(img: categories[index].img, text: categories[index].title)),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            crossAxisSpacing: 15,
+            mainAxisSpacing: 15,
+          ),
+          itemBuilder: (context, index) => defaultCategoriesBox(
+              img: categories[index].img, text: categories[index].title)),
     );
   }
 }
