@@ -23,7 +23,6 @@ class AppointmentsScreen extends StatelessWidget {
       status: 'Underway',
       cost: '250 EGP',
       image: tempImage,
-
     ),
     Appointment(
       serviceName: 'Plumbing',
@@ -33,7 +32,6 @@ class AppointmentsScreen extends StatelessWidget {
       status: 'Waiting',
       cost: '250 EGP',
       image: tempImage,
-
     ),
     Appointment(
       serviceName: 'Paint',
@@ -43,7 +41,6 @@ class AppointmentsScreen extends StatelessWidget {
       status: 'Finished',
       cost: '250 EGP',
       image: tempImage,
-
     ),
     Appointment(
       serviceName: 'Carpentry',
@@ -53,7 +50,6 @@ class AppointmentsScreen extends StatelessWidget {
       status: 'Finished',
       cost: '250 EGP',
       image: tempImage,
-
     ),
     Appointment(
       serviceName: 'Electricity',
@@ -63,7 +59,6 @@ class AppointmentsScreen extends StatelessWidget {
       status: 'Finished',
       cost: '250 EGP',
       image: tempImage,
-
     ),
   ];
   List<ChooseCategory> categories = [
@@ -72,6 +67,11 @@ class AppointmentsScreen extends StatelessWidget {
     ChooseCategory(category: 'Underway'),
     ChooseCategory(category: 'Waiting'),
   ];
+
+  List<Appointment> deleteItem(index) {
+    appointments = List.from(index)..removeAt(index);
+    return appointments;
+  }
 
   AppointmentsScreen({super.key});
 
@@ -87,22 +87,12 @@ class AppointmentsScreen extends StatelessWidget {
               height: 30,
               width: double.infinity,
               child: ListView.separated(
-                scrollDirection: Axis.horizontal,
+                  scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) => InkWell(
                         onTap: () {},
                         child: Container(
                           width: 95,
                           height: 100,
-                          child: Center(
-                            child: Text(
-                              categories[index].category,
-                              style: TextStyle(
-                                color: secondaryColor,
-                                fontSize: 20,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ),
                           decoration: BoxDecoration(
                             border: Border.all(
                               width: 1.5,
@@ -110,9 +100,19 @@ class AppointmentsScreen extends StatelessWidget {
                             ),
                             borderRadius: BorderRadius.circular(5),
                           ),
+                          child: Center(
+                            child: Text(
+                              categories[index].category,
+                              style: const TextStyle(
+                                color: secondaryColor,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ),
                         ),
                       ),
-                  separatorBuilder: (context, index) => SizedBox(
+                  separatorBuilder: (context, index) => const SizedBox(
                         width: 10,
                       ),
                   itemCount: categories.length),
@@ -133,7 +133,6 @@ class AppointmentsScreen extends StatelessWidget {
                   status: appointments[index].status,
                   cost: appointments[index].cost,
                   image: appointments[index].image,
-
                 ),
                 separatorBuilder: (context, index) => const SizedBox(
                   height: 15,

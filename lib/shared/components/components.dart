@@ -127,7 +127,8 @@ Future navigatePushDelete(
         ),
         (route) => false);
 
-Widget defaultCategoriesBox({required ImageProvider img, required String text}) =>
+Widget defaultCategoriesBox(
+        {required ImageProvider img, required String text}) =>
     Expanded(
       child: InkWell(
         onTap: () {
@@ -139,24 +140,32 @@ Widget defaultCategoriesBox({required ImageProvider img, required String text}) 
             Radius.circular(10),
           ),
           child: Container(
-            height: 120,
-            width: 100.0,
+            // height: 120,
+            // width: 100.0,
+            decoration: BoxDecoration(
+                color: Colors.white, borderRadius: BorderRadius.circular(10.0)),
+            // height: 120,
+            // width: 100.0,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image(
                   image: img,
-                  width: 50,
-                  height: 50,
+                  width: 60,
+                  height: 60,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 5,
                 ),
-                Text(text),
+                Text(
+                  text,
+                  style: const TextStyle(
+                    fontFamily: "Roboto",
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ],
             ),
-            decoration: BoxDecoration(
-                color: Colors.white, borderRadius: BorderRadius.circular(10.0)),
           ),
         ),
       ),
@@ -167,22 +176,22 @@ Widget defaultCategoryChooser({required String text}) => InkWell(
       child: Container(
         width: 95,
         height: 100,
-        child: Center(
-          child: Text(
-            text,
-            style: TextStyle(
-              color: secondaryColor,
-              fontSize: 20,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-        ),
         decoration: BoxDecoration(
           border: Border.all(
             width: 1.5,
             color: secondaryColor,
           ),
           borderRadius: BorderRadius.circular(5),
+        ),
+        child: Center(
+          child: Text(
+            text,
+            style: const TextStyle(
+              color: secondaryColor,
+              fontSize: 20,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
         ),
       ),
     );
@@ -222,7 +231,7 @@ Widget defaultAppointmentCard({
                     children: [
                       Text(
                         serviceName,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 19.0,
                         ),
@@ -248,16 +257,16 @@ Widget defaultAppointmentCard({
                             children: [
                               Text(
                                 userName,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 15.0,
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 5.0,
                               ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
+                                children: const [
                                   Image(
                                     image: AssetImage('assets/images/star.png'),
                                     width: 15.0,
@@ -286,7 +295,7 @@ Widget defaultAppointmentCard({
                         children: [
                           Text(
                             date,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 12.0,
                             ),
                           ),
@@ -295,7 +304,7 @@ Widget defaultAppointmentCard({
                           ),
                           Text(
                             time,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 12.0,
                             ),
                           ),
@@ -357,7 +366,7 @@ Widget defaultAppointmentCard({
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               InkWell(
-                                onTap: () {},
+                                onTap: (){},
                                 child: Icon(
                                   TablerIcons.trash,
                                   color: errorColor,

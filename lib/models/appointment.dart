@@ -17,6 +17,8 @@ class Appointment {
     required this.cost,
     required this.image
   });
+
+
 }
 class ChooseCategory{
   final String category;
