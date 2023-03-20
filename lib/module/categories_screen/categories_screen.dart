@@ -1,68 +1,51 @@
 import 'package:flutter/material.dart';
 import 'package:login_register_methods/shared/components/components.dart';
 
+import '../../models/category_model.dart';
+
 class CategoriesScreen extends StatelessWidget {
-  const CategoriesScreen({Key? key}) : super(key: key);
+
+  List<Categories> categories = [
+    Categories(
+      title: 'Cleaning',
+      img: AssetImage('assets/images/cleaning.png'),
+    ),
+    Categories(
+      title: 'Kitchen',
+      img: AssetImage('assets/images/kitchen.png'),
+    ),
+    Categories(
+      title: 'Plumbing',
+      img: AssetImage('assets/images/plumbing.png'),
+    ),
+    Categories(
+      title: 'Paint',
+      img: AssetImage('assets/images/paint.png'),
+    ),
+    Categories(
+      title: 'Carpentry',
+      img: AssetImage('assets/images/carpentry.png'),
+    ),
+    Categories(
+      title: 'Electricity',
+      img: AssetImage('assets/images/electrician.png'),
+    )
+  ];
+
+  CategoriesScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(20.0),
-      child: Column(
-        children: [
-          Row(
-            children: [
-              defaultCategoriesBox(
-                img: 'assets/images/cleaning.png',
-                text: 'Cleaning',
-              ),
-              const SizedBox(
-                width: 15,
-              ),
-              defaultCategoriesBox(
-                img: 'assets/images/kitchen.png',
-                text: 'Kitchen',
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 15,
-          ),
-          Row(
-            children: [
-              defaultCategoriesBox(
-                img: 'assets/images/plumbing.png',
-                text: 'Plumbing',
-              ),
-              const SizedBox(
-                width: 15,
-              ),
-              defaultCategoriesBox(
-                img: 'assets/images/paint.png',
-                text: 'Paint',
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 15,
-          ),
-          Row(
-            children: [
-              defaultCategoriesBox(
-                img: 'assets/images/carpentry.png',
-                text: 'Carpentry',
-              ),
-              const SizedBox(
-                width: 15,
-              ),
-              defaultCategoriesBox(
-                img: 'assets/images/electrician.png',
-                text: 'Electricity',
-              ),
-            ],
-          ),
-        ],
-      ),
+      child: GridView.builder(
+        shrinkWrap: true,
+        itemCount: categories.length,
+          scrollDirection: Axis.vertical,
+          gridDelegate:
+              SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,crossAxisSpacing: 15,mainAxisSpacing: 15),
+          itemBuilder: (context, index) =>
+              defaultCategoriesBox(img: categories[index].img, text: categories[index].title)),
     );
   }
 }

@@ -25,7 +25,7 @@ class MyDrawer extends StatelessWidget {
                 child: Row(
                   children: [
                     CircleAvatar(
-                      backgroundImage: NetworkImage(tempImage),
+                      backgroundImage: tempImage,
                       radius: 35,
                     ),
                     const SizedBox(

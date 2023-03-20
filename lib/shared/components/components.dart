@@ -127,7 +127,7 @@ Future navigatePushDelete(
         ),
         (route) => false);
 
-Widget defaultCategoriesBox({required String img, required String text}) =>
+Widget defaultCategoriesBox({required ImageProvider img, required String text}) =>
     Expanded(
       child: InkWell(
         onTap: () {
@@ -145,7 +145,7 @@ Widget defaultCategoriesBox({required String img, required String text}) =>
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image(
-                  image: AssetImage(img),
+                  image: img,
                   width: 50,
                   height: 50,
                 ),
@@ -195,6 +195,7 @@ Widget defaultAppointmentCard({
   required String time,
   required String status,
   required String cost,
+  required ImageProvider image,
 }) =>
     Material(
       elevation: 3,
@@ -234,7 +235,7 @@ Widget defaultAppointmentCard({
                           ClipRRect(
                             borderRadius: BorderRadius.circular(5),
                             child: Image(
-                              image: NetworkImage(tempImage),
+                              image: image,
                               width: 30,
                               height: 30,
                             ),
@@ -408,7 +409,7 @@ Widget defaultSuppliersItem({
                       ClipRRect(
                         borderRadius: BorderRadius.circular(5),
                         child: Image(
-                          image: NetworkImage(tempImage),
+                          image: tempImage,
                           height: 60,
                           width: 60,
                         ),
