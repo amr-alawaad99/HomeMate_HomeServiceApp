@@ -37,17 +37,20 @@ class CategoriesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(20.0),
-      child: GridView.builder(
-          shrinkWrap: true,
-          itemCount: categories.length,
-          scrollDirection: Axis.vertical,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            crossAxisSpacing: 15,
-            mainAxisSpacing: 15,
-          ),
-          itemBuilder: (context, index) => defaultCategoriesBox(
-              img: categories[index].img, text: categories[index].title)),
+      child: SizedBox(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        child: GridView.builder(
+            shrinkWrap: true,
+            itemCount: categories.length,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              crossAxisSpacing: 15,
+              mainAxisSpacing: 15,
+            ),
+            itemBuilder: (context, index) => defaultCategoriesBox(
+                img: categories[index].img, text: categories[index].title)),
+      ),
     );
   }
 }
