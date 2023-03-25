@@ -38,131 +38,133 @@ class PreSignUpScreen extends StatelessWidget {
 
           return Scaffold(
             appBar: AppBar(),
-            body: Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  /// "Welcome to *App name* app."
-                  RichText(
-                    text: const TextSpan(
-                        text: "Welcome to\n",
-                        style: TextStyle(
-                          fontFamily: "Roboto",
-                          color: Colors.black,
-                          fontSize: 25.0,
-                        ),
-                        children: [
-                          TextSpan(
-                              text: "HomeMate ",
-                              style: TextStyle(
-                                color: Colors.blue,
-                              ),
-                              children: [
-                                TextSpan(
-                                    text: "app.",
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                    )),
-                              ]),
-                        ]),
-                  ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.02,
-                  ),
-
-                  /// "Start by creating an account."
-                  const Text(
-                    "Start by creating an account.",
-                  ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.01,
-                  ),
-
-                  /// Caption Text
-                  Text(
-                    "Choose your account type to complete the registration process.",
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodySmall!
-                        .copyWith(fontSize: 15.0),
-                  ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.15,
-                  ),
-
-                  /// Choose User or Technical
-                  Row(
-                    children: [
-                      buildAccountTypeCard(accountTypeList[0], 0, context),
-                      Spacer(),
-                      buildAccountTypeCard(accountTypeList[1], 1, context),
-                    ],
-                  ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.08,
-                  ),
-
-                  /// Next Button
-                  Container(
-                    child: defaultButton(
-                      text: "Next",
-                      buttonColor: cubit.isSelected[0] == false &&
-                              cubit.isSelected[1] == false
-                          ? Colors.deepPurple.shade100
-                          : primaryColor,
-                      textColor: cubit.isSelected[0] == false &&
-                              cubit.isSelected[1] == false
-                          ? primaryColor
-                          : Colors.white,
-                      onPress: () {
-                        if (cubit.isSelected[0] == true) {
-                          navigateAndPush(
-                            context,
-                            widget: Provider(
-                              create: (context) => SignupCubit(),
-                              builder: (context, child) => UserSignUpScreen(),
-                            ),
-                          );
-                        } else if (cubit.isSelected[1] == true) {
-                          navigateAndPush(
-                            context,
-                            widget: Provider(
-                              create: (context) => SignupCubit(),
-                              builder: (context, child) => TecSignUpScreen(),
-                            ),
-                          );
-                        } else {
-                          print("Toast");
-                        }
-                      },
-                    ),
-                  ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.05,
-                  ),
-
-                  /// Text and TextButton
-                  Center(
-                    child: Column(
-                      children: [
-                        const Text(
-                          "Already have an account?",
-                        ),
-                        TextButton(
-                          onPressed: () {},
-                          child: const Text(
-                            "Sign In",
-                            style: TextStyle(
-                              decoration: TextDecoration.underline,
-                              fontSize: 18.0,
-                            ),
+            body: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    /// "Welcome to *App name* app."
+                    RichText(
+                      text: const TextSpan(
+                          text: "Welcome to\n",
+                          style: TextStyle(
+                            fontFamily: "Roboto",
+                            color: Colors.black,
+                            fontSize: 25.0,
                           ),
-                        ),
+                          children: [
+                            TextSpan(
+                                text: "HomeMate ",
+                                style: TextStyle(
+                                  color: Colors.blue,
+                                ),
+                                children: [
+                                  TextSpan(
+                                      text: "app.",
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                      )),
+                                ]),
+                          ]),
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.02,
+                    ),
+
+                    /// "Start by creating an account."
+                    const Text(
+                      "Start by creating an account.",
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.01,
+                    ),
+
+                    /// Caption Text
+                    Text(
+                      "Choose your account type to complete the registration process.",
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodySmall!
+                          .copyWith(fontSize: 15.0),
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.15,
+                    ),
+
+                    /// Choose User or Technical
+                    Row(
+                      children: [
+                        buildAccountTypeCard(accountTypeList[0], 0, context),
+                        Spacer(),
+                        buildAccountTypeCard(accountTypeList[1], 1, context),
                       ],
                     ),
-                  ),
-                ],
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.08,
+                    ),
+
+                    /// Next Button
+                    Container(
+                      child: defaultButton(
+                        text: "Next",
+                        buttonColor: cubit.isSelected[0] == false &&
+                                cubit.isSelected[1] == false
+                            ? Colors.deepPurple.shade100
+                            : primaryColor,
+                        textColor: cubit.isSelected[0] == false &&
+                                cubit.isSelected[1] == false
+                            ? primaryColor
+                            : Colors.white,
+                        onPress: () {
+                          if (cubit.isSelected[0] == true) {
+                            navigateAndPush(
+                              context,
+                              widget: Provider(
+                                create: (context) => SignupCubit(),
+                                builder: (context, child) => UserSignUpScreen(),
+                              ),
+                            );
+                          } else if (cubit.isSelected[1] == true) {
+                            navigateAndPush(
+                              context,
+                              widget: Provider(
+                                create: (context) => SignupCubit(),
+                                builder: (context, child) => TecSignUpScreen(),
+                              ),
+                            );
+                          } else {
+                            print("Toast");
+                          }
+                        },
+                      ),
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.05,
+                    ),
+
+                    /// Text and TextButton
+                    Center(
+                      child: Column(
+                        children: [
+                          const Text(
+                            "Already have an account?",
+                          ),
+                          TextButton(
+                            onPressed: () {},
+                            child: const Text(
+                              "Sign In",
+                              style: TextStyle(
+                                decoration: TextDecoration.underline,
+                                fontSize: 18.0,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           );
