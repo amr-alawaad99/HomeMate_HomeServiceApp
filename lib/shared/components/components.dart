@@ -129,37 +129,35 @@ Future navigatePushDelete(
 
 Widget defaultCategoriesBox(
         {required ImageProvider img, required String text}) =>
-    Expanded(
-      child: InkWell(
-        onTap: () {
-          /**navigateAndPush(context, widget: );**/
-        },
-        child: Material(
-          color: Colors.white,
-          elevation: 3,
-          borderRadius: const BorderRadius.all(
-            Radius.circular(10),
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image(
-                image: img,
-                width: 60,
-                height: 60,
+    InkWell(
+      onTap: () {
+        /**navigateAndPush(context, widget: );**/
+      },
+      child: Material(
+        color: Colors.white,
+        elevation: 3,
+        borderRadius: const BorderRadius.all(
+          Radius.circular(10),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image(
+              image: img,
+              width: 60,
+              height: 60,
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+            Text(
+              text,
+              style: const TextStyle(
+                fontFamily: "Roboto",
+                fontWeight: FontWeight.bold,
               ),
-              const SizedBox(
-                height: 5,
-              ),
-              Text(
-                text,
-                style: const TextStyle(
-                  fontFamily: "Roboto",
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
