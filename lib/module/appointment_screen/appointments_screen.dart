@@ -81,7 +81,7 @@ class AppointmentsScreen extends StatelessWidget {
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.only(top: 20, right: 20, left: 20),
+            padding: const EdgeInsets.only(top: 20, left: 20),
             child: SizedBox(
               height: 30,
               width: double.infinity,
@@ -118,7 +118,7 @@ class AppointmentsScreen extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.fromLTRB(10, 10, 10, 90),
+            padding: const EdgeInsets.all(20.0),
             child: SizedBox(
               height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width,
