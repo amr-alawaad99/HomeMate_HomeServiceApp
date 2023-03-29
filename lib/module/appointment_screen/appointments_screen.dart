@@ -79,7 +79,6 @@ class AppointmentsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
             padding: const EdgeInsets.only(top: 20, right: 20, left: 20),
@@ -119,7 +118,7 @@ class AppointmentsScreen extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(20.0),
+            padding: const EdgeInsets.fromLTRB(10, 10, 10, 90),
             child: SizedBox(
               height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width,
@@ -140,6 +139,9 @@ class AppointmentsScreen extends StatelessWidget {
                 itemCount: appointments.length,
               ),
             ),
+          ),
+          SizedBox(
+            height: 150,
           ),
         ],
       ),

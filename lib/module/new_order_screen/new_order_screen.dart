@@ -83,21 +83,6 @@ class NewOrderScreen extends StatelessWidget {
                   const SizedBox(
                     height: 15,
                   ),
-                  SizedBox(
-                      height: 100,
-                      child: ListView.separated(
-                          scrollDirection: Axis.horizontal,
-                          itemBuilder: (context, index) => SizedBox(
-                            width: 150,
-                            height: 150,
-                            child: defaultCategoriesBox(
-                                img: categories[index].img,
-                                text: categories[index].title),
-                          ),
-                          separatorBuilder: (context, index) => const SizedBox(
-                                width: 10,
-                              ),
-                          itemCount: categories.length)),
 
                   const SizedBox(
                     height: 15,
