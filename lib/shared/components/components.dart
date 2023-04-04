@@ -388,6 +388,7 @@ Widget defaultSuppliersItem({
   required BuildContext context,
 }) {
   return ListView.separated(
+    physics: NeverScrollableScrollPhysics(), ///To avoid nested scrolling
       itemBuilder: (BuildContext context, int index) {
         return InkWell(
           onTap: () {

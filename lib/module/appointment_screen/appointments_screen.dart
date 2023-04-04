@@ -77,74 +77,68 @@ class AppointmentsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 20, left: 20),
-            child: SizedBox(
-              height: 30,
-              width: double.infinity,
-              child: ListView.separated(
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) => InkWell(
-                        onTap: () {},
-                        child: Container(
-                          width: 95,
-                          height: 100,
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              width: 1.5,
-                              color: secondaryColor,
-                            ),
-                            borderRadius: BorderRadius.circular(5),
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(top: 20, left: 20),
+          child: SizedBox(
+            height: 30,
+            width: double.infinity,
+            child: ListView.separated(
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index) => InkWell(
+                      onTap: () {},
+                      child: Container(
+                        width: 95,
+                        height: 100,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            width: 1.5,
+                            color: secondaryColor,
                           ),
-                          child: Center(
-                            child: Text(
-                              categories[index].category,
-                              style: const TextStyle(
-                                color: secondaryColor,
-                                fontSize: 20,
-                                fontWeight: FontWeight.w500,
-                              ),
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        child: Center(
+                          child: Text(
+                            categories[index].category,
+                            style: const TextStyle(
+                              color: secondaryColor,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w500,
                             ),
                           ),
                         ),
                       ),
-                  separatorBuilder: (context, index) => const SizedBox(
-                        width: 10,
-                      ),
-                  itemCount: categories.length),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: SizedBox(
-              height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width,
-              child: ListView.separated(
-                shrinkWrap: true,
-                itemBuilder: (context, index) => defaultAppointmentCard(
-                  serviceName: appointments[index].serviceName,
-                  userName: appointments[index].userName,
-                  date: appointments[index].date,
-                  time: appointments[index].time,
-                  status: appointments[index].status,
-                  cost: appointments[index].cost,
-                  image: appointments[index].image,
-                ),
+                    ),
                 separatorBuilder: (context, index) => const SizedBox(
-                  height: 15,
-                ),
-                itemCount: appointments.length,
+                      width: 10,
+                    ),
+                itemCount: categories.length),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: SizedBox(
+            child: ListView.separated(
+              physics: NeverScrollableScrollPhysics(), ///To avoid nested scrolling
+              shrinkWrap: true,
+              itemBuilder: (context, index) => defaultAppointmentCard(
+                serviceName: appointments[index].serviceName,
+                userName: appointments[index].userName,
+                date: appointments[index].date,
+                time: appointments[index].time,
+                status: appointments[index].status,
+                cost: appointments[index].cost,
+                image: appointments[index].image,
               ),
+              separatorBuilder: (context, index) => const SizedBox(
+                height: 15,
+              ),
+              itemCount: appointments.length,
             ),
           ),
-          SizedBox(
-            height: 150,
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
