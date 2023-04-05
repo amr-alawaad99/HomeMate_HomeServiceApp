@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "220209510896",
+    "project_id": "homemate-home-service-app",
+    "storage_bucket": "homemate-home-service-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:220209510896:android:d6bf5b4b7cb5ff2fb1c535",
+        "android_client_info": {
+          "package_name": "homemate_homeservice.com.home_mate"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "220209510896-trt01ojhdm4vrr5c63bfu54nn7ehk5m8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "homemate_homeservice.com.home_mate",
+            "certificate_hash": "7af818d7fe916bbc24a66ed2281cdd4e3f6bb16c"
+          }
+        },
+        {
+          "client_id": "220209510896-jppu8ndu4a8sojjd23v64cdv2llae7ui.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyACWn0PuCuZ4YxN6Vyxjvgv1xhGIW_p-6M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "220209510896-jppu8ndu4a8sojjd23v64cdv2llae7ui.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
