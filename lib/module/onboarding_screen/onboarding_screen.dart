@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:login_register_methods/layout/main_layout_screen.dart';
 import 'package:login_register_methods/module/pre_sign_up_screen/sign_up_screen.dart';
+import 'package:login_register_methods/module/sign_in_screen/sign_in_screen.dart';
 import 'package:login_register_methods/shared/components/components.dart';
 import 'package:login_register_methods/shared/components/constants.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -132,7 +133,9 @@ class OnBoardingScreen extends StatelessWidget {
                         "Already have an account?",
                       ),
                       TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          navigateAndPush(context, widget: SignInScreen());
+                        },
                         child: const Text(
                           "Sign In",
                           style: TextStyle(

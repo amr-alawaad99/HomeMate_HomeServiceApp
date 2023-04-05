@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:login_register_methods/module/sign_up_screen/cubit/cubit.dart';
 import 'package:login_register_methods/module/sign_up_screen/cubit/states.dart';
+import 'package:login_register_methods/module/sign_up_screen/verification_screen.dart';
 import 'package:login_register_methods/shared/components/components.dart';
 import 'package:login_register_methods/shared/components/constants.dart';
 
 class UserSignUpScreen extends StatelessWidget {
 
 
-  bool value = false;
   final formKey = GlobalKey<FormState>();
   var fNameController = TextEditingController();
   var lNameController = TextEditingController();
@@ -16,6 +16,7 @@ class UserSignUpScreen extends StatelessWidget {
   var phoneController = TextEditingController();
   var passwordController = TextEditingController();
   var rPasswordController = TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +68,7 @@ class UserSignUpScreen extends StatelessWidget {
                         "Create your account now to enjoy all the services of the application",
                         style: Theme.of(context)
                             .textTheme
-                            .caption!
+                            .bodySmall!
                             .copyWith(fontSize: 18.0),
                       ),
                       SizedBox(
@@ -223,49 +224,54 @@ class UserSignUpScreen extends StatelessWidget {
                       SizedBox(
                         height: screenHeight * 0.01,
                       ),
-                      Row(
-                        children: [
-                          Checkbox(
-                            value: value,
-                            onChanged: (bool? value) {
-                              ///////////////////////////////////////////////////////////
-                                this.value = value!;
-
-                            },
-                          ),
-                          Expanded(
-                            child: RichText(
-                              text: TextSpan(
-                                  text: "Do you agree to our ",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyMedium!
-                                      .copyWith(fontSize: 15.0),
-                                  children: [
-                                    TextSpan(
-                                      text: "Privacy Policy and Terms.",
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodyMedium!
-                                          .copyWith(
-                                          color: Colors.blue,
-                                          fontSize: 15.0,
-                                          decoration: TextDecoration.underline),
-                                    ),
-                                  ]),
+                      Container(
+                        decoration: BoxDecoration(
+                          border: !cubit.isChecked & cubit.isClicked? Border.all(color: errorColor) : null,
+                        ),
+                        child: Row(
+                          children: [
+                            Checkbox(
+                              value: cubit.isChecked,
+                              onChanged: (value) {
+                                cubit.toggleCheckbox();
+                              },
                             ),
-                          ),
-                        ],
+                            Expanded(
+                              child: RichText(
+                                text: TextSpan(
+                                    text: "Do you agree to our ",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyMedium!
+                                        .copyWith(fontSize: 15.0),
+                                    children: [
+                                      TextSpan(
+                                        text: "Privacy Policy and Terms.",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyMedium!
+                                            .copyWith(
+                                            color: Colors.blue,
+                                            fontSize: 15.0,
+                                            decoration: TextDecoration.underline),
+                                      ),
+                                    ]),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                       SizedBox(
                         height: screenHeight * 0.03,
                       ),
                       Container(
                         child: defaultButton(
-                          text: "Create account",
+                          text: "Next",
                           onPress: () {
-                            if(formKey.currentState!.validate()){
-
+                            if(formKey.currentState!.validate() && cubit.isChecked){
+                              navigateAndPush(context, widget: VerificationScreen());
+                            } else if(!cubit.isClicked){
+                              cubit.errorCheckBox();
                             }
                           },
                         ),

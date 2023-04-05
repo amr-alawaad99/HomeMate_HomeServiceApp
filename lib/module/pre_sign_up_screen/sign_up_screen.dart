@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
+import 'package:login_register_methods/module/sign_in_screen/sign_in_screen.dart';
 import 'package:login_register_methods/module/sign_up_screen/cubit/cubit.dart';
 import 'package:login_register_methods/module/sign_up_screen/cubit/states.dart';
 import 'package:login_register_methods/module/sign_up_screen/tec_sign_up_screen/tec_sign_up_screen.dart';
@@ -151,7 +152,9 @@ class PreSignUpScreen extends StatelessWidget {
                             "Already have an account?",
                           ),
                           TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              navigateAndPush(context, widget: SignInScreen());
+                            },
                             child: const Text(
                               "Sign In",
                               style: TextStyle(

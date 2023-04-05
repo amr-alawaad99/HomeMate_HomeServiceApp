@@ -6,6 +6,7 @@ import 'package:login_register_methods/module/sign_up_screen/cubit/states.dart';
 import 'package:login_register_methods/shared/components/components.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../../shared/components/constants.dart';
+import '../verification_screen.dart';
 
 class Services {
   final String icon;
@@ -44,7 +45,6 @@ class TecSignUpScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
-    double screenWidth = MediaQuery.of(context).size.width;
     PageController serviceController = PageController();
     var cubit = SignupCubit.get(context);
 
@@ -146,38 +146,18 @@ class TecSignUpScreen extends StatelessWidget {
                       ),
 
                       /// TFFs
-                      Row(
-                        children: [
-                          Expanded(
-                            child: defaultTextFromField(
-                              hintText: "First Name",
-                              keyboardType: TextInputType.name,
-                              controller: fNameController,
-                              validator: (value) {
-                                if(value!.isEmpty){
-                                  return "First Name must not be empty";
-                                }
-                                return null;
-                              },
-                            ),
-                          ),
-                          SizedBox(
-                            width: screenWidth * 0.02,
-                          ),
-                          Expanded(
-                            child: defaultTextFromField(
-                              hintText: "Lase Name",
-                              keyboardType: TextInputType.name,
-                              controller: lNameController,
-                              validator: (value) {
-                                if(value!.isEmpty){
-                                  return "Last Name must not be empty";
-                                }
-                                return null;
-                              },
-                            ),
-                          ),
-                        ],
+                      Container(
+                        child: defaultTextFromField(
+                          hintText: "Tech/Company Name",
+                          keyboardType: TextInputType.name,
+                          controller: fNameController,
+                          validator: (value) {
+                            if(value!.isEmpty){
+                              return "First Name must not be empty";
+                            }
+                            return null;
+                          },
+                        ),
                       ),
                       SizedBox(
                         height: screenHeight * 0.01,
@@ -296,49 +276,54 @@ class TecSignUpScreen extends StatelessWidget {
                       SizedBox(
                         height: screenHeight * 0.01,
                       ),
-                      Row(
-                        children: [
-                          Checkbox(
-                            value: value,
-                            onChanged: (bool? value) {
-                              ////////////////////////////////////////////
-                                this.value = value!;
-
-                            },
-                          ),
-                          Expanded(
-                            child: RichText(
-                              text: TextSpan(
-                                  text: "Do you agree to our ",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyMedium!
-                                      .copyWith(fontSize: 15.0),
-                                  children: [
-                                    TextSpan(
-                                      text: "Privacy Policy and Terms.",
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodyMedium!
-                                          .copyWith(
-                                          color: Colors.blue,
-                                          fontSize: 15.0,
-                                          decoration: TextDecoration.underline),
-                                    ),
-                                  ]),
+                      Container(
+                        decoration: BoxDecoration(
+                          border: !cubit.isChecked & cubit.isClicked? Border.all(color: errorColor) : null,
+                        ),
+                        child: Row(
+                          children: [
+                            Checkbox(
+                              value: cubit.isChecked,
+                              onChanged: (value) {
+                                cubit.toggleCheckbox();
+                              },
                             ),
-                          ),
-                        ],
+                            Expanded(
+                              child: RichText(
+                                text: TextSpan(
+                                    text: "Do you agree to our ",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyMedium!
+                                        .copyWith(fontSize: 15.0),
+                                    children: [
+                                      TextSpan(
+                                        text: "Privacy Policy and Terms.",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyMedium!
+                                            .copyWith(
+                                            color: Colors.blue,
+                                            fontSize: 15.0,
+                                            decoration: TextDecoration.underline),
+                                      ),
+                                    ]),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                       SizedBox(
                         height: screenHeight * 0.03,
                       ),
                       Container(
                         child: defaultButton(
-                          text: "Create account",
+                          text: "Next",
                           onPress: () {
-                            if(formKey.currentState!.validate()){
-                              print("3a4");
+                            if(formKey.currentState!.validate() && cubit.isChecked){
+                              navigateAndPush(context, widget: VerificationScreen());
+                            } else if(!cubit.isClicked){
+                              cubit.errorCheckBox();
                             }
                           },
                         ),
