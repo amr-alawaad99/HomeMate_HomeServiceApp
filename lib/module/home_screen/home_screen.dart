@@ -209,7 +209,7 @@ class HomeScreen extends StatelessWidget {
                     const EdgeInsets.only(bottom: 8, top: 8, right: 5, left: 5),
                 child: Material(
                   elevation: 3,
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                  borderRadius: const BorderRadius.all(Radius.circular(10)),
                   child: Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: Row(
