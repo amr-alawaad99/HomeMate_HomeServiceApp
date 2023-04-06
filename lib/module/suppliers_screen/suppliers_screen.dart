@@ -31,7 +31,7 @@ class SuppliersScreen extends StatelessWidget {
                 itemBuilder: (context, index) => InkWell(
                   onTap: () {},
                   child: Container(
-                    width: 95,
+                    width: 90,
                     height: 100,
                     decoration: BoxDecoration(
                       border: Border.all(
@@ -45,7 +45,7 @@ class SuppliersScreen extends StatelessWidget {
                         categories[index].category,
                         style: const TextStyle(
                           color: secondaryColor,
-                          fontSize: 20,
+                          fontSize: 18,
                           fontWeight: FontWeight.w500,
                         ),
                       ),

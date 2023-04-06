@@ -80,7 +80,7 @@ class AppointmentsScreen extends StatelessWidget {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.only(top: 20, left: 20),
+          padding: const EdgeInsets.only(top: 20, left: 20,),
           child: SizedBox(
             height: 30,
             width: double.infinity,
