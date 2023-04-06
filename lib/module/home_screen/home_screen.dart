@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
-import 'package:login_register_methods/shared/components/components.dart';
 
 import '../../shared/components/constants.dart';
 
@@ -187,36 +186,34 @@ class HomeScreen extends StatelessWidget {
   Widget defaultCategoriesBox(
     ItemCatModel model,
   ) =>
-      Expanded(
-        child: InkWell(
-          onTap: () {
-            /**navigateAndPush(context, widget: );**/
-          },
-          child: Material(
-            elevation: 3,
-            borderRadius: const BorderRadius.all(
-              Radius.circular(10),
-            ),
-            child: Container(
-              height: 120,
-              width: 100.0,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image(
-                    image: AssetImage('${model?.image}'),
-                    width: 50,
-                    height: 50,
-                  ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  Text('${model?.name}'),
-                ],
-              ),
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10.0)),
+      InkWell(
+        onTap: () {
+          /**navigateAndPush(context, widget: );**/
+        },
+        child: Material(
+          elevation: 3,
+          borderRadius: const BorderRadius.all(
+            Radius.circular(10),
+          ),
+          child: Container(
+            height: 120,
+            width: 100.0,
+            decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10.0)),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image(
+                  image: AssetImage('${model.image}'),
+                  width: 50,
+                  height: 50,
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                Text('${model.name}'),
+              ],
             ),
           ),
         ),
