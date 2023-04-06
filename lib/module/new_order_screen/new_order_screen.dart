@@ -150,6 +150,7 @@ class NewOrderScreen extends StatelessWidget {
                         return null;
                       },
                       hintText: 'Choose Working Time',
+                      prefixIconColor: secondaryColor,
                       prefixIcon: TablerIcons.clock,
                       controller: timeController,
                       keyboardType: TextInputType.datetime,

@@ -56,6 +56,7 @@ Widget defaultTextFromField({
   Function()? suffixPressFunction,
   Function()? prefixPressFunction,
   Function()? onTapFunction,
+  Color prefixIconColor = Colors.grey
 }) =>
     Container(
       decoration: const BoxDecoration(
@@ -86,6 +87,7 @@ Widget defaultTextFromField({
             ),
             hintText: hintText,
             border: InputBorder.none,
+            prefixIconColor: ,
             prefixIcon: prefixIcon != null
                 ? IconButton(
                     icon: Icon(prefixIcon),
