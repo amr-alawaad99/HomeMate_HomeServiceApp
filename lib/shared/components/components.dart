@@ -77,6 +77,7 @@ Widget defaultTextFromField({
             fontSize: 16.0,
           ),
           onTap: onTapFunction,
+
           obscureText: isObscure,
           validator: validator,
           controller: controller,
@@ -89,13 +90,13 @@ Widget defaultTextFromField({
             border: InputBorder.none,
             prefixIcon: prefixIcon != null
                 ? IconButton(
-                    icon: Icon(prefixIcon),
+                    icon: Icon(prefixIcon,color: prefixIconColor,),
                     onPressed: prefixPressFunction,
                   )
                 : null,
             suffixIcon: suffixIcon != null
                 ? IconButton(
-                    icon: Icon(suffixIcon),
+                    icon: Icon(suffixIcon,),
                     onPressed: suffixPressFunction,
                   )
                 : null,

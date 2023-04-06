@@ -126,6 +126,7 @@ class NewOrderScreen extends StatelessWidget {
                       },
                       hintText: 'Choose Working Day',
                       prefixIcon: TablerIcons.calendar_event,
+                      prefixIconColor: secondaryColor,
                       controller: dateController,
                       keyboardType: TextInputType.datetime,
                       onTapFunction: () {
@@ -175,13 +176,10 @@ class NewOrderScreen extends StatelessWidget {
                       hintText: 'Location',
 
                       prefixIcon: TablerIcons.map_pin,
-
+                      prefixIconColor: secondaryColor,
                       controller: locationController,
                       keyboardType: TextInputType.text,
-                      onTapFunction: () {
-
-
-                      })
+                      )
                 ],
               ),
             ),
