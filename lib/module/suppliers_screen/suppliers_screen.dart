@@ -16,13 +16,16 @@ class SuppliersScreen extends StatelessWidget {
         ),
         Container(
             height: MediaQuery.of(context).size.height,
-            child: defaultSuppliersItem(context:context ,
+            child: defaultSuppliersItem(
+                context:context ,
                 mark: '5.4.3',
                 agentName: 'agentName',
-                jop: 'jopp',
+                jop: 'jop',
                 address: 'address',
                 distance: 'distance',
-                count: 10)),
+                count: 10
+            )
+        ),
       ],
     );
   }
