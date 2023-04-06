@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
-
+import 'package:login_register_methods/shared/components/components.dart';
 
 import '../../shared/components/constants.dart';
 
@@ -147,11 +147,11 @@ class HomeScreen extends StatelessWidget {
               SizedBox(
                 height: 100,
                 child: ListView.separated(
-                  physics: const BouncingScrollPhysics(),
+                  physics: BouncingScrollPhysics(),
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) =>
                       defaultCategoriesBox(catItem[index]),
-                  separatorBuilder: (context, index) => const SizedBox(
+                  separatorBuilder: (context, index) => SizedBox(
                     width: 10,
                   ),
                   itemCount: catItem.length,
@@ -173,7 +173,7 @@ class HomeScreen extends StatelessWidget {
               SizedBox(
                 height: MediaQuery.of(context).size.height+100,
                 child: ListView.separated(
-                  physics: const NeverScrollableScrollPhysics(),
+                  physics: NeverScrollableScrollPhysics(),
                   itemBuilder: (context, index) => defaultSupplierCard(suppliers[index]),
                   separatorBuilder: (context, index) => Container(height: 2,),
                   itemCount: 6,
@@ -187,35 +187,37 @@ class HomeScreen extends StatelessWidget {
   Widget defaultCategoriesBox(
     ItemCatModel model,
   ) =>
-      InkWell(
-        onTap: () {
-          /**navigateAndPush(context, widget: );**/
-        },
-        child: Material(
-          elevation: 3,
-          borderRadius: const BorderRadius.all(
-            Radius.circular(10),
-          ),
-          child: Container(
-            height: 120,
-            width: 100.0,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image(
-                  image: AssetImage('${model?.image}'),
-                  width: 50,
-                  height: 50,
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                Text('${model?.name}'),
-              ],
+      Expanded(
+        child: InkWell(
+          onTap: () {
+            /**navigateAndPush(context, widget: );**/
+          },
+          child: Material(
+            elevation: 3,
+            borderRadius: const BorderRadius.all(
+              Radius.circular(10),
             ),
-            decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10.0)),
+            child: Container(
+              height: 120,
+              width: 100.0,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image(
+                    image: AssetImage('${model?.image}'),
+                    width: 50,
+                    height: 50,
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Text('${model?.name}'),
+                ],
+              ),
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10.0)),
+            ),
           ),
         ),
       );
@@ -223,116 +225,116 @@ class HomeScreen extends StatelessWidget {
   Widget defaultSupplierCard(
       SupplierModel model,
       ) => Expanded(
-        child: InkWell(
-              onTap: () {
-                /**navigateAndPush(context, widget: );**/
-              },
-              child: Container(
-                height: 145,
+    child: InkWell(
+          onTap: () {
+            /**navigateAndPush(context, widget: );**/
+          },
+          child: Container(
+            height: 145,
+            child: Padding(
+              padding:
+                  const EdgeInsets.only(bottom: 8, top: 8, right: 5, left: 5),
+              child: Material(
+                elevation: 3,
+                borderRadius: BorderRadius.all(Radius.circular(10)),
                 child: Padding(
-                  padding:
-                      const EdgeInsets.only(bottom: 8, top: 8, right: 5, left: 5),
-                  child: Material(
-                    elevation: 3,
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(5),
-                            child: Image(
-                              image:model.image,
-                              height: 60,
-                              width: 60,
+                  padding: const EdgeInsets.all(16.0),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(5),
+                        child: Image(
+                          image:model.image,
+                          height: 60,
+                          width: 60,
+                        ),
+                      ),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('${model.userName}',
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                )),
+                            SizedBox(
+                              height: 10,
                             ),
-                          ),
-                          SizedBox(
-                            width: 20,
-                          ),
-                          Expanded(
-                            child: Column(
+                            Text('${model.serviceName}',
+                                style: TextStyle(
+                                  fontSize: 15,
+                                )),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text('${model.userName}',
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                    )),
-                                SizedBox(
-                                  height: 10,
+                                Icon(
+                                  TablerIcons.map_pin,
+                                  size: 20,
+                                  color: secondaryColor,
                                 ),
-                                Text('${model.serviceName}',
-                                    style: TextStyle(
-                                      fontSize: 15,
-                                    )),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Icon(
-                                      TablerIcons.map_pin,
-                                      size: 20,
-                                      color: secondaryColor,
-                                    ),
-                                    Expanded(
-                                      child: Text('${model.address}',
-                                          maxLines: 2,
-                                          overflow: TextOverflow.ellipsis,
-                                          style: TextStyle(
-                                            fontSize: 15,
-                                          )),
-                                    ),
-                                  ],
+                                Expanded(
+                                  child: Text('${model.address}',
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                        fontSize: 15,
+                                      )),
                                 ),
                               ],
                             ),
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Column(
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Column(
+                        children: [
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Icon(
-                                    Icons.star,
-                                    size: 20,
-                                    color: Colors.amber,
-                                  ),
-                                  SizedBox(
-                                    width: 4,
-                                  ),
-                                  Text(
-                                    '${model.rate}',
-                                    style: TextStyle(
-                                      fontSize: 15,
-                                    ),
-                                  ),
-                                ],
+                              Icon(
+                                Icons.star,
+                                size: 20,
+                                color: Colors.amber,
                               ),
                               SizedBox(
-                                height: 30,
+                                width: 4,
                               ),
-                              Text('${model.distance}',
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                  )),
+                              Text(
+                                '${model.rate}',
+                                style: TextStyle(
+                                  fontSize: 15,
+                                ),
+                              ),
                             ],
-                          )
+                          ),
+                          SizedBox(
+                            height: 30,
+                          ),
+                          Text('${model.distance}',
+                              style: TextStyle(
+                                fontSize: 15,
+                              )),
                         ],
-                      ),
-                    ),
+                      )
+                    ],
                   ),
                 ),
               ),
             ),
-      );
+          ),
+        ),
+  );
 }

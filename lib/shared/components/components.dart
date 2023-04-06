@@ -128,24 +128,29 @@ Future navigatePushDelete(
         (route) => false);
 
 Widget defaultCategoriesBox(
-        {required ImageProvider img, required String text}) =>
-    InkWell(
-      onTap: () {
-        /**navigateAndPush(context, widget: );**/
-      },
-      child: Material(
-        color: Colors.white,
-        elevation: 3,
-        borderRadius: const BorderRadius.all(
-          Radius.circular(10),
-        ),
+        {required ImageProvider img,
+        required String text,
+        double width = 60,
+        double height = 60,
+        double elevation = 3,
+        Color color = Colors.white,
+         Function()? onTap}) =>
+    Material(
+      color: color,
+      elevation: elevation,
+      borderRadius: const BorderRadius.all(
+        Radius.circular(10),
+      ),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(10),
+        onTap: onTap,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image(
               image: img,
-              width: 60,
-              height: 60,
+              width: width,
+              height: height,
             ),
             const SizedBox(
               height: 5,
@@ -357,7 +362,7 @@ Widget defaultAppointmentCard({
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               InkWell(
-                                onTap: (){},
+                                onTap: () {},
                                 child: Icon(
                                   TablerIcons.trash,
                                   color: errorColor,
@@ -388,7 +393,9 @@ Widget defaultSuppliersItem({
   required BuildContext context,
 }) {
   return ListView.separated(
-    physics: NeverScrollableScrollPhysics(), ///To avoid nested scrolling
+      physics: const NeverScrollableScrollPhysics(),
+
+      ///To avoid nested scrolling
       itemBuilder: (BuildContext context, int index) {
         return InkWell(
           onTap: () {
