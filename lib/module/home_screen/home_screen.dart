@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
+import 'package:login_register_methods/models/category_model.dart';
 import 'package:login_register_methods/shared/components/components.dart';
 
 import '../../shared/components/constants.dart';
@@ -91,31 +92,31 @@ class HomeScreen extends StatelessWidget {
         image: tempImage,
       ),
     ];
-    List<ItemCatModel> catItem = [
-      ItemCatModel(
-        name: 'Cleaning',
-        image: 'assets/images/cleaning.png',
+    List<Categories> categories = [
+      Categories(
+        title: 'Cleaning',
+        img: AssetImage('assets/images/cleaning.png'),
       ),
-      ItemCatModel(
-        name: 'Kitchen',
-        image: 'assets/images/kitchen.png',
+      Categories(
+        title: 'Kitchen',
+        img: AssetImage('assets/images/kitchen.png'),
       ),
-      ItemCatModel(
-        name: 'Plumbing',
-        image: 'assets/images/plumbing.png',
+      Categories(
+        title: 'Plumbing',
+        img: AssetImage('assets/images/plumbing.png'),
       ),
-      ItemCatModel(
-        name: 'Paint',
-        image: 'assets/images/paint.png',
+      Categories(
+        title: 'Paint',
+        img: AssetImage('assets/images/paint.png'),
       ),
-      ItemCatModel(
-        name: 'Carpentry',
-        image: 'assets/images/carpentry.png',
+      Categories(
+        title: 'Carpentry',
+        img: AssetImage('assets/images/carpentry.png'),
       ),
-      ItemCatModel(
-        name: 'Electricity',
-        image: 'assets/images/electrician.png',
-      ),
+      Categories(
+        title: 'Electricity',
+        img: AssetImage('assets/images/electrician.png'),
+      )
     ];
     return SingleChildScrollView(
       child: Padding(
@@ -147,14 +148,26 @@ class HomeScreen extends StatelessWidget {
               SizedBox(
                 height: 100,
                 child: ListView.separated(
-                  physics: BouncingScrollPhysics(),
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) =>
-                      defaultCategoriesBox(catItem[index]),
-                  separatorBuilder: (context, index) => SizedBox(
-                    width: 10,
-                  ),
-                  itemCount: catItem.length,
+                    physics: const BouncingScrollPhysics(),
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) => Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10)),
+                      padding: const EdgeInsets.all(2),
+                      width: 100,
+                      height: 100,
+                      child: defaultCategoriesBox(
+                          onTap: (){},
+                          elevation: 3,
+                          width: 50,
+                          height: 50,
+                          img: categories[index].img,
+                          text: categories[index].title),
+                    ),
+                    separatorBuilder: (context, index) => const SizedBox(
+                      width: 8,
+                    ),
+                    itemCount: categories.length
                 ),
               ),
               const SizedBox(
@@ -171,7 +184,7 @@ class HomeScreen extends StatelessWidget {
                 height: 15,
               ),
               SizedBox(
-                height: MediaQuery.of(context).size.height+100,
+                height: MediaQuery.of(context).size.height+90,
                 child: ListView.separated(
                   physics: NeverScrollableScrollPhysics(),
                   itemBuilder: (context, index) => defaultSupplierCard(suppliers[index]),
@@ -183,44 +196,6 @@ class HomeScreen extends StatelessWidget {
           )),
     );
   }
-
-  Widget defaultCategoriesBox(
-    ItemCatModel model,
-  ) =>
-      Expanded(
-        child: InkWell(
-          onTap: () {
-            /**navigateAndPush(context, widget: );**/
-          },
-          child: Material(
-            elevation: 3,
-            borderRadius: const BorderRadius.all(
-              Radius.circular(10),
-            ),
-            child: Container(
-              height: 120,
-              width: 100.0,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image(
-                    image: AssetImage('${model?.image}'),
-                    width: 50,
-                    height: 50,
-                  ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  Text('${model?.name}'),
-                ],
-              ),
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10.0)),
-            ),
-          ),
-        ),
-      );
 
   Widget defaultSupplierCard(
       SupplierModel model,
