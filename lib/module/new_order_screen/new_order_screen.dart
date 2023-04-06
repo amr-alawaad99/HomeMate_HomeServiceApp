@@ -47,6 +47,7 @@ class NewOrderScreen extends StatelessWidget {
     return ColorfulSafeArea(
       color: primaryColor,
       child: Scaffold(
+        backgroundColor: scaffoldLightColor,
         key: scaffoldKey,
         extendBody: true,
         body: NestedScrollView(
@@ -155,7 +156,7 @@ class NewOrderScreen extends StatelessWidget {
                           context: context,
                           initialTime: TimeOfDay.now(),
                         ).then((value) {
-                          dateController.text = value.toString();
+                          timeController.text = value!.format(context).toString();
                         });
                       })
                 ],

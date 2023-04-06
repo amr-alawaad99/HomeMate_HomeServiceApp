@@ -41,6 +41,7 @@ class CategoriesScreen extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(20),
           child: GridView.builder(
+            physics: const NeverScrollableScrollPhysics(),
               scrollDirection: Axis.vertical,
               shrinkWrap: true,
               itemCount: categories.length,

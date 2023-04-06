@@ -124,10 +124,8 @@ class HomeScreen extends StatelessWidget {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(10),
-                child: Container(
-                  child: const Image(
-                    image: AssetImage('assets/images/carpenter.jpg'),
-                  ),
+                child: const Image(
+                  image: AssetImage('assets/images/carpenter.jpg'),
                 ),
               ),
               const SizedBox(
@@ -146,11 +144,11 @@ class HomeScreen extends StatelessWidget {
               SizedBox(
                 height: 100,
                 child: ListView.separated(
-                  physics: BouncingScrollPhysics(),
+                  physics: const BouncingScrollPhysics(),
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) =>
                       defaultCategoriesBox(catItem[index]),
-                  separatorBuilder: (context, index) => SizedBox(
+                  separatorBuilder: (context, index) => const SizedBox(
                     width: 10,
                   ),
                   itemCount: catItem.length,
@@ -172,7 +170,7 @@ class HomeScreen extends StatelessWidget {
               SizedBox(
                 height: MediaQuery.of(context).size.height+100,
                 child: ListView.separated(
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   itemBuilder: (context, index) => defaultSupplierCard(suppliers[index]),
                   separatorBuilder: (context, index) => Container(height: 2,),
                   itemCount: 6,
@@ -221,117 +219,115 @@ class HomeScreen extends StatelessWidget {
 
   Widget defaultSupplierCard(
       SupplierModel model,
-      ) => Expanded(
-    child: InkWell(
-          onTap: () {
-            /**navigateAndPush(context, widget: );**/
-          },
-          child: Container(
-            height: 145,
-            child: Padding(
-              padding:
-                  const EdgeInsets.only(bottom: 8, top: 8, right: 5, left: 5),
-              child: Material(
-                elevation: 3,
-                borderRadius: BorderRadius.all(Radius.circular(10)),
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(5),
-                        child: Image(
-                          image:model.image,
-                          height: 60,
-                          width: 60,
+      ) => InkWell(
+            onTap: () {
+              /**navigateAndPush(context, widget: );**/
+            },
+            child: Container(
+              height: 145,
+              child: Padding(
+                padding:
+                    const EdgeInsets.only(bottom: 8, top: 8, right: 5, left: 5),
+                child: Material(
+                  elevation: 3,
+                  borderRadius: const BorderRadius.all(Radius.circular(10)),
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(5),
+                          child: Image(
+                            image:model.image,
+                            height: 60,
+                            width: 60,
+                          ),
                         ),
-                      ),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text('${model.userName}',
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                )),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Text('${model.serviceName}',
-                                style: TextStyle(
-                                  fontSize: 15,
-                                )),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Icon(
-                                  TablerIcons.map_pin,
-                                  size: 20,
-                                  color: secondaryColor,
-                                ),
-                                Expanded(
-                                  child: Text('${model.address}',
-                                      maxLines: 2,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: TextStyle(
-                                        fontSize: 15,
-                                      )),
-                                ),
-                              ],
-                            ),
-                          ],
+                        SizedBox(
+                          width: 20,
                         ),
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Column(
-                        children: [
-                          Row(
+                        Expanded(
+                          child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Icon(
-                                Icons.star,
-                                size: 20,
-                                color: Colors.amber,
-                              ),
+                              Text('${model.userName}',
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  )),
                               SizedBox(
-                                width: 4,
+                                height: 10,
                               ),
-                              Text(
-                                '${model.rate}',
-                                style: TextStyle(
-                                  fontSize: 15,
-                                ),
+                              Text('${model.serviceName}',
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                  )),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Icon(
+                                    TablerIcons.map_pin,
+                                    size: 20,
+                                    color: secondaryColor,
+                                  ),
+                                  Expanded(
+                                    child: Text('${model.address}',
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: TextStyle(
+                                          fontSize: 15,
+                                        )),
+                                  ),
+                                ],
                               ),
                             ],
                           ),
-                          SizedBox(
-                            height: 30,
-                          ),
-                          Text('${model.distance}',
-                              style: TextStyle(
-                                fontSize: 15,
-                              )),
-                        ],
-                      )
-                    ],
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Column(
+                          children: [
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Icon(
+                                  Icons.star,
+                                  size: 20,
+                                  color: Colors.amber,
+                                ),
+                                SizedBox(
+                                  width: 4,
+                                ),
+                                Text(
+                                  '${model.rate}',
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 30,
+                            ),
+                            Text('${model.distance}',
+                                style: TextStyle(
+                                  fontSize: 15,
+                                )),
+                          ],
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-        ),
-  );
+          );
 }
