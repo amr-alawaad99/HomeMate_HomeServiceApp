@@ -13,6 +13,8 @@ class NewOrderScreen extends StatelessWidget {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   var dateController = TextEditingController();
   var timeController = TextEditingController();
+  var locationController = TextEditingController();
+
   List<Categories> categories = [
     Categories(
       title: 'Cleaning',
@@ -158,6 +160,26 @@ class NewOrderScreen extends StatelessWidget {
                         ).then((value) {
                           timeController.text = value!.format(context).toString();
                         });
+                      }),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  defaultTextFromField(
+                      validator: (String? value) {
+                        if (value!.isEmpty) {
+                          return 'you must enter location';
+                        }
+                        return null;
+                      },
+                      hintText: 'Location',
+
+                      prefixIcon: TablerIcons.map_pin,
+
+                      controller: locationController,
+                      keyboardType: TextInputType.text,
+                      onTapFunction: () {
+
+
                       })
                 ],
               ),
