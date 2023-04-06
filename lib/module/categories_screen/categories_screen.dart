@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:login_register_methods/module/new_order_screen/new_order_screen.dart';
 import 'package:login_register_methods/shared/components/components.dart';
 
 import '../../models/category_model.dart';
@@ -38,8 +39,9 @@ class CategoriesScreen extends StatelessWidget {
     return Column(
       children: [
         Container(
-          padding: EdgeInsets.all(20),
+          padding: const EdgeInsets.all(20),
           child: GridView.builder(
+            physics: const NeverScrollableScrollPhysics(),
               scrollDirection: Axis.vertical,
               shrinkWrap: true,
               itemCount: categories.length,
@@ -49,6 +51,10 @@ class CategoriesScreen extends StatelessWidget {
                 mainAxisSpacing: 15,
               ),
               itemBuilder: (context, index) => defaultCategoriesBox(
+                onTap: (){
+                  navigateAndPush(context, widget:NewOrderScreen());
+                },
+
                   img: categories[index].img,
                   text: categories[index].title)),
         ),

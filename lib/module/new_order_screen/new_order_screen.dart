@@ -13,6 +13,8 @@ class NewOrderScreen extends StatelessWidget {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   var dateController = TextEditingController();
   var timeController = TextEditingController();
+  var locationController = TextEditingController();
+
   List<Categories> categories = [
     Categories(
       title: 'Cleaning',
@@ -44,20 +46,22 @@ class NewOrderScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return
-    ColorfulSafeArea(
+    return ColorfulSafeArea(
       color: primaryColor,
       child: Scaffold(
+        backgroundColor: scaffoldLightColor,
         key: scaffoldKey,
         extendBody: true,
         body: NestedScrollView(
           floatHeaderSlivers: true,
           headerSliverBuilder: (context, innerBoxIsScrolled) => <Widget>[
             const SliverAppBar(
-              floating: false,
-              expandedHeight: 50,
+
+              floating: true,
               pinned: true,
+
               flexibleSpace: FlexibleSpaceBar(
+
                 title: Text(
                   'New Order',
                   style: TextStyle(color: Colors.white, fontFamily: "Roboto"),
@@ -73,17 +77,43 @@ class NewOrderScreen extends StatelessWidget {
             ),
           ],
           body: Padding(
-            padding: const EdgeInsets.all(10.0),
+            padding: const EdgeInsets.all(20.0),
             child: Form(
               key: formKey,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('Select Service'),
+                  const Text(
+                    'Select Service',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
                   const SizedBox(
                     height: 15,
                   ),
-
+                  SizedBox(
+                    height: 100,
+                    child: ListView.separated(
+                      physics: const BouncingScrollPhysics(),
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) => Container(
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10)),
+                              padding: const EdgeInsets.all(2),
+                              width: 100,
+                              height: 100,
+                              child: defaultCategoriesBox(
+                                onTap: (){},
+                                  elevation: 3,
+                                  width: 50,
+                                  height: 50,
+                                  img: categories[index].img,
+                                  text: categories[index].title),
+                            ),
+                        separatorBuilder: (context, index) => const SizedBox(
+                              width: 8,
+                            ),
+                        itemCount: categories.length),
+                  ),
                   const SizedBox(
                     height: 15,
                   ),
@@ -128,8 +158,28 @@ class NewOrderScreen extends StatelessWidget {
                           context: context,
                           initialTime: TimeOfDay.now(),
                         ).then((value) {
-                          dateController.text = value.toString();
+                          timeController.text = value!.format(context).toString();
                         });
+                      }),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  defaultTextFromField(
+                      validator: (String? value) {
+                        if (value!.isEmpty) {
+                          return 'you must enter location';
+                        }
+                        return null;
+                      },
+                      hintText: 'Location',
+
+                      prefixIcon: TablerIcons.map_pin,
+
+                      controller: locationController,
+                      keyboardType: TextInputType.text,
+                      onTapFunction: () {
+
+
                       })
                 ],
               ),
