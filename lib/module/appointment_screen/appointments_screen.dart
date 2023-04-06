@@ -80,7 +80,7 @@ class AppointmentsScreen extends StatelessWidget {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.only(top: 20, left: 20,),
+          padding: const EdgeInsets.only(top: 15, left: 15,),
           child: SizedBox(
             height: 30,
             width: double.infinity,
@@ -112,13 +112,13 @@ class AppointmentsScreen extends StatelessWidget {
                       ),
                     ),
                 separatorBuilder: (context, index) => const SizedBox(
-                      width: 10,
+                      width: 8,
                     ),
                 itemCount: categories.length),
           ),
         ),
         Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: const EdgeInsets.all(15.0),
           child: SizedBox(
             child: ListView.separated(
               physics: NeverScrollableScrollPhysics(), ///To avoid nested scrolling

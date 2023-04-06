@@ -403,14 +403,14 @@ Widget defaultSuppliersItem({
           onTap: () {
             /**navigateAndPush(context, widget: );**/
           },
-          child: Container(
+          child: SizedBox(
             height: 150,
             child: Padding(
               padding:
-                  const EdgeInsets.only(bottom: 8, top: 8, right: 16, left: 16),
+                  const EdgeInsets.only( top: 10, right: 15, left: 15),
               child: Material(
                 elevation: 3,
-                borderRadius: BorderRadius.all(Radius.circular(10)),
+                borderRadius: const BorderRadius.all(Radius.circular(10)),
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Row(
