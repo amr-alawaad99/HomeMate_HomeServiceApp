@@ -87,7 +87,6 @@ Widget defaultTextFromField({
             ),
             hintText: hintText,
             border: InputBorder.none,
-            prefixIconColor: ,
             prefixIcon: prefixIcon != null
                 ? IconButton(
                     icon: Icon(prefixIcon),
