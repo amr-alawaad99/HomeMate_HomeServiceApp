@@ -22,7 +22,7 @@ class LayoutCubit extends Cubit<LayoutStates>{
   List<Widget> screens = [
     const  HomeScreen(),
      CategoriesScreen(),
-    const SuppliersScreen(),
+     SuppliersScreen(),
      AppointmentsScreen(),
   ];
   //////////////////////////////////

@@ -49,13 +49,22 @@ class NewOrderScreen extends StatelessWidget {
     return ColorfulSafeArea(
       color: primaryColor,
       child: Scaffold(
+        bottomNavigationBar: Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: defaultButton(text: 'Send Request', onPress: (){},fontSize: 20),
+        ),
+
         backgroundColor: scaffoldLightColor,
         key: scaffoldKey,
         extendBody: true,
+
         body: NestedScrollView(
+
+
           floatHeaderSlivers: true,
           headerSliverBuilder: (context, innerBoxIsScrolled) => <Widget>[
             const SliverAppBar(
+
 
               floating: true,
               pinned: true,
