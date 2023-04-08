@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:login_register_methods/module/sign_up_screen/cubit/cubit.dart';
 import 'package:login_register_methods/module/sign_up_screen/cubit/states.dart';
 import 'package:login_register_methods/module/sign_up_screen/verification_screen.dart';
 import 'package:login_register_methods/shared/components/components.dart';
 import 'package:login_register_methods/shared/components/constants.dart';
+import 'package:provider/provider.dart';
 
 class UserSignUpScreen extends StatelessWidget {
 
@@ -39,6 +41,7 @@ class UserSignUpScreen extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      //TITLE
                       RichText(
                         text: TextSpan(
                             style: Theme.of(context)
@@ -64,6 +67,7 @@ class UserSignUpScreen extends StatelessWidget {
                       SizedBox(
                         height: screenHeight * 0.02,
                       ),
+                      //CAPTION
                       Text(
                         "Create your account now to enjoy all the services of the application",
                         style: Theme.of(context)
@@ -74,6 +78,7 @@ class UserSignUpScreen extends StatelessWidget {
                       SizedBox(
                         height: screenHeight * 0.05,
                       ),
+                      //FIRST AND LAST NAME INPUT
                       Row(
                         children: [
                           Expanded(
@@ -81,6 +86,7 @@ class UserSignUpScreen extends StatelessWidget {
                               hintText: "First Name",
                               keyboardType: TextInputType.name,
                               controller: fNameController,
+                              maxLength: 20,
                               validator: (value) {
                                 if(value!.isEmpty){
                                   return "First Name must not be empty";
@@ -97,6 +103,7 @@ class UserSignUpScreen extends StatelessWidget {
                               hintText: "Lase Name",
                               keyboardType: TextInputType.name,
                               controller: lNameController,
+                              maxLength: 20,
                               validator: (value) {
                                 if(value!.isEmpty){
                                   return "Last Name must not be empty";
@@ -110,6 +117,7 @@ class UserSignUpScreen extends StatelessWidget {
                       SizedBox(
                         height: screenHeight * 0.01,
                       ),
+                      //EMAIL INPUT
                       Container(
                         child: defaultTextFromField(
                           hintText: "Email",
@@ -118,6 +126,8 @@ class UserSignUpScreen extends StatelessWidget {
                           validator: (value) {
                             if(value!.isEmpty){
                               return "Email must not be empty";
+                            } else if(!RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(value)){
+                              return "not a valid email address";
                             }
                             return null;
                           },
@@ -126,6 +136,7 @@ class UserSignUpScreen extends StatelessWidget {
                       SizedBox(
                         height: screenHeight * 0.01,
                       ),
+                      //PHONE NUMBER INPUT
                       Container(
                         decoration: const BoxDecoration(
                           color: Colors.white,
@@ -152,11 +163,16 @@ class UserSignUpScreen extends StatelessWidget {
                               ),
                               Expanded(
                                 child: TextFormField(
+                                  maxLength: 10,
+                                  inputFormatters: [
+                                    LengthLimitingTextInputFormatter(10), // Apply a formatter to limit the length
+                                  ],
                                   style: const TextStyle(
                                     fontFamily: "Roboto",
                                     fontSize: 18.0,
                                   ),
                                   decoration: const InputDecoration(
+                                    counterText: '', //To Hide MaxLength
                                     hintStyle: TextStyle(
                                       color: Colors.grey,
                                     ),
@@ -168,6 +184,8 @@ class UserSignUpScreen extends StatelessWidget {
                                   validator: (value) {
                                     if(value!.isEmpty){
                                       return "Phone Number must not be empty";
+                                    } else if(!RegExp(r'^1[0-9]{9}$').hasMatch(value)){
+                                      return "invalid phone number";
                                     }
                                     return null;
                                   },
@@ -180,6 +198,7 @@ class UserSignUpScreen extends StatelessWidget {
                       SizedBox(
                         height: screenHeight * 0.01,
                       ),
+                      //PASSWORD INPUT
                       Container(
                         child: defaultTextFromField(
                           hintText: "Create Password",
@@ -191,9 +210,15 @@ class UserSignUpScreen extends StatelessWidget {
                           },
                           keyboardType: TextInputType.visiblePassword,
                           controller: passwordController,
+                          maxLength: 30,
                           validator: (value) {
                             if(value!.isEmpty){
                               return "Password must not be empty";
+                            } else if(value.length < 8){
+                              return "Password must be at least 8 characters";
+                            } else if(!RegExp(r'^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,30}$').hasMatch(value)){
+                              return "Password must have at least one uppercase letter,\none lowercase letter,\none digit,\none special character,"
+                                  "\nminimum length of 8 characters,\nmaximum length of 30 characters";
                             }
                             return null;
                           },
@@ -202,6 +227,7 @@ class UserSignUpScreen extends StatelessWidget {
                       SizedBox(
                         height: screenHeight * 0.01,
                       ),
+                      //RE-PASSWORD INPUT
                       Container(
                         child: defaultTextFromField(
                           hintText: "Repeat Password",
@@ -216,6 +242,13 @@ class UserSignUpScreen extends StatelessWidget {
                           validator: (value) {
                             if(value!.isEmpty){
                               return "Password must not be empty";
+                            } else if(rPasswordController.text != passwordController.text){
+                              return "The passwords you entered do not match.";
+                            } else if(value.length < 8){
+                              return "Password must be at least 8 characters";
+                            } else if(!RegExp(r'^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,30}$').hasMatch(value)){
+                              return "Password must have at least one uppercase letter,\none lowercase letter,\none digit,\none special character,"
+                                  "\nminimum length of 8 characters,\nmaximum length of 30 characters";
                             }
                             return null;
                           },
@@ -224,6 +257,7 @@ class UserSignUpScreen extends StatelessWidget {
                       SizedBox(
                         height: screenHeight * 0.01,
                       ),
+                      //CHECKBOX
                       Container(
                         decoration: BoxDecoration(
                           border: !cubit.isChecked & cubit.isClicked? Border.all(color: errorColor) : null,
@@ -264,12 +298,23 @@ class UserSignUpScreen extends StatelessWidget {
                       SizedBox(
                         height: screenHeight * 0.03,
                       ),
+                      //NEXT BUTTON
                       Container(
                         child: defaultButton(
                           text: "Next",
                           onPress: () {
                             if(formKey.currentState!.validate() && cubit.isChecked){
-                              navigateAndPush(context, widget: VerificationScreen());
+                              Map<String, String> userInfo = {
+                                'firstName' : fNameController.text,
+                                'lastName' : lNameController.text,
+                                'email' : emailController.text,
+                                'phone' : phoneController.text,
+                                'password' : passwordController.text,
+                              };
+                              navigateAndPush(context, widget: Provider(
+                                create: (context) => SignupCubit(),
+                                builder: (context, child) => VerificationScreen(userInfo),
+                              ),);
                             } else if(!cubit.isClicked){
                               cubit.errorCheckBox();
                             }

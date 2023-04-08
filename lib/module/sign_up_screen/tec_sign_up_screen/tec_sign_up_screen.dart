@@ -321,7 +321,14 @@ class TecSignUpScreen extends StatelessWidget {
                           text: "Next",
                           onPress: () {
                             if(formKey.currentState!.validate() && cubit.isChecked){
-                              navigateAndPush(context, widget: VerificationScreen());
+                              Map<String, String> userInfo = {
+                                'firstName' : fNameController.text,
+                                'lastName' : lNameController.text,
+                                'email' : emailController.text,
+                                'phone' : phoneController.text,
+                                'password' : passwordController.text,
+                              };
+                              navigateAndPush(context, widget: VerificationScreen(userInfo));
                             } else if(!cubit.isClicked){
                               cubit.errorCheckBox();
                             }

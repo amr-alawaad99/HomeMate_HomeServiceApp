@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:login_register_methods/shared/components/constants.dart';
 
 /// BUTTON
@@ -53,6 +55,7 @@ Widget defaultTextFromField({
   bool isObscure = false,
   IconData? suffixIcon,
   IconData? prefixIcon,
+  int? maxLength,
   Function()? suffixPressFunction,
   Function()? prefixPressFunction,
   Function()? onTapFunction,
@@ -72,6 +75,10 @@ Widget defaultTextFromField({
       child: Padding(
         padding: const EdgeInsets.all(10.0),
         child: TextFormField(
+          maxLength: maxLength,
+          inputFormatters: [
+            LengthLimitingTextInputFormatter(maxLength), // Apply a formatter to limit the length
+          ],
           style: const TextStyle(
             fontFamily: "Roboto",
             fontSize: 16.0,
@@ -83,6 +90,7 @@ Widget defaultTextFromField({
           controller: controller,
           keyboardType: keyboardType,
           decoration: InputDecoration(
+            counterText: '', //To Hide MaxLength
             hintStyle: const TextStyle(
               color: Colors.grey,
             ),
@@ -128,6 +136,23 @@ Future navigatePushDelete(
           builder: (context) => widget,
         ),
         (route) => false);
+
+/// Show Toast
+void showToast({
+  required String message,
+  required Color toastColor,
+  Color textColor = Colors.white,
+  double fontSize = 16.0,
+}) =>
+    Fluttertoast.showToast(
+      msg: message,
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.BOTTOM,
+      timeInSecForIosWeb: 1,
+      backgroundColor: toastColor,
+      textColor: textColor,
+      fontSize: fontSize,
+    );
 
 Widget defaultCategoriesBox(
         {required ImageProvider img,
