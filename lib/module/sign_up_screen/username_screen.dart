@@ -14,10 +14,21 @@ class UsernameScreen extends StatelessWidget {
   var usernameController = TextEditingController();
   Map<String, String> userinfo;
 
+
+
   UsernameScreen(this.userinfo, {super.key});
 
   @override
   Widget build(BuildContext context) {
+
+    var cubit = SignupCubit.get(context);
+    ///Generate a random username
+    usernameController.text = UsernameGenerator().generateForName(
+      userinfo['firstName']!,
+      lastName: userinfo['lastName']!,
+      numberSeed: 999,
+    );
+
     return BlocConsumer<SignupCubit, SignupStates>(
       listener: (context, state) {
         if (state is CreateUserErrorState) {
@@ -32,14 +43,6 @@ class UsernameScreen extends StatelessWidget {
         }
       },
       builder: (context, state) {
-
-        var cubit = SignupCubit.get(context);
-
-        usernameController.text = UsernameGenerator().generateForName(
-          userinfo['firstName']!,
-          lastName: userinfo['lastName']!,
-          numberSeed: 999,
-        );
 
         return Scaffold(
           appBar: AppBar(),
@@ -133,7 +136,7 @@ class UsernameScreen extends StatelessWidget {
                       onPress: () async {
                         if (formKey.currentState!.validate()) {
                           await cubit.checkUsername(usernameController.text);
-                          if(cubit.usernameExists == false){
+                          if(cubit.usernameExists == false) {
                             SignupCubit.get(context).registerUserAccount(
                               email: userinfo['email']!,
                               password: userinfo['password']!,
@@ -142,6 +145,8 @@ class UsernameScreen extends StatelessWidget {
                               userName: usernameController.text,
                               phoneNumber: userinfo['phone']!,
                             );
+                          } else if(state is UsernameCheckingErrorState) {
+                            showToast(message: "Error! PERMISSION_DENIED", toastColor: errorColor);
                           } else {
                             showToast(message: "username already exists", toastColor: errorColor);
                           }
