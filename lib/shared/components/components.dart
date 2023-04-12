@@ -161,6 +161,7 @@ Widget defaultCategoriesBox(
         double height = 60,
         double elevation = 3,
         Color color = Colors.white,
+        Color textColor = Colors.black,
          Function()? onTap}) =>
     Material(
       color: color,
@@ -184,7 +185,8 @@ Widget defaultCategoriesBox(
             ),
             Text(
               text,
-              style: const TextStyle(
+              style:  TextStyle(
+                color: textColor,
                 fontFamily: "Roboto",
                 fontWeight: FontWeight.bold,
               ),
@@ -449,7 +451,7 @@ Widget defaultSuppliersItem({
                           width: 60,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 20,
                       ),
                       Expanded(
