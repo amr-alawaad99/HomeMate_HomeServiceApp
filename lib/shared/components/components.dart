@@ -75,6 +75,8 @@ Widget defaultTextFromField({
       child: Padding(
         padding: const EdgeInsets.all(10.0),
         child: TextFormField(
+
+
           maxLength: maxLength,
           inputFormatters: [
             LengthLimitingTextInputFormatter(maxLength), // Apply a formatter to limit the length
