@@ -15,6 +15,7 @@ class NewOrderScreen extends StatelessWidget {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   var dateController = TextEditingController();
   var timeController = TextEditingController();
+  var notesController = TextEditingController();
   var locationController = TextEditingController();
 
   NewOrderScreen({super.key});
@@ -192,7 +193,18 @@ class NewOrderScreen extends StatelessWidget {
                             prefixIconColor: secondaryColor,
                             controller: locationController,
                             keyboardType: TextInputType.text,
-                          )
+                          ),
+                          const SizedBox(
+                            height: 15,
+                          ),
+
+                          defaultTextFromField(
+                            suffixIcon: TablerIcons.camera,
+                            suffixPressFunction: (){},
+                            hintText: 'Notes',
+                            controller: notesController,
+                            keyboardType: TextInputType.text,
+                          ),
                         ],
                       ),
                     ),
