@@ -8,6 +8,7 @@ class Appointment {
   final String status;
   final String cost;
   final ImageProvider image;
+
   Appointment({
     required this.serviceName,
     required this.userName,

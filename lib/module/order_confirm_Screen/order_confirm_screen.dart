@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 
 import '../../shared/components/constants.dart';
 
 class OrderConfirmScreen extends StatelessWidget {
-  const OrderConfirmScreen({Key? key}) : super(key: key);
+  OrderConfirmScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: scaffoldLightColor,
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.white),
         title: const Text(
@@ -63,7 +65,7 @@ class OrderConfirmScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 10,
                     ),
                     Column(
@@ -78,7 +80,7 @@ class OrderConfirmScreen extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         Text(
@@ -92,7 +94,22 @@ class OrderConfirmScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-              )
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              ListTile(
+                title: Text('DATE AND TIME'),
+                iconColor: primaryColor,
+                subtitle: Text('14 Apr, 2023\n01:30 AM '),
+                trailing: IconButton(
+                  icon: Icon(
+                    TablerIcons.edit,
+                  ),
+                  onPressed: () {},
+                ),
+                contentPadding: EdgeInsets.all(5),
+              ),
             ],
           ),
         ),

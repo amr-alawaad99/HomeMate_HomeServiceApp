@@ -46,21 +46,22 @@ Widget defaultButton({
     );
 
 /// TEXT FROM FIELD
-Widget defaultTextFromField({
-  required String hintText,
-  required TextEditingController controller,
-  required TextInputType keyboardType,
-  String? Function(String? value)? validator,
-  bool isSuffix = false,
-  bool isObscure = false,
-  IconData? suffixIcon,
-  IconData? prefixIcon,
-  int? maxLength,
-  Function()? suffixPressFunction,
-  Function()? prefixPressFunction,
-  Function()? onTapFunction,
-  Color prefixIconColor = Colors.grey
-}) =>
+Widget defaultTextFromField(
+        {required String hintText,
+        required TextEditingController controller,
+        required TextInputType keyboardType,
+        String? Function(String? value)? validator,
+        bool isSuffix = false,
+        bool isEnabled = true,
+        bool isObscure = false,
+        IconData? suffixIcon,
+        IconData? prefixIcon,
+        int? maxLength,
+        Function()? suffixPressFunction,
+        Function()? prefixPressFunction,
+        Function()? onTapFunction,
+        Color prefixIconColor = Colors.grey,
+        Color suffixIconColor = Colors.grey}) =>
     Container(
       decoration: const BoxDecoration(
         color: Colors.white,
@@ -75,24 +76,24 @@ Widget defaultTextFromField({
       child: Padding(
         padding: const EdgeInsets.all(10.0),
         child: TextFormField(
-
-
           maxLength: maxLength,
           inputFormatters: [
-            LengthLimitingTextInputFormatter(maxLength), // Apply a formatter to limit the length
+            LengthLimitingTextInputFormatter(maxLength),
+            // Apply a formatter to limit the length
           ],
           style: const TextStyle(
             fontFamily: "Roboto",
             fontSize: 16.0,
           ),
           onTap: onTapFunction,
-
+          enabled: isEnabled,
           obscureText: isObscure,
           validator: validator,
           controller: controller,
           keyboardType: keyboardType,
           decoration: InputDecoration(
-            counterText: '', //To Hide MaxLength
+            counterText: '',
+            //To Hide MaxLength
             hintStyle: const TextStyle(
               color: Colors.grey,
             ),
@@ -100,13 +101,19 @@ Widget defaultTextFromField({
             border: InputBorder.none,
             prefixIcon: prefixIcon != null
                 ? IconButton(
-                    icon: Icon(prefixIcon,color: prefixIconColor,),
+                    icon: Icon(
+                      prefixIcon,
+                      color: prefixIconColor,
+                    ),
                     onPressed: prefixPressFunction,
                   )
                 : null,
             suffixIcon: suffixIcon != null
                 ? IconButton(
-                    icon: Icon(suffixIcon,),
+                    icon: Icon(
+                      suffixIcon,
+                      color: suffixIconColor,
+                    ),
                     onPressed: suffixPressFunction,
                   )
                 : null,
@@ -156,21 +163,25 @@ void showToast({
       fontSize: fontSize,
     );
 
-Widget defaultCategoriesBox(
-        {required ImageProvider img,
-        required String text,
-        double width = 60,
-        double height = 60,
-        double elevation = 3,
-        Color color = Colors.white,
-        Color textColor = Colors.black,
-         Function()? onTap}) =>
-    Material(
-      color: color,
-      elevation: elevation,
-      borderRadius: const BorderRadius.all(
-        Radius.circular(10),
-      ),
+Widget defaultCategoriesBox({
+  required ImageProvider img,
+  required String text,
+  double width = 60,
+  double height = 60,
+  double elevation = 3,
+  Color color = Colors.white,
+  Color textColor = Colors.black,
+  Function()? onTap,
+}) =>
+    Container(
+      decoration: BoxDecoration(
+          boxShadow: const <BoxShadow>[
+            BoxShadow(
+                color: Colors.black12,
+                blurRadius: 20.0,
+                offset: Offset(0.0, 0.75)),
+          ],
+          color: Colors.white, borderRadius: BorderRadius.circular(10.0)),
       child: InkWell(
         borderRadius: BorderRadius.circular(10),
         onTap: onTap,
@@ -187,7 +198,7 @@ Widget defaultCategoriesBox(
             ),
             Text(
               text,
-              style:  TextStyle(
+              style: TextStyle(
                 color: textColor,
                 fontFamily: "Roboto",
                 fontWeight: FontWeight.bold,
@@ -232,184 +243,198 @@ Widget defaultAppointmentCard({
   required String status,
   required String cost,
   required ImageProvider image,
+  required Color iconColor,
+  required Color statusColor,
+  Function()? onTap,
 }) =>
-    Material(
-      elevation: 3,
-      borderRadius: const BorderRadius.all(
-        Radius.circular(10),
-      ),
-      child: Container(
-        padding: const EdgeInsets.all(10),
-        height: 150,
-        width: double.infinity,
-        decoration: BoxDecoration(
-            color: Colors.white, borderRadius: BorderRadius.circular(10.0)),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        serviceName,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 19.0,
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Row(
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(5),
-                            child: Image(
-                              image: image,
-                              width: 30,
-                              height: 30,
-                            ),
-                          ),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                userName,
-                                style: const TextStyle(
-                                  fontSize: 15.0,
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 5.0,
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: const [
-                                  Image(
-                                    image: AssetImage('assets/images/star.png'),
-                                    width: 15.0,
-                                    height: 15.0,
-                                  ),
-                                  SizedBox(
-                                    width: 5,
-                                  ),
-                                  Text(
-                                    '4.5/5',
-                                    style: TextStyle(
-                                      fontSize: 12.0,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            date,
-                            style: const TextStyle(
-                              fontSize: 12.0,
-                            ),
-                          ),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          Text(
-                            time,
-                            style: const TextStyle(
-                              fontSize: 12.0,
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Icon(
-                            TablerIcons.circle,
-                            size: 20,
-                            color: secondaryColor,
-                          ),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          Text(
-                            status,
-                            style: TextStyle(
-                              fontSize: 12.0,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            Expanded(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Cost',
-                        style: TextStyle(
-                          fontSize: 15.0,
-                        ),
-                      ),
-                      Text(
-                        cost,
-                        style: TextStyle(
-                          fontSize: 15.0,
-                          fontWeight: FontWeight.bold,
-                          color: secondaryColor,
-                        ),
-                      ),
-                      Expanded(
-                        child: Container(
-                          height: double.infinity,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              InkWell(
-                                onTap: () {},
-                                child: Icon(
-                                  TablerIcons.trash,
-                                  color: errorColor,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
+    Container(
+      padding: const EdgeInsets.all(10),
+      height: 150,
+      width: double.infinity,
+      decoration: BoxDecoration(
+          boxShadow: <BoxShadow>[
+            BoxShadow(
+                color: Colors.black12,
+                blurRadius: 20.0,
+                offset: Offset(0.0, 0.75)),
           ],
-        ),
+          color: Colors.white, borderRadius: BorderRadius.circular(10.0)),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      serviceName,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 19.0,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(5),
+                          child: Image(
+                            image: image,
+                            width: 30,
+                            height: 30,
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              userName,
+                              style: const TextStyle(
+                                fontSize: 15.0,
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 5.0,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: const [
+                                Image(
+                                  image: AssetImage('assets/images/star.png'),
+                                  width: 15.0,
+                                  height: 15.0,
+                                ),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                Text(
+                                  '4.5/5',
+                                  style: TextStyle(
+                                    fontSize: 12.0,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          date,
+                          style: const TextStyle(
+                            fontSize: 12.0,
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          time,
+                          style: const TextStyle(
+                            fontSize: 12.0,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Icon(
+                          TablerIcons.circle,
+                          size: 20,
+                          color: iconColor,
+                        ),
+                        const SizedBox(
+                          width: 5,
+                        ),
+                        Text(
+                          status,
+                          style: TextStyle(
+                            fontSize: 12.0,
+                            color: statusColor,
+                            fontWeight: FontWeight.bold
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Cost',
+                      style: TextStyle(
+                        fontSize: 15.0,
+                      ),
+                    ),
+                    Text(
+                      cost,
+                      style: TextStyle(
+                        fontSize: 15.0,
+                        fontWeight: FontWeight.bold,
+                        color: secondaryColor,
+                      ),
+                    ),
+                    Expanded(
+                      child: Container(
+                        height: double.infinity,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            InkWell(
+                              onTap: onTap,
+                              child: Icon(
+                                TablerIcons.trash,
+                                color: errorColor,
+                              ),
+                            ),
+                            SizedBox(width: 5,),
+                            status=='Finished'?SizedBox():InkWell(
+                              onTap: onTap,
+                              child: Icon(
+
+                                TablerIcons.edit,
+                                color: primaryColor,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
 //
@@ -435,11 +460,17 @@ Widget defaultSuppliersItem({
           child: SizedBox(
             height: 150,
             child: Padding(
-              padding:
-                  const EdgeInsets.only( top: 10, right: 15, left: 15),
-              child: Material(
-                elevation: 3,
-                borderRadius: const BorderRadius.all(Radius.circular(10)),
+              padding: const EdgeInsets.only(top: 10, right: 15, left: 15),
+              child: Container(
+                decoration: BoxDecoration(
+                    boxShadow: <BoxShadow>[
+                      BoxShadow(
+                          color: Colors.black12,
+                          blurRadius: 20.0,
+                          offset: Offset(0.0, 0.75)),
+                    ],
+                    color: Colors.white, borderRadius: BorderRadius.circular(10.0)),
+
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Row(

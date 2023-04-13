@@ -26,5 +26,19 @@ class LayoutCubit extends Cubit<LayoutStates>{
      AppointmentsScreen(),
   ];
   //////////////////////////////////
+  int appointmentSelectedIndex = 0;
+  int suppliersSelectedIndex = 0;
+
+  void changeAppointmentIndex(int index){
+    appointmentSelectedIndex=index;
+    emit(AppointmentChangeSelectedState());
+
+  }
+
+  void changeSuppliersIndex(int index){
+    suppliersSelectedIndex=index;
+    emit(SuppliersChangeSelectedState());
+
+  }
 
 }
