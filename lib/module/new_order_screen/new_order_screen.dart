@@ -1,11 +1,8 @@
 import 'dart:io';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:date_time_picker_widget/date_time_picker_widget.dart';
-
 import 'package:flutter/material.dart';
 import 'package:login_register_methods/module/new_order_screen/new_order_cubit/new_order_cubit.dart';
 import 'package:login_register_methods/module/new_order_screen/new_order_cubit/new_order_states.dart';
@@ -70,7 +67,7 @@ class NewOrderScreen extends StatelessWidget {
                 ),
                 backgroundColor: primaryColor,
               ),
-              body: SingleChildScrollView(
+              body: SingleChildScrollView(physics: const BouncingScrollPhysics(),
                 child: Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: Form(
@@ -219,38 +216,51 @@ class NewOrderScreen extends StatelessWidget {
                           height: 15,
                         ),
 
-                        // Column(
-                        //   children: [
-                        //     defaultTextFromField(
-                        //       suffixIcon: TablerIcons.camera,
-                        //       suffixPressFunction: cubit.pickImage,
-                        //       hintText: 'Notes',
-                        //       controller: notesController,
-                        //       keyboardType: TextInputType.text,
-                        //     ),
-                        //     Container(
-                        //       padding: const EdgeInsets.all(20),
-                        //       child: GridView.builder(
-                        //         physics: const NeverScrollableScrollPhysics(),
-                        //         scrollDirection: Axis.horizontal,
-                        //         shrinkWrap: true,
-                        //         itemCount: cubit.imageFileList!.length,
-                        //         gridDelegate:
-                        //             const SliverGridDelegateWithFixedCrossAxisCount(
-                        //           crossAxisCount: 3,
-                        //           crossAxisSpacing: 15,
-                        //           mainAxisSpacing: 15,
-                        //         ),
-                        //         itemBuilder: (context, index) => Image.file(
-                        //           File(
-                        //             cubit.imageFileList![index].path,
-                        //           ),
-                        //           fit: BoxFit.cover,
-                        //         ),
-                        //       ),
-                        //     ),
-                        //   ],
-                        // ),
+                        defaultTextFromField(
+                          suffixIcon: TablerIcons.camera,
+                          suffixIconColor: secondaryColor,
+                          suffixPressFunction: cubit.pickImage,
+                          hintText: 'Notes',
+                          controller: notesController,
+                          keyboardType: TextInputType.text,
+                        ),
+
+                        Container(
+                          decoration: const BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                            boxShadow: <BoxShadow>[
+                              BoxShadow(
+                                  color: Colors.black12,
+                                  blurRadius: 20.0,
+                                  offset: Offset(0.0, 0.75)),
+                            ],
+                          ),
+                          width: double.infinity,
+                          height: 120,
+                          padding: const EdgeInsets.all(10),
+                          child: GridView.builder(
+                            physics: BouncingScrollPhysics(),
+                            shrinkWrap: true,
+                            itemCount: cubit.imageFileList!.length,
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 4,
+                              crossAxisSpacing: 10,
+                              mainAxisSpacing: 10,
+
+                            ),
+                            itemBuilder: (context, index) => ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: Image.file(
+                                File(
+                                  cubit.imageFileList![index].path,
+                                ),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   ),
