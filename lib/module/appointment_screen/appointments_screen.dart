@@ -156,9 +156,7 @@ class AppointmentsScreen extends StatelessWidget {
                     shrinkWrap: true,
                     itemBuilder: (context, index) => defaultAppointmentCard(
                       onTap: (){
-                         deleteItem;
-                        print(appointments.length);
-                        print(appointments.length);
+
                       },
                       serviceName: appointments[index].serviceName,
                       userName: appointments[index].userName,

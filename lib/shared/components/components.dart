@@ -173,15 +173,12 @@ Widget defaultCategoriesBox({
   Color textColor = Colors.black,
   Function()? onTap,
 }) =>
-    Container(
-      decoration: BoxDecoration(
-          boxShadow: const <BoxShadow>[
-            BoxShadow(
-                color: Colors.black12,
-                blurRadius: 20.0,
-                offset: Offset(0.0, 0.75)),
-          ],
-          color: Colors.white, borderRadius: BorderRadius.circular(10.0)),
+    Material(
+      color: color,
+      elevation: elevation,
+      borderRadius: const BorderRadius.all(
+        Radius.circular(10),
+      ),
       child: InkWell(
         borderRadius: BorderRadius.circular(10),
         onTap: onTap,

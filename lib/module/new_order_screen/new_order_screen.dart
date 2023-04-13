@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:date_time_picker_widget/date_time_picker_widget.dart';
 
@@ -216,13 +219,38 @@ class NewOrderScreen extends StatelessWidget {
                           height: 15,
                         ),
 
-                        defaultTextFromField(
-                          suffixIcon: TablerIcons.camera,
-                          suffixPressFunction: () {},
-                          hintText: 'Notes',
-                          controller: notesController,
-                          keyboardType: TextInputType.text,
-                        ),
+                        // Column(
+                        //   children: [
+                        //     defaultTextFromField(
+                        //       suffixIcon: TablerIcons.camera,
+                        //       suffixPressFunction: cubit.pickImage,
+                        //       hintText: 'Notes',
+                        //       controller: notesController,
+                        //       keyboardType: TextInputType.text,
+                        //     ),
+                        //     Container(
+                        //       padding: const EdgeInsets.all(20),
+                        //       child: GridView.builder(
+                        //         physics: const NeverScrollableScrollPhysics(),
+                        //         scrollDirection: Axis.horizontal,
+                        //         shrinkWrap: true,
+                        //         itemCount: cubit.imageFileList!.length,
+                        //         gridDelegate:
+                        //             const SliverGridDelegateWithFixedCrossAxisCount(
+                        //           crossAxisCount: 3,
+                        //           crossAxisSpacing: 15,
+                        //           mainAxisSpacing: 15,
+                        //         ),
+                        //         itemBuilder: (context, index) => Image.file(
+                        //           File(
+                        //             cubit.imageFileList![index].path,
+                        //           ),
+                        //           fit: BoxFit.cover,
+                        //         ),
+                        //       ),
+                        //     ),
+                        //   ],
+                        // ),
                       ],
                     ),
                   ),

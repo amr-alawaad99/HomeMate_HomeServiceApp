@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:login_register_methods/module/new_order_screen/new_order_cubit/new_order_states.dart';
 
 import '../../../models/category_model.dart';
@@ -44,6 +47,22 @@ class NewOrderCubit extends Cubit<NewOrderStates>
     selectedIndex=index;
     emit(NewOrderSelectServiceState());
 
+  }
+    File? image;
+
+  List<XFile>? imageFileList=[];
+
+  final imagePicker=ImagePicker();
+  void pickImage() async{
+    final List<XFile> pickedImages = await imagePicker.pickMultiImage();
+    if(pickedImages.isNotEmpty){
+      imageFileList!.addAll(pickedImages);
+      print(imageFileList!.length);
+    }else{}
+
+
+
+    emit(NewOrderPickImageState());
   }
 
 }
