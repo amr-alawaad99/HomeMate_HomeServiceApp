@@ -25,3 +25,11 @@ class CreateUserErrorState extends SignupStates{
 
   CreateUserErrorState(this.error);
 }
+
+class UsernameCheckingLoadingState extends SignupStates{}
+class UsernameCheckingSuccessState extends SignupStates{}
+class UsernameCheckingErrorState extends SignupStates{
+  final String error;
+
+  UsernameCheckingErrorState(this.error);
+}

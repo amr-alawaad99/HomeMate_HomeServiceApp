@@ -122,8 +122,9 @@ class SignupCubit extends Cubit<SignupStates> {
         .get()
         .then((value) {
       usernameExists = value.exists;
+      emit(UsernameCheckingSuccessState());
     }).catchError((error) {
-      print(error.toString());
+      emit(UsernameCheckingErrorState(error.toString()));
     });
     return usernameExists;
   }
