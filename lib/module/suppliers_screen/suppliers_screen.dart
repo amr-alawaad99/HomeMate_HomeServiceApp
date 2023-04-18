@@ -17,6 +17,8 @@ class SuppliersScreen extends StatelessWidget {
     ChooseCategory(category: 'Electricity'),
   ];
 
+  SuppliersScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(

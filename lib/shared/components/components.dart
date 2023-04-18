@@ -60,6 +60,9 @@ Widget defaultTextFromField(
         Function()? suffixPressFunction,
         Function()? prefixPressFunction,
         Function()? onTapFunction,
+
+
+
         Color prefixIconColor = Colors.grey,
         Color suffixIconColor = Colors.grey}) =>
     Container(
@@ -76,6 +79,7 @@ Widget defaultTextFromField(
       child: Padding(
         padding: const EdgeInsets.all(10.0),
         child: TextFormField(
+
           maxLength: maxLength,
           inputFormatters: [
             LengthLimitingTextInputFormatter(maxLength),
@@ -85,6 +89,7 @@ Widget defaultTextFromField(
             fontFamily: "Roboto",
             fontSize: 16.0,
           ),
+
           onTap: onTapFunction,
           enabled: isEnabled,
           obscureText: isObscure,
@@ -249,7 +254,7 @@ Widget defaultAppointmentCard({
       height: 150,
       width: double.infinity,
       decoration: BoxDecoration(
-          boxShadow: <BoxShadow>[
+          boxShadow: const <BoxShadow>[
             BoxShadow(
                 color: Colors.black12,
                 blurRadius: 20.0,
@@ -400,7 +405,7 @@ Widget defaultAppointmentCard({
                       ),
                     ),
                     Expanded(
-                      child: Container(
+                      child: SizedBox(
                         height: double.infinity,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
@@ -460,7 +465,7 @@ Widget defaultSuppliersItem({
               padding: const EdgeInsets.only(top: 10, right: 15, left: 15),
               child: Container(
                 decoration: BoxDecoration(
-                    boxShadow: <BoxShadow>[
+                    boxShadow: const <BoxShadow>[
                       BoxShadow(
                           color: Colors.black12,
                           blurRadius: 20.0,

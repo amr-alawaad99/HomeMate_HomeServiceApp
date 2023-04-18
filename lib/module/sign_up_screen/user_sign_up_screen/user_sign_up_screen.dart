@@ -19,6 +19,8 @@ class UserSignUpScreen extends StatelessWidget {
   var passwordController = TextEditingController();
   var rPasswordController = TextEditingController();
 
+  UserSignUpScreen({super.key});
+
 
   @override
   Widget build(BuildContext context) {

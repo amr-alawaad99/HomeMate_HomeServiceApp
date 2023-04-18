@@ -14,6 +14,8 @@ class SignInScreen extends StatelessWidget {
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
 
+  SignInScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(

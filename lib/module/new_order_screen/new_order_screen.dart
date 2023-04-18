@@ -1,11 +1,12 @@
-import 'dart:io';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
+import 'package:galleryimage/galleryimage.dart';
 import 'package:intl/intl.dart';
 import 'package:date_time_picker_widget/date_time_picker_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:login_register_methods/module/new_order_screen/new_order_cubit/new_order_cubit.dart';
 import 'package:login_register_methods/module/new_order_screen/new_order_cubit/new_order_states.dart';
+import 'package:login_register_methods/module/new_order_screen/widgets/image_picker_screen.dart';
 import 'package:login_register_methods/module/order_confirm_Screen/order_confirm_screen.dart';
 
 import '../../shared/components/components.dart';
@@ -19,6 +20,8 @@ class NewOrderScreen extends StatelessWidget {
   var notesController = TextEditingController();
   var locationController = TextEditingController();
 
+  NewOrderScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -28,27 +31,88 @@ class NewOrderScreen extends StatelessWidget {
           builder: (context, state) {
             var cubit = NewOrderCubit.get(context);
             return Scaffold(
-              bottomNavigationBar: SizedBox(
-                height: 100,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        child: defaultButton(
-                          text: 'Send Request',
-                          onPress: () {
-                            navigateAndPush(
-                              context,
-                              widget: OrderConfirmScreen(),
-                            );
-                          },
-                          fontSize: 20,
-                        ),
-                      ),
-                    ],
+              bottomNavigationBar: Container(
+                padding: EdgeInsets.all(15),
+                decoration: BoxDecoration(
+                  boxShadow: const <BoxShadow>[
+                    BoxShadow(
+                        color: Colors.black12,
+                        blurRadius: 20.0,
+                        offset: Offset(0.0, 0.75)),
+                  ],
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(
+                      10,
+                    ),
+                    topRight: Radius.circular(
+                      10,
+                    ),
                   ),
+                ),
+                height: 80,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width / 4,
+                      child: Row(
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                                color: secondaryColor, shape: BoxShape.circle),
+                            width: 13,
+                            height: 13,
+                          ),
+                          Container(
+                            color: secondaryColor.withOpacity(0.2),
+                            width: 70,
+                            height: 2,
+                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                                color: secondaryColor.withOpacity(0.2), shape: BoxShape.circle),
+                            width: 13,
+                            height: 13,
+                          ),
+                        ],
+                      ),
+                      // StepsIndicator(
+                      //   selectedStep: 1,
+                      //   nbSteps: 2,
+                      //   doneLineColor: secondaryColor,
+                      //   doneStepColor: secondaryColor,
+                      //   undoneLineColor: Colors.grey,
+                      //   lineLengthCustomStep: [
+                      //     StepsIndicatorCustomLine(
+                      //       nbStep: 2,
+                      //       length: 70,
+                      //     )
+                      //   ],
+                      //   enableLineAnimation: true,
+                      //   enableStepAnimation: false,
+                      // ),
+                    ),
+                    const SizedBox(
+                      width: 50,
+                    ),
+                    defaultButton(
+                      text: 'Send Request',
+                      width: MediaQuery.of(context).size.width / 2,
+                      onPress: () {
+                        if (formKey.currentState!.validate()) {
+                          navigateAndPush(
+                            context,
+                            widget: OrderConfirmScreen(
+                              date: dateController.text,
+                              time: timeController.text,
+                            ),
+                          );
+                        }
+                      },
+                      fontSize: 20,
+                    ),
+                  ],
                 ),
               ),
               backgroundColor: scaffoldLightColor,
@@ -67,7 +131,8 @@ class NewOrderScreen extends StatelessWidget {
                 ),
                 backgroundColor: primaryColor,
               ),
-              body: SingleChildScrollView(physics: const BouncingScrollPhysics(),
+              body: SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
                 child: Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: Form(
@@ -216,51 +281,98 @@ class NewOrderScreen extends StatelessWidget {
                           height: 15,
                         ),
 
-                        defaultTextFromField(
-                          suffixIcon: TablerIcons.camera,
-                          suffixIconColor: secondaryColor,
-                          suffixPressFunction: cubit.pickImage,
-                          hintText: 'Notes',
-                          controller: notesController,
-                          keyboardType: TextInputType.text,
-                        ),
-
                         Container(
-                          decoration: const BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                            boxShadow: <BoxShadow>[
-                              BoxShadow(
+                            decoration: const BoxDecoration(
+                              color: Colors.white,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10.0)),
+                              boxShadow: <BoxShadow>[
+                                BoxShadow(
                                   color: Colors.black12,
                                   blurRadius: 20.0,
-                                  offset: Offset(0.0, 0.75)),
-                            ],
-                          ),
-                          width: double.infinity,
-                          height: 120,
-                          padding: const EdgeInsets.all(10),
-                          child: GridView.builder(
-                            physics: BouncingScrollPhysics(),
-                            shrinkWrap: true,
-                            itemCount: cubit.imageFileList!.length,
-                            gridDelegate:
-                                const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 4,
-                              crossAxisSpacing: 10,
-                              mainAxisSpacing: 10,
-
-                            ),
-                            itemBuilder: (context, index) => ClipRRect(
-                              borderRadius: BorderRadius.circular(10),
-                              child: Image.file(
-                                File(
-                                  cubit.imageFileList![index].path,
+                                  offset: Offset(
+                                    0.0,
+                                    0.75,
+                                  ),
                                 ),
-                                fit: BoxFit.cover,
-                              ),
+                              ],
                             ),
-                          ),
-                        ),
+                            child: Column(
+                              children: [
+                                defaultTextFromField(
+                                  suffixIcon: TablerIcons.camera,
+                                  suffixIconColor: secondaryColor,
+                                  suffixPressFunction: () {
+                                    showDialog(
+                                        context: context,
+                                        builder: (context) =>
+                                            ImagePickerScreen());
+                                  },
+                                  hintText: 'Notes',
+                                  controller: notesController,
+                                  keyboardType: TextInputType.text,
+                                ),
+                                // cubit.listOfUrls.isNotEmpty
+                                //     ? GalleryImage(
+                                //         imageUrls: cubit.listOfUrls,
+                                //         numOfShowImages: 3,
+                                //         titleGallery: 'your images',
+                                //       )
+                                //     :
+                                SizedBox(
+                                        height: 120,
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        child: FittedBox(
+                                          alignment: Alignment.topCenter,
+                                          child: Icon(
+                                            TablerIcons.photo,
+                                            color: Colors.grey,
+                                          ),
+                                        ),
+                                      ),
+                              ],
+                            )),
+
+                        // Container(
+                        //   decoration: const BoxDecoration(
+                        //     color: Colors.white,
+                        //     borderRadius:
+                        //         BorderRadius.all(Radius.circular(10.0)),
+                        //     boxShadow: <BoxShadow>[
+                        //       BoxShadow(
+                        //           color: Colors.black12,
+                        //           blurRadius: 20.0,
+                        //           offset: Offset(0.0, 0.75)),
+                        //     ],
+                        //   ),
+                        //   width: double.infinity,
+                        //   height: 120,
+                        //   padding: const EdgeInsets.all(10),
+                        //   child:
+                        //   GridView.builder(
+                        //     physics: const BouncingScrollPhysics(),
+                        //     shrinkWrap: true,
+                        //     itemCount: cubit.imageFileList!.length,
+                        //     gridDelegate:
+                        //         const SliverGridDelegateWithFixedCrossAxisCount(
+                        //       crossAxisCount: 4,
+                        //       crossAxisSpacing: 10,
+                        //       mainAxisSpacing: 10,
+                        //     ),
+                        //     itemBuilder: (context, index) =>
+                        //         ClipRRect(
+                        //       borderRadius: BorderRadius.circular(10),
+                        //       child: Image.file(
+                        //         File(
+                        //           cubit.imageFileList![index].path,
+                        //         ),
+                        //         fit: BoxFit.cover,
+                        //       ),
+                        //     ),
+                        //
+                        //   ),
+                        // ),
                       ],
                     ),
                   ),
