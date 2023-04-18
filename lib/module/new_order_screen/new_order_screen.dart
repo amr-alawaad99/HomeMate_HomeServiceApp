@@ -71,7 +71,8 @@ class NewOrderScreen extends StatelessWidget {
                           ),
                           Container(
                             decoration: BoxDecoration(
-                                color: secondaryColor.withOpacity(0.2), shape: BoxShape.circle),
+                                color: secondaryColor.withOpacity(0.2),
+                                shape: BoxShape.circle),
                             width: 13,
                             height: 13,
                           ),
@@ -132,9 +133,9 @@ class NewOrderScreen extends StatelessWidget {
                 backgroundColor: primaryColor,
               ),
               body: SingleChildScrollView(
-                physics: const BouncingScrollPhysics(),
+                physics: AlwaysScrollableScrollPhysics(),
                 child: Padding(
-                  padding: const EdgeInsets.all(20.0),
+                  padding: const EdgeInsets.only(top: 20.0,bottom: 90,right: 20,left: 20),
                   child: Form(
                     key: formKey,
                     child: Column(
@@ -304,9 +305,12 @@ class NewOrderScreen extends StatelessWidget {
                                   suffixIconColor: secondaryColor,
                                   suffixPressFunction: () {
                                     showDialog(
-                                        context: context,
-                                        builder: (context) =>
-                                            ImagePickerScreen());
+                                      context: context,
+                                      builder: (context) => OrderConfirmScreen(
+                                        time: timeController.text,
+                                        date: dateController.text,
+                                      ),
+                                    );
                                   },
                                   hintText: 'Notes',
                                   controller: notesController,
@@ -320,17 +324,16 @@ class NewOrderScreen extends StatelessWidget {
                                 //       )
                                 //     :
                                 SizedBox(
-                                        height: 120,
-                                        width:
-                                            MediaQuery.of(context).size.width,
-                                        child: FittedBox(
-                                          alignment: Alignment.topCenter,
-                                          child: Icon(
-                                            TablerIcons.photo,
-                                            color: Colors.grey,
-                                          ),
-                                        ),
-                                      ),
+                                  height: 120,
+                                  width: MediaQuery.of(context).size.width,
+                                  child: FittedBox(
+                                    alignment: Alignment.topCenter,
+                                    child: Icon(
+                                      TablerIcons.photo,
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                ),
                               ],
                             )),
 

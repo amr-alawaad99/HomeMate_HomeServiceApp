@@ -4,11 +4,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:login_register_methods/module/onboarding_screen/onboarding_screen.dart';
 import 'package:login_register_methods/shared/bloc_observer.dart';
 import 'package:login_register_methods/shared/components/constants.dart';
+import 'firebase_options.dart';
 
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
   Bloc.observer = MyBlocObserver();
 
