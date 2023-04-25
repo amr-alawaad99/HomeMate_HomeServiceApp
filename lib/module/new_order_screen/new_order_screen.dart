@@ -1,14 +1,13 @@
+import 'dart:io';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
-import 'package:galleryimage/galleryimage.dart';
 import 'package:intl/intl.dart';
 import 'package:date_time_picker_widget/date_time_picker_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:login_register_methods/module/new_order_screen/new_order_cubit/new_order_cubit.dart';
 import 'package:login_register_methods/module/new_order_screen/new_order_cubit/new_order_states.dart';
-import 'package:login_register_methods/module/new_order_screen/widgets/image_picker_screen.dart';
 import 'package:login_register_methods/module/order_confirm_Screen/order_confirm_screen.dart';
-
 import '../../shared/components/components.dart';
 import '../../shared/components/constants.dart';
 
@@ -78,21 +77,6 @@ class NewOrderScreen extends StatelessWidget {
                           ),
                         ],
                       ),
-                      // StepsIndicator(
-                      //   selectedStep: 1,
-                      //   nbSteps: 2,
-                      //   doneLineColor: secondaryColor,
-                      //   doneStepColor: secondaryColor,
-                      //   undoneLineColor: Colors.grey,
-                      //   lineLengthCustomStep: [
-                      //     StepsIndicatorCustomLine(
-                      //       nbStep: 2,
-                      //       length: 70,
-                      //     )
-                      //   ],
-                      //   enableLineAnimation: true,
-                      //   enableStepAnimation: false,
-                      // ),
                     ),
                     const SizedBox(
                       width: 50,
@@ -107,6 +91,9 @@ class NewOrderScreen extends StatelessWidget {
                             widget: OrderConfirmScreen(
                               date: dateController.text,
                               time: timeController.text,
+                              images: cubit.imageFileList!,
+                              notes: notesController.text,
+                              location: locationController.text,
                             ),
                           );
                         }
@@ -135,7 +122,8 @@ class NewOrderScreen extends StatelessWidget {
               body: SingleChildScrollView(
                 physics: AlwaysScrollableScrollPhysics(),
                 child: Padding(
-                  padding: const EdgeInsets.only(top: 20.0,bottom: 90,right: 20,left: 20),
+                  padding: const EdgeInsets.only(
+                      top: 20.0, bottom: 90, right: 20, left: 20),
                   child: Form(
                     key: formKey,
                     child: Column(
@@ -304,36 +292,88 @@ class NewOrderScreen extends StatelessWidget {
                                   suffixIcon: TablerIcons.camera,
                                   suffixIconColor: secondaryColor,
                                   suffixPressFunction: () {
-                                    showDialog(
-                                      context: context,
-                                      builder: (context) => OrderConfirmScreen(
-                                        time: timeController.text,
-                                        date: dateController.text,
-                                      ),
-                                    );
+                                    cubit.selectImages();
                                   },
+                                  validator: (String? value) {
+                                    if (value!.isEmpty) {
+                                      return 'enter notes';
+                                    }
+                                    return null;
+                                  },
+                                  //     () {
+                                  //
+                                  //
+                                  //   // showDialog(
+                                  //   //   context: context,
+                                  //   //   builder: (context) => ImagePickerScreen(),
+                                  //   // );
+                                  // },
                                   hintText: 'Notes',
                                   controller: notesController,
                                   keyboardType: TextInputType.text,
                                 ),
-                                // cubit.listOfUrls.isNotEmpty
-                                //     ? GalleryImage(
-                                //         imageUrls: cubit.listOfUrls,
-                                //         numOfShowImages: 3,
-                                //         titleGallery: 'your images',
-                                //       )
-                                //     :
-                                SizedBox(
-                                  height: 120,
-                                  width: MediaQuery.of(context).size.width,
-                                  child: FittedBox(
-                                    alignment: Alignment.topCenter,
-                                    child: Icon(
-                                      TablerIcons.photo,
-                                      color: Colors.grey,
-                                    ),
-                                  ),
-                                ),
+
+                                cubit.imageFileList!.isNotEmpty
+                                    ? Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: SizedBox(
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                          height: 100,
+                                          child: GridView.builder(
+                                            itemCount:
+                                                cubit.imageFileList!.length,
+                                            gridDelegate:
+                                                SliverGridDelegateWithFixedCrossAxisCount(
+                                                    crossAxisCount: 4),
+                                            itemBuilder: (context, index) =>
+                                                Padding(
+                                              padding: const EdgeInsets.all(2.0),
+                                              child: Stack(
+                                                fit: StackFit.expand,
+                                                children: [
+                                                  ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(10),
+                                                    child: Image.file(
+                                                      File(cubit
+                                                          .imageFileList![index]
+                                                          .path),
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                                  ),
+                                                  Positioned(
+                                                    right: 0,
+                                                    child: IconButton(
+                                                      onPressed: () {
+                                                        cubit.clearImage(index);
+                                                      },
+                                                      icon: Container(
+
+                                                        child: Icon(
+                                                          TablerIcons.x,color: Colors.white,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                    )
+                                    : SizedBox(
+                                        height: 120,
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        child: FittedBox(
+                                          alignment: Alignment.topCenter,
+                                          child: Icon(
+                                            TablerIcons.photo,
+                                            color: Colors.grey,
+                                          ),
+                                        ),
+                                      ),
                               ],
                             )),
 

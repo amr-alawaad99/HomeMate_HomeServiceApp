@@ -60,9 +60,7 @@ Widget defaultTextFromField(
         Function()? suffixPressFunction,
         Function()? prefixPressFunction,
         Function()? onTapFunction,
-
-
-
+        ValueChanged<String>? onSubmit,
         Color prefixIconColor = Colors.grey,
         Color suffixIconColor = Colors.grey}) =>
     Container(
@@ -79,7 +77,7 @@ Widget defaultTextFromField(
       child: Padding(
         padding: const EdgeInsets.all(10.0),
         child: TextFormField(
-
+          onFieldSubmitted: onSubmit,
           maxLength: maxLength,
           inputFormatters: [
             LengthLimitingTextInputFormatter(maxLength),
@@ -89,7 +87,6 @@ Widget defaultTextFromField(
             fontFamily: "Roboto",
             fontSize: 16.0,
           ),
-
           onTap: onTapFunction,
           enabled: isEnabled,
           obscureText: isObscure,
@@ -253,14 +250,10 @@ Widget defaultAppointmentCard({
       padding: const EdgeInsets.all(10),
       height: 150,
       width: double.infinity,
-      decoration: BoxDecoration(
-          boxShadow: const <BoxShadow>[
-            BoxShadow(
-                color: Colors.black12,
-                blurRadius: 20.0,
-                offset: Offset(0.0, 0.75)),
-          ],
-          color: Colors.white, borderRadius: BorderRadius.circular(10.0)),
+      decoration: BoxDecoration(boxShadow: const <BoxShadow>[
+        BoxShadow(
+            color: Colors.black12, blurRadius: 20.0, offset: Offset(0.0, 0.75)),
+      ], color: Colors.white, borderRadius: BorderRadius.circular(10.0)),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -371,10 +364,9 @@ Widget defaultAppointmentCard({
                         Text(
                           status,
                           style: TextStyle(
-                            fontSize: 12.0,
-                            color: statusColor,
-                            fontWeight: FontWeight.bold
-                          ),
+                              fontSize: 12.0,
+                              color: statusColor,
+                              fontWeight: FontWeight.bold),
                         ),
                       ],
                     ),
@@ -418,15 +410,18 @@ Widget defaultAppointmentCard({
                                 color: errorColor,
                               ),
                             ),
-                            SizedBox(width: 5,),
-                            status=='Finished'?SizedBox():InkWell(
-                              onTap: onTap,
-                              child: Icon(
-
-                                TablerIcons.edit,
-                                color: primaryColor,
-                              ),
+                            SizedBox(
+                              width: 5,
                             ),
+                            status == 'Finished'
+                                ? SizedBox()
+                                : InkWell(
+                                    onTap: onTap,
+                                    child: Icon(
+                                      TablerIcons.edit,
+                                      color: primaryColor,
+                                    ),
+                                  ),
                           ],
                         ),
                       ),
@@ -471,8 +466,8 @@ Widget defaultSuppliersItem({
                           blurRadius: 20.0,
                           offset: Offset(0.0, 0.75)),
                     ],
-                    color: Colors.white, borderRadius: BorderRadius.circular(10.0)),
-
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10.0)),
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Row(
