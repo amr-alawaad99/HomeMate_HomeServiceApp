@@ -16,6 +16,7 @@ class OrderConfirmScreen extends StatelessWidget {
   final String date;
   final String notes;
   final String time;
+  final int services;
   final String location;
   final List<XFile> images;
 
@@ -25,7 +26,8 @@ class OrderConfirmScreen extends StatelessWidget {
       required this.date,
       required this.images,
       required this.notes,
-      required this.location,});
+      required this.location,
+      required this.services});
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +36,7 @@ class OrderConfirmScreen extends StatelessWidget {
         child: BlocConsumer<NewOrderCubit, NewOrderStates>(
           listener: (context, state) {},
           builder: (context, state) {
+            var cubit = NewOrderCubit.get(context);
 
             return Scaffold(
               backgroundColor: scaffoldLightColor,
@@ -103,10 +106,7 @@ class OrderConfirmScreen extends StatelessWidget {
                       onPress: () {
                         NewOrderCubit.get(context).uploadImage(images);
                         navigateAndPush(context, widget: SuccessScreen());
-                        // navigateAndPush(
-                        //   context,
-                        //   widget: OrderConfirmScreen(),
-                        // );
+
                       },
                       fontSize: 20,
                     ),
@@ -149,7 +149,7 @@ class OrderConfirmScreen extends StatelessWidget {
                                   height: 110,
                                 ),
                                 Image(
-                                  image: AssetImage('assets/images/cleaning.png'),
+                                  image: cubit.categories[services].img,
                                   height: 80,
                                   width: 80,
                                 ),
@@ -163,7 +163,7 @@ class OrderConfirmScreen extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Cleaning',
+                                  cubit.categories[services].title,
                                   style: TextStyle(
                                     color: scaffoldLightColor,
                                     fontSize: 20,

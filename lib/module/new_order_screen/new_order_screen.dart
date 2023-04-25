@@ -18,8 +18,13 @@ class NewOrderScreen extends StatelessWidget {
   var timeController = TextEditingController();
   var notesController = TextEditingController();
   var locationController = TextEditingController();
+  int serviceIndex =0;
 
   NewOrderScreen({super.key});
+
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -89,6 +94,7 @@ class NewOrderScreen extends StatelessWidget {
                           navigateAndPush(
                             context,
                             widget: OrderConfirmScreen(
+                              services: serviceIndex,
                               date: dateController.text,
                               time: timeController.text,
                               images: cubit.imageFileList!,
@@ -151,6 +157,7 @@ class NewOrderScreen extends StatelessWidget {
                                     child: defaultCategoriesBox(
                                         onTap: () {
                                           cubit.changeIndex(index);
+                                          serviceIndex = index;
                                         },
                                         color: cubit.selectedIndex == index
                                             ? secondaryColor
