@@ -146,7 +146,7 @@ class UsernameScreen extends StatelessWidget {
                               phoneNumber: userinfo['phone']!,
                             );
                           } else if(state is UsernameCheckingErrorState) {
-                            showToast(message: "Error! PERMISSION_DENIED", toastColor: errorColor);
+                            showToast(message: "Error!", toastColor: errorColor);
                           } else {
                             showToast(message: "username already exists", toastColor: errorColor);
                           }
@@ -154,6 +154,10 @@ class UsernameScreen extends StatelessWidget {
                       },
                     ),
                   ),
+                  if(state is CreateUserLoadingState)
+                    const SizedBox(height: 5,),
+                  if(state is CreateUserLoadingState)
+                    const LinearProgressIndicator(color: primaryColor,),
                 ],
               ),
             ),

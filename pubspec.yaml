@@ -51,6 +51,7 @@ dependencies:
   username_generator: ^1.3.0
   fluttertoast: ^8.2.1
   shared_preferences: ^2.1.0
+  conditional_builder_null_safety: ^0.0.6
 
 
 

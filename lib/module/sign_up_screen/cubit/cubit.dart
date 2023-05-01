@@ -78,7 +78,7 @@ class SignupCubit extends Cubit<SignupStates> {
 
     FirebaseFirestore.instance
         .collection("Users")
-        .doc(userName)
+        .doc(uid)
         .set(userModel.toMap())
         .then((value) {
       emit(CreateUserSuccessState(uid));
@@ -115,17 +115,27 @@ class SignupCubit extends Cubit<SignupStates> {
   ///Check username
   bool? usernameExists;
 
-  Future<bool?> checkUsername(String username) async {
+  Future<void> checkUsername(String username) async {
     await FirebaseFirestore.instance
         .collection("Users")
-        .doc(username)
         .get()
         .then((value) {
-      usernameExists = value.exists;
-      emit(UsernameCheckingSuccessState());
+          if (value.size == 0){
+            usernameExists = false;
+          } else {
+            for (var element in value.docs) {
+              if(element.data()['username'].toString() == username){
+                usernameExists = true;
+                break;
+              } else if (element.data()['username'].toString() != username){
+                usernameExists = false;
+              }
+            }
+          }
+          print(usernameExists);
+          emit(UsernameCheckingSuccessState());
     }).catchError((error) {
       emit(UsernameCheckingErrorState(error.toString()));
     });
-    return usernameExists;
   }
 }

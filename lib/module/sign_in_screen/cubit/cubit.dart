@@ -1,7 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:login_register_methods/module/sign_in_screen/cubit/states.dart';
+
+import '../../../shared/components/constants.dart';
 
 
 class SignInCubit extends Cubit<SignInStates> {
@@ -18,4 +21,16 @@ class SignInCubit extends Cubit<SignInStates> {
     emit(PasswordVisibilityChangeState());
   }
 
+  void userSignIn({
+    required String email,
+    required String password
+}){
+    emit(LoginLoadingState());
+    FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password).then((value) {
+      uid = value.user!.uid;
+      emit(LoginSuccessState(value.user!.uid));
+    }).catchError((error){
+      emit(LoginErrorState(error.toString()));
+    });
+  }
 }
