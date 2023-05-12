@@ -147,7 +147,7 @@ class TecSignUpScreen extends StatelessWidget {
 
                       /// TFFs
                       Container(
-                        child: defaultTextFromField(
+                        child: defaultTextFormField(
                           hintText: "Tech/Company Name",
                           keyboardType: TextInputType.name,
                           controller: fNameController,
@@ -163,7 +163,7 @@ class TecSignUpScreen extends StatelessWidget {
                         height: screenHeight * 0.01,
                       ),
                       Container(
-                        child: defaultTextFromField(
+                        child: defaultTextFormField(
                           hintText: "Email",
                           keyboardType: TextInputType.emailAddress,
                           controller: emailController,
@@ -233,7 +233,7 @@ class TecSignUpScreen extends StatelessWidget {
                         height: screenHeight * 0.01,
                       ),
                       Container(
-                        child: defaultTextFromField(
+                        child: defaultTextFormField(
                           hintText: "Create Password",
                           isSuffix: true,
                           suffixIcon: cubit.passSuffix,
@@ -255,7 +255,7 @@ class TecSignUpScreen extends StatelessWidget {
                         height: screenHeight * 0.01,
                       ),
                       Container(
-                        child: defaultTextFromField(
+                        child: defaultTextFormField(
                           hintText: "Repeat Password",
                           isSuffix: true,
                           suffixIcon: cubit.passSuffix,

@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:login_register_methods/model/user_model.dart';
 import 'package:login_register_methods/module/sign_up_screen/cubit/states.dart';
+import 'package:login_register_methods/shared/components/constants.dart';
 
 class SignupCubit extends Cubit<SignupStates> {
   SignupCubit() : super(SignupInitState());
@@ -58,21 +59,22 @@ class SignupCubit extends Cubit<SignupStates> {
 
   ///Create user in Firebase FireStore
   _createUserAccount({
-    required String fName,
-    required String lName,
+    required String name,
     required String userName,
     required String phoneNumber,
+    required String email,
     required String uid,
   }) {
     UserModel userModel = UserModel(
       uid: uid,
-      firstName: fName,
-      lastName: lName,
+      profileName: name,
       username: userName,
-      location: "Not defined",
+      address: "Not defined",
+      gpsLocation: '',
+      email: email,
       phoneNumber: phoneNumber,
       isVerified: false,
-      profilePic: "assets/images/default profile pic.jpg",
+      profilePic: "https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?w=740&t=st=1683814060~exp=1683814660~hmac=4705fb79b3a531709bff00d930256c2bc9d17c0767e36d812dc2fefd9fc875ef",
       isUser: true,
     );
 
@@ -81,7 +83,8 @@ class SignupCubit extends Cubit<SignupStates> {
         .doc(uid)
         .set(userModel.toMap())
         .then((value) {
-      emit(CreateUserSuccessState(uid));
+          uId = uid;
+          emit(CreateUserSuccessState(uid));
     }).catchError((error) {
       emit(CreateUserErrorState(error.toString()));
     });
@@ -91,8 +94,7 @@ class SignupCubit extends Cubit<SignupStates> {
   registerUserAccount({
     required String email,
     required String password,
-    required String fName,
-    required String lName,
+    required String name,
     required String userName,
     required String phoneNumber,
   }) {
@@ -102,10 +104,10 @@ class SignupCubit extends Cubit<SignupStates> {
         .createUserWithEmailAndPassword(email: email, password: password)
         .then((value) {
       _createUserAccount(
-          fName: fName,
-          lName: lName,
+          name: name,
           userName: userName,
           phoneNumber: phoneNumber,
+          email: email,
           uid: value.user!.uid);
     }).catchError((error) {
       emit(CreateUserErrorState(error.toString()));

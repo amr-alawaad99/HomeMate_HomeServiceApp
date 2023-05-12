@@ -36,7 +36,8 @@ class MyDrawer extends StatelessWidget {
                     child: Row(
                       children: [
                         CircleAvatar(
-                          backgroundImage: AssetImage(cubit.originalUser!.profilePic!),
+                          backgroundColor: Colors.white,
+                          backgroundImage: NetworkImage(cubit.originalUser!.profilePic!),
                           radius: 35,
                         ),
                         const SizedBox(
@@ -50,7 +51,9 @@ class MyDrawer extends StatelessWidget {
                             children: [
                               // PROFILE NAME
                               Text(
-                                "Hi, ${cubit.originalUser!.firstName}",
+                                "Hi, ${cubit.originalUser!.profileName}",
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
                                 style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Colors.white),
                               ),
                               const SizedBox(
@@ -58,8 +61,8 @@ class MyDrawer extends StatelessWidget {
                               ),
                               // LOCATION ICON AND LOCATION TEXT
                               Text(
-                                cubit.originalUser!.location!,
-                                maxLines: 2,
+                                cubit.originalUser!.address!,
+                                overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
                                   fontFamily: "Roboto",
                                   color: Colors.grey.shade400,

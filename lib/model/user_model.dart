@@ -1,21 +1,23 @@
 class UserModel{
   String? uid;
-  String? firstName;
-  String? lastName;
+  String? profileName;
   String? username;
+  String? email;
   String? profilePic;
-  String? location;
+  String? address;
+  String? gpsLocation;
   String? phoneNumber;
   bool? isVerified;
   bool? isUser;
 
   UserModel({
     this.uid,
-    this.firstName,
-    this.lastName,
+    this.profileName,
     this.username,
+    this.email,
     this.profilePic,
-    this.location,
+    this.address,
+    this.gpsLocation,
     this.phoneNumber,
     this.isVerified,
     this.isUser,
@@ -23,11 +25,12 @@ class UserModel{
 
   UserModel.fromJson(Map<String, dynamic> json){
     uid = json['uid'];
-    firstName = json['firstName'];
-    lastName = json['lastName'];
+    profileName = json['profileName'];
     username = json['username'];
+    email = json['email'];
     profilePic = json['profilePic'];
-    location = json['location'];
+    address = json['address'];
+    gpsLocation = json['gpsLocation'];
     phoneNumber = json['phoneNumber'];
     isVerified = json['isVerified'];
     isUser = json['isUser'];
@@ -36,11 +39,12 @@ class UserModel{
   Map<String, dynamic> toMap(){
     return {
       'uid' : uid,
-      'firstName' : firstName,
-      'lastName' : lastName,
+      'profileName' : profileName,
       'username' : username,
+      'email' : email,
       'profilePic' : profilePic,
-      'location' : location,
+      'address' : address,
+      'gpsLocation' : gpsLocation,
       'phoneNumber' : phoneNumber,
       'isVerified' : isVerified,
       'isUser' : isUser,

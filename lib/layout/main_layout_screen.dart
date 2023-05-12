@@ -11,6 +11,7 @@ import 'package:login_register_methods/module/new_order_screen/new_order_screen.
 import 'package:login_register_methods/shared/components/components.dart';
 import 'package:login_register_methods/shared/components/constants.dart';
 
+
 class MainLayoutScreen extends StatelessWidget {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   var searchController = TextEditingController();
@@ -30,7 +31,7 @@ class MainLayoutScreen extends StatelessWidget {
             drawer: const MyDrawer(),
             extendBody: true,
             body: ConditionalBuilder(
-              condition: cubit.originalUser != null,
+              condition: cubit.originalUser != null && cubit.originalUser!.profilePic != null,
               builder: (context) => NestedScrollView(
                 floatHeaderSlivers: true,
                 headerSliverBuilder: (context, innerBoxIsScrolled) => <Widget>[
@@ -53,7 +54,8 @@ class MainLayoutScreen extends StatelessWidget {
                             child: Row(
                               children: [
                                 CircleAvatar(
-                                  backgroundImage: AssetImage(cubit.originalUser!.profilePic!),
+                                  backgroundColor: Colors.white,
+                                  backgroundImage: NetworkImage(cubit.originalUser!.profilePic!),
                                   radius: 25,
                                 ),
                                 const SizedBox(
@@ -68,7 +70,9 @@ class MainLayoutScreen extends StatelessWidget {
                                     children: [
                                       // PROFILE NAME
                                       Text(
-                                        "Hi, ${cubit.originalUser!.firstName!}",
+                                        "Hi, ${cubit.originalUser!.profileName!}",
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
                                         style: const TextStyle(
                                           fontFamily: "Roboto",
                                           color: Colors.white,
@@ -91,12 +95,15 @@ class MainLayoutScreen extends StatelessWidget {
                                           const SizedBox(
                                             width: 5,
                                           ),
-                                          Text(
-                                            cubit.originalUser!.location!,
-                                            style: TextStyle(
-                                              fontFamily: "Roboto",
-                                              color: Colors.grey.shade400,
-                                              fontSize: 12,
+                                          Expanded(
+                                            child: Text(
+                                              cubit.originalUser!.address!,
+                                              overflow: TextOverflow.ellipsis,
+                                              style: TextStyle(
+                                                fontFamily: "Roboto",
+                                                color: Colors.grey.shade400,
+                                                fontSize: 12,
+                                              ),
                                             ),
                                           ),
                                         ],

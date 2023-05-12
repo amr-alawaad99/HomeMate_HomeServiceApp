@@ -5,6 +5,8 @@ import 'package:login_register_methods/module/sign_up_screen/cubit/cubit.dart';
 import 'package:login_register_methods/module/sign_up_screen/cubit/states.dart';
 import 'package:username_generator/username_generator.dart';
 
+import '../../layout/cubit/cubit.dart';
+import '../../model/user_model.dart';
 import '../../shared/components/components.dart';
 import '../../shared/components/constants.dart';
 import '../../shared/local/cache_helper.dart';
@@ -24,8 +26,7 @@ class UsernameScreen extends StatelessWidget {
     var cubit = SignupCubit.get(context);
     ///Generate a random username
     usernameController.text = UsernameGenerator().generateForName(
-      userinfo['firstName']!,
-      lastName: userinfo['lastName']!,
+      userinfo['Name']!,
       numberSeed: 999,
     );
 
@@ -35,10 +36,11 @@ class UsernameScreen extends StatelessWidget {
           showToast(message: "Error! Can't Register!", toastColor: errorColor);
         }
         if (state is CreateUserSuccessState) {
-          CacheHelper.saveData(key: 'uid', value: state.uid)
-              .then((value) {
+          CacheHelper.saveData(key: "uid", value: state.uid).then((value) {
             navigatePushDelete(context, widget: MainLayoutScreen());
-            //ChatAppCubit.get(context).getUserData();    //TO GET THE NEW LOGGED IN ACCOUNT IMMEDIATELY RATHER THAN THE PREVIOUS ACCOUNT!!
+            //TO GET THE NEW LOGGED IN ACCOUNT IMMEDIATELY RATHER THAN THE PREVIOUS ACCOUNT!!
+            LayoutCubit.get(context).originalUser = UserModel();
+            LayoutCubit.get(context).getUserData();
           });
         }
       },
@@ -92,7 +94,7 @@ class UsernameScreen extends StatelessWidget {
                   ),
                   //USERNAME INPUT
                   Container(
-                    child: defaultTextFromField(
+                    child: defaultTextFormField(
                       hintText: "@username",
                       controller: usernameController,
                       keyboardType: TextInputType.name,
@@ -140,8 +142,7 @@ class UsernameScreen extends StatelessWidget {
                             SignupCubit.get(context).registerUserAccount(
                               email: userinfo['email']!,
                               password: userinfo['password']!,
-                              fName: userinfo['firstName']!,
-                              lName: userinfo['lastName']!,
+                              name: userinfo['Name']!,
                               userName: usernameController.text,
                               phoneNumber: userinfo['phone']!,
                             );

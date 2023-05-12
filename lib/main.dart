@@ -18,12 +18,12 @@ void main() async {
 
   Bloc.observer = MyBlocObserver();
 
-  uid = CacheHelper.getData(key: 'uid')?? '';
-  print('uid is $uid');
+  uId = CacheHelper.getData(key: 'uid')?? '';
+  print('uid is $uId');
 
   Widget widget;
 
-  if (uid == '') {
+  if (uId == '') {
     widget = OnBoardingScreen();
   } else {
     widget = MainLayoutScreen();

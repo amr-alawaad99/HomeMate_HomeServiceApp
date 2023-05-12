@@ -12,8 +12,7 @@ class UserSignUpScreen extends StatelessWidget {
 
 
   final formKey = GlobalKey<FormState>();
-  var fNameController = TextEditingController();
-  var lNameController = TextEditingController();
+  var nameController = TextEditingController();
   var emailController = TextEditingController();
   var phoneController = TextEditingController();
   var passwordController = TextEditingController();
@@ -78,48 +77,30 @@ class UserSignUpScreen extends StatelessWidget {
                       SizedBox(
                         height: screenHeight * 0.05,
                       ),
-                      //FIRST AND LAST NAME INPUT
-                      Row(
-                        children: [
-                          Expanded(
-                            child: defaultTextFromField(
-                              hintText: "First Name",
-                              keyboardType: TextInputType.name,
-                              controller: fNameController,
-                              maxLength: 20,
-                              validator: (value) {
-                                if(value!.isEmpty){
-                                  return "First Name must not be empty";
-                                }
-                                return null;
-                              },
-                            ),
-                          ),
-                          SizedBox(
-                            width: screenWidth * 0.02,
-                          ),
-                          Expanded(
-                            child: defaultTextFromField(
-                              hintText: "Lase Name",
-                              keyboardType: TextInputType.name,
-                              controller: lNameController,
-                              maxLength: 20,
-                              validator: (value) {
-                                if(value!.isEmpty){
-                                  return "Last Name must not be empty";
-                                }
-                                return null;
-                              },
-                            ),
-                          ),
-                        ],
+                      //NAME INPUT
+                      Container(
+                        child: defaultTextFormField(
+                          hintText: "Profile Name",
+                          keyboardType: TextInputType.name,
+                          controller: nameController,
+                          maxLength: 50,
+                          validator: (value) {
+                            if(value!.isEmpty){
+                              return "Profile Name must not be empty";
+                            }
+                            return null;
+                          },
+                        ),
+                      ),
+                      SizedBox(
+                        width: screenWidth * 0.02,
                       ),
                       SizedBox(
                         height: screenHeight * 0.01,
                       ),
                       //EMAIL INPUT
                       Container(
-                        child: defaultTextFromField(
+                        child: defaultTextFormField(
                           hintText: "Email",
                           keyboardType: TextInputType.emailAddress,
                           controller: emailController,
@@ -200,7 +181,7 @@ class UserSignUpScreen extends StatelessWidget {
                       ),
                       //PASSWORD INPUT
                       Container(
-                        child: defaultTextFromField(
+                        child: defaultTextFormField(
                           hintText: "Create Password",
                           isSuffix: true,
                           suffixIcon: cubit.passSuffix,
@@ -229,7 +210,7 @@ class UserSignUpScreen extends StatelessWidget {
                       ),
                       //RE-PASSWORD INPUT
                       Container(
-                        child: defaultTextFromField(
+                        child: defaultTextFormField(
                           hintText: "Repeat Password",
                           isSuffix: true,
                           suffixIcon: cubit.passSuffix,
@@ -305,8 +286,7 @@ class UserSignUpScreen extends StatelessWidget {
                           onPress: () {
                             if(formKey.currentState!.validate() && cubit.isChecked){
                               Map<String, String> userInfo = {
-                                'firstName' : fNameController.text,
-                                'lastName' : lNameController.text,
+                                'Name' : nameController.text,
                                 'email' : emailController.text,
                                 'phone' : phoneController.text,
                                 'password' : passwordController.text,

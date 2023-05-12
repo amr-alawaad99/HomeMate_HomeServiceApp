@@ -18,6 +18,7 @@ Widget defaultButton({
     Container(
       height: height,
       width: width,
+      clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
         color: buttonColor,
         borderRadius: const BorderRadius.all(
@@ -46,7 +47,7 @@ Widget defaultButton({
     );
 
 /// TEXT FROM FIELD
-Widget defaultTextFromField({
+Widget defaultTextFormField({
   required String hintText,
   required TextEditingController controller,
   required TextInputType keyboardType,
@@ -56,9 +57,12 @@ Widget defaultTextFromField({
   IconData? suffixIcon,
   IconData? prefixIcon,
   int? maxLength,
+  String? initialValue,
   Function()? suffixPressFunction,
   Function()? prefixPressFunction,
   Function()? onTapFunction,
+  Function(String value)? onChangedFunction,
+  Function(String value)? onFieldSubmittedFunction,
   Color prefixIconColor = Colors.grey
 }) =>
     Container(
@@ -75,6 +79,7 @@ Widget defaultTextFromField({
       child: Padding(
         padding: const EdgeInsets.all(10.0),
         child: TextFormField(
+          initialValue: initialValue,
           maxLength: maxLength,
           inputFormatters: [
             LengthLimitingTextInputFormatter(maxLength), // Apply a formatter to limit the length
@@ -84,13 +89,14 @@ Widget defaultTextFromField({
             fontSize: 16.0,
           ),
           onTap: onTapFunction,
-
+          onChanged: onChangedFunction,
           obscureText: isObscure,
+          onFieldSubmitted: onFieldSubmittedFunction,
           validator: validator,
           controller: controller,
           keyboardType: keyboardType,
           decoration: InputDecoration(
-            counterText: '', //To Hide MaxLength
+            counterText: '', //To Hide MaxLength counter
             hintStyle: const TextStyle(
               color: Colors.grey,
             ),

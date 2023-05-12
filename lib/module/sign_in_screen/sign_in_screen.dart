@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:login_register_methods/layout/cubit/cubit.dart';
 import 'package:login_register_methods/layout/main_layout_screen.dart';
 import 'package:login_register_methods/module/sign_in_screen/cubit/cubit.dart';
 import 'package:login_register_methods/module/sign_in_screen/cubit/states.dart';
 import 'package:login_register_methods/shared/components/components.dart';
 import 'package:login_register_methods/shared/components/constants.dart';
 import 'package:login_register_methods/shared/local/cache_helper.dart';
+
+import '../../model/user_model.dart';
 
 class SignInScreen extends StatelessWidget {
 
@@ -26,6 +29,9 @@ class SignInScreen extends StatelessWidget {
           if(state is LoginSuccessState){
             CacheHelper.saveData(key: "uid", value: state.uid).then((value) {
               navigatePushDelete(context, widget: MainLayoutScreen());
+              //TO GET THE NEW LOGGED IN ACCOUNT IMMEDIATELY RATHER THAN THE PREVIOUS ACCOUNT!!
+              LayoutCubit.get(context).originalUser = UserModel();
+              LayoutCubit.get(context).getUserData();
             });
           } else if(state is LoginErrorState){
             showToast(message: "Invalid Login info!", toastColor: errorColor);
@@ -80,7 +86,7 @@ class SignInScreen extends StatelessWidget {
                           height: screenHeight * 0.05,
                         ),
                         Container(
-                          child: defaultTextFromField(
+                          child: defaultTextFormField(
                             hintText: "Email",
                             keyboardType: TextInputType.emailAddress,
                             controller: emailController,
@@ -96,7 +102,7 @@ class SignInScreen extends StatelessWidget {
                           height: 10,
                         ),
                         Container(
-                          child: defaultTextFromField(
+                          child: defaultTextFormField(
                             hintText: "Password",
                             isSuffix: true,
                             suffixIcon: cubit.passSuffix,
