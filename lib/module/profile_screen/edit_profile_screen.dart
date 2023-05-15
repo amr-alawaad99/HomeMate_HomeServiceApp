@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
+import 'package:login_register_methods/module/google_maps_widget/google_maps_widget.dart';
 import '../../layout/cubit/cubit.dart';
 import '../../layout/cubit/states.dart';
 import '../../shared/components/components.dart';
@@ -12,7 +13,6 @@ class EditProfileScreen extends StatelessWidget {
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final TextEditingController addressController = TextEditingController();
-
 
   EditProfileScreen({super.key});
 
@@ -216,24 +216,13 @@ class EditProfileScreen extends StatelessWidget {
                             ),
                           ],),
                           const SizedBox(height: 20,),
-                          Container(
-                            height: 130,
+                          // Map
+                          SizedBox(
+                            height: 300,
                             width: double.infinity,
-                            color: Colors.grey,
+                            child: GoogleMapsWidget(isScrollable: true, isRotatable: true, isZoomable: true),
                           ),
                           const SizedBox(height: 20,),
-                          Align(
-                            child: TextButton(
-                              onPressed: () {},
-                              child: Text(
-                                "Change Password",
-                                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                  color: secondaryColor,
-                                  decoration: TextDecoration.underline,
-                                ),
-                              ),
-                            ),
-                          ),
                         ],
                       ),
                     ),

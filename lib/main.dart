@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:login_register_methods/layout/cubit/cubit.dart';
 import 'package:login_register_methods/layout/main_layout_screen.dart';
+import 'package:login_register_methods/module/google_maps_widget/app_data.dart';
 import 'package:login_register_methods/module/onboarding_screen/onboarding_screen.dart';
 import 'package:login_register_methods/module/sign_in_screen/cubit/cubit.dart';
 import 'package:login_register_methods/module/sign_in_screen/cubit/states.dart';
 import 'package:login_register_methods/shared/bloc_observer.dart';
 import 'package:login_register_methods/shared/components/constants.dart';
 import 'package:login_register_methods/shared/local/cache_helper.dart';
+import 'package:provider/provider.dart';
 
 
 void main() async {
@@ -42,6 +44,7 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) => SignInCubit(),),
         BlocProvider(create: (context) => LayoutCubit()..getUserData(),),
+        ChangeNotifierProvider(create: (context) => AppData(),),
       ],
       child: BlocConsumer<SignInCubit, SignInStates>(
         listener: (context, state) {},

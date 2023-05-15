@@ -3,13 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:login_register_methods/layout/cubit/cubit.dart';
 import 'package:login_register_methods/layout/cubit/states.dart';
+import 'package:login_register_methods/module/google_maps_widget/google_maps_widget.dart';
 import 'package:login_register_methods/module/profile_screen/edit_profile_screen.dart';
 import 'package:login_register_methods/shared/components/components.dart';
 import 'package:login_register_methods/shared/components/constants.dart';
 
 
 class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({Key? key}) : super(key: key);
+  ProfileScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -182,24 +183,16 @@ class ProfileScreen extends StatelessWidget {
                           ),
                         ],),
                         const SizedBox(height: 20,),
+                        // Map
                         Container(
-                          height: 130,
+                          height: 200,
                           width: double.infinity,
-                          color: Colors.grey,
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.red)
+                          ),
+                          child: GoogleMapsWidget(isScrollable: false, isZoomable: false, isRotatable: false,),
                         ),
                         const SizedBox(height: 20,),
-                        Align(
-                          child: TextButton(
-                            onPressed: () {},
-                            child: Text(
-                              "Change Password",
-                              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                color: secondaryColor,
-                                decoration: TextDecoration.underline,
-                              ),
-                            ),
-                          ),
-                        ),
                       ],
                     ),
                   ),

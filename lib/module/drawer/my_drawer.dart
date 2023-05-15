@@ -81,7 +81,7 @@ class MyDrawer extends StatelessWidget {
                       ],
                     ),
                     onTap: () {
-                      navigateAndPush(context, widget: const ProfileScreen());
+                      navigateAndPush(context, widget: ProfileScreen());
                     },
                   ),
                 ),
@@ -108,10 +108,10 @@ class MyDrawer extends StatelessWidget {
                       ),
                       const SizedBox(height: 20,),
                       InkWell(
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 15),
+                        child: const Padding(
+                          padding: EdgeInsets.symmetric(vertical: 15),
                           child: Row(
-                            children: const [
+                            children: [
                               Icon(
                                 TablerIcons.message_dots,
                                 color: secondaryColor,
@@ -132,10 +132,10 @@ class MyDrawer extends StatelessWidget {
                         },
                       ),
                       InkWell(
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 15),
+                        child: const Padding(
+                          padding: EdgeInsets.symmetric(vertical: 15),
                           child: Row(
-                            children: const [
+                            children: [
                               Icon(
                                 TablerIcons.map_2,
                                 color: secondaryColor,
@@ -154,10 +154,10 @@ class MyDrawer extends StatelessWidget {
                         onTap: () {},
                       ),
                       InkWell(
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 15),
+                        child: const Padding(
+                          padding: EdgeInsets.symmetric(vertical: 15),
                           child: Row(
-                            children: const [
+                            children: [
                               Icon(
                                 TablerIcons.credit_card,
                                 color: secondaryColor,
@@ -176,10 +176,10 @@ class MyDrawer extends StatelessWidget {
                         onTap: () {},
                       ),
                       InkWell(
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 15),
+                        child: const Padding(
+                          padding: EdgeInsets.symmetric(vertical: 15),
                           child: Row(
-                            children: const [
+                            children: [
                               Icon(
                                 TablerIcons.notes,
                                 color: secondaryColor,
@@ -198,10 +198,10 @@ class MyDrawer extends StatelessWidget {
                         onTap: () {},
                       ),
                       InkWell(
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 15),
+                        child: const Padding(
+                          padding: EdgeInsets.symmetric(vertical: 15),
                           child: Row(
-                            children: const [
+                            children: [
                               Icon(
                                 TablerIcons.info_circle,
                                 color: secondaryColor,
@@ -220,10 +220,10 @@ class MyDrawer extends StatelessWidget {
                         onTap: () {},
                       ),
                       InkWell(
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 15),
+                        child: const Padding(
+                          padding: EdgeInsets.symmetric(vertical: 15),
                           child: Row(
-                            children: const [
+                            children: [
                               Icon(
                                 TablerIcons.phone,
                                 color: secondaryColor,
@@ -242,10 +242,10 @@ class MyDrawer extends StatelessWidget {
                         onTap: () {},
                       ),
                       InkWell(
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 15),
+                        child: const Padding(
+                          padding: EdgeInsets.symmetric(vertical: 15),
                           child: Row(
-                            children: const [
+                            children: [
                               Icon(
                                 TablerIcons.language,
                                 color: secondaryColor,
@@ -265,10 +265,10 @@ class MyDrawer extends StatelessWidget {
                       ),
                       const Spacer(),
                       InkWell(
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 15),
+                        child: const Padding(
+                          padding: EdgeInsets.symmetric(vertical: 15),
                           child: Row(
-                            children: const [
+                            children: [
                               Icon(
                                 TablerIcons.logout,
                                 color: errorColor,
