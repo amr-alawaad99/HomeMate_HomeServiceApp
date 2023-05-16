@@ -73,6 +73,7 @@ class LayoutCubit extends Cubit<LayoutStates> {
   void uploadProfilePic({
     String? profileName,
     String? address,
+    String? gpsLocation,
   }) {
     emit(UploadProfilePicLoadingState());
     firebase_storage.FirebaseStorage.instance
@@ -86,6 +87,7 @@ class LayoutCubit extends Cubit<LayoutStates> {
           profilePic: value2,
           profileName: profileName,
           address: address,
+          gpsLocation: gpsLocation,
         );
       }).catchError((error) {
         print('1:');
@@ -127,5 +129,12 @@ class LayoutCubit extends Cubit<LayoutStates> {
     }).catchError((error) {
       emit(UpdateUserDataErrorState(error.toString()));
     });
+  }
+
+
+  String? currentPosition;
+  void updateCurrentPositionOnGPS(String lastPosition){
+    currentPosition = lastPosition;
+    emit(ChangeCurrentPositionSuccessState());
   }
 }

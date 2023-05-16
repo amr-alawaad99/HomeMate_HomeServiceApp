@@ -9,8 +9,6 @@ import '../../shared/components/components.dart';
 import '../../shared/components/constants.dart';
 
 class EditProfileScreen extends StatelessWidget {
-
-
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final TextEditingController addressController = TextEditingController();
 
@@ -18,15 +16,15 @@ class EditProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     var cubit = LayoutCubit.get(context);
-    final TextEditingController nameController = TextEditingController(text: cubit.originalUser!.profileName);
-    final TextEditingController addressController = TextEditingController(text: cubit.originalUser!.address);
+    final TextEditingController nameController =
+        TextEditingController(text: cubit.originalUser!.profileName);
+    final TextEditingController addressController =
+        TextEditingController(text: cubit.originalUser!.address);
 
     return BlocConsumer<LayoutCubit, LayoutStates>(
       listener: (context, state) {},
       builder: (context, state) {
-
         double screenHeight = MediaQuery.of(context).size.height;
         return Scaffold(
           appBar: AppBar(
@@ -42,58 +40,69 @@ class EditProfileScreen extends StatelessWidget {
             ),
             title: Text(
               "Edit profile",
-              style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Colors.white),
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyMedium!
+                  .copyWith(color: Colors.white),
             ),
+
             /// Button for Updating Profile
             actions: [
-              if(cubit.profilePic != null
-                  || nameController.text != cubit.originalUser!.profileName
-                  || addressController.text != cubit.originalUser!.address)
+              if (cubit.profilePic != null ||
+                  nameController.text != cubit.originalUser!.profileName ||
+                  addressController.text != cubit.originalUser!.address ||
+                  cubit.currentPosition != cubit.originalUser!.gpsLocation)
                 Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: Container(
-                  height: double.maxFinite,
-                  clipBehavior: Clip.antiAlias,
-                  decoration: const BoxDecoration(
-                    color: secondaryColor,
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(10.0),
-                    ),
-                    boxShadow: <BoxShadow>[
-                      BoxShadow(
-                        color: Colors.black26,
-                        blurRadius: 10.0,
-                        offset: Offset(0.0, 0.75),
+                    padding: const EdgeInsets.all(5.0),
+                    child: Container(
+                      height: double.maxFinite,
+                      clipBehavior: Clip.antiAlias,
+                      decoration: const BoxDecoration(
+                        color: secondaryColor,
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(10.0),
+                        ),
+                        boxShadow: <BoxShadow>[
+                          BoxShadow(
+                            color: Colors.black26,
+                            blurRadius: 10.0,
+                            offset: Offset(0.0, 0.75),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                  child: MaterialButton(
-                    onPressed: () {
-                      if(cubit.profilePic != null) {
-                        cubit.uploadProfilePic(
-                          profileName: nameController.text,
-                          address: addressController.text,
-                        );
-                      } else {
-                        cubit.updateUserProfile(
-                          profileName: nameController.text,
-                          address: addressController.text,
-                        );
-                      }
-                    },
-                    child: state is UploadProfilePicLoadingState || state is GetUserDataLoadingState?
-                    const SizedBox(width: 25, height: 25,child: CircularProgressIndicator(color: Colors.white,)) :
-                    const Text(
-                      "Update",
-                      style: TextStyle(
-                        fontFamily: 'Roboto',
-                        color: Colors.white,
-                        fontSize: 18.0,
+                      child: MaterialButton(
+                        onPressed: () {
+                          if (cubit.profilePic != null) {
+                            cubit.uploadProfilePic(
+                              profileName: nameController.text,
+                              address: addressController.text,
+                            );
+                          } else {
+                            cubit.updateUserProfile(
+                              profileName: nameController.text,
+                              address: addressController.text,
+                              gpsLocation: cubit.currentPosition,
+                            );
+                          }
+                        },
+                        child: state is UploadProfilePicLoadingState ||
+                                state is GetUserDataLoadingState
+                            ? const SizedBox(
+                                width: 25,
+                                height: 25,
+                                child: CircularProgressIndicator(
+                                  color: Colors.white,
+                                ))
+                            : const Text(
+                                "Update",
+                                style: TextStyle(
+                                  fontFamily: 'Roboto',
+                                  color: Colors.white,
+                                  fontSize: 18.0,
+                                ),
+                              ),
                       ),
-                    ),
-                  ),
-                )
-              ),
+                    )),
             ],
           ),
           body: SingleChildScrollView(
@@ -107,7 +116,8 @@ class EditProfileScreen extends StatelessWidget {
                       height: screenHeight * 0.2,
                       decoration: const BoxDecoration(
                         color: primaryColor,
-                        borderRadius: BorderRadius.vertical(bottom: Radius.circular(10)),
+                        borderRadius:
+                            BorderRadius.vertical(bottom: Radius.circular(10)),
                       ),
                     ),
                     Align(
@@ -127,9 +137,11 @@ class EditProfileScreen extends StatelessWidget {
                             // AVATAR
                             CircleAvatar(
                               backgroundColor: Colors.white,
-                              backgroundImage: cubit.profilePic == null?
-                              NetworkImage(cubit.originalUser!.profilePic!) :
-                              FileImage(File(cubit.profilePic!.path)) as ImageProvider,
+                              backgroundImage: cubit.profilePic == null
+                                  ? NetworkImage(
+                                      cubit.originalUser!.profilePic!)
+                                  : FileImage(File(cubit.profilePic!.path))
+                                      as ImageProvider,
                               radius: 55,
                             ),
                             // ICON TO CHOOSE PIC FROM GALLERY
@@ -142,7 +154,8 @@ class EditProfileScreen extends StatelessWidget {
                                 style: ElevatedButton.styleFrom(
                                   shape: const CircleBorder(),
                                   padding: const EdgeInsets.all(5),
-                                  backgroundColor: secondaryColor, // <-- Button color
+                                  backgroundColor:
+                                      secondaryColor, // <-- Button color
                                 ),
                                 child: const Padding(
                                   padding: EdgeInsets.only(bottom: 5),
@@ -178,7 +191,9 @@ class EditProfileScreen extends StatelessWidget {
                                 "@${cubit.originalUser!.username}",
                                 style: Theme.of(context).textTheme.bodySmall,
                               ),
-                              const SizedBox(height: 10,),
+                              const SizedBox(
+                                height: 10,
+                              ),
                               // Edit Name
                               Container(
                                 child: defaultTextFormField(
@@ -187,7 +202,7 @@ class EditProfileScreen extends StatelessWidget {
                                   controller: nameController,
                                   keyboardType: TextInputType.name,
                                   validator: (value) {
-                                    if(value!.isEmpty){
+                                    if (value!.isEmpty) {
                                       return 'Name can not be empty!';
                                     }
                                     return null;
@@ -196,33 +211,54 @@ class EditProfileScreen extends StatelessWidget {
                               ),
                             ],
                           ),
-                          const SizedBox(height: 30,),
+                          const SizedBox(
+                            height: 30,
+                          ),
                           // Address
                           Text(
                             "Address",
-                            style: Theme.of(context).textTheme.bodySmall!.copyWith(fontSize: 15),
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodySmall!
+                                .copyWith(fontSize: 15),
                           ),
-                          const SizedBox(height: 10,),
-                          Row(children: [
-                            //Icon
-                            const Padding(
-                              padding: EdgeInsets.only(bottom: 5),
-                              child: Icon(TablerIcons.map_pin, color: secondaryColor,),
-                            ),
-                            const SizedBox(width: 10,),
-                            //Text
-                            Expanded(
-                              child: defaultTextFormField(hintText: 'Address', controller: addressController, keyboardType: TextInputType.text),
-                            ),
-                          ],),
-                          const SizedBox(height: 20,),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Row(
+                            children: [
+                              //Icon
+                              const Padding(
+                                padding: EdgeInsets.only(bottom: 5),
+                                child: Icon(
+                                  TablerIcons.map_pin,
+                                  color: secondaryColor,
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              //Text
+                              Expanded(
+                                child: defaultTextFormField(
+                                    hintText: 'Address',
+                                    controller: addressController,
+                                    keyboardType: TextInputType.text),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
                           // Map
                           SizedBox(
                             height: 300,
                             width: double.infinity,
-                            child: GoogleMapsWidget(isScrollable: true, isRotatable: true, isZoomable: true),
+                            child: GoogleMapsWidget(),
                           ),
-                          const SizedBox(height: 20,),
+                          const SizedBox(
+                            height: 20,
+                          ),
                         ],
                       ),
                     ),

@@ -1,10 +1,10 @@
 import 'dart:async';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:login_register_methods/layout/cubit/cubit.dart';
 import 'package:login_register_methods/module/google_maps_widget/app_data.dart';
 import 'package:login_register_methods/module/google_maps_widget/assistant_methods.dart';
 import 'package:provider/provider.dart';
@@ -13,11 +13,13 @@ class GoogleMapsWidget extends StatefulWidget {
   bool isScrollable;
   bool isZoomable;
   bool isRotatable;
+  bool myLocationButtonEnabled;
 
   GoogleMapsWidget(
-      {required this.isScrollable,
-      required this.isZoomable,
-      required this.isRotatable,
+      {this.isScrollable = true,
+      this.isZoomable = true,
+      this.isRotatable = true,
+      this.myLocationButtonEnabled = true,
       Key? key})
       : super(key: key);
 
@@ -63,8 +65,15 @@ class _GoogleMapsWidgetState extends State<GoogleMapsWidget> {
         desiredAccuracy: LocationAccuracy.bestForNavigation);
     userCurrentPosition = position;
     setState(() {
-      _initialPosition =
-          LatLng(userCurrentPosition!.latitude, userCurrentPosition!.longitude);
+      if (LayoutCubit.get(context).originalUser!.gpsLocation == '') {
+        _initialPosition = LatLng(
+            userCurrentPosition!.latitude, userCurrentPosition!.longitude);
+      } else {
+        List<String> location = LayoutCubit.get(context).originalUser!.gpsLocation!.split(',');
+        double latitude = double.parse(location[0]);
+        double longitude = double.parse(location[1]);
+        _initialPosition = LatLng(latitude, longitude);
+      }
       _cameraPosition =
           CameraPosition(target: _initialPosition as LatLng, zoom: 14.5);
       _newGoogleMapController
@@ -94,6 +103,8 @@ class _GoogleMapsWidgetState extends State<GoogleMapsWidget> {
     onCameraMoveEndLatLng ??= _initialPosition!;
     await AssistantMethods.pickOriginPositionOnMap(
         onCameraMoveEndLatLng!, context);
+    LayoutCubit.get(context).updateCurrentPositionOnGPS(
+        "${onCameraMoveEndLatLng!.latitude},${onCameraMoveEndLatLng!.longitude}");
   }
 
   @override
@@ -105,7 +116,6 @@ class _GoogleMapsWidgetState extends State<GoogleMapsWidget> {
 
   @override
   Widget build(BuildContext context) {
-
     final appData = Provider.of<AppData>(context);
     String originalAddress;
     if (appData.pinnedLocationOnMap != null) {
@@ -125,7 +135,7 @@ class _GoogleMapsWidgetState extends State<GoogleMapsWidget> {
                 children: [
                   GoogleMap(
                     mapType: MapType.normal,
-                    myLocationButtonEnabled: true,
+                    myLocationButtonEnabled: widget.myLocationButtonEnabled,
                     myLocationEnabled: true,
                     scrollGesturesEnabled: widget.isScrollable,
                     zoomGesturesEnabled: widget.isZoomable,
@@ -171,7 +181,8 @@ class _GoogleMapsWidgetState extends State<GoogleMapsWidget> {
                     right: 0.0,
                     child: Container(
                       decoration: const BoxDecoration(
-                          borderRadius: BorderRadius.vertical(top: Radius.circular(20.0)),
+                          borderRadius:
+                              BorderRadius.vertical(top: Radius.circular(20.0)),
                           color: Colors.white),
                       child: Padding(
                         padding: const EdgeInsets.symmetric(

@@ -190,7 +190,7 @@ class ProfileScreen extends StatelessWidget {
                           decoration: BoxDecoration(
                             border: Border.all(color: Colors.red)
                           ),
-                          child: GoogleMapsWidget(isScrollable: false, isZoomable: false, isRotatable: false,),
+                          child: GoogleMapsWidget(isScrollable: false, isZoomable: false, isRotatable: false, myLocationButtonEnabled: false),
                         ),
                         const SizedBox(height: 20,),
                       ],

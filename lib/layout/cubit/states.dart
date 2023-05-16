@@ -33,3 +33,5 @@ class UpdateUserDataErrorState extends LayoutStates{
 
   UpdateUserDataErrorState(this.error);
 }
+
+class ChangeCurrentPositionSuccessState extends LayoutStates{}
