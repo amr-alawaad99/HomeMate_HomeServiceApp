@@ -35,3 +35,8 @@ class UpdateUserDataErrorState extends LayoutStates{
 }
 
 class ChangeCurrentPositionSuccessState extends LayoutStates{}
+
+
+
+class AppointmentChangeSelectedState extends LayoutStates{}
+class SuppliersChangeSelectedState extends LayoutStates{}

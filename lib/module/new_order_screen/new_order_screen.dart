@@ -235,7 +235,7 @@ class NewOrderScreen extends StatelessWidget {
                         const SizedBox(
                           height: 15,
                         ),
-                        defaultTextFromField(
+                        defaultTextFormField(
                             validator: (String? value) {
                               if (value!.isEmpty) {
                                 return 'you must choose Time';
@@ -260,7 +260,7 @@ class NewOrderScreen extends StatelessWidget {
                         const SizedBox(
                           height: 15,
                         ),
-                        defaultTextFromField(
+                        defaultTextFormField(
                           validator: (String? value) {
                             if (value!.isEmpty) {
                               return 'you must enter location';
@@ -295,7 +295,7 @@ class NewOrderScreen extends StatelessWidget {
                             ),
                             child: Column(
                               children: [
-                                defaultTextFromField(
+                                defaultTextFormField(
                                   suffixIcon: TablerIcons.camera,
                                   suffixIconColor: secondaryColor,
                                   suffixPressFunction: () {
