@@ -375,9 +375,14 @@ class NewOrderScreen extends StatelessWidget {
                                             MediaQuery.of(context).size.width,
                                         child: FittedBox(
                                           alignment: Alignment.topCenter,
-                                          child: Icon(
-                                            TablerIcons.photo,
-                                            color: Colors.grey,
+                                          child: Column(
+                                            children: const [
+                                              Icon(
+                                                TablerIcons.photo,
+                                                color: Colors.grey,
+                                              ),
+                                              SizedBox(height: 5,)
+                                            ],
                                           ),
                                         ),
                                       ),

@@ -11,8 +11,9 @@ import 'package:login_register_methods/module/categories_screen/categories_scree
 import 'package:login_register_methods/module/home_screen/home_screen.dart';
 import 'package:login_register_methods/module/suppliers_screen/suppliers_screen.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import '../../model/category_model.dart';
 import '../../model/user_model.dart';
-import '../../models/category_model.dart';
+
 import '../../shared/components/constants.dart';
 import '../../shared/local/cache_helper.dart';
 

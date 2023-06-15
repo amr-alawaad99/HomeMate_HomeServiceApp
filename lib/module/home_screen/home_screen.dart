@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 
-import '../../models/category_model.dart';
+
+import '../../model/category_model.dart';
 import '../../shared/components/components.dart';
 import '../../shared/components/constants.dart';
 
