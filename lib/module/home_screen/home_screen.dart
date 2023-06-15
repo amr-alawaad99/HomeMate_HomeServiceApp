@@ -202,7 +202,7 @@ class HomeScreen extends StatelessWidget {
             onTap: () {
               /**navigateAndPush(context, widget: );**/
             },
-            child: Container(
+            child: SizedBox(
               height: 145,
               child: Padding(
                 padding:
@@ -230,7 +230,7 @@ class HomeScreen extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('${model.userName}',
+                              Text(model.userName,
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
@@ -239,7 +239,7 @@ class HomeScreen extends StatelessWidget {
                               SizedBox(
                                 height: 10,
                               ),
-                              Text('${model.serviceName}',
+                              Text(model.serviceName,
                                   style: TextStyle(
                                     fontSize: 15,
                                   )),
@@ -256,7 +256,7 @@ class HomeScreen extends StatelessWidget {
                                     color: secondaryColor,
                                   ),
                                   Expanded(
-                                    child: Text('${model.address}',
+                                    child: Text(model.address,
                                         maxLines: 2,
                                         overflow: TextOverflow.ellipsis,
                                         style: TextStyle(
@@ -286,7 +286,7 @@ class HomeScreen extends StatelessWidget {
                                   width: 4,
                                 ),
                                 Text(
-                                  '${model.rate}',
+                                  model.rate,
                                   style: TextStyle(
                                     fontSize: 15,
                                   ),
@@ -296,7 +296,7 @@ class HomeScreen extends StatelessWidget {
                             SizedBox(
                               height: 30,
                             ),
-                            Text('${model.distance}',
+                            Text(model.distance,
                                 style: TextStyle(
                                   fontSize: 15,
                                 )),

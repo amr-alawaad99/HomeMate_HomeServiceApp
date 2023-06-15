@@ -37,6 +37,13 @@
             {
               "client_id": "220209510896-jppu8ndu4a8sojjd23v64cdv2llae7ui.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "220209510896-30i9qnegpp03o6p53vksf4a5lsgo4qf3.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "homematehomeservice.com.homeMate"
+              }
             }
           ]
         }
