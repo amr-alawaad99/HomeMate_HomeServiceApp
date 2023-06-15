@@ -5,8 +5,8 @@ import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:intl/intl.dart';
 import 'package:date_time_picker_widget/date_time_picker_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:login_register_methods/module/new_order_screen/new_order_cubit/new_order_cubit.dart';
-import 'package:login_register_methods/module/new_order_screen/new_order_cubit/new_order_states.dart';
+import 'package:login_register_methods/layout/cubit/cubit.dart';
+import 'package:login_register_methods/layout/cubit/states.dart';
 import 'package:login_register_methods/module/order_confirm_Screen/order_confirm_screen.dart';
 import '../../shared/components/components.dart';
 import '../../shared/components/constants.dart';
@@ -29,11 +29,11 @@ class NewOrderScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-        create: (BuildContext context) => NewOrderCubit(),
-        child: BlocConsumer<NewOrderCubit, NewOrderStates>(
+        create: (BuildContext context) => LayoutCubit(),
+        child: BlocConsumer<LayoutCubit, LayoutStates>(
           listener: (context, state) {},
           builder: (context, state) {
-            var cubit = NewOrderCubit.get(context);
+            var cubit = LayoutCubit.get(context);
             return Scaffold(
               bottomNavigationBar: Container(
                 padding: EdgeInsets.all(15),

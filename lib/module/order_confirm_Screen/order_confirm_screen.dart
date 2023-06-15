@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:login_register_methods/layout/cubit/states.dart';
 import 'package:login_register_methods/module/new_order_screen/new_order_screen.dart';
 import 'package:login_register_methods/module/success_screen/success_screen.dart';
 
+import '../../layout/cubit/cubit.dart';
 import '../../shared/components/components.dart';
 import '../../shared/components/constants.dart';
 import 'dart:io';
 
-import '../new_order_screen/new_order_cubit/new_order_cubit.dart';
-import '../new_order_screen/new_order_cubit/new_order_states.dart';
 
 class OrderConfirmScreen extends StatelessWidget {
   final String date;
@@ -32,11 +32,11 @@ class OrderConfirmScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-        create: (BuildContext context) => NewOrderCubit(),
-        child: BlocConsumer<NewOrderCubit, NewOrderStates>(
+        create: (BuildContext context) => LayoutCubit(),
+        child: BlocConsumer<LayoutCubit, LayoutStates>(
           listener: (context, state) {},
           builder: (context, state) {
-            var cubit = NewOrderCubit.get(context);
+            var cubit = LayoutCubit.get(context);
 
             return Scaffold(
               backgroundColor: scaffoldLightColor,
@@ -104,7 +104,7 @@ class OrderConfirmScreen extends StatelessWidget {
                       width: MediaQuery.of(context).size.width / 2,
                       text: 'Confirm',
                       onPress: () {
-                        NewOrderCubit.get(context).uploadImage(images);
+                        LayoutCubit.get(context).uploadImage(images);
                         navigateAndPush(context, widget: SuccessScreen());
 
                       },

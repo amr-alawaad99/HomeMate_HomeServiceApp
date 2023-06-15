@@ -40,3 +40,11 @@ class ChangeCurrentPositionSuccessState extends LayoutStates{}
 
 class AppointmentChangeSelectedState extends LayoutStates{}
 class SuppliersChangeSelectedState extends LayoutStates{}
+
+////////////////////////
+
+
+class NewOrderSelectServiceState extends LayoutStates{}
+class NewOrderPickImageState extends LayoutStates{}
+class NewOrderClearPickedImageState extends LayoutStates{}
+class NewOrderUploadImageToFirebaseState extends LayoutStates{}
