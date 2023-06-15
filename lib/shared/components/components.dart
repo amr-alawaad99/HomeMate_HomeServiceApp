@@ -46,7 +46,7 @@ Widget defaultButton({
     );
 
 /// TEXT FROM FIELD
-Widget defaultTextFromField(
+Widget defaultTextFormField(
         {required String hintText,
         required TextEditingController controller,
         required TextInputType keyboardType,

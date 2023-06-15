@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:login_register_methods/layout/cubit/cubit.dart';
 
 import '../../layout/cubit/states.dart';
-import '../../models/appointment.dart';
+import '../../model/appointment.dart';
 import '../../shared/components/components.dart';
 import '../../shared/components/constants.dart';
 

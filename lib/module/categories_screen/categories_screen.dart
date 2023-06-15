@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:login_register_methods/module/new_order_screen/new_order_screen.dart';
 import 'package:login_register_methods/shared/components/components.dart';
 
-import '../../models/category_model.dart';
+import '../../model/category_model.dart';
+
 
 class CategoriesScreen extends StatelessWidget {
   List<Categories> categories = [

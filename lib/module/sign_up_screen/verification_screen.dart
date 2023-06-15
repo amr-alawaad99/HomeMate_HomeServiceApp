@@ -60,7 +60,7 @@ class VerificationScreen extends StatelessWidget {
                   height: 30,
                 ),
                 Container(
-                  child: defaultTextFromField(
+                  child: defaultTextFormField(
                     hintText: "Enter Verification Code",
                     controller: verificationController,
                     keyboardType: TextInputType.number,
