@@ -188,7 +188,7 @@ Widget defaultCategoriesBox({
   Function()? onTap,
 }) =>
     Material(
-      // color: color,
+      color: color,
       elevation: elevation,
       borderRadius: const BorderRadius.all(
         Radius.circular(10),
@@ -210,7 +210,7 @@ Widget defaultCategoriesBox({
             Text(
               text,
               style: TextStyle(
-                // color: textColor,
+                color: textColor,
                 fontFamily: "Roboto",
                 fontWeight: FontWeight.bold,
               ),
