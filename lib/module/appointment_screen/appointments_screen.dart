@@ -158,14 +158,14 @@ class AppointmentsScreen extends StatelessWidget {
                       onTap: (){
 
                       },
-                      serviceName: appointments[index].serviceName,
-                      userName: appointments[index].userName,
-                      date: appointments[index].date,
-                      time: appointments[index].time,
-                      status: appointments[index].status,
+                      serviceName: appointments[index].serviceName!,
+                      userName: appointments[index].userName!,
+                      date: appointments[index].date!,
+                      time: appointments[index].time!,
+                      status: appointments[index].status!,
                       statusColor: appointments[index].status == 'Finished'?successColor:warningColor,
-                      cost: appointments[index].cost,
-                      image: appointments[index].image,
+                      cost: appointments[index].cost!,
+                      image: appointments[index].image!,
                       iconColor: (appointments[index].status == 'Finished')
                           ? successColor
                           : warningColor,

@@ -1,30 +1,48 @@
 import 'package:flutter/material.dart';
 
 class Appointment {
-  final String serviceName;
-  final String userName;
-  final String date;
-  final String time;
-  final String status;
-  final String cost;
-  final ImageProvider image;
+  String? serviceName;
+  String? userName;
+  String? date;
+  String? time;
+  String? status;
+  String? cost;
+  ImageProvider? image;
 
-  Appointment({
-    required this.serviceName,
-    required this.userName,
-    required this.date,
-    required this.time,
-    required this.status,
-    required this.cost,
-    required this.image
-  });
+  Appointment(
+      {this.serviceName,
+      this.userName,
+      this.date,
+      this.time,
+      this.status,
+      this.cost,
+      this.image});
 
+  Appointment.fromJson(Map<String, dynamic> json) {
+    serviceName = json['serviceName'];
+    userName = json['userName'];
+    date = json['date'];
+    time = json['time'];
+    status = json['status'];
+    cost = json['cost'];
+    image = json['image'];
+  }
 
+  Map<String, dynamic> toMap() {
+    return {
+      'serviceName': serviceName,
+      'userName': userName,
+      'date': date,
+      'time': time,
+      'status': status,
+      'cost': cost,
+      'image': image,
+    };
+  }
 }
-class ChooseCategory{
+
+class ChooseCategory {
   final String category;
 
-  ChooseCategory({
-    required this.category
-});
+  ChooseCategory({required this.category});
 }

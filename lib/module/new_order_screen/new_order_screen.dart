@@ -8,8 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:login_register_methods/layout/cubit/cubit.dart';
 import 'package:login_register_methods/layout/cubit/states.dart';
 import 'package:login_register_methods/module/order_confirm_Screen/order_confirm_screen.dart';
-import 'package:login_register_methods/module/sign_in_screen/cubit/cubit.dart';
-import 'package:login_register_methods/module/sign_in_screen/cubit/states.dart';
 import '../../shared/components/components.dart';
 import '../../shared/components/constants.dart';
 
@@ -231,78 +229,77 @@ class NewOrderScreen extends StatelessWidget {
                                   dateController.text =
                                       DateFormat('dd MMM, yyyy').format(date);
 
-                                  print(dateController.text);
-                                },
-                              ),
-                            ),
-                            // defaultTextFromField(
-                            //     validator: (String? value) {
-                            //       if (value!.isEmpty) {
-                            //         return 'you must choose the day';
-                            //       }
-                            //       return null;
-                            //     },
-                            //     hintText: 'Choose Working Day',
-                            //     prefixIcon: TablerIcons.calendar_event,
-                            //     prefixIconColor: secondaryColor,
-                            //     controller: dateController,
-                            //     keyboardType: TextInputType.datetime,
-                            //     onTapFunction: () {
-                            //       showDatePicker(
-                            //         context: context,
-                            //         initialDate: DateTime.now(),
-                            //         firstDate: DateTime.now(),
-                            //         lastDate: DateTime(2123),
-                            //       ).then((value) {
-                            //         dateController.text =
-                            //             DateFormat.yMMMEd().format(value!);
-                            //       });
-                            //     }),
-                            const SizedBox(
-                              height: 15,
-                            ),
-                            defaultTextFormField(
-                                validator: (String? value) {
-                                  if (value!.isEmpty) {
-                                    return 'you must choose Time';
-                                  }
-                                  return null;
-                                },
-                                hintText: 'Choose Time',
-                                prefixIconColor: secondaryColor,
-                                prefixIcon: TablerIcons.clock,
-                                controller: timeController,
-                                keyboardType: TextInputType.datetime,
-                                onTapFunction: () {
-                                  showTimePicker(
-                                    context: context,
-                                    initialTime: TimeOfDay.now(),
-                                  ).then((value) {
-                                    timeController.text =
-                                        value!.format(context).toString();
-                                  });
-                                }),
+                              print(dateController.text);
+                            },
+                          ),
+                        ),
+                        // defaultTextFromField(
+                        //     validator: (String? value) {
+                        //       if (value!.isEmpty) {
+                        //         return 'you must choose the day';
+                        //       }
+                        //       return null;
+                        //     },
+                        //     hintText: 'Choose Working Day',
+                        //     prefixIcon: TablerIcons.calendar_event,
+                        //     prefixIconColor: secondaryColor,
+                        //     controller: dateController,
+                        //     keyboardType: TextInputType.datetime,
+                        //     onTapFunction: () {
+                        //       showDatePicker(
+                        //         context: context,
+                        //         initialDate: DateTime.now(),
+                        //         firstDate: DateTime.now(),
+                        //         lastDate: DateTime(2123),
+                        //       ).then((value) {
+                        //         dateController.text =
+                        //             DateFormat.yMMMEd().format(value!);
+                        //       });
+                        //     }),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        defaultTextFormField(
+                            validator: (String? value) {
+                              if (value!.isEmpty) {
+                                return 'you must choose Time';
+                              }
+                              return null;
+                            },
+                            hintText: 'Choose Time',
+                            prefixIconColor: secondaryColor,
+                            prefixIcon: TablerIcons.clock,
+                            controller: timeController,
+                            keyboardType: TextInputType.datetime,
+                            onTapFunction: () {
+                              showTimePicker(
+                                context: context,
+                                initialTime: TimeOfDay.now(),
+                              ).then((value) {
+                                timeController.text =
+                                    value!.format(context).toString();
+                              });
+                            }),
 
-                            const SizedBox(
-                              height: 15,
-                            ),
-
-                            defaultTextFormField(
-                              validator: (String? value) {
-                                if (value!.isEmpty) {
-                                  return 'you must enter location';
-                                }
-                                return null;
-                              },
-                              hintText: 'Location',
-                              prefixIcon: TablerIcons.map_pin,
-                              prefixIconColor: secondaryColor,
-                              controller: locationController,
-                              keyboardType: TextInputType.text,
-                            ),
-                            const SizedBox(
-                              height: 15,
-                            ),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        defaultTextFormField(
+                          validator: (String? value) {
+                            if (value!.isEmpty) {
+                              return 'you must enter location';
+                            }
+                            return null;
+                          },
+                          hintText: 'Location',
+                          prefixIcon: TablerIcons.map_pin,
+                          prefixIconColor: secondaryColor,
+                          controller: locationController,
+                          keyboardType: TextInputType.text,
+                        ),
+                        const SizedBox(
+                          height: 15,
+                        ),
 
                             Container(
                                 decoration: BoxDecoration(
