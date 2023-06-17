@@ -1,4 +1,6 @@
 import 'dart:io';
+import 'dart:math';
+import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -6,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:login_register_methods/layout/cubit/states.dart';
+import 'package:login_register_methods/model/appointment.dart';
+import 'package:login_register_methods/model/orderModel.dart';
 import 'package:login_register_methods/module/appointment_screen/appointments_screen.dart';
 import 'package:login_register_methods/module/categories_screen/categories_screen.dart';
 import 'package:login_register_methods/module/home_screen/home_screen.dart';
@@ -245,44 +249,33 @@ class LayoutCubit extends Cubit<LayoutStates> {
       listOfUrls.add(imageUrl.toString());
     }
     emit(NewOrderUploadImageToFirebaseState());
-    // var snapshot = await firebaseStorage
-    //     .ref()
-    //     .child('images/imageName${DateTime.now().microsecondsSinceEpoch}')
-    //     .putFile(image!);
-    // var downloadUrl = await snapshot.ref.getDownloadURL();
-    // imageUrl = downloadUrl;
-    // listOfUrls.add(imageUrl!);
-    //
-    // emit(
-    //   NewOrderUploadImageToFirebaseState(),
-    // );
-    // return imageUrl;
+
   }
+  void orderCreate({
+    String? serviceName,
+    String? date,
+    String? time,
+    String? notes,
+    String? location,
+    ImageProvider? image,
+  }) {
+    OrderModel model = OrderModel(
+      serviceName: serviceName,
+      date: date,
+      time: time,
+      notes: notes,
+      location: location,
+      image: image,
+    );
+    FirebaseFirestore.instance.collection('orders').doc(uId).set(
+      model.toMap(),
+    ).then((value) {
+    emit(UploadOrderSuccessState());
+    }).catchError((error){
+      emit(UploadOrderErrorState());
 
-// imageOrderDisplay() {
-//   imageFileList = listOfUrls;
-//   emit(NewOrderDisplayImageState());
-// }
-
-// Future<String?> uploadToFireStore() async {
-//
-//
-//   // File file = File(image!.path);
-//   // String imageName = 'orderImage/${DateTime.now().microsecondsSinceEpoch}';
-//   // String? imageUrl;
-//   // try{
-//   //   await FirebaseStorage.instance.ref(imageName).putFile(file);
-//   //   imageUrl = await FirebaseStorage.instance.ref(imageName).getDownloadURL();
-//   //   if(imageUrl!=null){
-//   //     image =null;
-//   //     print(imageUrl);
-//   //     emit(NewOrderUploadImageToFirebaseState());
-//   //   }
-//   // }on FirebaseException catch(error){
-//   //   showToast(message: '$error Cancelled', toastColor: primaryColor);
-//   // }
-//
-//
-//   return null;
-// }
+    });
+  }
 }
+
+
