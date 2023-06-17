@@ -8,9 +8,12 @@ import 'package:login_register_methods/layout/cubit/cubit.dart';
 import 'package:login_register_methods/layout/cubit/states.dart';
 import 'package:login_register_methods/module/drawer/my_drawer.dart';
 import 'package:login_register_methods/module/new_order_screen/new_order_screen.dart';
+import 'package:login_register_methods/module/sign_in_screen/cubit/cubit.dart';
+import 'package:login_register_methods/module/sign_up_screen/cubit/states.dart';
 import 'package:login_register_methods/shared/components/components.dart';
 import 'package:login_register_methods/shared/components/constants.dart';
 
+import '../module/sign_in_screen/cubit/states.dart';
 
 class MainLayoutScreen extends StatelessWidget {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
@@ -31,209 +34,225 @@ class MainLayoutScreen extends StatelessWidget {
             drawer: const MyDrawer(),
             extendBody: true,
             body: ConditionalBuilder(
-              condition: cubit.originalUser != null && cubit.originalUser!.profilePic != null,
+              condition: cubit.originalUser != null &&
+                  cubit.originalUser!.profilePic != null,
               builder: (context) => NestedScrollView(
                 floatHeaderSlivers: true,
                 headerSliverBuilder: (context, innerBoxIsScrolled) => <Widget>[
-                  SliverAppBar(
-                    backgroundColor: primaryColor,
-                    shape: const RoundedRectangleBorder(
-                        borderRadius:
-                        BorderRadius.vertical(bottom: Radius.circular(15))),
-                    automaticallyImplyLeading: false,
-                    flexibleSpace: Padding(
-                      padding:
-                      const EdgeInsetsDirectional.fromSTEB(15, 25, 15, 25),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          InkWell(
-                            onTap: () {
-                              scaffoldKey.currentState!.openDrawer();
-                            },
-                            child: Row(
-                              children: [
-                                CircleAvatar(
-                                  backgroundColor: Colors.white,
-                                  backgroundImage: NetworkImage(cubit.originalUser!.profilePic!),
-                                  radius: 25,
+                  BlocConsumer<SignInCubit, SignInStates>(
+                    listener: (context, state) {},
+                    builder: (context, state) {
+                      return SliverAppBar(
+                        backgroundColor: SignInCubit.get(context).isDark
+                            ? Color(0xff303030)
+                            : primaryColor,
+                        shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.vertical(
+                                bottom: Radius.circular(15))),
+                        automaticallyImplyLeading: false,
+                        flexibleSpace: Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              15, 25, 15, 25),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  scaffoldKey.currentState!.openDrawer();
+                                },
+                                child: Row(
+                                  children: [
+                                    CircleAvatar(
+                                      backgroundColor: Colors.white,
+                                      backgroundImage: NetworkImage(
+                                          cubit.originalUser!.profilePic!),
+                                      radius: 25,
+                                    ),
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
+                                    // NAME AND LOCATION
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          // PROFILE NAME
+                                          Text(
+                                            "Hi, ${cubit.originalUser!.profileName!}",
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: const TextStyle(
+                                              fontFamily: "Roboto",
+                                              color: Colors.white,
+                                              fontSize: 15.0,
+                                            ),
+                                          ),
+                                          const SizedBox(
+                                            height: 2,
+                                          ),
+                                          // LOCATION ICON AND LOCATION TEXT
+                                          Row(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.end,
+                                            children: [
+                                              Icon(
+                                                TablerIcons.map_pin,
+                                                color: Colors.grey.shade400,
+                                                size: 18,
+                                              ),
+                                              const SizedBox(
+                                                width: 5,
+                                              ),
+                                              Expanded(
+                                                child: Text(
+                                                  cubit.originalUser!.address!,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  style: TextStyle(
+                                                    fontFamily: "Roboto",
+                                                    color: Colors.grey.shade400,
+                                                    fontSize: 12,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    // NOTIFICATION ICON
+                                    IconButton(
+                                      onPressed: () {
+                                        print("N");
+                                      },
+                                      icon: const Icon(
+                                        TablerIcons.bell,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                // NAME AND LOCATION
-                                Expanded(
+                              ),
+                              if (LayoutCubit.get(context).currentIndex == 0)
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(horizontal: 2),
                                   child: Column(
                                     crossAxisAlignment:
-                                    CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.center,
+                                        CrossAxisAlignment.start,
                                     children: [
-                                      // PROFILE NAME
-                                      Text(
-                                        "Hi, ${cubit.originalUser!.profileName!}",
-                                        maxLines: 1,
-                                        overflow: TextOverflow.ellipsis,
-                                        style: const TextStyle(
+                                      const SizedBox(
+                                        height: 15,
+                                      ),
+                                      const Text(
+                                        'What are you\nlooking for?',
+                                        style: TextStyle(
                                           fontFamily: "Roboto",
+                                          fontSize: 22.0,
                                           color: Colors.white,
-                                          fontSize: 15.0,
+                                          fontWeight: FontWeight.bold,
+                                          height: 1.5,
                                         ),
                                       ),
                                       const SizedBox(
-                                        height: 2,
+                                        height: 15,
                                       ),
-                                      // LOCATION ICON AND LOCATION TEXT
-                                      Row(
-                                        crossAxisAlignment:
-                                        CrossAxisAlignment.end,
-                                        children: [
-                                          Icon(
-                                            TablerIcons.map_pin,
-                                            color: Colors.grey.shade400,
-                                            size: 18,
-                                          ),
-                                          const SizedBox(
-                                            width: 5,
-                                          ),
-                                          Expanded(
-                                            child: Text(
-                                              cubit.originalUser!.address!,
-                                              overflow: TextOverflow.ellipsis,
-                                              style: TextStyle(
-                                                fontFamily: "Roboto",
-                                                color: Colors.grey.shade400,
-                                                fontSize: 12,
+                                      Container(
+                                        decoration: BoxDecoration(
+                                          color: SignInCubit.get(context).isDark
+                                              ? Colors.grey[700]
+                                              : scaffoldLightColor,
+                                          borderRadius: const BorderRadius.all(
+                                              Radius.circular(10.0)),
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(10.0),
+                                          child: TextFormField(
+                                            style: const TextStyle(
+                                              fontFamily: "Roboto",
+                                              fontSize: 16.0,
+                                            ),
+                                            controller: searchController,
+                                            keyboardType: TextInputType.text,
+                                            decoration: const InputDecoration(
+                                              hintStyle: TextStyle(
+                                                color: Colors.grey,
+                                              ),
+                                              hintText:
+                                                  "Search for services or suppliers",
+                                              border: InputBorder.none,
+                                              prefixIcon: Padding(
+                                                padding:
+                                                    EdgeInsets.only(bottom: 5),
+                                                child: Icon(TablerIcons.search),
                                               ),
                                             ),
                                           ),
-                                        ],
+                                        ),
                                       ),
                                     ],
                                   ),
                                 ),
-                                // NOTIFICATION ICON
-                                IconButton(
-                                  onPressed: () {
-                                    print("N");
-                                  },
-                                  icon: const Icon(
-                                    TablerIcons.bell,
-                                    color: Colors.white,
-                                  ),
+                              if (LayoutCubit.get(context).currentIndex == 1)
+                                Column(
+                                  children: [
+                                    const SizedBox(
+                                      height: 15,
+                                    ),
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        color:  SignInCubit.get(context).isDark
+                                            ? Colors.grey[700]
+                                            : scaffoldLightColor,
+                                        borderRadius: const BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(10.0),
+                                        child: TextFormField(
+                                          style: const TextStyle(
+                                            fontFamily: "Roboto",
+                                            fontSize: 16.0,
+                                          ),
+                                          controller: searchController,
+                                          keyboardType: TextInputType.text,
+                                          decoration: const InputDecoration(
+                                            hintStyle: TextStyle(
+                                              color: Colors.grey,
+                                            ),
+                                            hintText:
+                                                "What service do you need",
+                                            border: InputBorder.none,
+                                            prefixIcon: Padding(
+                                              padding:
+                                                  EdgeInsets.only(bottom: 5),
+                                              child: Icon(TablerIcons.search),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              ],
-                            ),
+                            ],
                           ),
-                          if (LayoutCubit.get(context).currentIndex == 0)
-                            Padding(
-                              padding:
-                              const EdgeInsets.symmetric(horizontal: 2),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const SizedBox(
-                                    height: 15,
-                                  ),
-                                  const Text(
-                                    'What are you\nlooking for?',
-                                    style: TextStyle(
-                                      fontFamily: "Roboto",
-                                      fontSize: 22.0,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                      height: 1.5,
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    height: 15,
-                                  ),
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      color: scaffoldLightColor,
-                                      borderRadius: const BorderRadius.all(
-                                          Radius.circular(10.0)),
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(10.0),
-                                      child: TextFormField(
-                                        style: const TextStyle(
-                                          fontFamily: "Roboto",
-                                          fontSize: 16.0,
-                                        ),
-                                        controller: searchController,
-                                        keyboardType: TextInputType.text,
-                                        decoration: const InputDecoration(
-                                          hintStyle: TextStyle(
-                                            color: Colors.grey,
-                                          ),
-                                          hintText:
-                                          "Search for services or suppliers",
-                                          border: InputBorder.none,
-                                          prefixIcon:
-                                          Padding(
-                                            padding: EdgeInsets.only(bottom: 5),
-                                            child: Icon(TablerIcons.search),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          if (LayoutCubit.get(context).currentIndex == 1)
-                            Column(
-                              children: [
-                                const SizedBox(
-                                  height: 15,
-                                ),
-                                Container(
-                                  decoration: BoxDecoration(
-                                    color: scaffoldLightColor,
-                                    borderRadius: const BorderRadius.all(
-                                        Radius.circular(10.0)),
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(10.0),
-                                    child: TextFormField(
-                                      style: const TextStyle(
-                                        fontFamily: "Roboto",
-                                        fontSize: 16.0,
-                                      ),
-                                      controller: searchController,
-                                      keyboardType: TextInputType.text,
-                                      decoration: const InputDecoration(
-                                        hintStyle: TextStyle(
-                                          color: Colors.grey,
-                                        ),
-                                        hintText:
-                                        "What service do you need",
-                                        border: InputBorder.none,
-                                        prefixIcon:
-                                        Padding(
-                                          padding: EdgeInsets.only(bottom: 5),
-                                          child: Icon(TablerIcons.search),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                        ],
-                      ),
-                    ),
-                    bottom: LayoutCubit.get(context).currentIndex == 0
-                        ? const PreferredSize(
-                        preferredSize: Size.fromHeight(210),
-                        child: SizedBox())
-                        : LayoutCubit.get(context).currentIndex == 1
-                        ? const PreferredSize(
-                        preferredSize: Size.fromHeight(130),
-                        child: SizedBox())
-                        : const PreferredSize(
-                        preferredSize: Size.fromHeight(50),
-                        child: SizedBox()),
+                        ),
+                        bottom: LayoutCubit.get(context).currentIndex == 0
+                            ? const PreferredSize(
+                                preferredSize: Size.fromHeight(210),
+                                child: SizedBox())
+                            : LayoutCubit.get(context).currentIndex == 1
+                                ? const PreferredSize(
+                                    preferredSize: Size.fromHeight(130),
+                                    child: SizedBox())
+                                : const PreferredSize(
+                                    preferredSize: Size.fromHeight(50),
+                                    child: SizedBox()),
+                      );
+                    },
                   ),
                 ],
                 body: SingleChildScrollView(
@@ -244,21 +263,26 @@ class MainLayoutScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              fallback: (context) => const Center(child: CircularProgressIndicator()),
+              fallback: (context) =>
+                  const Center(child: CircularProgressIndicator()),
             ),
             floatingActionButton: FloatingActionButton(
               onPressed: () {
                 navigateAndPush(context, widget: NewOrderScreen());
               },
-              backgroundColor: secondaryColor,
-              child: const Icon(TablerIcons.plus),
+              child: const Icon(
+                TablerIcons.plus,
+                color: Colors.white,
+              ),
             ),
             floatingActionButtonLocation:
                 FloatingActionButtonLocation.endDocked,
             bottomNavigationBar: BubbleBottomBar(
+              backgroundColor: SignInCubit.get(context).isDark
+                  ? Color(0xff303030)
+                  : Colors.white,
               opacity: 0.2,
               currentIndex: LayoutCubit.get(context).currentIndex,
-              backgroundColor: Colors.white,
               hasInk: true,
               hasNotch: true,
               fabLocation: BubbleBottomBarFabLocation.end,
@@ -266,7 +290,11 @@ class MainLayoutScreen extends StatelessWidget {
                 defaultBottomBarItem(context, "Home", TablerIcons.smart_home),
                 defaultBottomBarItem(
                     context, "Categories", TablerIcons.layout_grid),
-                defaultBottomBarItem(context, "Suppliers", TablerIcons.users),
+                defaultBottomBarItem(
+                  context,
+                  "Suppliers",
+                  TablerIcons.users,
+                ),
                 defaultBottomBarItem(
                   context,
                   "Appointment",
@@ -282,7 +310,6 @@ class MainLayoutScreen extends StatelessWidget {
       },
     );
   }
-
 
   BubbleBottomBarItem defaultBottomBarItem(
           context, String text, IconData icon) =>
@@ -305,7 +332,7 @@ class MainLayoutScreen extends StatelessWidget {
               child: Text(
                 text,
                 style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                    color: primaryColor,
+                    color: SignInCubit.get(context).isDark ? Colors.white : primaryColor,
                     fontSize: MediaQuery.of(context).size.width * 0.03,
                     fontWeight: FontWeight.bold,
                     overflow: TextOverflow.ellipsis),
@@ -318,7 +345,7 @@ class MainLayoutScreen extends StatelessWidget {
               width: 15,
               height: 3,
               decoration: BoxDecoration(
-                color: primaryColor,
+                color:  SignInCubit.get(context).isDark ? Colors.white : primaryColor,
                 borderRadius: BorderRadius.circular(20.0),
               ),
             ),

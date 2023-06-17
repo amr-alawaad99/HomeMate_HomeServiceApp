@@ -15,3 +15,6 @@ class LoginErrorState extends SignInStates{
   final String error;
   LoginErrorState(this.error);
 }
+
+///state mode change
+class AppChangeModeState extends SignInStates{}
