@@ -11,7 +11,6 @@ import '../../shared/components/components.dart';
 import '../../shared/components/constants.dart';
 import 'dart:io';
 
-
 class OrderConfirmScreen extends StatelessWidget {
   final String date;
   final String notes;
@@ -104,9 +103,16 @@ class OrderConfirmScreen extends StatelessWidget {
                       width: MediaQuery.of(context).size.width / 2,
                       text: 'Confirm',
                       onPress: () {
-                        LayoutCubit.get(context).uploadImage(images);
-                        navigateAndPush(context, widget: SuccessScreen());
+                        cubit.uploadImage(images);
+                        cubit.orderCreate(
+                          serviceName: cubit.categories[services].title,
+                          date: date,
+                          time: time,
+                          location: location,
+                          notes: notes,
 
+                        );
+                        navigateAndPush(context, widget: SuccessScreen());
                       },
                       fontSize: 20,
                     ),
@@ -212,7 +218,8 @@ class OrderConfirmScreen extends StatelessWidget {
                               children: [
                                 Text(
                                   'Date And Time'.toUpperCase(),
-                                  style: TextStyle(color: Colors.grey, fontSize: 15),
+                                  style: TextStyle(
+                                      color: Colors.grey, fontSize: 15),
                                 ),
                                 SizedBox(
                                   height: 5,
@@ -230,7 +237,8 @@ class OrderConfirmScreen extends StatelessWidget {
                                 color: primaryColor,
                               ),
                               onPressed: () {
-                                navigatePushDelete(context, widget: NewOrderScreen());
+                                navigatePushDelete(context,
+                                    widget: NewOrderScreen());
                               },
                             ),
                           ],
@@ -263,7 +271,8 @@ class OrderConfirmScreen extends StatelessWidget {
                               children: [
                                 Text(
                                   'Address'.toUpperCase(),
-                                  style: TextStyle(color: Colors.grey, fontSize: 15),
+                                  style: TextStyle(
+                                      color: Colors.grey, fontSize: 15),
                                 ),
                                 SizedBox(
                                   height: 10,
@@ -273,7 +282,8 @@ class OrderConfirmScreen extends StatelessWidget {
                                   height: 10,
                                 ),
                                 Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
                                     Icon(
@@ -284,7 +294,8 @@ class OrderConfirmScreen extends StatelessWidget {
                                       width: 10,
                                     ),
                                     SizedBox(
-                                      width: MediaQuery.of(context).size.width / 1.7,
+                                      width: MediaQuery.of(context).size.width /
+                                          1.7,
                                       child: Text(
                                         location,
                                         maxLines: 2,
@@ -332,7 +343,8 @@ class OrderConfirmScreen extends StatelessWidget {
                               children: [
                                 Text(
                                   'Notes'.toUpperCase(),
-                                  style: TextStyle(color: Colors.grey, fontSize: 15),
+                                  style: TextStyle(
+                                      color: Colors.grey, fontSize: 15),
                                 ),
                                 SizedBox(
                                   height: 10,
@@ -360,13 +372,13 @@ class OrderConfirmScreen extends StatelessWidget {
                                 //   ],
                                 // ),
                                 SizedBox(
-                                  width: MediaQuery.of(context).size.width/2,
+                                  width: MediaQuery.of(context).size.width / 2,
                                   height: 70,
                                   child: GridView.builder(
                                     itemCount: images.length,
                                     gridDelegate:
-                                    SliverGridDelegateWithFixedCrossAxisCount(
-                                        crossAxisCount: 3),
+                                        SliverGridDelegateWithFixedCrossAxisCount(
+                                            crossAxisCount: 3),
                                     itemBuilder: (context, index) => Padding(
                                       padding: const EdgeInsets.all(2.0),
                                       child: ClipRRect(
@@ -388,9 +400,7 @@ class OrderConfirmScreen extends StatelessWidget {
                                 TablerIcons.edit,
                                 color: primaryColor,
                               ),
-                              onPressed: () {
-
-                              },
+                              onPressed: () {},
                             ),
                           ],
                         ),
@@ -402,7 +412,5 @@ class OrderConfirmScreen extends StatelessWidget {
             );
           },
         ));
-
-
   }
 }
