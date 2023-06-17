@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:login_register_methods/layout/cubit/cubit.dart';
 import 'package:login_register_methods/layout/cubit/states.dart';
 import 'package:login_register_methods/module/order_confirm_Screen/order_confirm_screen.dart';
+import 'package:login_register_methods/module/sign_in_screen/cubit/cubit.dart';
+import 'package:login_register_methods/module/sign_in_screen/cubit/states.dart';
 import '../../shared/components/components.dart';
 import '../../shared/components/constants.dart';
 
