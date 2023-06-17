@@ -20,13 +20,9 @@ class NewOrderScreen extends StatelessWidget {
   var timeController = TextEditingController();
   var notesController = TextEditingController();
   var locationController = TextEditingController();
-  int serviceIndex =0;
+  int serviceIndex = 0;
 
   NewOrderScreen({super.key});
-
-
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -36,12 +32,10 @@ class NewOrderScreen extends StatelessWidget {
           listener: (context, state) {},
           builder: (context, state) {
             var cubit = LayoutCubit.get(context);
-            return BlocConsumer<SignInCubit,SignInStates>(
-              listener: (context, state) {
-
-              },
+            return BlocConsumer<SignInCubit, SignInStates>(
+              listener: (context, state) {},
               builder: (context, state) {
-                return  Scaffold(
+                return Scaffold(
                   bottomNavigationBar: Container(
                     padding: EdgeInsets.all(15),
                     decoration: BoxDecoration(
@@ -51,7 +45,9 @@ class NewOrderScreen extends StatelessWidget {
                             blurRadius: 20.0,
                             offset: Offset(0.0, 0.75)),
                       ],
-                      color: SignInCubit.get(context).isDark ? Color(0xff303030) : scaffoldLightColor,
+                      color: SignInCubit.get(context).isDark
+                          ? Color(0xff303030)
+                          : scaffoldLightColor,
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(
                           10,
@@ -71,7 +67,8 @@ class NewOrderScreen extends StatelessWidget {
                             children: [
                               Container(
                                 decoration: BoxDecoration(
-                                    color: secondaryColor, shape: BoxShape.circle),
+                                    color: secondaryColor,
+                                    shape: BoxShape.circle),
                                 width: 13,
                                 height: 13,
                               ),
@@ -94,7 +91,9 @@ class NewOrderScreen extends StatelessWidget {
                           width: 50,
                         ),
                         defaultButton(
-                          buttonColor: SignInCubit.get(context).isDark ? Color(0xff626262) : primaryColor,
+                          buttonColor: SignInCubit.get(context).isDark
+                              ? Color(0xff626262)
+                              : primaryColor,
                           text: 'Send Request',
                           width: MediaQuery.of(context).size.width / 2,
                           onPress: () {
@@ -117,21 +116,26 @@ class NewOrderScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  backgroundColor: SignInCubit.get(context).isDark ? Color(0xff212121) : scaffoldLightColor,
+                  backgroundColor: SignInCubit.get(context).isDark
+                      ? Color(0xff212121)
+                      : scaffoldLightColor,
                   key: scaffoldKey,
                   extendBody: true,
                   appBar: AppBar(
                     iconTheme: const IconThemeData(color: Colors.white),
                     title: const Text(
                       'New Order',
-                      style: TextStyle(color: Colors.white, fontFamily: "Roboto"),
+                      style:
+                          TextStyle(color: Colors.white, fontFamily: "Roboto"),
                     ),
                     shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.vertical(
                         bottom: Radius.circular(15),
                       ),
                     ),
-                    backgroundColor: SignInCubit.get(context).isDark ? Color(0xff303030) : primaryColor,
+                    backgroundColor: SignInCubit.get(context).isDark
+                        ? Color(0xff303030)
+                        : primaryColor,
                   ),
                   body: SingleChildScrollView(
                     physics: AlwaysScrollableScrollPhysics(),
@@ -156,45 +160,59 @@ class NewOrderScreen extends StatelessWidget {
                                   physics: const BouncingScrollPhysics(),
                                   scrollDirection: Axis.horizontal,
                                   itemBuilder: (context, index) => Container(
-                                    decoration: BoxDecoration(
-                                        borderRadius:
-                                        BorderRadius.circular(10)),
-                                    padding: const EdgeInsets.all(2),
-                                    width: 100,
-                                    height: 100,
-                                    child: defaultCategoriesBox(
-                                        onTap: () {
-                                          cubit.changeIndex(index);
-                                          serviceIndex = index;
-                                        },
-                                        color: cubit.selectedIndex == index
-                                            ? secondaryColor
-                                            : Colors.white,
-                                        textColor: cubit.selectedIndex == index
-                                            ? Colors.white
-                                            : Colors.black,
-                                        elevation: cubit.selectedIndex == index
-                                            ? 0
-                                            : 3,
-                                        width: 50,
-                                        height: 50,
-                                        img: cubit.categories[index].img,
-                                        text: cubit.categories[index].title),
-                                  ),
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(10)),
+                                        padding: const EdgeInsets.all(2),
+                                        width: 100,
+                                        height: 100,
+                                        child: defaultCategoriesBox(
+                                            onTap: () {
+                                              cubit.changeIndex(index);
+                                              serviceIndex = index;
+                                            },
+                                            color: cubit.selectedIndex == index
+                                                ? SignInCubit.get(context)
+                                                        .isDark
+                                                    ? Colors.grey[500]
+                                                    : secondaryColor
+                                                : SignInCubit.get(context)
+                                                        .isDark
+                                                    ? dark2
+                                                    : Colors.white,
+                                            textColor:
+                                                cubit.selectedIndex == index
+                                                    ? Colors.white
+                                                    : SignInCubit.get(context)
+                                                            .isDark
+                                                        ? Colors.white
+                                                        : Colors.black,
+                                            elevation:
+                                                cubit.selectedIndex == index
+                                                    ? 0
+                                                    : 3,
+                                            width: 50,
+                                            height: 50,
+                                            img: cubit.categories[index].img,
+                                            text:
+                                                cubit.categories[index].title),
+                                      ),
                                   separatorBuilder: (context, index) =>
-                                  const SizedBox(
-                                    width: 8,
-                                  ),
+                                      const SizedBox(
+                                        width: 8,
+                                      ),
                                   itemCount: cubit.categories.length),
                             ),
                             const SizedBox(
                               height: 15,
                             ),
                             Container(
-                              decoration:  BoxDecoration(
-                                color: SignInCubit.get(context).isDark ? Color(0xff303030) : Colors.white,
+                              decoration: BoxDecoration(
+                                color: SignInCubit.get(context).isDark
+                                    ? Color(0xff303030)
+                                    : Colors.white,
                                 borderRadius:
-                                BorderRadius.all(Radius.circular(10.0)),
+                                    BorderRadius.all(Radius.circular(10.0)),
                                 boxShadow: <BoxShadow>[
                                   BoxShadow(
                                     color: Colors.black12,
@@ -287,10 +305,12 @@ class NewOrderScreen extends StatelessWidget {
                             ),
 
                             Container(
-                                decoration:  BoxDecoration(
-                                  color: SignInCubit.get(context).isDark ? Color(0xff303030) : Colors.white,
+                                decoration: BoxDecoration(
+                                  color: SignInCubit.get(context).isDark
+                                      ? Color(0xff303030)
+                                      : Colors.white,
                                   borderRadius:
-                                  BorderRadius.all(Radius.circular(10.0)),
+                                      BorderRadius.all(Radius.circular(10.0)),
                                   boxShadow: <BoxShadow>[
                                     BoxShadow(
                                       color: Colors.black12,
@@ -328,73 +348,81 @@ class NewOrderScreen extends StatelessWidget {
                                       controller: notesController,
                                       keyboardType: TextInputType.text,
                                     ),
-
                                     cubit.imageFileList!.isNotEmpty
                                         ? Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: SizedBox(
-                                        width:
-                                        MediaQuery.of(context).size.width,
-                                        height: 100,
-                                        child: GridView.builder(
-                                          itemCount:
-                                          cubit.imageFileList!.length,
-                                          gridDelegate:
-                                          SliverGridDelegateWithFixedCrossAxisCount(
-                                              crossAxisCount: 4),
-                                          itemBuilder: (context, index) =>
-                                              Padding(
-                                                padding: const EdgeInsets.all(2.0),
-                                                child: Stack(
-                                                  fit: StackFit.expand,
-                                                  children: [
-                                                    ClipRRect(
-                                                      borderRadius:
-                                                      BorderRadius.circular(10),
-                                                      child: Image.file(
-                                                        File(cubit
-                                                            .imageFileList![index]
-                                                            .path),
-                                                        fit: BoxFit.cover,
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: SizedBox(
+                                              width: MediaQuery.of(context)
+                                                  .size
+                                                  .width,
+                                              height: 100,
+                                              child: GridView.builder(
+                                                itemCount:
+                                                    cubit.imageFileList!.length,
+                                                gridDelegate:
+                                                    SliverGridDelegateWithFixedCrossAxisCount(
+                                                        crossAxisCount: 4),
+                                                itemBuilder: (context, index) =>
+                                                    Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(2.0),
+                                                  child: Stack(
+                                                    fit: StackFit.expand,
+                                                    children: [
+                                                      ClipRRect(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(10),
+                                                        child: Image.file(
+                                                          File(cubit
+                                                              .imageFileList![
+                                                                  index]
+                                                              .path),
+                                                          fit: BoxFit.cover,
+                                                        ),
                                                       ),
-                                                    ),
-                                                    Positioned(
-                                                      right: 0,
-                                                      child: IconButton(
-                                                        onPressed: () {
-                                                          cubit.clearImage(index);
-                                                        },
-                                                        icon: Container(
-
-                                                          child: Icon(
-                                                            TablerIcons.x,color: Colors.white,
+                                                      Positioned(
+                                                        right: 0,
+                                                        child: IconButton(
+                                                          onPressed: () {
+                                                            cubit.clearImage(
+                                                                index);
+                                                          },
+                                                          icon: Container(
+                                                            child: Icon(
+                                                              TablerIcons.x,
+                                                              color:
+                                                                  Colors.white,
+                                                            ),
                                                           ),
                                                         ),
                                                       ),
-                                                    ),
-                                                  ],
+                                                    ],
+                                                  ),
                                                 ),
                                               ),
-                                        ),
-                                      ),
-                                    )
-                                        : SizedBox(
-                                      height: 120,
-                                      width:
-                                      MediaQuery.of(context).size.width,
-                                      child: FittedBox(
-                                        alignment: Alignment.topCenter,
-                                        child: Column(
-                                          children: const [
-                                            Icon(
-                                              TablerIcons.photo,
-                                              color: Colors.grey,
                                             ),
-                                            SizedBox(height: 5,)
-                                          ],
-                                        ),
-                                      ),
-                                    ),
+                                          )
+                                        : SizedBox(
+                                            height: 120,
+                                            width: MediaQuery.of(context)
+                                                .size
+                                                .width,
+                                            child: FittedBox(
+                                              alignment: Alignment.topCenter,
+                                              child: Column(
+                                                children: const [
+                                                  Icon(
+                                                    TablerIcons.photo,
+                                                    color: Colors.grey,
+                                                  ),
+                                                  SizedBox(
+                                                    height: 5,
+                                                  )
+                                                ],
+                                              ),
+                                            ),
+                                          ),
                                   ],
                                 )),
 
@@ -442,7 +470,7 @@ class NewOrderScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                ) ;
+                );
               },
             );
           },
