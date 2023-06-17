@@ -48,3 +48,7 @@ class NewOrderSelectServiceState extends LayoutStates{}
 class NewOrderPickImageState extends LayoutStates{}
 class NewOrderClearPickedImageState extends LayoutStates{}
 class NewOrderUploadImageToFirebaseState extends LayoutStates{}
+
+
+///state mode change
+class AppChangeModeState extends LayoutStates{}

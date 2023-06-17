@@ -5,6 +5,9 @@ const Color secondaryColor = Color(0xff28b5cd);
 const Color successColor = Color(0xff00cf90);
 const Color warningColor = Color(0xffffb300);
 const Color errorColor = Color(0xffee4646);
+const Color dark1 = Color(0xff212121);
+const Color dark2 = Color(0xff424242);
+const Color dark3 = Color(0xff616161);
 
 Color scaffoldLightColor = Colors.grey.shade100;
 
