@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:login_register_methods/module/sign_in_screen/cubit/cubit.dart';
+import 'package:login_register_methods/module/sign_in_screen/cubit/states.dart';
 import 'package:login_register_methods/shared/components/constants.dart';
 
 /// BUTTON
@@ -63,65 +66,74 @@ Widget defaultTextFormField(
         ValueChanged<String>? onSubmit,
         Color prefixIconColor = Colors.grey,
         Color suffixIconColor = Colors.grey}) =>
-    Container(
-      decoration: const BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.all(Radius.circular(10.0)),
-        boxShadow: <BoxShadow>[
-          BoxShadow(
-              color: Colors.black12,
-              blurRadius: 20.0,
-              offset: Offset(0.0, 0.75)),
-        ],
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: TextFormField(
-          onFieldSubmitted: onSubmit,
-          maxLength: maxLength,
-          inputFormatters: [
-            LengthLimitingTextInputFormatter(maxLength),
-            // Apply a formatter to limit the length
-          ],
-          style: const TextStyle(
-            fontFamily: "Roboto",
-            fontSize: 16.0,
+    BlocConsumer<SignInCubit,SignInStates>(
+      listener: (context, state) {
+
+      },
+      builder: (context, state) {
+        return Container(
+          decoration:  BoxDecoration(
+            color: SignInCubit.get(context).isDark
+                ? Colors.grey[800]
+                : scaffoldLightColor,
+            borderRadius: BorderRadius.all(Radius.circular(10.0)),
+            boxShadow: const <BoxShadow>[
+              BoxShadow(
+                  color: Colors.black12,
+                  blurRadius: 20.0,
+                  offset: Offset(0.0, 0.75)),
+            ],
           ),
-          onTap: onTapFunction,
-          enabled: isEnabled,
-          obscureText: isObscure,
-          validator: validator,
-          controller: controller,
-          keyboardType: keyboardType,
-          decoration: InputDecoration(
-            counterText: '',
-            //To Hide MaxLength
-            hintStyle: const TextStyle(
-              color: Colors.grey,
+          child: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: TextFormField(
+              onFieldSubmitted: onSubmit,
+              maxLength: maxLength,
+              inputFormatters: [
+                LengthLimitingTextInputFormatter(maxLength),
+                // Apply a formatter to limit the length
+              ],
+              style: const TextStyle(
+                fontFamily: "Roboto",
+                fontSize: 16.0,
+              ),
+              onTap: onTapFunction,
+              enabled: isEnabled,
+              obscureText: isObscure,
+              validator: validator,
+              controller: controller,
+              keyboardType: keyboardType,
+              decoration: InputDecoration(
+                counterText: '',
+                //To Hide MaxLength
+                hintStyle: const TextStyle(
+                  color: Colors.grey,
+                ),
+                hintText: hintText,
+                border: InputBorder.none,
+                prefixIcon: prefixIcon != null
+                    ? IconButton(
+                  icon: Icon(
+                    prefixIcon,
+                    color: prefixIconColor,
+                  ),
+                  onPressed: prefixPressFunction,
+                )
+                    : null,
+                suffixIcon: suffixIcon != null
+                    ? IconButton(
+                  icon: Icon(
+                    suffixIcon,
+                    color: suffixIconColor,
+                  ),
+                  onPressed: suffixPressFunction,
+                )
+                    : null,
+              ),
             ),
-            hintText: hintText,
-            border: InputBorder.none,
-            prefixIcon: prefixIcon != null
-                ? IconButton(
-                    icon: Icon(
-                      prefixIcon,
-                      color: prefixIconColor,
-                    ),
-                    onPressed: prefixPressFunction,
-                  )
-                : null,
-            suffixIcon: suffixIcon != null
-                ? IconButton(
-                    icon: Icon(
-                      suffixIcon,
-                      color: suffixIconColor,
-                    ),
-                    onPressed: suffixPressFunction,
-                  )
-                : null,
           ),
-        ),
-      ),
+        ) ;
+      },
     );
 
 /// NAVIGATE AND PUSH (KEEPS PREVIOUS PAGE OPENED)
@@ -171,12 +183,12 @@ Widget defaultCategoriesBox({
   double width = 60,
   double height = 60,
   double elevation = 3,
-  Color color = Colors.white,
-  Color textColor = Colors.black,
+  Color? color,
+  Color? textColor,
   Function()? onTap,
 }) =>
     Material(
-      color: color,
+      // color: color,
       elevation: elevation,
       borderRadius: const BorderRadius.all(
         Radius.circular(10),
@@ -198,7 +210,7 @@ Widget defaultCategoriesBox({
             Text(
               text,
               style: TextStyle(
-                color: textColor,
+                // color: textColor,
                 fontFamily: "Roboto",
                 fontWeight: FontWeight.bold,
               ),
@@ -246,193 +258,206 @@ Widget defaultAppointmentCard({
   required Color statusColor,
   Function()? onTap,
 }) =>
-    Container(
-      padding: const EdgeInsets.all(10),
-      height: 150,
-      width: double.infinity,
-      decoration: BoxDecoration(boxShadow: const <BoxShadow>[
-        BoxShadow(
-            color: Colors.black12, blurRadius: 20.0, offset: Offset(0.0, 0.75)),
-      ], color: Colors.white, borderRadius: BorderRadius.circular(10.0)),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
+    BlocConsumer<SignInCubit,SignInStates>(
+      listener: (context, state) {
+
+      },
+      builder: (context, state) {
+        return Container(
+          padding: const EdgeInsets.all(10),
+          height: 150,
+          width: double.infinity,
+          decoration: BoxDecoration(
+            boxShadow:  <BoxShadow>[
+              BoxShadow(
+                  color: SignInCubit.get(context).isDark ? Color(0xff303030) : Colors.white,
+                  offset: Offset(0.0, 0.75)),
+            ],
+            // color: Colors.white,
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      serviceName,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 19.0,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Row(
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(5),
-                          child: Image(
-                            image: image,
-                            width: 30,
-                            height: 30,
+                        Text(
+                          serviceName,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 19.0,
                           ),
                         ),
                         const SizedBox(
-                          width: 10,
+                          height: 10,
                         ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                        Row(
                           children: [
-                            Text(
-                              userName,
-                              style: const TextStyle(
-                                fontSize: 15.0,
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(5),
+                              child: Image(
+                                image: image,
+                                width: 30,
+                                height: 30,
                               ),
                             ),
                             const SizedBox(
-                              height: 5.0,
+                              width: 10,
                             ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: const [
-                                Image(
-                                  image: AssetImage('assets/images/star.png'),
-                                  width: 15.0,
-                                  height: 15.0,
-                                ),
-                                SizedBox(
-                                  width: 5,
-                                ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
                                 Text(
-                                  '4.5/5',
-                                  style: TextStyle(
-                                    fontSize: 12.0,
+                                  userName,
+                                  style: const TextStyle(
+                                    fontSize: 15.0,
                                   ),
+                                ),
+                                const SizedBox(
+                                  height: 5.0,
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: const [
+                                    Image(
+                                      image: AssetImage('assets/images/star.png'),
+                                      width: 15.0,
+                                      height: 15.0,
+                                    ),
+                                    SizedBox(
+                                      width: 5,
+                                    ),
+                                    Text(
+                                      '4.5/5',
+                                      style: TextStyle(
+                                        fontSize: 12.0,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),
                           ],
                         ),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              date,
+                              style: const TextStyle(
+                                fontSize: 12.0,
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              time,
+                              style: const TextStyle(
+                                fontSize: 12.0,
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Icon(
+                              TablerIcons.circle,
+                              size: 20,
+                              color: iconColor,
+                            ),
+                            const SizedBox(
+                              width: 5,
+                            ),
+                            Text(
+                              status,
+                              style: TextStyle(
+                                  fontSize: 12.0,
+                                  color: statusColor,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        ),
                       ],
                     ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    Row(
+                  ],
+                ),
+              ),
+              Expanded(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          date,
-                          style: const TextStyle(
-                            fontSize: 12.0,
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Text(
-                          time,
-                          style: const TextStyle(
-                            fontSize: 12.0,
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Icon(
-                          TablerIcons.circle,
-                          size: 20,
-                          color: iconColor,
-                        ),
-                        const SizedBox(
-                          width: 5,
-                        ),
-                        Text(
-                          status,
+                          'Cost',
                           style: TextStyle(
-                              fontSize: 12.0,
-                              color: statusColor,
-                              fontWeight: FontWeight.bold),
+                            fontSize: 15.0,
+                          ),
+                        ),
+                        Text(
+                          cost,
+                          style: TextStyle(
+                            fontSize: 15.0,
+                            fontWeight: FontWeight.bold,
+                            color: secondaryColor,
+                          ),
+                        ),
+                        Expanded(
+                          child: SizedBox(
+                            height: double.infinity,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                InkWell(
+                                  onTap: onTap,
+                                  child: Icon(
+                                    TablerIcons.trash,
+                                    color: errorColor,
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                status == 'Finished'
+                                    ? SizedBox()
+                                    : InkWell(
+                                  onTap: onTap,
+                                  child: Icon(
+                                    TablerIcons.edit,
+                                    color: primaryColor,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
                       ],
                     ),
                   ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-          Expanded(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Cost',
-                      style: TextStyle(
-                        fontSize: 15.0,
-                      ),
-                    ),
-                    Text(
-                      cost,
-                      style: TextStyle(
-                        fontSize: 15.0,
-                        fontWeight: FontWeight.bold,
-                        color: secondaryColor,
-                      ),
-                    ),
-                    Expanded(
-                      child: SizedBox(
-                        height: double.infinity,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            InkWell(
-                              onTap: onTap,
-                              child: Icon(
-                                TablerIcons.trash,
-                                color: errorColor,
-                              ),
-                            ),
-                            SizedBox(
-                              width: 5,
-                            ),
-                            status == 'Finished'
-                                ? SizedBox()
-                                : InkWell(
-                                    onTap: onTap,
-                                    child: Icon(
-                                      TablerIcons.edit,
-                                      color: primaryColor,
-                                    ),
-                                  ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
+        );
+      },
+
     );
 //
 
@@ -458,109 +483,113 @@ Widget defaultSuppliersItem({
             height: 150,
             child: Padding(
               padding: const EdgeInsets.only(top: 10, right: 15, left: 15),
-              child: Container(
-                decoration: BoxDecoration(
-                    boxShadow: const <BoxShadow>[
-                      BoxShadow(
-                          color: Colors.black12,
-                          blurRadius: 20.0,
-                          offset: Offset(0.0, 0.75)),
-                    ],
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10.0)),
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(5),
-                        child: Image(
-                          image: tempImage,
-                          height: 60,
-                          width: 60,
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 20,
-                      ),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(agentName,
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                )),
-                            SizedBox(
-                              height: 10,
+              child: BlocConsumer<SignInCubit,SignInStates>(
+                listener: (context, state) { },
+                builder: (context, state) {
+                  return  Container(
+                    decoration: BoxDecoration(
+                        boxShadow: <BoxShadow>[
+                          BoxShadow(
+                              color : SignInCubit.get(context).isDark ? Color(0xff303030) : Colors.white,
+                              offset: Offset(0.0, 0.75)),
+                        ],
+                        // color: Colors.white,
+                        borderRadius: BorderRadius.circular(10.0)),
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(5),
+                            child: Image(
+                              image: tempImage,
+                              height: 60,
+                              width: 60,
                             ),
-                            Text(jop,
-                                style: TextStyle(
-                                  fontSize: 15,
-                                )),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
+                          ),
+                          const SizedBox(
+                            width: 20,
+                          ),
+                          Expanded(
+                            child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Icon(
-                                  TablerIcons.map_pin,
-                                  size: 20,
-                                  color: secondaryColor,
+                                Text(agentName,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    )),
+                                SizedBox(
+                                  height: 10,
                                 ),
-                                Expanded(
-                                  child: Text(address,
-                                      maxLines: 2,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: TextStyle(
-                                        fontSize: 15,
-                                      )),
+                                Text(jop,
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                    )),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Icon(
+                                      TablerIcons.map_pin,
+                                      size: 20,
+                                      color: secondaryColor,
+                                    ),
+                                    Expanded(
+                                      child: Text(address,
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                            fontSize: 15,
+                                          )),
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Column(
-                        children: [
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Icon(
-                                Icons.star,
-                                size: 20,
-                                color: Colors.amber,
-                              ),
-                              SizedBox(
-                                width: 4,
-                              ),
-                              Text(
-                                mark,
-                                style: TextStyle(
-                                  fontSize: 15,
-                                ),
-                              ),
-                            ],
                           ),
                           SizedBox(
-                            height: 30,
+                            width: 10,
                           ),
-                          Text(distance,
-                              style: TextStyle(
-                                fontSize: 15,
-                              )),
+                          Column(
+                            children: [
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Icon(
+                                    Icons.star,
+                                    size: 20,
+                                    color: Colors.amber,
+                                  ),
+                                  SizedBox(
+                                    width: 4,
+                                  ),
+                                  Text(
+                                    mark,
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 30,
+                              ),
+                              Text(distance,
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                  )),
+                            ],
+                          )
                         ],
-                      )
-                    ],
-                  ),
-                ),
+                      ),
+                    ),
+                  );
+                },
               ),
             ),
           ),

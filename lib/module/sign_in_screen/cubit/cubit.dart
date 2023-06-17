@@ -5,6 +5,7 @@ import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:login_register_methods/module/sign_in_screen/cubit/states.dart';
 
 import '../../../shared/components/constants.dart';
+import '../../../shared/local/cache_helper.dart';
 
 
 class SignInCubit extends Cubit<SignInStates> {
@@ -33,4 +34,26 @@ class SignInCubit extends Cubit<SignInStates> {
       emit(LoginErrorState(error.toString()));
     });
   }
+
+  ////////////////////////////
+  /// to dark mode
+  bool isDark = false;
+  void changeAppMode({bool? fromShared}){
+    if(fromShared != null) {
+      isDark = fromShared;
+      emit(AppChangeModeState());
+    }
+    else{
+       isDark = !isDark;
+    CacheHelper.saveData(key: 'isDark', value: isDark).then((value) {
+      emit(AppChangeModeState());
+    });
+  }
+  }
+
+
+
+
+
+
 }
