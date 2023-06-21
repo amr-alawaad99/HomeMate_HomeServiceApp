@@ -246,14 +246,15 @@ class LayoutCubit extends Cubit<LayoutStates> {
       listOfUrls.add(imageUrl.toString());
     }
     emit(NewOrderUploadImageToFirebaseState());
-
   }
+
   void orderCreate({
     String? serviceName,
     String? date,
     String? time,
     String? notes,
     String? location,
+    String? gpsLocation,
     ImageProvider? image,
   }) {
     OrderModel model = OrderModel(
@@ -263,14 +264,21 @@ class LayoutCubit extends Cubit<LayoutStates> {
       notes: notes,
       location: location,
       image: image,
+      uId: uId,
+      gpsLocation: originalUser!.gpsLocation!,
     );
-    FirebaseFirestore.instance.collection('orders').doc(uId).set(
-      model.toMap(),
-    ).then((value) {
+    FirebaseFirestore.instance
+        .collection('orders')
+        .doc(uId)
+        .collection('user Orders')
+        .doc()
+        .set(
+          model.toMap(),
+        )
+        .then((value) {
       emit(UploadOrderSuccessState());
-    }).catchError((error){
+    }).catchError((error) {
       emit(UploadOrderErrorState());
-
     });
   }
 }

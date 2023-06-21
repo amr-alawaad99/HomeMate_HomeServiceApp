@@ -110,6 +110,9 @@ class OrderConfirmScreen extends StatelessWidget {
                           time: time,
                           location: location,
                           notes: notes,
+                          gpsLocation: LayoutCubit.get(context).originalUser!.gpsLocation!
+
+
 
                         );
                         navigateAndPush(context, widget: SuccessScreen());
