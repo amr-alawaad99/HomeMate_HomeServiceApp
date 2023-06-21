@@ -13,6 +13,8 @@ import 'package:login_register_methods/shared/components/constants.dart';
 import 'package:login_register_methods/shared/local/cache_helper.dart';
 import 'package:provider/provider.dart';
 
+import 'layou_tec/layout_tec.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
