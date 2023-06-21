@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:login_register_methods/layout/main_layout_screen.dart';
+import 'package:login_register_methods/module/new_order_screen/new_order_screen.dart';
 import 'package:login_register_methods/module/sign_up_screen/cubit/cubit.dart';
 import 'package:login_register_methods/module/sign_up_screen/cubit/states.dart';
 import 'package:username_generator/username_generator.dart';
@@ -26,7 +27,7 @@ class UsernameScreen extends StatelessWidget {
     var cubit = SignupCubit.get(context);
     ///Generate a random username
     usernameController.text = UsernameGenerator().generateForName(
-      userinfo['Name']!,
+      userinfo['name']!,
       numberSeed: 999,
     );
 
@@ -37,7 +38,12 @@ class UsernameScreen extends StatelessWidget {
         }
         if (state is CreateUserSuccessState) {
           CacheHelper.saveData(key: "uid", value: state.uid).then((value) {
-            navigatePushDelete(context, widget: MainLayoutScreen());
+            if(SignupCubit.get(context).isSelected[0] == true){
+              navigatePushDelete(context, widget: MainLayoutScreen());
+            }else{
+              navigatePushDelete(context, widget: NewOrderScreen());
+            }
+
             //TO GET THE NEW LOGGED IN ACCOUNT IMMEDIATELY RATHER THAN THE PREVIOUS ACCOUNT!!
             LayoutCubit.get(context).originalUser = UserModel();
             LayoutCubit.get(context).getUserData();
@@ -119,8 +125,8 @@ class UsernameScreen extends StatelessWidget {
                   //     physics: const NeverScrollableScrollPhysics(),
                   //     itemBuilder: (context, index) => buildValidUsernames(
                   //       context,
-                  //       fName: userinfo['firstName']!,
-                  //       lNAme: userinfo['lastName']!,
+                  //       fname: userinfo['firstname']!,
+                  //       lNAme: userinfo['lastname']!,
                   //       index: index,
                   //     ),
                   //     //Build what I want
@@ -142,7 +148,7 @@ class UsernameScreen extends StatelessWidget {
                             SignupCubit.get(context).registerUserAccount(
                               email: userinfo['email']!,
                               password: userinfo['password']!,
-                              name: userinfo['Name']!,
+                              name: userinfo['name']!,
                               userName: usernameController.text,
                               phoneNumber: userinfo['phone']!,
                             );

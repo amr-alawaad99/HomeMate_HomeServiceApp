@@ -33,3 +33,11 @@ class UsernameCheckingErrorState extends SignupStates{
 
   UsernameCheckingErrorState(this.error);
 }
+
+
+class UserAlreadyExistsState extends SignupStates{
+  final String uid;
+
+  UserAlreadyExistsState(this.uid);
+}
+class UserDoesNotExistsState extends SignupStates{}

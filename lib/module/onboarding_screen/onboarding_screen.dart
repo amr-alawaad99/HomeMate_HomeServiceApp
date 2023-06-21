@@ -1,12 +1,20 @@
 import 'package:colorful_safe_area/colorful_safe_area.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:login_register_methods/layout/main_layout_screen.dart';
 import 'package:login_register_methods/module/pre_sign_up_screen/sign_up_screen.dart';
 import 'package:login_register_methods/module/sign_in_screen/sign_in_screen.dart';
+import 'package:login_register_methods/module/sign_up_screen/cubit/cubit.dart';
+import 'package:login_register_methods/module/sign_up_screen/cubit/states.dart';
+import 'package:login_register_methods/module/sign_up_screen/google_facebook_signup_info.dart';
 import 'package:login_register_methods/shared/components/components.dart';
 import 'package:login_register_methods/shared/components/constants.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+
+import '../../layout/cubit/cubit.dart';
+import '../../model/user_model.dart';
+import '../../shared/local/cache_helper.dart';
 
 class BoardingModel {
   final String highlightedText;
@@ -45,126 +53,150 @@ class OnBoardingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-    return ColorfulSafeArea(
-      color: Colors.grey.shade100,
-      child: Scaffold(
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.02,
-            ),
-
-            /// PageView Builder for OnBoarding
-            Expanded(
-              child: PageView.builder(
-                itemBuilder: (context, index) =>
-                    onBoardingItem(boarding[index], context),
-                controller: boardingController,
-                itemCount: boarding.length,
-              ),
-            ),
-
-            /// Page Indicator
-            Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: SmoothPageIndicator(
-                controller: boardingController,
-                count: boarding.length,
-                effect: const ExpandingDotsEffect(
-                    dotColor: Colors.grey,
-                    dotHeight: 8.0,
-                    expansionFactor: 2.5,
-                    dotWidth: 8.0,
-                    spacing: 5.0,
-                    activeDotColor: secondaryColor),
-              ),
-            ),
-
-            /// Signup, Google, Facebook, Text and Text buttons
-            Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Column(
+    return BlocProvider(
+      create: (context) => SignupCubit(),
+      child: BlocConsumer<SignupCubit, SignupStates>(
+        listener: (context, state) {
+          if(state is UserDoesNotExistsState){
+            navigateAndPush(context, widget: GoogleFacebookSignUpInfo(SignupCubit.get(context).googleUser!.displayName!));
+          } else if(state is UserAlreadyExistsState){
+            navigateAndPush(context, widget: MainLayoutScreen());
+            CacheHelper.saveData(key: "uid", value: state.uid).then((value) {
+              navigatePushDelete(context, widget: MainLayoutScreen());
+              //TO GET THE NEW LOGGED IN ACCOUNT IMMEDIATELY RATHER THAN THE PREVIOUS ACCOUNT!!
+              LayoutCubit.get(context).originalUser = UserModel();
+              LayoutCubit.get(context).getUserData();
+            });
+          }
+        },
+        builder: (context, state) {
+          return ColorfulSafeArea(
+            color: Colors.grey.shade100,
+            child: Scaffold(
+              body: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
-                    child: defaultButton(
-                      onPress: () {
-                        navigateAndPush(context, widget: PreSignUpScreen());
-                      },
-                      text: "Sign Up",
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.02,
+                  ),
+
+                  /// PageView Builder for OnBoarding
+                  Expanded(
+                    child: PageView.builder(
+                      itemBuilder: (context, index) =>
+                          onBoardingItem(boarding[index], context),
+                      controller: boardingController,
+                      itemCount: boarding.length,
                     ),
                   ),
-                  const SizedBox(
-                    height: 15.0,
+
+                  /// Page Indicator
+                  Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: SmoothPageIndicator(
+                      controller: boardingController,
+                      count: boarding.length,
+                      effect: const ExpandingDotsEffect(
+                          dotColor: Colors.grey,
+                          dotHeight: 8.0,
+                          expansionFactor: 2.5,
+                          dotWidth: 8.0,
+                          spacing: 5.0,
+                          activeDotColor: secondaryColor),
+                    ),
                   ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: defaultButton(
-                          onPress: () {},
-                          text: "G",
-                          buttonColor: Colors.white,
-                          textColor: Colors.red.shade400,
-                          fontSize: 30.0,
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 15.0,
-                      ),
-                      Expanded(
-                        child: defaultButton(
-                          onPress: () {},
-                          text: "f",
-                          buttonColor: Colors.white,
-                          textColor: Colors.blue.shade900,
-                          isBold: true,
-                          fontSize: 30.0,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 15.0,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text(
-                        "Already have an account?",
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          navigateAndPush(context, widget: SignInScreen());
-                        },
-                        child: const Text(
-                          "Sign In",
-                          style: TextStyle(
-                            fontFamily: "Roboto",
-                            fontSize: 18.0,
-                            decoration: TextDecoration.underline,
+
+                  /// Signup, Google, Facebook, Text and Text buttons
+                  Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: Column(
+                      children: [
+                        // Sign up with Email and Password
+                        Container(
+                          child: defaultButton(
+                            onPress: () {
+                              navigateAndPush(context, widget: PreSignUpScreen());
+                            },
+                            text: "Sign Up",
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      navigatePushDelete(context, widget: MainLayoutScreen());
-                    },
-                    child: const Text(
-                      "Login as a Guest",
-                      style: TextStyle(
-                        fontFamily: "Roboto",
-                        fontSize: 18.0,
-                        decoration: TextDecoration.underline,
-                      ),
+                        const SizedBox(
+                          height: 15.0,
+                        ),
+                        // Sign in with Google
+                        Row(
+                          children: [
+                            Expanded(
+                              child: defaultButton(
+                                onPress: () async {
+                                  await SignupCubit.get(context).checkGoogleAccountExistence();
+                                },
+                                text: "G",
+                                buttonColor: Colors.white,
+                                textColor: Colors.red.shade400,
+                                fontSize: 30.0,
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 15.0,
+                            ),
+                            Expanded(
+                              child: defaultButton(
+                                onPress: () {},
+                                text: "f",
+                                buttonColor: Colors.white,
+                                textColor: Colors.blue.shade900,
+                                isBold: true,
+                                fontSize: 30.0,
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 15.0,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Text(
+                              "Already have an account?",
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                navigateAndPush(context, widget: SignInScreen());
+                              },
+                              child: const Text(
+                                "Sign In",
+                                style: TextStyle(
+                                  fontFamily: "Roboto",
+                                  fontSize: 18.0,
+                                  decoration: TextDecoration.underline,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            navigatePushDelete(context, widget: MainLayoutScreen());
+                          },
+                          child: const Text(
+                            "Login as a Guest",
+                            style: TextStyle(
+                              fontFamily: "Roboto",
+                              fontSize: 18.0,
+                              decoration: TextDecoration.underline,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ],
               ),
             ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }

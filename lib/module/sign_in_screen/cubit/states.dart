@@ -16,5 +16,16 @@ class LoginErrorState extends SignInStates{
   LoginErrorState(this.error);
 }
 
+
+class UserAlreadyExistsState extends SignInStates{
+  final String uid;
+
+  UserAlreadyExistsState(this.uid);
+}
+class UserDoesNotExistsState extends SignInStates{}
+
 ///state mode change
 class AppChangeModeState extends SignInStates{}
+
+
+

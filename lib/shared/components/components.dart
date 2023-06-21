@@ -21,6 +21,7 @@ Widget defaultButton({
     Container(
       height: height,
       width: width,
+      clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
         color: buttonColor,
         borderRadius: const BorderRadius.all(
