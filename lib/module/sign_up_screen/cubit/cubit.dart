@@ -66,6 +66,7 @@ class SignupCubit extends Cubit<SignupStates> {
     required String phoneNumber,
     required String email,
     required String uid,
+    bool isVerified = false,
   }) {
     UserModel userModel = UserModel(
       uid: uid,
@@ -75,7 +76,7 @@ class SignupCubit extends Cubit<SignupStates> {
       gpsLocation: '',
       email: email,
       phoneNumber: phoneNumber,
-      isVerified: false,
+      isVerified: isVerified,
       profilePic:
           "https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?w=740&t=st=1683814060~exp=1683814660~hmac=4705fb79b3a531709bff00d930256c2bc9d17c0767e36d812dc2fefd9fc875ef",
       isUser: true,
@@ -195,7 +196,8 @@ class SignupCubit extends Cubit<SignupStates> {
 
     // sign in
     await auth.signInWithCredential(credential!).then((value) {
-      _createUserAccount(name: googleUser!.displayName!, userName: userName, phoneNumber: phoneNumber, email: googleUser!.email, uid: value.user!.uid);
+      _createUserAccount(name: googleUser!.displayName!, userName: userName,
+          phoneNumber: phoneNumber, email: googleUser!.email, uid: value.user!.uid, isVerified: true);
     });
   }
 

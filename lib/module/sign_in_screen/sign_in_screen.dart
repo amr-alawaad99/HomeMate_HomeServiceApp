@@ -9,6 +9,7 @@ import 'package:login_register_methods/shared/components/constants.dart';
 import 'package:login_register_methods/shared/local/cache_helper.dart';
 
 import '../../model/user_model.dart';
+import '../sign_up_screen/google_facebook_signup_info.dart';
 
 class SignInScreen extends StatelessWidget {
 
@@ -33,6 +34,16 @@ class SignInScreen extends StatelessWidget {
               LayoutCubit.get(context).originalUser = UserModel();
               LayoutCubit.get(context).getUserData();
             });
+          } else if(state is UserAlreadyExistsState){
+            navigateAndPush(context, widget: MainLayoutScreen());
+            CacheHelper.saveData(key: "uid", value: state.uid).then((value) {
+              navigatePushDelete(context, widget: MainLayoutScreen());
+              //TO GET THE NEW LOGGED IN ACCOUNT IMMEDIATELY RATHER THAN THE PREVIOUS ACCOUNT!!
+              LayoutCubit.get(context).originalUser = UserModel();
+              LayoutCubit.get(context).getUserData();
+            });
+          } else if(state is UserDoesNotExistsState){
+            navigateAndPush(context, widget: GoogleFacebookSignUpInfo(SignInCubit.get(context).googleUser!.displayName!));
           } else if(state is LoginErrorState){
             showToast(message: "Invalid Login info!", toastColor: errorColor);
           }
@@ -140,11 +151,14 @@ class SignInScreen extends StatelessWidget {
                         const SizedBox(
                           height: 20,
                         ),
+                        //Google Facebook Sign in
                         Row(
                           children: [
                             Expanded(
                               child: defaultButton(
-                                onPress: () {},
+                                onPress: () async {
+                                  await SignInCubit.get(context).checkGoogleAccountExistence();
+                                },
                                 text: "G",
                                 buttonColor: Colors.white,
                                 textColor: Colors.red.shade400,
