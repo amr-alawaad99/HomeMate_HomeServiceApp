@@ -4,6 +4,7 @@ import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:login_register_methods/module/sign_up_screen/cubit/cubit.dart';
 import 'package:login_register_methods/module/sign_up_screen/cubit/states.dart';
 import 'package:login_register_methods/shared/components/components.dart';
+import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../../shared/components/constants.dart';
 import '../verification_screen.dart';
@@ -32,8 +33,7 @@ class TecSignUpScreen extends StatelessWidget {
   ];
 
   bool value = false;
-  var fNameController = TextEditingController();
-  var lNameController = TextEditingController();
+  var nameController = TextEditingController();
   var emailController = TextEditingController();
   var phoneController = TextEditingController();
   var passwordController = TextEditingController();
@@ -150,7 +150,7 @@ class TecSignUpScreen extends StatelessWidget {
                         child: defaultTextFormField(
                           hintText: "Tech/Company Name",
                           keyboardType: TextInputType.name,
-                          controller: fNameController,
+                          controller: nameController,
                           validator: (value) {
                             if(value!.isEmpty){
                               return "First Name must not be empty";
@@ -322,13 +322,15 @@ class TecSignUpScreen extends StatelessWidget {
                           onPress: () {
                             if(formKey.currentState!.validate() && cubit.isChecked){
                               Map<String, String> userInfo = {
-                                'firstName' : fNameController.text,
-                                'lastName' : lNameController.text,
+                                'name' : nameController.text,
                                 'email' : emailController.text,
                                 'phone' : phoneController.text,
                                 'password' : passwordController.text,
                               };
-                              navigateAndPush(context, widget: VerificationScreen(userInfo));
+                              navigateAndPush(context, widget: Provider(
+                                create: (context) => SignupCubit(),
+                                builder: (context, child) => VerificationScreen(userInfo),
+                              ),);
                             } else if(!cubit.isClicked){
                               cubit.errorCheckBox();
                             }

@@ -52,7 +52,8 @@ class MyApp extends StatelessWidget {
           SignInCubit()
             ..changeAppMode(
               fromShared: isDark,
-            ),
+            )
+
         ),
         BlocProvider(
           create: (context) =>

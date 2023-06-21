@@ -265,7 +265,6 @@ class LayoutCubit extends Cubit<LayoutStates> {
       location: location,
       image: image,
       uId: uId,
-      gpsLocation: originalUser!.gpsLocation!,
     );
     FirebaseFirestore.instance
         .collection('orders')

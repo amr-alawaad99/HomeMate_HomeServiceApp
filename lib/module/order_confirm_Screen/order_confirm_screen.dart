@@ -17,6 +17,7 @@ class OrderConfirmScreen extends StatelessWidget {
   final String time;
   final int services;
   final String location;
+
   final List<XFile> images;
 
   const OrderConfirmScreen(
@@ -26,10 +27,12 @@ class OrderConfirmScreen extends StatelessWidget {
       required this.images,
       required this.notes,
       required this.location,
-      required this.services});
+      required this.services,
+      });
 
   @override
   Widget build(BuildContext context) {
+
     return BlocProvider(
         create: (BuildContext context) => LayoutCubit(),
         child: BlocConsumer<LayoutCubit, LayoutStates>(
@@ -110,9 +113,6 @@ class OrderConfirmScreen extends StatelessWidget {
                           time: time,
                           location: location,
                           notes: notes,
-                          gpsLocation: LayoutCubit.get(context).originalUser!.gpsLocation!
-
-
 
                         );
                         navigateAndPush(context, widget: SuccessScreen());

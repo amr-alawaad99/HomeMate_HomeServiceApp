@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:login_register_methods/layout/cubit/cubit.dart';
 import 'package:login_register_methods/layout/main_layout_screen.dart';
+import 'package:login_register_methods/module/new_order_screen/new_order_screen.dart';
 import 'package:login_register_methods/module/sign_in_screen/cubit/cubit.dart';
 import 'package:login_register_methods/module/sign_in_screen/cubit/states.dart';
 import 'package:login_register_methods/shared/components/components.dart';
@@ -12,8 +13,6 @@ import '../../model/user_model.dart';
 import '../sign_up_screen/google_facebook_signup_info.dart';
 
 class SignInScreen extends StatelessWidget {
-
-
   bool value = false;
   final formKey = GlobalKey<FormState>();
   var emailController = TextEditingController();
@@ -27,14 +26,17 @@ class SignInScreen extends StatelessWidget {
       create: (context) => SignInCubit(),
       child: BlocConsumer<SignInCubit, SignInStates>(
         listener: (context, state) {
-          if(state is LoginSuccessState){
+          if (state is LoginSuccessState) {
             CacheHelper.saveData(key: "uid", value: state.uid).then((value) {
-              navigatePushDelete(context, widget: MainLayoutScreen());
+
+                navigatePushDelete(context, widget: MainLayoutScreen());
+
+
               //TO GET THE NEW LOGGED IN ACCOUNT IMMEDIATELY RATHER THAN THE PREVIOUS ACCOUNT!!
               LayoutCubit.get(context).originalUser = UserModel();
               LayoutCubit.get(context).getUserData();
             });
-          } else if(state is UserAlreadyExistsState){
+          } else if (state is UserAlreadyExistsState) {
             navigateAndPush(context, widget: MainLayoutScreen());
             CacheHelper.saveData(key: "uid", value: state.uid).then((value) {
               navigatePushDelete(context, widget: MainLayoutScreen());
@@ -42,14 +44,15 @@ class SignInScreen extends StatelessWidget {
               LayoutCubit.get(context).originalUser = UserModel();
               LayoutCubit.get(context).getUserData();
             });
-          } else if(state is UserDoesNotExistsState){
-            navigateAndPush(context, widget: GoogleFacebookSignUpInfo(SignInCubit.get(context).googleUser!.displayName!));
-          } else if(state is LoginErrorState){
+          } else if (state is UserDoesNotExistsState) {
+            navigateAndPush(context,
+                widget: GoogleFacebookSignUpInfo(
+                    SignInCubit.get(context).googleUser!.displayName!));
+          } else if (state is LoginErrorState) {
             showToast(message: "Invalid Login info!", toastColor: errorColor);
           }
         },
         builder: (context, state) {
-
           double screenHeight = MediaQuery.of(context).size.height;
           var cubit = SignInCubit.get(context);
 
@@ -76,10 +79,13 @@ class SignInScreen extends StatelessWidget {
                                 ),
                                 TextSpan(
                                   text: "Email.",
-                                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                      fontSize: 22.0,
-                                      color: secondaryColor,
-                                      fontStyle: FontStyle.italic),
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyMedium!
+                                      .copyWith(
+                                          fontSize: 22.0,
+                                          color: secondaryColor,
+                                          fontStyle: FontStyle.italic),
                                 ),
                               ]),
                         ),
@@ -102,7 +108,7 @@ class SignInScreen extends StatelessWidget {
                             keyboardType: TextInputType.emailAddress,
                             controller: emailController,
                             validator: (value) {
-                              if(value!.isEmpty){
+                              if (value!.isEmpty) {
                                 return "Email must not be empty";
                               }
                               return null;
@@ -124,7 +130,7 @@ class SignInScreen extends StatelessWidget {
                             keyboardType: TextInputType.visiblePassword,
                             controller: passwordController,
                             validator: (value) {
-                              if(value!.isEmpty){
+                              if (value!.isEmpty) {
                                 return "Password must not be empty";
                               }
                               return null;
@@ -138,16 +144,22 @@ class SignInScreen extends StatelessWidget {
                           child: defaultButton(
                             text: "Sign In",
                             onPress: () {
-                              if(formKey.currentState!.validate()){
-                                cubit.userSignIn(email: emailController.text, password: passwordController.text);
+                              if (formKey.currentState!.validate()) {
+                                cubit.userSignIn(
+                                    email: emailController.text,
+                                    password: passwordController.text);
                               }
                             },
                           ),
                         ),
-                        if(state is LoginLoadingState)
-                          const SizedBox(height: 5,),
-                        if(state is LoginLoadingState)
-                          const LinearProgressIndicator(color: primaryColor,),
+                        if (state is LoginLoadingState)
+                          const SizedBox(
+                            height: 5,
+                          ),
+                        if (state is LoginLoadingState)
+                          const LinearProgressIndicator(
+                            color: primaryColor,
+                          ),
                         const SizedBox(
                           height: 20,
                         ),
@@ -157,7 +169,8 @@ class SignInScreen extends StatelessWidget {
                             Expanded(
                               child: defaultButton(
                                 onPress: () async {
-                                  await SignInCubit.get(context).checkGoogleAccountExistence();
+                                  await SignInCubit.get(context)
+                                      .checkGoogleAccountExistence();
                                 },
                                 text: "G",
                                 buttonColor: Colors.white,
