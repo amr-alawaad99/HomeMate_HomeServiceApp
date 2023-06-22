@@ -52,3 +52,10 @@ class UploadOrderSuccessState extends LayoutStates{}
 class UploadOrderErrorState extends LayoutStates{
 
 }
+class GetOrderDataLoadingState extends LayoutStates{}
+class GetOrderDataSuccessState extends LayoutStates{}
+class GetOrderDataErrorState extends LayoutStates{
+  final String error;
+
+  GetOrderDataErrorState(this.error);
+}

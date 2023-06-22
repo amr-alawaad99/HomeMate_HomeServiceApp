@@ -254,7 +254,7 @@ Widget defaultAppointmentCard({
   required String cost,
   required ImageProvider image,
   required Color iconColor,
-  required Color statusColor,
+   Color? statusColor,
   Function()? onTap,
 }) =>
     BlocConsumer<SignInCubit, SignInStates>(

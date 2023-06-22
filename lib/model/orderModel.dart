@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
 
 class OrderModel{
-  String? serviceName;
-  String? uId;
 
+  String? uId;
+  String? userName;
+  String? serviceName;
   String? date;
   String? time;
   String? notes;
   String? location;
+  String? gpsLocation;
+  String? status;
+  String? cost;
   ImageProvider? image;
+
 
   OrderModel({
     this.serviceName,
@@ -18,6 +23,9 @@ class OrderModel{
     this.location,
     this.image,
     this.uId,
+    this.status,
+    this.userName,
+    this.cost,
 
 });
   OrderModel.fromJson(Map<String, dynamic> json){
@@ -27,8 +35,10 @@ class OrderModel{
     time = json['time'];
     notes = json['notes'];
     location = json['location'];
-
     image = json['image'];
+    status = json['status'];
+    userName = json['userName'];
+    cost = json['cost'];
   }
   Map<String, dynamic> toMap(){
     return {
@@ -38,8 +48,11 @@ class OrderModel{
       'time': time,
       'notes': notes,
       'location': location,
-
       'image': image,
+      'status': status,
+      'userName': userName,
+      'cost': cost,
+
     };
   }
 }

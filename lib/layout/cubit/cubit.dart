@@ -249,13 +249,17 @@ class LayoutCubit extends Cubit<LayoutStates> {
   }
 
   void orderCreate({
+    String? userName,
     String? serviceName,
     String? date,
     String? time,
     String? notes,
     String? location,
     String? gpsLocation,
+    String? status,
+    String? cost,
     ImageProvider? image,
+
   }) {
     OrderModel model = OrderModel(
       serviceName: serviceName,
@@ -265,6 +269,10 @@ class LayoutCubit extends Cubit<LayoutStates> {
       location: location,
       image: image,
       uId: uId,
+      status: status,
+      cost: cost,
+      userName: userName,
+
     );
     FirebaseFirestore.instance
         .collection('orders')
@@ -278,6 +286,23 @@ class LayoutCubit extends Cubit<LayoutStates> {
       emit(UploadOrderSuccessState());
     }).catchError((error) {
       emit(UploadOrderErrorState());
+    });
+  }
+
+// get orders from firebase
+  OrderModel? orders;
+
+  void getOrders() {
+    emit(GetOrderDataLoadingState());
+    FirebaseFirestore.instance
+        .collection("Users")
+        .doc(uId)
+        .collection("user Orders")
+        .doc()
+        .get()
+        .then((value) {
+      orders = OrderModel.fromJson(value.data()!);
+      emit(GetOrderDataSuccessState());
     });
   }
 }

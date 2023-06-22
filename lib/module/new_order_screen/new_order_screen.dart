@@ -26,12 +26,14 @@ class NewOrderScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
+    locationController.text = LayoutCubit.get(context).originalUser!.address!;
     return BlocProvider(
         create: (BuildContext context) => LayoutCubit(),
         child: BlocConsumer<LayoutCubit, LayoutStates>(
           listener: (context, state) {},
           builder: (context, state) {
+
+
 
             var cubit = LayoutCubit.get(context);
 
