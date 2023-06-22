@@ -30,7 +30,7 @@ class CategoriesScreen extends StatelessWidget {
     Categories(
       title: 'Electricity',
       img: AssetImage('assets/images/electrician.png'),
-    )
+    ),
   ];
 
   CategoriesScreen({super.key});

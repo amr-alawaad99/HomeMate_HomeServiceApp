@@ -271,7 +271,7 @@ Widget defaultAppointmentCard({
             boxShadow: <BoxShadow>[
               BoxShadow(
                 color: SignInCubit.get(context).isDark
-                    ? Color(0xff303030)
+                    ? Colors.transparent
                     : Colors.black12,
                 blurRadius: 20.0,
                 offset: Offset(0.0, 0.75),
@@ -493,7 +493,7 @@ Widget defaultSuppliersItem({
                         boxShadow: <BoxShadow>[
                           BoxShadow(
                             color: SignInCubit.get(context).isDark
-                                ? Color(0xff303030)
+                                ? Colors.transparent
                                 : Colors.black12,
                             blurRadius: 20.0,
                             offset: Offset(0.0, 0.75),
