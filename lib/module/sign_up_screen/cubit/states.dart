@@ -33,3 +33,24 @@ class UsernameCheckingErrorState extends SignupStates{
 
   UsernameCheckingErrorState(this.error);
 }
+
+
+class UserAlreadyExistsState extends SignupStates{
+  final String uid;
+
+  UserAlreadyExistsState(this.uid);
+}
+
+class UserDoesNotExistsState extends SignupStates{}
+class GetGoogleUserInfoErrorState extends SignupStates{
+  final String error;
+
+  GetGoogleUserInfoErrorState(this.error);
+}
+
+class GoogleSignInSuccessState extends SignupStates{}
+class GoogleSignInErrorState extends SignupStates{
+  final String error;
+
+  GoogleSignInErrorState(this.error);
+}
