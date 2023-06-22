@@ -273,17 +273,17 @@ class LayoutTecScreen extends StatelessWidget {
                 fallback: (context) =>
                 const Center(child: CircularProgressIndicator()),
               ),
-              floatingActionButton: FloatingActionButton(
-                onPressed: () {
-                  navigateAndPush(context, widget: NewOrderScreen());
-                },
-                child: const Icon(
-                  TablerIcons.plus,
-                  color: Colors.white,
-                ),
-              ),
-              floatingActionButtonLocation:
-              FloatingActionButtonLocation.endDocked,
+              // floatingActionButton: FloatingActionButton(
+              //   onPressed: () {
+              //     navigateAndPush(context, widget: NewOrderScreen());
+              //   },
+              //   child: const Icon(
+              //     TablerIcons.plus,
+              //     color: Colors.white,
+              //   ),
+              // ),
+              // floatingActionButtonLocation:
+              // FloatingActionButtonLocation.endDocked,
               bottomNavigationBar: BubbleBottomBar(
                 backgroundColor: SignInCubit.get(context).isDark
                     ? Color(0xff303030)
@@ -291,8 +291,8 @@ class LayoutTecScreen extends StatelessWidget {
                 opacity: 0.2,
                 currentIndex: LayoutTecCubit.get(context).currentIndex,
                 hasInk: true,
-                hasNotch: true,
-                fabLocation: BubbleBottomBarFabLocation.end,
+                hasNotch: false,
+                // fabLocation: BubbleBottomBarFabLocation.end,
                 items: [
                   defaultBottomBarItem(context, "Home", TablerIcons.smart_home),
 
