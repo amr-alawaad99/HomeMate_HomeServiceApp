@@ -67,13 +67,11 @@ Widget defaultTextFormField(
         ValueChanged<String>? onSubmit,
         Color prefixIconColor = Colors.grey,
         Color suffixIconColor = Colors.grey}) =>
-    BlocConsumer<SignInCubit,SignInStates>(
-      listener: (context, state) {
-
-      },
+    BlocConsumer<SignInCubit, SignInStates>(
+      listener: (context, state) {},
       builder: (context, state) {
         return Container(
-          decoration:  BoxDecoration(
+          decoration: BoxDecoration(
             color: SignInCubit.get(context).isDark
                 ? Colors.grey[800]
                 : scaffoldLightColor,
@@ -114,26 +112,26 @@ Widget defaultTextFormField(
                 border: InputBorder.none,
                 prefixIcon: prefixIcon != null
                     ? IconButton(
-                  icon: Icon(
-                    prefixIcon,
-                    color: prefixIconColor,
-                  ),
-                  onPressed: prefixPressFunction,
-                )
+                        icon: Icon(
+                          prefixIcon,
+                          color: prefixIconColor,
+                        ),
+                        onPressed: prefixPressFunction,
+                      )
                     : null,
                 suffixIcon: suffixIcon != null
                     ? IconButton(
-                  icon: Icon(
-                    suffixIcon,
-                    color: suffixIconColor,
-                  ),
-                  onPressed: suffixPressFunction,
-                )
+                        icon: Icon(
+                          suffixIcon,
+                          color: suffixIconColor,
+                        ),
+                        onPressed: suffixPressFunction,
+                      )
                     : null,
               ),
             ),
           ),
-        ) ;
+        );
       },
     );
 
@@ -259,20 +257,25 @@ Widget defaultAppointmentCard({
   required Color statusColor,
   Function()? onTap,
 }) =>
-    BlocConsumer<SignInCubit,SignInStates>(
-      listener: (context, state) {
-
-      },
+    BlocConsumer<SignInCubit, SignInStates>(
+      listener: (context, state) {},
       builder: (context, state) {
         return Container(
           padding: const EdgeInsets.all(10),
           height: 150,
           width: double.infinity,
           decoration: BoxDecoration(
-            boxShadow:  <BoxShadow>[
+            color: SignInCubit.get(context).isDark
+                ? Color(0xff303030)
+                : Colors.white,
+            boxShadow: <BoxShadow>[
               BoxShadow(
-                  color: SignInCubit.get(context).isDark ? Color(0xff303030) : Colors.white,
-                  offset: Offset(0.0, 0.75)),
+                color: SignInCubit.get(context).isDark
+                    ? Color(0xff303030)
+                    : Colors.black12,
+                blurRadius: 20.0,
+                offset: Offset(0.0, 0.75),
+              ),
             ],
             // color: Colors.white,
             borderRadius: BorderRadius.circular(10.0),
@@ -328,7 +331,8 @@ Widget defaultAppointmentCard({
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: const [
                                     Image(
-                                      image: AssetImage('assets/images/star.png'),
+                                      image:
+                                          AssetImage('assets/images/star.png'),
                                       width: 15.0,
                                       height: 15.0,
                                     ),
@@ -439,12 +443,12 @@ Widget defaultAppointmentCard({
                                 status == 'Finished'
                                     ? SizedBox()
                                     : InkWell(
-                                  onTap: onTap,
-                                  child: Icon(
-                                    TablerIcons.edit,
-                                    color: primaryColor,
-                                  ),
-                                ),
+                                        onTap: onTap,
+                                        child: Icon(
+                                          TablerIcons.edit,
+                                          color: primaryColor,
+                                        ),
+                                      ),
                               ],
                             ),
                           ),
@@ -458,7 +462,6 @@ Widget defaultAppointmentCard({
           ),
         );
       },
-
     );
 //
 
@@ -477,22 +480,24 @@ Widget defaultSuppliersItem({
       ///To avoid nested scrolling
       itemBuilder: (BuildContext context, int index) {
         return InkWell(
-          onTap: () {
-            /**navigateAndPush(context, widget: );**/
-          },
-          child: SizedBox(
-            height: 150,
-            child: Padding(
-              padding: const EdgeInsets.only(top: 10, right: 15, left: 15),
-              child: BlocConsumer<SignInCubit,SignInStates>(
-                listener: (context, state) { },
-                builder: (context, state) {
-                  return  Container(
+            onTap: () {
+              /**navigateAndPush(context, widget: );**/
+            },
+            child: SizedBox(
+              height: 150,
+              child: Padding(
+                  padding: const EdgeInsets.only(top: 10, right: 15, left: 15),
+                  child: Container(
                     decoration: BoxDecoration(
+                      color: SignInCubit.get(context).isDark ? Color(0xff303030) :  Colors.white,
                         boxShadow: <BoxShadow>[
                           BoxShadow(
-                              color : SignInCubit.get(context).isDark ? Color(0xff303030) : Colors.white,
-                              offset: Offset(0.0, 0.75)),
+                            color: SignInCubit.get(context).isDark
+                                ? Color(0xff303030)
+                                : Colors.black12,
+                            blurRadius: 20.0,
+                            offset: Offset(0.0, 0.75),
+                          ),
                         ],
                         // color: Colors.white,
                         borderRadius: BorderRadius.circular(10.0)),
@@ -589,12 +594,8 @@ Widget defaultSuppliersItem({
                         ],
                       ),
                     ),
-                  );
-                },
-              ),
-            ),
-          ),
-        );
+                  )),
+            ));
       },
       separatorBuilder: (context, index) => SizedBox(),
       itemCount: count);
