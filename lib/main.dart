@@ -13,7 +13,6 @@ import 'package:login_register_methods/shared/components/constants.dart';
 import 'package:login_register_methods/shared/local/cache_helper.dart';
 import 'package:provider/provider.dart';
 
-import 'layou_tec/layout_tec.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,7 +22,6 @@ void main() async {
   bool isDark = CacheHelper.getData(key: 'isDark') ?? false;
 
   Bloc.observer = MyBlocObserver();
-
 
   uId = CacheHelper.getData(key: 'uid') ?? '';
   print('uid is $uId');
@@ -60,7 +58,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) =>
           LayoutCubit()
-            ..getUserData(),
+            ..getUserData()..getOrders(),
         ),
         ChangeNotifierProvider(
           create: (context) => AppData(),

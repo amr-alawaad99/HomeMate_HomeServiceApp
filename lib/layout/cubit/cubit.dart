@@ -280,4 +280,17 @@ class LayoutCubit extends Cubit<LayoutStates> {
       emit(UploadOrderErrorState());
     });
   }
+
+  List<OrderModel> myOrders = [];
+  void getOrders(){
+    FirebaseFirestore.instance.collection("orders").doc(uId).collection("user Orders").get().then((value) {
+      print(value.size);
+      for (var element in value.docs) {
+        print(element.data()["date"]);
+        myOrders.add(OrderModel.fromJson(element.data()));
+      }
+    }).catchError((error){
+      print("FFFFFFFF $error");
+    });
+  }
 }

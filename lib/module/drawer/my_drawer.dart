@@ -148,6 +148,7 @@ class MyDrawer extends StatelessWidget {
                             ),
                             onTap: () {
                               print("message");
+                              LayoutCubit.get(context).getOrders();
                             },
                           ),
                           InkWell(
