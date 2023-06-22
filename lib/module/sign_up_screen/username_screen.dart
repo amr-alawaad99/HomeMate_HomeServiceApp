@@ -6,6 +6,7 @@ import 'package:login_register_methods/module/sign_up_screen/cubit/cubit.dart';
 import 'package:login_register_methods/module/sign_up_screen/cubit/states.dart';
 import 'package:username_generator/username_generator.dart';
 
+import '../../layou_tec/layout_tec.dart';
 import '../../layout/cubit/cubit.dart';
 import '../../model/user_model.dart';
 import '../../shared/components/components.dart';
@@ -41,7 +42,7 @@ class UsernameScreen extends StatelessWidget {
             if(SignupCubit.get(context).isSelected[0] == true){
               navigatePushDelete(context, widget: MainLayoutScreen());
             }else{
-              navigatePushDelete(context, widget: NewOrderScreen());
+              navigatePushDelete(context, widget: LayoutTecScreen());
             }
 
             //TO GET THE NEW LOGGED IN ACCOUNT IMMEDIATELY RATHER THAN THE PREVIOUS ACCOUNT!!
