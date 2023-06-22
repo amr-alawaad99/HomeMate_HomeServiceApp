@@ -288,7 +288,7 @@ class UserSignUpScreen extends StatelessWidget {
                           onPress: () {
                             if(formKey.currentState!.validate() && cubit.isChecked){
                               Map<String, String> userInfo = {
-                                'Name' : nameController.text,
+                                'name' : nameController.text,
                                 'email' : emailController.text,
                                 'phone' : phoneController.text,
                                 'password' : passwordController.text,
