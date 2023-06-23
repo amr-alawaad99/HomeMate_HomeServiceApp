@@ -66,6 +66,7 @@ class SignupCubit extends Cubit<SignupStates> {
     required String phoneNumber,
     required String email,
     required String uid,
+    required bool isUser,
     bool isVerified = false,
   }) {
     UserModel userModel = UserModel(
@@ -79,7 +80,7 @@ class SignupCubit extends Cubit<SignupStates> {
       isVerified: isVerified,
       profilePic:
           "https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?w=740&t=st=1683814060~exp=1683814660~hmac=4705fb79b3a531709bff00d930256c2bc9d17c0767e36d812dc2fefd9fc875ef",
-      isUser: true,
+      isUser: isUser,
     );
 
     FirebaseFirestore.instance
@@ -101,6 +102,7 @@ class SignupCubit extends Cubit<SignupStates> {
     required String name,
     required String userName,
     required String phoneNumber,
+    required bool isUser,
   }) {
     emit(CreateUserLoadingState());
 
@@ -112,7 +114,9 @@ class SignupCubit extends Cubit<SignupStates> {
           userName: userName,
           phoneNumber: phoneNumber,
           email: email,
-          uid: value.user!.uid);
+          uid: value.user!.uid,
+          isUser: isUser,
+      );
     }).catchError((error) {
       emit(CreateUserErrorState(error.toString()));
     });
@@ -197,7 +201,7 @@ class SignupCubit extends Cubit<SignupStates> {
     // sign in
     await auth.signInWithCredential(credential!).then((value) {
       _createUserAccount(name: googleUser!.displayName!, userName: userName,
-          phoneNumber: phoneNumber, email: googleUser!.email, uid: value.user!.uid, isVerified: true);
+         isUser: true, phoneNumber: phoneNumber, email: googleUser!.email, uid: value.user!.uid, isVerified: true);
     });
   }
 

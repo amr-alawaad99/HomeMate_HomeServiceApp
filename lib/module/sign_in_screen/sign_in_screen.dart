@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:login_register_methods/layou_tec/layout_tec.dart';
 import 'package:login_register_methods/layout/cubit/cubit.dart';
+import 'package:login_register_methods/layout/cubit/states.dart';
 import 'package:login_register_methods/layout/main_layout_screen.dart';
 import 'package:login_register_methods/module/new_order_screen/new_order_screen.dart';
 import 'package:login_register_methods/module/sign_in_screen/cubit/cubit.dart';
@@ -22,14 +24,23 @@ class SignInScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => SignInCubit(),
+    return BlocListener<LayoutCubit,LayoutStates>(
+      listener: (context, state) {
+        if(state is GetUserDataSuccessState){
+          if(state.isUser ){
+            navigatePushDelete(context, widget: MainLayoutScreen());
+          }else{
+            navigatePushDelete(context, widget: LayoutTecScreen());
+          }
+        }
+      },
       child: BlocConsumer<SignInCubit, SignInStates>(
         listener: (context, state) {
+
           if (state is LoginSuccessState) {
             CacheHelper.saveData(key: "uid", value: state.uid).then((value) {
 
-                navigatePushDelete(context, widget: MainLayoutScreen());
+                // navigatePushDelete(context, widget: MainLayoutScreen());
 
 
               //TO GET THE NEW LOGGED IN ACCOUNT IMMEDIATELY RATHER THAN THE PREVIOUS ACCOUNT!!
@@ -37,9 +48,9 @@ class SignInScreen extends StatelessWidget {
               LayoutCubit.get(context).getUserData();
             });
           } else if (state is UserAlreadyExistsState) {
-            navigateAndPush(context, widget: MainLayoutScreen());
+            // navigateAndPush(context, widget: MainLayoutScreen());
             CacheHelper.saveData(key: "uid", value: state.uid).then((value) {
-              navigatePushDelete(context, widget: MainLayoutScreen());
+              // navigatePushDelete(context, widget: MainLayoutScreen());
               //TO GET THE NEW LOGGED IN ACCOUNT IMMEDIATELY RATHER THAN THE PREVIOUS ACCOUNT!!
               LayoutCubit.get(context).originalUser = UserModel();
               LayoutCubit.get(context).getUserData();
@@ -145,6 +156,7 @@ class SignInScreen extends StatelessWidget {
                             text: "Sign In",
                             onPress: () {
                               if (formKey.currentState!.validate()) {
+                                CacheHelper.saveData(key: 'isUser', value: true);
                                 cubit.userSignIn(
                                     email: emailController.text,
                                     password: passwordController.text);

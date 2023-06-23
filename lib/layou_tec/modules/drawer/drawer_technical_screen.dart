@@ -11,6 +11,7 @@ import 'package:login_register_methods/module/sign_in_screen/cubit/states.dart';
 import 'package:login_register_methods/shared/components/components.dart';
 import 'package:login_register_methods/shared/components/constants.dart';
 
+import '../../../module/onboarding_screen/onboarding_screen.dart';
 import '../../../module/sign_in_screen/cubit/cubit.dart';
 
 
@@ -22,9 +23,9 @@ class DrawerTechnicalScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<LayoutTecCubit, LayoutTecStates>(
       listener: (context, state) {
-        // if (state is SignOutSuccessState) {
-        //   navigatePushDelete(context, widget: OnBoardingScreen());
-        // }
+        if (state is SignOutSuccessState) {
+          navigatePushDelete(context, widget: OnBoardingScreen());
+        }
       },
       builder: (context, state) {
         var cubit = LayoutTecCubit.get(context);
@@ -324,7 +325,7 @@ class DrawerTechnicalScreen extends StatelessWidget {
                               ),
                             ),
                             onTap: () {
-                              // LayoutTecCubit.get(context).singOut();
+                              LayoutTecCubit.get(context).singOut();
                             },
                           ),
                         ],

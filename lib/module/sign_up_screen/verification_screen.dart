@@ -11,7 +11,7 @@ import '../../shared/components/constants.dart';
 class VerificationScreen extends StatelessWidget {
   final formKey = GlobalKey<FormState>();
   var verificationController = TextEditingController();
-  Map<String, String> userInfo;
+  Map<String, dynamic> userInfo;
   VerificationScreen(this.userInfo, {super.key});
 
   @override

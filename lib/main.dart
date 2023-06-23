@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:login_register_methods/layou_tec/layout_tec.dart';
 import 'package:login_register_methods/layout/cubit/cubit.dart';
 import 'package:login_register_methods/layout/main_layout_screen.dart';
 import 'package:login_register_methods/module/google_maps_widget/app_data.dart';
@@ -26,12 +27,16 @@ void main() async {
   uId = CacheHelper.getData(key: 'uid') ?? '';
   print('uid is $uId');
 
+  isUser = CacheHelper.getData(key: 'isUser');
+
   Widget widget;
 
   if (uId == '') {
     widget = OnBoardingScreen();
-  } else {
+  } else if(uId != '' && isUser == true) {
     widget = MainLayoutScreen();
+  }else{
+    widget = LayoutTecScreen();
   }
   runApp(MyApp(widget, isDark,));
 }

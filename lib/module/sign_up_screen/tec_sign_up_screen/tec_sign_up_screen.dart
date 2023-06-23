@@ -4,6 +4,7 @@ import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:login_register_methods/module/sign_up_screen/cubit/cubit.dart';
 import 'package:login_register_methods/module/sign_up_screen/cubit/states.dart';
 import 'package:login_register_methods/shared/components/components.dart';
+import 'package:login_register_methods/shared/local/cache_helper.dart';
 import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../../shared/components/constants.dart';
@@ -320,12 +321,14 @@ class TecSignUpScreen extends StatelessWidget {
                         child: defaultButton(
                           text: "Next",
                           onPress: () {
+                            CacheHelper.saveData(key: 'isUser', value: false);
                             if(formKey.currentState!.validate() && cubit.isChecked){
-                              Map<String, String> userInfo = {
+                              Map<String, dynamic> userInfo = {
                                 'name' : nameController.text,
                                 'email' : emailController.text,
                                 'phone' : phoneController.text,
                                 'password' : passwordController.text,
+                                'isUser' : false,
                               };
                               navigateAndPush(context, widget: Provider(
                                 create: (context) => SignupCubit(),

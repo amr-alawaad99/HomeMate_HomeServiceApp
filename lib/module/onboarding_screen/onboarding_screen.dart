@@ -15,6 +15,7 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../layout/cubit/cubit.dart';
 import '../../model/user_model.dart';
 import '../../shared/local/cache_helper.dart';
+import '../pre_sign_in_screen/pre_sign_in_screen.dart';
 
 class BoardingModel {
   final String highlightedText;

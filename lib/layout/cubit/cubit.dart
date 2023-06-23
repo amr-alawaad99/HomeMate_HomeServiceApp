@@ -64,9 +64,15 @@ class LayoutCubit extends Cubit<LayoutStates> {
 
   void getUserData() {
     emit(GetUserDataLoadingState());
+    if( CacheHelper.getData(key: 'uid')==null){
+        originalUser=UserModel();
+        return ;
+    }
+    print('hello world');
+    uId=CacheHelper.getData(key: 'uid');
     FirebaseFirestore.instance.collection("Users").doc(uId).get().then((value) {
       originalUser = UserModel.fromJson(value.data()!);
-      emit(GetUserDataSuccessState());
+      emit(GetUserDataSuccessState(originalUser!.isUser!));
     });
   }
 
@@ -283,6 +289,11 @@ class LayoutCubit extends Cubit<LayoutStates> {
 
   List<OrderModel> myOrders = [];
   void getOrders(){
+    if( CacheHelper.getData(key: 'uid')==null){
+      myOrders=[];
+      return ;
+    }
+    uId = CacheHelper.getData(key: 'uid');
     FirebaseFirestore.instance.collection("orders").doc(uId).collection("user Orders").get().then((value) {
       print(value.size);
       for (var element in value.docs) {

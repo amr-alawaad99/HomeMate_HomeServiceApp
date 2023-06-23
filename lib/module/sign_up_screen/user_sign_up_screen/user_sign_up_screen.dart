@@ -6,6 +6,7 @@ import 'package:login_register_methods/module/sign_up_screen/cubit/states.dart';
 import 'package:login_register_methods/module/sign_up_screen/verification_screen.dart';
 import 'package:login_register_methods/shared/components/components.dart';
 import 'package:login_register_methods/shared/components/constants.dart';
+import 'package:login_register_methods/shared/local/cache_helper.dart';
 import 'package:provider/provider.dart';
 
 class UserSignUpScreen extends StatelessWidget {
@@ -287,11 +288,13 @@ class UserSignUpScreen extends StatelessWidget {
                           text: "Next",
                           onPress: () {
                             if(formKey.currentState!.validate() && cubit.isChecked){
-                              Map<String, String> userInfo = {
+                              CacheHelper.saveData(key: 'isUser', value: true);
+                              Map<String, dynamic> userInfo = {
                                 'name' : nameController.text,
                                 'email' : emailController.text,
                                 'phone' : phoneController.text,
                                 'password' : passwordController.text,
+                                'isUser' : true,
                               };
                               navigateAndPush(context, widget: Provider(
                                 create: (context) => SignupCubit(),

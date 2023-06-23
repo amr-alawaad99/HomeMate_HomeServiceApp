@@ -25,6 +25,7 @@ class SignInCubit extends Cubit<SignInStates> {
     emit(PasswordVisibilityChangeState());
   }
 
+///user signIn
   void userSignIn({
     required String email,
     required String password
@@ -38,7 +39,21 @@ class SignInCubit extends Cubit<SignInStates> {
     });
   }
 
-  ////////////////////////////
+  //
+  // ///Technical signIn
+  // void technicalSignIn({
+  //   required String email,
+  //   required String password
+  // }){
+  //   emit(LoginLoadingState());
+  //   FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password).then((value) {
+  //     uId = value.user!.uid;
+  //     emit(LoginSuccessState(value.user!.uid));
+  //   }).catchError((error){
+  //     emit(LoginErrorState(error.toString()));
+  //   });
+  // }
+  // ////////////////////////////
 
 
 
@@ -91,7 +106,14 @@ class SignInCubit extends Cubit<SignInStates> {
   }
 
 
+  ///Toggle between User and Technical
+  List<bool> isSelected = List.generate(2, (index) => false);
 
+  void changeSelected(index) {
+    isSelected.replaceRange(0, isSelected.length, isSelected.map((e) => false));
+    isSelected[index] = true;
+    emit(IsSelectedChangeState());
+  }
 
 
 

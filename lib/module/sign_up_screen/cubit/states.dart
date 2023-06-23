@@ -18,7 +18,8 @@ class CreateUserLoadingState extends SignupStates{}
 class CreateUserSuccessState extends SignupStates{
   final String uid;
 
-  CreateUserSuccessState(this.uid);
+
+  CreateUserSuccessState(this.uid,);
 }
 class CreateUserErrorState extends SignupStates{
   final String error;

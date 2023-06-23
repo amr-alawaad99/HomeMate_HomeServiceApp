@@ -16,7 +16,7 @@ import '../../shared/local/cache_helper.dart';
 class UsernameScreen extends StatelessWidget {
   final formKey = GlobalKey<FormState>();
   var usernameController = TextEditingController();
-  Map<String, String> userinfo;
+  Map<String, dynamic> userinfo;
 
 
 
@@ -38,10 +38,11 @@ class UsernameScreen extends StatelessWidget {
           showToast(message: "Error! Can't Register!", toastColor: errorColor);
         }
         if (state is CreateUserSuccessState) {
-          CacheHelper.saveData(key: "uid", value: state.uid).then((value) {
-            if(SignupCubit.get(context).isSelected[0] == true){
+          CacheHelper.saveData(key: "uid", value: state.uid).then((value) async {
+            isUser = await CacheHelper.getData(key: 'isUser');
+            if(isUser == true){
               navigatePushDelete(context, widget: MainLayoutScreen());
-            }else{
+            }else if (isUser == false){
               navigatePushDelete(context, widget: LayoutTecScreen());
             }
 
@@ -152,6 +153,7 @@ class UsernameScreen extends StatelessWidget {
                               name: userinfo['name']!,
                               userName: usernameController.text,
                               phoneNumber: userinfo['phone']!,
+                              isUser: userinfo['isUser'],
                             );
                           } else if(state is UsernameCheckingErrorState) {
                             showToast(message: "Error!", toastColor: errorColor);
