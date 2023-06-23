@@ -241,15 +241,17 @@ class LayoutCubit extends Cubit<LayoutStates> {
         .child(image.name + DateTime.now().microsecondsSinceEpoch.toString());
     UploadTask uploadTask = reference.putFile(File(image.path));
     await uploadTask.whenComplete(() {
-      print(reference.getDownloadURL());
+
     });
     return await reference.getDownloadURL();
   }
 
-  void uploadImage(List<XFile> images) async {
+   uploadImage(List<XFile> images) async {
+    print(images.length);
     for (int i = 0; i < images.length; i++) {
-      var imageUrl = uploadFile(images[i]);
+      var imageUrl = await uploadFile(images[i]);
       listOfUrls.add(imageUrl.toString());
+      print('urls ${imageUrl.toString()}');
     }
     emit(NewOrderUploadImageToFirebaseState());
   }
