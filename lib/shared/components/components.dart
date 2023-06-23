@@ -264,7 +264,7 @@ Widget defaultSuppliersItem({
               /**navigateAndPush(context, widget: );**/
             },
             child: SizedBox(
-              height: 150,
+              height: 130,
               child: Padding(
                   padding: const EdgeInsets.only(top: 10, right: 15, left: 15),
                   child: Container(

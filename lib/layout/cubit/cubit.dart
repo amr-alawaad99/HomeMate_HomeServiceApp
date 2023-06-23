@@ -64,12 +64,12 @@ class LayoutCubit extends Cubit<LayoutStates> {
 
   void getUserData() {
     emit(GetUserDataLoadingState());
-    if( CacheHelper.getData(key: 'uid')==null){
-        originalUser=UserModel();
-        return ;
+    if (CacheHelper.getData(key: 'uid') == null) {
+      originalUser = UserModel();
+      return;
     }
     print('hello world');
-    uId=CacheHelper.getData(key: 'uid');
+    uId = CacheHelper.getData(key: 'uid');
     FirebaseFirestore.instance.collection("Users").doc(uId).get().then((value) {
       originalUser = UserModel.fromJson(value.data()!);
       emit(GetUserDataSuccessState(originalUser!.isUser!));
@@ -288,20 +288,38 @@ class LayoutCubit extends Cubit<LayoutStates> {
   }
 
   List<OrderModel> myOrders = [];
-  void getOrders(){
-    if( CacheHelper.getData(key: 'uid')==null){
-      myOrders=[];
-      return ;
+
+  void getOrders() {
+    if (CacheHelper.getData(key: 'uid') == null) {
+      myOrders = [];
+      return;
     }
     uId = CacheHelper.getData(key: 'uid');
-    FirebaseFirestore.instance.collection("orders").doc(uId).collection("user Orders").get().then((value) {
+    FirebaseFirestore.instance
+        .collection("orders")
+        .doc(uId)
+        .collection("user Orders")
+        .get()
+        .then((value) {
       print(value.size);
       for (var element in value.docs) {
         print(element.data()["date"]);
         myOrders.add(OrderModel.fromJson(element.data()));
       }
-    }).catchError((error){
+    }).catchError((error) {
       print("FFFFFFFF $error");
     });
+  }
+
+  Stream<List<OrderModel>> orders() {
+    return FirebaseFirestore.instance
+        .collection("orders")
+        .doc(uId)
+        .collection("user Orders")
+        .orderBy('time')
+        .snapshots()
+        .map((snapshot) => snapshot.docs
+            .map((doc) => OrderModel.fromJson(doc.data()))
+            .toList());
   }
 }
