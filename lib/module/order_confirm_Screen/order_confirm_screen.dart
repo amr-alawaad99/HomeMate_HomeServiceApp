@@ -105,14 +105,24 @@ class OrderConfirmScreen extends StatelessWidget {
                     defaultButton(
                       width: MediaQuery.of(context).size.width / 2,
                       text: 'Confirm',
-                      onPress: () {
+                      onPress: () async {
+                        String imgs = '';
+
+
+
                         cubit.uploadImage(images);
+                        List<String> urls =  cubit.listOfUrls;
+                        for(int i = 0 ;i<urls.length;i++){
+                          imgs += '${urls[i].toString()},';
+                          print(urls[i].toString());
+                        }
                         cubit.orderCreate(
                           serviceName: cubit.categories[services].title,
                           date: date,
                           time: time,
                           location: location,
                           notes: notes,
+                          image: imgs,
 
                         );
                         navigateAndPush(context, widget: SuccessScreen());

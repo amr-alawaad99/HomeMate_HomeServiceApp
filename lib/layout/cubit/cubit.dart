@@ -261,7 +261,7 @@ class LayoutCubit extends Cubit<LayoutStates> {
     String? notes,
     String? location,
     String? gpsLocation,
-    ImageProvider? image,
+    String? image,
   }) {
     OrderModel model = OrderModel(
       serviceName: serviceName,

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+
 
 class OrderModel{
 
@@ -12,7 +12,7 @@ class OrderModel{
   String? gpsLocation;
   String? status;
   String? cost;
-  ImageProvider? image;
+  String? image;
 
 
   OrderModel({
