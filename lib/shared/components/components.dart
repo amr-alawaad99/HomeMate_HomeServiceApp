@@ -12,11 +12,12 @@ Widget defaultButton({
   double height = 60.0,
   double width = double.infinity,
   Color buttonColor = primaryColor,
-  required String text,
+  String? text,
   Color textColor = Colors.white,
   bool isBold = false,
   double fontSize = 18.0,
   required Function() onPress,
+  Widget? child,
 }) =>
     Container(
       height: height,
@@ -37,8 +38,8 @@ Widget defaultButton({
       ),
       child: MaterialButton(
         onPressed: onPress,
-        child: Text(
-          text,
+        child: child ?? Text(
+          text?? "",
           style: TextStyle(
             fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
             fontFamily: 'Roboto',

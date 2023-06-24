@@ -1,6 +1,7 @@
 import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
 import 'package:colorful_safe_area/colorful_safe_area.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
@@ -17,7 +18,7 @@ import '../module/sign_in_screen/cubit/states.dart';
 
 class MainLayoutScreen extends StatelessWidget {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-  var searchController = TextEditingController();
+  final TextEditingController searchController = TextEditingController();
 
   MainLayoutScreen({super.key});
 
@@ -26,6 +27,9 @@ class MainLayoutScreen extends StatelessWidget {
     return BlocConsumer<LayoutCubit, LayoutStates>(
       listener: (context, state) {},
       builder: (context, state) {
+        if(!FirebaseAuth.instance.currentUser!.emailVerified) {
+          FirebaseAuth.instance.currentUser!.reload();
+        }
         var cubit = LayoutCubit.get(context);
         return ColorfulSafeArea(
           color: primaryColor,
@@ -255,12 +259,35 @@ class MainLayoutScreen extends StatelessWidget {
                     },
                   ),
                 ],
-                body: SingleChildScrollView(
-                  child: Padding(
-                    padding: const EdgeInsets.only(bottom: 56),
-                    child: LayoutCubit.get(context)
-                        .screens[LayoutCubit.get(context).currentIndex],
-                  ),
+                body: Column(
+                  children: [
+                    if(!FirebaseAuth.instance.currentUser!.emailVerified)
+                      Container(
+                        color: Colors.yellow,
+                        padding: EdgeInsets.symmetric(vertical: 10),
+                        child: Row(
+                          children: [
+                            Icon(TablerIcons.alert_circle),
+                            SizedBox(width: 10,),
+                            Expanded(
+                              child: Text(
+                                "Your email is not verified! Please check your email address.",
+                                style: Theme.of(context).textTheme.bodySmall!.copyWith(fontSize: 15),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    Expanded(
+                      child: SingleChildScrollView(
+                        child: Padding(
+                          padding: const EdgeInsets.only(bottom: 56),
+                          child: LayoutCubit.get(context)
+                              .screens[LayoutCubit.get(context).currentIndex],
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
               fallback: (context) =>

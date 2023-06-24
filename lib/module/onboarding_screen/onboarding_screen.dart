@@ -2,6 +2,7 @@ import 'package:colorful_safe_area/colorful_safe_area.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:login_register_methods/layout/main_layout_screen.dart';
 import 'package:login_register_methods/module/pre_sign_up_screen/sign_up_screen.dart';
 import 'package:login_register_methods/module/sign_in_screen/sign_in_screen.dart';
@@ -123,31 +124,30 @@ class OnBoardingScreen extends StatelessWidget {
                         const SizedBox(
                           height: 15.0,
                         ),
-                        // Sign in with Google
+                        // Sign in with Google and Facebook
                         Row(
                           children: [
+                            // Google sign in
                             Expanded(
                               child: defaultButton(
                                 onPress: () async {
                                   await SignupCubit.get(context).checkGoogleAccountExistence();
                                 },
-                                text: "G",
+                                child: Icon(TablerIcons.brand_google, color: Colors.red, size: 30),
                                 buttonColor: Colors.white,
-                                textColor: Colors.red.shade400,
-                                fontSize: 30.0,
                               ),
                             ),
                             const SizedBox(
                               width: 15.0,
                             ),
+                            // Facebook sign in
                             Expanded(
                               child: defaultButton(
-                                onPress: () {},
-                                text: "f",
+                                onPress: () {
+                                  navigateAndPush(context, widget: comingSoonDialog());
+                                },
+                                child: Icon(TablerIcons.brand_facebook, color: Colors.blue.shade900, size: 30,),
                                 buttonColor: Colors.white,
-                                textColor: Colors.blue.shade900,
-                                isBold: true,
-                                fontSize: 30.0,
                               ),
                             ),
                           ],
@@ -155,6 +155,7 @@ class OnBoardingScreen extends StatelessWidget {
                         const SizedBox(
                           height: 15.0,
                         ),
+                        // Already have an account? Sign In
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -176,6 +177,7 @@ class OnBoardingScreen extends StatelessWidget {
                             ),
                           ],
                         ),
+                        // Login as a Guest
                         TextButton(
                           onPressed: () {
                             navigatePushDelete(context, widget: MainLayoutScreen());

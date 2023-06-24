@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,7 +5,6 @@ import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:login_register_methods/module/sign_in_screen/cubit/states.dart';
 
-import '../../../model/user_model.dart';
 import '../../../shared/components/constants.dart';
 import '../../../shared/local/cache_helper.dart';
 
@@ -89,6 +87,7 @@ class SignInCubit extends Cubit<SignInStates> {
       emit(UserDoesNotExistsState());
     }
   }
+
 
   /// to dark mode
   bool isDark = false;

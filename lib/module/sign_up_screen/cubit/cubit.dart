@@ -89,6 +89,7 @@ class SignupCubit extends Cubit<SignupStates> {
         .set(userModel.toMap())
         .then((value) {
       uId = uid;
+      FirebaseAuth.instance.currentUser!.sendEmailVerification();
       emit(CreateUserSuccessState(uid));
     }).catchError((error) {
       emit(CreateUserErrorState(error.toString()));
