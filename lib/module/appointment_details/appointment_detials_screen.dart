@@ -252,6 +252,7 @@ class AppointmentDetails extends StatelessWidget {
                         ),
                         imageUrls: urls,
 
+
                         errorWidget: SizedBox(),
                         crossAxisCount: 3,
                         numOfShowImages: urls.length>=3?3:urls.length,
