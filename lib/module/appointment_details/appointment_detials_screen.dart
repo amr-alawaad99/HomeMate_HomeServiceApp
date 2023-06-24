@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:galleryimage/galleryimage.dart';
 
-
 import '../../model/orderModel.dart';
 import '../../shared/components/constants.dart';
 import '../sign_in_screen/cubit/cubit.dart';
@@ -122,7 +121,7 @@ class AppointmentDetails extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: 20,
+                height: 15,
               ),
               defaultContainer(
                   textColor: SignInCubit.get(context).isDark
@@ -138,7 +137,7 @@ class AppointmentDetails extends StatelessWidget {
                   mainText: 'date',
                   modelText: model.date!),
               SizedBox(
-                height: 20,
+                height: 15,
               ),
               defaultContainer(
                   width: MediaQuery.of(context).size.width,
@@ -154,7 +153,7 @@ class AppointmentDetails extends StatelessWidget {
                   mainText: 'time',
                   modelText: model.time!),
               SizedBox(
-                height: 20,
+                height: 15,
               ),
               defaultContainer(
                   textColor: SignInCubit.get(context).isDark
@@ -170,7 +169,7 @@ class AppointmentDetails extends StatelessWidget {
                   mainText: 'details',
                   modelText: model.notes!),
               SizedBox(
-                height: 20,
+                height: 15,
               ),
               defaultContainer(
                   width: MediaQuery.of(context).size.width,
@@ -186,7 +185,7 @@ class AppointmentDetails extends StatelessWidget {
                   mainText: 'location',
                   modelText: model.location!),
               SizedBox(
-                height: 20,
+                height: 15,
               ),
               defaultContainer(
                   width: MediaQuery.of(context).size.width,
@@ -202,29 +201,64 @@ class AppointmentDetails extends StatelessWidget {
                   mainText: 'status',
                   modelText: model.status!),
               SizedBox(
-                height: 20,
+                height: 15,
               ),
-              urls.length ==0 ?SizedBox():GalleryImage(
-                colorOfNumberWidget: SignInCubit.get(context).isDark
-                    ? Colors.white.withOpacity(0.2)
-                    : Colors.black,
-                galleryBackgroundColor: SignInCubit.get(context).isDark
-                    ? Color(0xff303030)
-                    : scaffoldLightColor,
-                textStyleOfNumberWidget: TextStyle(
-                  fontFamily: "Roboto",
-                  color: SignInCubit.get(context).isDark
-                      ? Colors.black
-                      : Colors.white,
-                  fontSize: 25,
+              urls[0] == ''
+                  ? SizedBox()
+                  :Text(
+                'Order Photos'.toUpperCase(),
+                style: TextStyle(
+                  color: Colors.grey,
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
                 ),
-                imageUrls: urls,
-                errorWidget: SizedBox(),
-                crossAxisCount: 3,
-                numOfShowImages: urls.length,
-                titleGallery: 'Order photos'.toUpperCase(),
-                childAspectRatio: 1.2,
               ),
+              SizedBox(height: 5,),
+
+              urls[0] == ''
+                  ? SizedBox()
+                  : Container(
+                padding: EdgeInsets.all(10),
+                height: 117,
+                decoration: BoxDecoration(
+                  color: SignInCubit.get(context).isDark
+                      ? Color(0xff303030)
+                      : Colors.white,
+                  boxShadow: <BoxShadow>[
+                    BoxShadow(
+                      color: SignInCubit.get(context).isDark
+                    ? Colors.transparent
+                    : Colors.black12,
+                      blurRadius: 20.0,
+                      offset: Offset(0.0, 0.75),
+                    ),
+                  ],
+// color: Colors.white,
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                    child: GalleryImage(
+                        colorOfNumberWidget: SignInCubit.get(context).isDark
+                            ? Colors.white.withOpacity(0.2)
+                            : Colors.black,
+                        galleryBackgroundColor: SignInCubit.get(context).isDark
+                            ? Color(0xff303030)
+                            : scaffoldLightColor,
+                        textStyleOfNumberWidget: TextStyle(
+                          fontFamily: "Roboto",
+                          color: SignInCubit.get(context).isDark
+                              ? Colors.black
+                              : Colors.white,
+                          fontSize: 25,
+                        ),
+                        imageUrls: urls,
+
+                        errorWidget: SizedBox(),
+                        crossAxisCount: 3,
+                        numOfShowImages: urls.length>=3?3:urls.length,
+                        titleGallery: 'Order photos'.toUpperCase(),
+                        childAspectRatio: 1.2,
+                      ),
+                  ),
             ],
           ),
         ),
@@ -235,7 +269,7 @@ class AppointmentDetails extends StatelessWidget {
 
 Widget defaultContainer({
   required double width,
-   double height = 80,
+
   required Color color,
   required Color textColor,
   required Color shadowColor,
@@ -244,7 +278,7 @@ Widget defaultContainer({
 }) =>
     Container(
       padding: const EdgeInsets.all(10),
-      height: height,
+
       width: width,
       decoration: BoxDecoration(
         color: color,
@@ -272,16 +306,14 @@ Widget defaultContainer({
           SizedBox(
             height: 10,
           ),
-          Expanded(
-            child: Text(
-
-              modelText.toUpperCase(),
-              style: TextStyle(
-                color: textColor,
-                fontSize: 15,
-              ),
-              overflow: TextOverflow.ellipsis,maxLines: 6,
+          Text(
+            modelText.toUpperCase(),
+            style: TextStyle(
+              color: textColor,
+              fontSize: 15,
             ),
+            overflow: TextOverflow.ellipsis,
+            maxLines: 6,
           ),
         ],
       ),
