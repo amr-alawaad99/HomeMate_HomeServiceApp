@@ -283,8 +283,8 @@ class LayoutCubit extends Cubit<LayoutStates> {
       uId: uId,
       dateTimeForOrder: ntpTime.toString(),
       status: status,
-      cost: cost
-
+      cost: cost,
+      gpsLocation: gpsLocation,
     );
     emit(UploadOrderLoadingState());
     FirebaseFirestore.instance
