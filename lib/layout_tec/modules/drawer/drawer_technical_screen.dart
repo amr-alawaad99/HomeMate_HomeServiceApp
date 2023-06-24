@@ -2,9 +2,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
-import 'package:login_register_methods/layou_tec/cubit/cubit.dart';
+import 'package:login_register_methods/layout_tec/cubit/cubit.dart';
 
-import 'package:login_register_methods/layou_tec/cubit/states.dart';
+import 'package:login_register_methods/layout_tec/cubit/states.dart';
 
 import 'package:login_register_methods/module/profile_screen/profile_screen.dart';
 import 'package:login_register_methods/module/sign_in_screen/cubit/states.dart';

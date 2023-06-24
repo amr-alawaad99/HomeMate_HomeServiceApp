@@ -4,15 +4,13 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
-import 'package:login_register_methods/layou_tec/cubit/cubit.dart';
-import 'package:login_register_methods/layou_tec/cubit/states.dart';
+import 'package:login_register_methods/layout_tec/cubit/cubit.dart';
+import 'package:login_register_methods/layout_tec/cubit/states.dart';
 
-import '../layout/cubit/cubit.dart';
-import '../module/drawer/my_drawer.dart';
-import '../module/new_order_screen/new_order_screen.dart';
+
 import '../module/sign_in_screen/cubit/cubit.dart';
 import '../module/sign_in_screen/cubit/states.dart';
-import '../shared/components/components.dart';
+
 import '../shared/components/constants.dart';
 import 'modules/drawer/drawer_technical_screen.dart';
 

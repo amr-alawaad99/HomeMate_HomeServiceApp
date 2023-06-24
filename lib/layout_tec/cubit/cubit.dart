@@ -1,12 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:login_register_methods/layou_tec/cubit/states.dart';
-import 'package:login_register_methods/layou_tec/modules/appointment_technical_screen/appointment_screen.dart';
-import 'package:login_register_methods/layou_tec/modules/home_technical_screen/home_technical_screen.dart';
+import 'package:login_register_methods/layout_tec/cubit/states.dart';
+import 'package:login_register_methods/layout_tec/modules/appointment_technical_screen/appointment_screen.dart';
+import 'package:login_register_methods/layout_tec/modules/home_technical_screen/home_technical_screen.dart';
 
 import '../../model/user_model.dart';
-import '../../module/appointment_screen/appointments_screen.dart';
+
 import '../../shared/components/constants.dart';
 import '../../shared/local/cache_helper.dart';
 import '../modules/history_screen/history_screen.dart';
