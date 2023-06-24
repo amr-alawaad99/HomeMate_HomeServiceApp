@@ -389,7 +389,9 @@ class AppointmentsScreen extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
                                   InkWell(
-                                    onTap: () {},
+                                    onTap: () {
+                                      LayoutCubit.get(context).removeOrder(orderUid: model.orderUid!);
+                                    },
                                     child: Icon(
                                       TablerIcons.trash,
                                       color: errorColor,

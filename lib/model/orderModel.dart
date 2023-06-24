@@ -14,6 +14,7 @@ class OrderModel{
   String? cost;
   String? image;
   String? dateTimeForOrder;
+  String? orderUid;
 
 
 
@@ -30,6 +31,7 @@ class OrderModel{
     this.cost,
     this.dateTimeForOrder,
     this.gpsLocation,
+    this.orderUid,
 
 });
   OrderModel.fromJson(Map<String, dynamic> json){
@@ -45,6 +47,7 @@ class OrderModel{
     cost = json['cost'];
     dateTimeForOrder = json['dateTimeForOrder'];
     gpsLocation = json['gpsLocation'];
+    orderUid = json['orderUid'];
   }
   Map<String, dynamic> toMap(){
     return {
@@ -60,6 +63,7 @@ class OrderModel{
       'cost': cost,
       'dateTimeForOrder': dateTimeForOrder,
       'gpsLocation': gpsLocation,
+      'orderUid': orderUid,
 
     };
   }

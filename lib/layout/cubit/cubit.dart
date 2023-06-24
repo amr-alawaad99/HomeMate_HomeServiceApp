@@ -285,17 +285,19 @@ class LayoutCubit extends Cubit<LayoutStates> {
       status: status,
       cost: cost,
       gpsLocation: gpsLocation,
+      orderUid: "",
     );
     emit(UploadOrderLoadingState());
     FirebaseFirestore.instance
         .collection('orders')
         .doc(uId)
         .collection('user Orders')
-        .doc()
-        .set(
-          model.toMap(),
-        )
+        .add(model.toMap())
         .then((value) {
+      FirebaseFirestore.instance
+          .collection('orders')
+          .doc(uId)
+          .collection('user Orders').doc(value.id).update({"orderUid" : value.id});
       emit(UploadOrderSuccessState());
     }).catchError((error) {
       emit(UploadOrderErrorState());
@@ -325,6 +327,12 @@ class LayoutCubit extends Cubit<LayoutStates> {
       print("FFFFFFFF $error");
     });
   }
+
+  void removeOrder({required String orderUid}){
+    FirebaseFirestore.instance.collection('orders').doc(uId)
+        .collection('user Orders').doc(orderUid).delete();
+  }
+
 
   Stream<List<OrderModel>> orders() {
     return FirebaseFirestore.instance
