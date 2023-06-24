@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
@@ -139,6 +140,57 @@ class ProfileScreen extends StatelessWidget {
                               style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 15),
                             ),
                           ),
+                          //Verification check Icon
+                          if(FirebaseAuth.instance.currentUser!.emailVerified)
+                            Padding(
+                            padding: EdgeInsets.only(bottom: 5),
+                            child: IconButton(
+                              onPressed: () {
+                                navigateAndPush(context,
+                                  widget: Dialog(
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text("Your email is verified"),
+                                  ),
+                                ),
+                                );
+                              },
+                              icon: Icon(TablerIcons.circle_check, color: successColor,),
+                            ),
+                          ),
+                          if(!FirebaseAuth.instance.currentUser!.emailVerified)
+                            Padding(
+                              padding: EdgeInsets.only(bottom: 5),
+                              child: IconButton(
+                                onPressed: () {
+                                  navigateAndPush(context, widget: Dialog(
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        SizedBox(height: 10,),
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: const [
+                                            Icon(TablerIcons.alert_circle, color: errorColor,),
+                                            SizedBox(width: 10,),
+                                            Text("Your email is not verified!"),
+                                          ],
+                                        ),
+                                        TextButton(onPressed: () async {
+                                          try {
+                                            await FirebaseAuth.instance.currentUser!.sendEmailVerification();
+                                            showToast(message: "Verification link sent\nCheck your email", toastColor: successColor);
+                                          } on FirebaseAuthException catch (e) {
+                                            showToast(message: e.message.toString(), toastColor: errorColor);
+                                          }
+                                        }, child: Text("resend verification link"),),
+                                      ],
+                                    ),
+                                  ));
+                                },
+                                icon: Icon(TablerIcons.alert_circle, color: errorColor,),
+                              ),
+                            ),
                         ],),
                         const SizedBox(height: 20,),
                         // Phone Number
