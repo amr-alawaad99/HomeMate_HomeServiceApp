@@ -20,19 +20,18 @@ class OrderConfirmScreen extends StatelessWidget {
 
   final List<XFile> images;
 
-  const OrderConfirmScreen(
-      {super.key,
-      required this.time,
-      required this.date,
-      required this.images,
-      required this.notes,
-      required this.location,
-      required this.services,
-      });
+  const OrderConfirmScreen({
+    super.key,
+    required this.time,
+    required this.date,
+    required this.images,
+    required this.notes,
+    required this.location,
+    required this.services,
+  });
 
   @override
   Widget build(BuildContext context) {
-
     return BlocProvider(
         create: (BuildContext context) => LayoutCubit(),
         child: BlocConsumer<LayoutCubit, LayoutStates>(
@@ -120,14 +119,12 @@ class OrderConfirmScreen extends StatelessWidget {
                         ],
                       ),
                       child: MaterialButton(
-
-
                         onPressed: () async {
                           await cubit.uploadImage(images);
                           String imgs = '';
-                          List<String> urls =   cubit.listOfUrls;
+                          List<String> urls = cubit.listOfUrls;
                           print(urls.length);
-                          for(int i = 0 ;i<urls.length;i++){
+                          for (int i = 0; i < urls.length; i++) {
                             imgs += '${urls[i].toString()},';
                           }
                           cubit.orderCreate(
@@ -137,28 +134,29 @@ class OrderConfirmScreen extends StatelessWidget {
                             location: location,
                             notes: notes,
                             image: imgs,
-
-
+                            status: 'waiting',
+                            cost: ''
 
                           );
                           navigateAndPush(context, widget: SuccessScreen());
                         },
-                        child: state is NewOrderUploadImageToFirebaseLoadingState ||
-                            state is UploadOrderLoadingState
-                            ? const SizedBox(
-                            width: 25,
-                            height: 25,
-                            child: CircularProgressIndicator(
-                              color: Colors.white,
-                            ))
-                            : const Text(
-                          "Confirm",
-                          style: TextStyle(
-                            fontFamily: 'Roboto',
-                            color: Colors.white,
-                            fontSize: 18.0,
-                          ),
-                        ),
+                        child:
+                            state is NewOrderUploadImageToFirebaseLoadingState ||
+                                    state is UploadOrderLoadingState
+                                ? const SizedBox(
+                                    width: 25,
+                                    height: 25,
+                                    child: CircularProgressIndicator(
+                                      color: Colors.white,
+                                    ))
+                                : const Text(
+                                    "Confirm",
+                                    style: TextStyle(
+                                      fontFamily: 'Roboto',
+                                      color: Colors.white,
+                                      fontSize: 18.0,
+                                    ),
+                                  ),
                       ),
                     ),
                     // defaultButton(
@@ -390,7 +388,7 @@ class OrderConfirmScreen extends StatelessWidget {
                       ),
                       Container(
                         padding: EdgeInsets.all(10),
-                        height: 150,
+                        height: 170,
                         width: double.infinity,
                         decoration: const BoxDecoration(
                           color: Colors.white,
@@ -406,63 +404,75 @@ class OrderConfirmScreen extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Notes'.toUpperCase(),
-                                  style: TextStyle(
-                                      color: Colors.grey, fontSize: 15),
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Text(notes),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                // Row(
-                                //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                //   mainAxisSize: MainAxisSize.max,
-                                //   children: [
-                                //     SizedBox(
-                                //       width: MediaQuery.of(context).size.width / 1.7,
-                                //       child: Text(
-                                //         notes,
-                                //         maxLines: 2,
-                                //         overflow: TextOverflow.ellipsis,
-                                //       ),
-                                //     ),
-                                //     SizedBox(
-                                //       width: 10,
-                                //     ),
-                                //
-                                //   ],
-                                // ),
-                                SizedBox(
-                                  width: MediaQuery.of(context).size.width / 2,
-                                  height: 70,
-                                  child: GridView.builder(
-                                    itemCount: images.length,
-                                    gridDelegate:
-                                        SliverGridDelegateWithFixedCrossAxisCount(
-                                            crossAxisCount: 3),
-                                    itemBuilder: (context, index) => Padding(
-                                      padding: const EdgeInsets.all(2.0),
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(5),
-                                        child: Image.file(
-                                          File(images[index].path),
-                                          fit: BoxFit.cover,
-                                          height: 50,
-                                          width: 50,
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Notes'.toUpperCase(),
+                                    style: TextStyle(
+                                        color: Colors.grey, fontSize: 15),
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Expanded(
+                                    child: SizedBox(
+                                        width: MediaQuery.of(context).size.width,
+                                        child: Text(
+                                          notes,
+                                          overflow: TextOverflow.ellipsis,
+                                          maxLines: 2,
+                                        )),
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  // Row(
+                                  //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  //   mainAxisSize: MainAxisSize.max,
+                                  //   children: [
+                                  //     SizedBox(
+                                  //       width: MediaQuery.of(context).size.width / 1.7,
+                                  //       child: Text(
+                                  //         notes,
+                                  //         maxLines: 2,
+                                  //         overflow: TextOverflow.ellipsis,
+                                  //       ),
+                                  //     ),
+                                  //     SizedBox(
+                                  //       width: 10,
+                                  //     ),
+                                  //
+                                  //   ],
+                                  // ),
+                                  Expanded(
+                                    child: SizedBox(
+                                      width: MediaQuery.of(context).size.width / 2,
+                                      height: 70,
+                                      child: GridView.builder(
+                                        itemCount: images.length,
+                                        gridDelegate:
+                                            SliverGridDelegateWithFixedCrossAxisCount(
+                                                crossAxisCount: 3),
+                                        itemBuilder: (context, index) => Padding(
+                                          padding: const EdgeInsets.all(2.0),
+                                          child: ClipRRect(
+                                            borderRadius: BorderRadius.circular(5),
+                                            child: Image.file(
+                                              File(images[index].path),
+                                              fit: BoxFit.cover,
+                                              height: 50,
+                                              width: 50,
+                                            ),
+                                          ),
                                         ),
                                       ),
                                     ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                             IconButton(
                               icon: Icon(

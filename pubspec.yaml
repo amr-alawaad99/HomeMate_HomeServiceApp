@@ -58,6 +58,7 @@ dependencies:
   date_time_picker_widget: ^2.0.0
   google_sign_in: ^6.1.4
   ntp: ^2.0.0
+  galleryimage: ^2.0.1
 
 
 

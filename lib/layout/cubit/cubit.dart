@@ -270,6 +270,8 @@ class LayoutCubit extends Cubit<LayoutStates> {
     String? location,
     String? gpsLocation,
     String? image,
+    String? status,
+    String? cost,
   }) {
     OrderModel model = OrderModel(
       serviceName: serviceName,
@@ -280,6 +282,8 @@ class LayoutCubit extends Cubit<LayoutStates> {
       image: image,
       uId: uId,
       dateTimeForOrder: ntpTime.toString(),
+      status: status,
+      cost: cost
 
     );
     emit(UploadOrderLoadingState());
