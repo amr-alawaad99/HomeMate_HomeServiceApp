@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
-import 'package:login_register_methods/layou_tec/layout_tec.dart';
 import 'package:login_register_methods/layout/cubit/cubit.dart';
 import 'package:login_register_methods/layout/cubit/states.dart';
 import 'package:login_register_methods/layout/main_layout_screen.dart';
@@ -12,6 +11,7 @@ import 'package:login_register_methods/shared/components/components.dart';
 import 'package:login_register_methods/shared/components/constants.dart';
 import 'package:login_register_methods/shared/local/cache_helper.dart';
 
+import '../../layout_tec/layout_tec.dart';
 import '../../model/user_model.dart';
 import '../sign_up_screen/google_facebook_signup_info.dart';
 
