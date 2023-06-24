@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 
 const Color primaryColor = Color(0xff734BA4);
 const Color secondaryColor = Color(0xff28b5cd);
@@ -14,4 +15,19 @@ Color scaffoldLightColor = Colors.grey.shade100;
 ImageProvider tempImage = const NetworkImage('https://img.freepik.com/free-vector/self-care-concept_23-2148523717.jpg?w=740&t=st=1678538562~exp=1678539162~hmac=a7d5a1db32b0d9a70e2ebbf68ab260a7ff455a23edb61284689ea8c3559233dd',);
 
 String uId = '';
-bool? isUser ;
+bool? isUser;
+
+
+Widget comingSoonDialog() => Dialog(
+  child: SizedBox(
+    height: 200,
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Icon(TablerIcons.alert_triangle, size: 60, color: Colors.yellow.shade600,),
+        SizedBox(height: 40,),
+        Text("Coming Soon!", style: TextStyle(fontWeight: FontWeight.bold),)
+      ],
+    ),
+  ),
+);

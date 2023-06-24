@@ -137,9 +137,6 @@ class OrderConfirmScreen extends StatelessWidget {
                             location: location,
                             notes: notes,
                             image: imgs,
-
-
-
                           );
                           navigateAndPush(context, widget: SuccessScreen());
                         },
