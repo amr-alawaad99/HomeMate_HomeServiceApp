@@ -102,30 +102,89 @@ class OrderConfirmScreen extends StatelessWidget {
                     const SizedBox(
                       width: 50,
                     ),
-                    defaultButton(
+                    Container(
                       width: MediaQuery.of(context).size.width / 2,
-                      text: 'Confirm',
-                      onPress: () async {
-                        await cubit.uploadImage(images);
-                        String imgs = '';
-                        List<String> urls =   cubit.listOfUrls;
-                        print(urls.length);
-                        for(int i = 0 ;i<urls.length;i++){
-                          imgs += '${urls[i].toString()},';
-                        }
-                        cubit.orderCreate(
-                          serviceName: cubit.categories[services].title,
-                          date: date,
-                          time: time,
-                          location: location,
-                          notes: notes,
-                          image: imgs,
+                      height: 60,
+                      clipBehavior: Clip.antiAlias,
+                      decoration: BoxDecoration(
+                        color: primaryColor,
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(10.0),
+                        ),
+                        boxShadow: const <BoxShadow>[
+                          BoxShadow(
+                            color: Colors.black26,
+                            blurRadius: 10.0,
+                            offset: Offset(0.0, 0.75),
+                          ),
+                        ],
+                      ),
+                      child: MaterialButton(
 
-                        );
-                        navigateAndPush(context, widget: SuccessScreen());
-                      },
-                      fontSize: 20,
+
+                        onPressed: () async {
+                          await cubit.uploadImage(images);
+                          String imgs = '';
+                          List<String> urls =   cubit.listOfUrls;
+                          print(urls.length);
+                          for(int i = 0 ;i<urls.length;i++){
+                            imgs += '${urls[i].toString()},';
+                          }
+                          cubit.orderCreate(
+                            serviceName: cubit.categories[services].title,
+                            date: date,
+                            time: time,
+                            location: location,
+                            notes: notes,
+                            image: imgs,
+
+
+
+                          );
+                          navigateAndPush(context, widget: SuccessScreen());
+                        },
+                        child: state is NewOrderUploadImageToFirebaseLoadingState ||
+                            state is UploadOrderLoadingState
+                            ? const SizedBox(
+                            width: 25,
+                            height: 25,
+                            child: CircularProgressIndicator(
+                              color: Colors.white,
+                            ))
+                            : const Text(
+                          "Confirm",
+                          style: TextStyle(
+                            fontFamily: 'Roboto',
+                            color: Colors.white,
+                            fontSize: 18.0,
+                          ),
+                        ),
+                      ),
                     ),
+                    // defaultButton(
+                    //   width: MediaQuery.of(context).size.width / 2,
+                    //   text: 'Confirm',
+                    //   onPress: () async {
+                    //     await cubit.uploadImage(images);
+                    //     String imgs = '';
+                    //     List<String> urls =   cubit.listOfUrls;
+                    //     print(urls.length);
+                    //     for(int i = 0 ;i<urls.length;i++){
+                    //       imgs += '${urls[i].toString()},';
+                    //     }
+                    //     cubit.orderCreate(
+                    //       serviceName: cubit.categories[services].title,
+                    //       date: date,
+                    //       time: time,
+                    //       location: location,
+                    //       notes: notes,
+                    //       image: imgs,
+                    //
+                    //     );
+                    //     navigateAndPush(context, widget: SuccessScreen());
+                    //   },
+                    //   fontSize: 20,
+                    // ),
                   ],
                 ),
               ),

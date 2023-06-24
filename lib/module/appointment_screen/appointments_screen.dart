@@ -1,4 +1,4 @@
-import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
@@ -111,7 +111,8 @@ class AppointmentsScreen extends StatelessWidget {
                 child: ListView.separated(
                     physics: const BouncingScrollPhysics(),
                     scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, index) => InkWell(
+                    itemBuilder: (context, index) =>
+                        InkWell(
                           onTap: () {
                             cubit.changeAppointmentIndex(index);
                           },
@@ -121,9 +122,9 @@ class AppointmentsScreen extends StatelessWidget {
                             decoration: BoxDecoration(
                               border: cubit.appointmentSelectedIndex == index
                                   ? Border.all(
-                                      width: 1.5,
-                                      color: secondaryColor,
-                                    )
+                                width: 1.5,
+                                color: secondaryColor,
+                              )
                                   : null,
                               borderRadius: BorderRadius.circular(5),
                             ),
@@ -141,9 +142,10 @@ class AppointmentsScreen extends StatelessWidget {
                             ),
                           ),
                         ),
-                    separatorBuilder: (context, index) => const SizedBox(
-                          width: 8,
-                        ),
+                    separatorBuilder: (context, index) =>
+                    const SizedBox(
+                      width: 8,
+                    ),
                     itemCount: categories.length),
               ),
             ),
@@ -156,16 +158,17 @@ class AppointmentsScreen extends StatelessWidget {
                     if (snapshot.hasError) {
                       return Text('Error No Data found! ${snapshot.error}');
                     } else if (snapshot.hasData) {
-                      final orders = snapshot.data!;
+                      final orders = snapshot.data!.reversed;
                       return ListView(
                         physics: NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
                         children: orders
                             .map(
-                              (e) => defaultAppointmentCard(
-                            model: e,
-                            context: context,
-                          ),
+                              (e) =>
+                              defaultAppointmentCard(
+                                model: e,
+                                context: context,
+                              ),
                         )
                             .toList(),
                       );
@@ -186,20 +189,27 @@ class AppointmentsScreen extends StatelessWidget {
   }
 
   Widget defaultAppointmentCard(
-          {required OrderModel model, required context}) =>
+      {required OrderModel model, required context}) =>
       Padding(
-        padding: const EdgeInsets.only(left: 15.0,right: 15,top: 15),
+        padding: const EdgeInsets.only(left: 15.0, right: 15, top: 15),
         child: Container(
           padding: const EdgeInsets.all(10),
           height: 150,
-          width: MediaQuery.of(context).size.width,
+          width: MediaQuery
+              .of(context)
+              .size
+              .width,
           decoration: BoxDecoration(
-            color: SignInCubit.get(context).isDark
+            color: SignInCubit
+                .get(context)
+                .isDark
                 ? Color(0xff303030)
                 : Colors.white,
             boxShadow: <BoxShadow>[
               BoxShadow(
-                color: SignInCubit.get(context).isDark
+                color: SignInCubit
+                    .get(context)
+                    .isDark
                     ? Colors.transparent
                     : Colors.black12,
                 blurRadius: 20.0,
@@ -236,7 +246,10 @@ class AppointmentsScreen extends StatelessWidget {
                             ClipRRect(
                               borderRadius: BorderRadius.circular(5),
                               child: Image(
-                                image: NetworkImage(
+                                image: NetworkImage(LayoutCubit
+                                    .get(context)
+                                    .originalUser!
+                                    .isUser == false ? model.image!:
                                     "https://img.freepik.com/free-vector/self-care-concept_23-2148523717.jpg?w=740&t=st=1678538562~exp=1678539162~hmac=a7d5a1db32b0d9a70e2ebbf68ab260a7ff455a23edb61284689ea8c3559233dd"),
                                 width: 30,
                                 height: 30,
@@ -249,7 +262,10 @@ class AppointmentsScreen extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "Amr",
+                                  LayoutCubit
+                                      .get(context)
+                                      .originalUser!
+                                      .isUser == false ? model.userName!:'not defined',
                                   style: const TextStyle(
                                     fontSize: 15.0,
                                   ),
@@ -261,7 +277,8 @@ class AppointmentsScreen extends StatelessWidget {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: const [
                                     Image(
-                                      image: AssetImage('assets/images/star.png'),
+                                      image: AssetImage(
+                                          'assets/images/star.png'),
                                       width: 15.0,
                                       height: 15.0,
                                     ),

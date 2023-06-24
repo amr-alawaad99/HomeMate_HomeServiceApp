@@ -102,7 +102,10 @@ class NewOrderScreen extends StatelessWidget {
                           text: 'Send Request',
                           width: MediaQuery.of(context).size.width / 2,
                           onPress: () {
-                            if (formKey.currentState!.validate()) {
+                            if(cubit.selectedIndex == -1 ){
+                              showToast(message: 'You must choose service', toastColor: errorColor);
+                            }
+                            if (formKey.currentState!.validate()&& cubit.selectedIndex != -1) {
                               navigateAndPush(
                                 context,
                                 widget: OrderConfirmScreen(

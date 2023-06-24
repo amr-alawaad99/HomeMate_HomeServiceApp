@@ -63,7 +63,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) =>
           LayoutCubit()
-            ..getUserData()..getOrders(),
+            ..getUserData()..getOrders()..loadDateTime(),
         ),
         ChangeNotifierProvider(
           create: (context) => AppData(),

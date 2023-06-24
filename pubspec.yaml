@@ -57,6 +57,7 @@ dependencies:
   geocoding: ^2.1.0
   date_time_picker_widget: ^2.0.0
   google_sign_in: ^6.1.4
+  ntp: ^2.0.0
 
 
 

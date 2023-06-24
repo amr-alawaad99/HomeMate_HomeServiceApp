@@ -11,6 +11,7 @@ import 'package:login_register_methods/module/categories_screen/categories_scree
 import 'package:login_register_methods/module/home_screen/home_screen.dart';
 import 'package:login_register_methods/module/suppliers_screen/suppliers_screen.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:ntp/ntp.dart';
 import '../../model/category_model.dart';
 import '../../model/orderModel.dart';
 import '../../model/user_model.dart';
@@ -223,6 +224,7 @@ class LayoutCubit extends Cubit<LayoutStates> {
         NewOrderPickImageState(),
       );
     } catch (e) {
+      emit(NewOrderPickErrorImageState());
       print('something wrong ' + e.toString());
     }
   }
@@ -235,25 +237,29 @@ class LayoutCubit extends Cubit<LayoutStates> {
   }
 
   Future<String> uploadFile(XFile image) async {
+
     Reference reference = firebaseStorage
         .ref()
         .child("order_images")
         .child(image.name + DateTime.now().microsecondsSinceEpoch.toString());
+    emit(NewOrderUploadImageToFirebaseLoadingState());
     UploadTask uploadTask = reference.putFile(File(image.path));
     await uploadTask.whenComplete(() {
+      emit(NewOrderUploadImageToFirebaseSuccessState());
 
     });
     return await reference.getDownloadURL();
   }
 
    uploadImage(List<XFile> images) async {
+
     print(images.length);
     for (int i = 0; i < images.length; i++) {
       var imageUrl = await uploadFile(images[i]);
       listOfUrls.add(imageUrl.toString());
-      print('urls ${imageUrl.toString()}');
+
     }
-    emit(NewOrderUploadImageToFirebaseState());
+    emit(NewOrderUploadAllImageToFirebaseSuccessState());
   }
 
   void orderCreate({
@@ -273,7 +279,10 @@ class LayoutCubit extends Cubit<LayoutStates> {
       location: location,
       image: image,
       uId: uId,
+      dateTimeForOrder: ntpTime.toString(),
+
     );
+    emit(UploadOrderLoadingState());
     FirebaseFirestore.instance
         .collection('orders')
         .doc(uId)
@@ -318,10 +327,18 @@ class LayoutCubit extends Cubit<LayoutStates> {
         .collection("orders")
         .doc(uId)
         .collection("user Orders")
-        .orderBy('time')
+        .orderBy('dateTimeForOrder')
         .snapshots()
         .map((snapshot) => snapshot.docs
             .map((doc) => OrderModel.fromJson(doc.data()))
             .toList());
   }
+
+  // global date time
+DateTime ntpTime = DateTime.now();
+
+  void loadDateTime()async{
+    ntpTime = await NTP.now();
+  }
+
 }
