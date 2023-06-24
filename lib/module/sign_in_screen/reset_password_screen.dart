@@ -94,7 +94,7 @@ class ResetPasswordScreen extends StatelessWidget {
             SizedBox(height: 20,),
             Container(
               child: defaultButton(
-                onPress: () async {
+                onPress: () {
                   passwordReset();
                 },
                 text: "Reset Password",
