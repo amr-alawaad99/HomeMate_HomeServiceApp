@@ -156,18 +156,19 @@ class AppointmentDetails extends StatelessWidget {
                 height: 15,
               ),
               defaultContainer(
-                  textColor: SignInCubit.get(context).isDark
-                      ? Colors.white
-                      : Colors.black,
-                  width: MediaQuery.of(context).size.width,
-                  color: SignInCubit.get(context).isDark
-                      ? Color(0xff303030)
-                      : Colors.white,
-                  shadowColor: SignInCubit.get(context).isDark
-                      ? Colors.transparent
-                      : Colors.black12,
-                  mainText: 'details',
-                  modelText: model.notes!),
+                textColor: SignInCubit.get(context).isDark
+                    ? Colors.white
+                    : Colors.black,
+                width: MediaQuery.of(context).size.width,
+                color: SignInCubit.get(context).isDark
+                    ? Color(0xff303030)
+                    : Colors.white,
+                shadowColor: SignInCubit.get(context).isDark
+                    ? Colors.transparent
+                    : Colors.black12,
+                mainText: 'details',
+                modelText: model.notes!,
+              ),
               SizedBox(
                 height: 15,
               ),
@@ -205,38 +206,39 @@ class AppointmentDetails extends StatelessWidget {
               ),
               urls[0] == ''
                   ? SizedBox()
-                  :Text(
-                'Order Photos'.toUpperCase(),
-                style: TextStyle(
-                  color: Colors.grey,
-                  fontSize: 15,
-                  fontWeight: FontWeight.bold,
-                ),
+                  : Text(
+                      'Order Photos'.toUpperCase(),
+                      style: TextStyle(
+                        color: Colors.grey,
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+              SizedBox(
+                height: 5,
               ),
-              SizedBox(height: 5,),
-
               urls[0] == ''
                   ? SizedBox()
                   : Container(
-                padding: EdgeInsets.all(10),
-                height: 117,
-                decoration: BoxDecoration(
-                  color: SignInCubit.get(context).isDark
-                      ? Color(0xff303030)
-                      : Colors.white,
-                  boxShadow: <BoxShadow>[
-                    BoxShadow(
-                      color: SignInCubit.get(context).isDark
-                    ? Colors.transparent
-                    : Colors.black12,
-                      blurRadius: 20.0,
-                      offset: Offset(0.0, 0.75),
-                    ),
-                  ],
+                      padding: EdgeInsets.all(10),
+                      height: 117,
+                      decoration: BoxDecoration(
+                        color: SignInCubit.get(context).isDark
+                            ? Color(0xff303030)
+                            : Colors.white,
+                        boxShadow: <BoxShadow>[
+                          BoxShadow(
+                            color: SignInCubit.get(context).isDark
+                                ? Colors.transparent
+                                : Colors.black12,
+                            blurRadius: 20.0,
+                            offset: Offset(0.0, 0.75),
+                          ),
+                        ],
 // color: Colors.white,
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-                    child: GalleryImage(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      child: GalleryImage(
                         colorOfNumberWidget: SignInCubit.get(context).isDark
                             ? Colors.white.withOpacity(0.2)
                             : Colors.black,
@@ -251,15 +253,13 @@ class AppointmentDetails extends StatelessWidget {
                           fontSize: 25,
                         ),
                         imageUrls: urls,
-
-
                         errorWidget: SizedBox(),
                         crossAxisCount: 3,
-                        numOfShowImages: urls.length>=3?3:urls.length,
+                        numOfShowImages: urls.length >= 3 ? 3 : urls.length,
                         titleGallery: 'Order photos'.toUpperCase(),
                         childAspectRatio: 1.2,
                       ),
-                  ),
+                    ),
             ],
           ),
         ),
@@ -270,7 +270,6 @@ class AppointmentDetails extends StatelessWidget {
 
 Widget defaultContainer({
   required double width,
-
   required Color color,
   required Color textColor,
   required Color shadowColor,
@@ -279,7 +278,6 @@ Widget defaultContainer({
 }) =>
     Container(
       padding: const EdgeInsets.all(10),
-
       width: width,
       decoration: BoxDecoration(
         color: color,

@@ -236,28 +236,29 @@ class LayoutCubit extends Cubit<LayoutStates> {
     );
   }
 
-  Future<String> uploadFile(XFile image) async {
-
+  Future<String> uploadFile(
+    XFile image,
+  ) async {
     Reference reference = firebaseStorage
         .ref()
-        .child("order_images")
-        .child(image.name + DateTime.now().microsecondsSinceEpoch.toString());
+        .child("Users/orders_pics/${Uri.file(image.path).pathSegments.last}");
     emit(NewOrderUploadImageToFirebaseLoadingState());
     UploadTask uploadTask = reference.putFile(File(image.path));
     await uploadTask.whenComplete(() {
       emit(NewOrderUploadImageToFirebaseSuccessState());
-
     });
     return await reference.getDownloadURL();
   }
 
-   uploadImage(List<XFile> images) async {
-
+  uploadImage(
+    List<XFile> images,
+  ) async {
     print(images.length);
     for (int i = 0; i < images.length; i++) {
-      var imageUrl = await uploadFile(images[i]);
+      var imageUrl = await uploadFile(
+        images[i],
+      );
       listOfUrls.add(imageUrl.toString());
-
     }
     emit(NewOrderUploadAllImageToFirebaseSuccessState());
   }
@@ -297,7 +298,9 @@ class LayoutCubit extends Cubit<LayoutStates> {
       FirebaseFirestore.instance
           .collection('orders')
           .doc(uId)
-          .collection('user Orders').doc(value.id).update({"orderUid" : value.id});
+          .collection('user Orders')
+          .doc(value.id)
+          .update({"orderUid": value.id});
       emit(UploadOrderSuccessState());
     }).catchError((error) {
       emit(UploadOrderErrorState());
@@ -328,11 +331,14 @@ class LayoutCubit extends Cubit<LayoutStates> {
     });
   }
 
-  void removeOrder({required String orderUid}){
-    FirebaseFirestore.instance.collection('orders').doc(uId)
-        .collection('user Orders').doc(orderUid).delete();
+  void removeOrder({required String orderUid}) {
+    FirebaseFirestore.instance
+        .collection('orders')
+        .doc(uId)
+        .collection('user Orders')
+        .doc(orderUid)
+        .delete();
   }
-
 
   Stream<List<OrderModel>> orders() {
     return FirebaseFirestore.instance
@@ -347,10 +353,21 @@ class LayoutCubit extends Cubit<LayoutStates> {
   }
 
   // global date time
-DateTime ntpTime = DateTime.now();
+  DateTime ntpTime = DateTime.now();
 
-  void loadDateTime()async{
+  void loadDateTime() async {
     ntpTime = await NTP.now();
   }
 
+  Stream<List<UserModel>> techs() {
+    return FirebaseFirestore.instance
+        .collection("Users")
+        .snapshots()
+        .map((snapshot) {
+      return snapshot.docs
+          .where((element) => element.data()["isUser"] == false)
+          .map((e) => UserModel.fromJson(e.data()))
+          .toList();
+    });
+  }
 }

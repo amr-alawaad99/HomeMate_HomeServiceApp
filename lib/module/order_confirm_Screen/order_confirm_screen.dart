@@ -118,7 +118,7 @@ class OrderConfirmScreen extends StatelessWidget {
                   ),
                   child: MaterialButton(
                     onPressed: () async {
-                      await cubit.uploadImage(images);
+                      await cubit.uploadImage(images,);
                       String imgs = '';
                       List<String> urls = cubit.listOfUrls;
                       print(urls.length);

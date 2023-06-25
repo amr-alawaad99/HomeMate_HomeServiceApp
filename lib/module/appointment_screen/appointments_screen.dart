@@ -251,63 +251,66 @@ class AppointmentsScreen extends StatelessWidget {
                           const SizedBox(
                             height: 10,
                           ),
-                          Row(
-                            children: [
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(5),
-                                child: Image(
-                                  image: NetworkImage(LayoutCubit
-                                      .get(context)
-                                      .originalUser!
-                                      .isUser == false ? model.image! :
-                                  "https://img.freepik.com/free-vector/self-care-concept_23-2148523717.jpg?w=740&t=st=1678538562~exp=1678539162~hmac=a7d5a1db32b0d9a70e2ebbf68ab260a7ff455a23edb61284689ea8c3559233dd"),
-                                  width: 30,
-                                  height: 30,
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    LayoutCubit
+                          Expanded(
+                            child: Row(
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(5),
+                                  child: Image(
+                                    image: NetworkImage(LayoutCubit
                                         .get(context)
                                         .originalUser!
-                                        .isUser == false
-                                        ? model.userName!
-                                        : 'not defined',
-                                    style: const TextStyle(
-                                      fontSize: 15.0,
+                                        .isUser == false ? model.image! :
+                                    "https://img.freepik.com/free-vector/self-care-concept_23-2148523717.jpg?w=740&t=st=1678538562~exp=1678539162~hmac=a7d5a1db32b0d9a70e2ebbf68ab260a7ff455a23edb61284689ea8c3559233dd"),
+                                    width: 30,
+                                    height: 30,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+
+                                      LayoutCubit
+                                          .get(context)
+                                          .originalUser!
+                                          .isUser == false
+                                          ? model.userName!
+                                          : 'waiting for technical offers!',
+                                      style: const TextStyle(
+                                        fontSize: 15.0,
+                                      ),
                                     ),
-                                  ),
-                                  const SizedBox(
-                                    height: 5.0,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: const [
-                                      Image(
-                                        image: AssetImage(
-                                            'assets/images/star.png'),
-                                        width: 15.0,
-                                        height: 15.0,
-                                      ),
-                                      SizedBox(
-                                        width: 5,
-                                      ),
-                                      Text(
-                                        '4.5/5',
-                                        style: TextStyle(
-                                          fontSize: 12.0,
+                                    const SizedBox(
+                                      height: 5.0,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      children: const [
+                                        Image(
+                                          image: AssetImage(
+                                              'assets/images/star.png'),
+                                          width: 15.0,
+                                          height: 15.0,
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ],
+                                        SizedBox(
+                                          width: 5,
+                                        ),
+                                        Text(
+                                          '??/5',
+                                          style: TextStyle(
+                                            fontSize: 12.0,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
                           const SizedBox(
                             height: 15,
@@ -360,61 +363,50 @@ class AppointmentsScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                Expanded(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Ex.Cost',
-                            style: TextStyle(
-                              fontSize: 15.0,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Text(
+                          'Ex.Cost',
+                          style: TextStyle(
+                            fontSize: 15.0,
+                          ),
+                        ),
+                        Text(
+                          model.cost!,
+                          style: TextStyle(
+                            fontSize: 15.0,
+                            fontWeight: FontWeight.bold,
+                            color: secondaryColor,
+                          ),
+                        ),
+                        Expanded(
+                          child: SizedBox(
+                            height: double.infinity,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                InkWell(
+                                  onTap: () {
+                                    LayoutCubit.get(context).removeOrder(orderUid: model.orderUid!);
+                                  },
+                                  child: Icon(
+                                    TablerIcons.trash,
+                                    color: errorColor,
+                                  ),
+                                ),
+
+                              ],
                             ),
                           ),
-                          Text(
-                            model.cost!,
-                            style: TextStyle(
-                              fontSize: 15.0,
-                              fontWeight: FontWeight.bold,
-                              color: secondaryColor,
-                            ),
-                          ),
-                          Expanded(
-                            child: SizedBox(
-                              height: double.infinity,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  InkWell(
-                                    onTap: () {
-                                      LayoutCubit.get(context).removeOrder(orderUid: model.orderUid!);
-                                    },
-                                    child: Icon(
-                                      TablerIcons.trash,
-                                      color: errorColor,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 5,
-                                  ),
-                                  InkWell(
-                                    onTap: () {},
-                                    child: Icon(
-                                      TablerIcons.edit,
-                                      color: primaryColor,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ],
             ),
