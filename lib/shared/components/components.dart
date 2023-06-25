@@ -251,115 +251,116 @@ Widget defaultCategoryChooser({required String text}) => InkWell(
 Widget defaultSuppliersItem({
   required UserModel model,required context,
 }) {
-  return SizedBox(
-    height: 130,
-    child: Padding(
-        padding: const EdgeInsets.only(top: 10, right: 15, left: 15),
-        child: Container(
-          decoration: BoxDecoration(
-              color: SignInCubit.get(context).isDark
-                  ? Color(0xff303030)
-                  : Colors.white,
-              boxShadow: <BoxShadow>[
-                BoxShadow(
-                  color: SignInCubit.get(context).isDark
-                      ? Colors.transparent
-                      : Colors.black12,
-                  blurRadius: 20.0,
-                  offset: Offset(0.0, 0.75),
-                ),
-              ],
-              // color: Colors.white,
-              borderRadius: BorderRadius.circular(10.0)),
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(5),
-                  child: Image(image: NetworkImage("${model.profilePic}"),)
-                ),
-                const SizedBox(
-                  width: 20,
-                ),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(model.profileName!,
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                          )),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text('jop',
-                          style: TextStyle(
-                            fontSize: 15,
-                          )),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Icon(
-                            TablerIcons.map_pin,
-                            size: 20,
-                            color: secondaryColor,
-                          ),
-                          Expanded(
-                            child: Text(model.address!,
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                  fontSize: 15,
-                                )),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  width: 10,
-                ),
-                Column(
+  return Padding(
+    padding: const EdgeInsets.only(top: 15.0,),
+    child: SizedBox(
+      height: 130,
+      child: Container(
+        decoration: BoxDecoration(
+            color: SignInCubit.get(context).isDark
+                ? Color(0xff303030)
+                : Colors.white,
+            boxShadow: <BoxShadow>[
+              BoxShadow(
+                color: SignInCubit.get(context).isDark
+                    ? Colors.transparent
+                    : Colors.black12,
+                blurRadius: 20.0,
+                offset: Offset(0.0, 0.75),
+              ),
+            ],
+            // color: Colors.white,
+            borderRadius: BorderRadius.circular(10.0)),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(5),
+                child: Image(image: NetworkImage("${model.profilePic}"),)
+              ),
+              const SizedBox(
+                width: 20,
+              ),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Icon(
-                          Icons.star,
-                          size: 20,
-                          color: Colors.amber,
-                        ),
-                        SizedBox(
-                          width: 4,
-                        ),
-                        Text(
-                          '??/5',
-                          style: TextStyle(
-                            fontSize: 15,
-                          ),
-                        ),
-                      ],
-                    ),
+                    Text(model.profileName!,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        )),
                     SizedBox(
-                      height: 30,
+                      height: 10,
                     ),
-                    Text('distance',
+                    Text('jop',
                         style: TextStyle(
                           fontSize: 15,
                         )),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Icon(
+                          TablerIcons.map_pin,
+                          size: 20,
+                          color: secondaryColor,
+                        ),
+                        Expanded(
+                          child: Text(model.address!,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                fontSize: 15,
+                              )),
+                        ),
+                      ],
+                    ),
                   ],
-                )
-              ],
-            ),
+                ),
+              ),
+              SizedBox(
+                width: 10,
+              ),
+              Column(
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Icon(
+                        Icons.star,
+                        size: 20,
+                        color: Colors.amber,
+                      ),
+                      SizedBox(
+                        width: 4,
+                      ),
+                      Text(
+                        '??/5',
+                        style: TextStyle(
+                          fontSize: 15,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  Text('distance',
+                      style: TextStyle(
+                        fontSize: 15,
+                      )),
+                ],
+              )
+            ],
           ),
-        )),
+        ),
+      ),
+    ),
   );
 }
