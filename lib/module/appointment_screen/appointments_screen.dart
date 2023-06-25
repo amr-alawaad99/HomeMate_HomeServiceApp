@@ -12,71 +12,7 @@ import '../appointment_details/appointment_detials_screen.dart';
 import '../sign_in_screen/cubit/cubit.dart';
 
 class AppointmentsScreen extends StatelessWidget {
-  // List<Appointment> appointments = [
-  //   Appointment(
-  //     serviceName: 'Cleaning',
-  //     userName: 'Mohamed',
-  //     date: '21-10-2023',
-  //     time: '12:50 AM',
-  //     status: 'Finished',
-  //     cost: '250 EGP',
-  //     image: tempImage,
-  //   ),
-  //   Appointment(
-  //     serviceName: 'Kitchen',
-  //     userName: 'Ahmed',
-  //     date: '21-10-2023',
-  //     time: '12:50 AM',
-  //     status: 'Underway',
-  //     cost: '250 EGP',
-  //     image: tempImage,
-  //   ),
-  //   Appointment(
-  //     serviceName: 'Plumbing',
-  //     userName: 'Ibrahim',
-  //     date: '21-10-2023',
-  //     time: '12:50 AM',
-  //     status: 'Waiting Offers',
-  //     cost: '250 EGP',
-  //     image: tempImage,
-  //   ),
-  //   Appointment(
-  //     serviceName: 'Paint',
-  //     userName: 'Aly',
-  //     date: '21-10-2023',
-  //     time: '12:50 AM',
-  //     status: 'Finished',
-  //     cost: '250 EGP',
-  //     image: tempImage,
-  //   ),
-  //   Appointment(
-  //     serviceName: 'Carpentry',
-  //     userName: 'Saad',
-  //     date: '21-10-2023',
-  //     time: '12:50 AM',
-  //     status: 'Finished',
-  //     cost: '250 EGP',
-  //     image: tempImage,
-  //   ),
-  //   Appointment(
-  //     serviceName: 'Electricity',
-  //     userName: 'Mostafa',
-  //     date: '21-10-2023',
-  //     time: '12:50 AM',
-  //     status: 'Finished',
-  //     cost: '250 EGP',
-  //     image: tempImage,
-  //   ),
-  //   Appointment(
-  //     serviceName: 'Electricity',
-  //     userName: 'Mohsen',
-  //     date: '21-10-2023',
-  //     time: '12:50 AM',
-  //     status: 'Waiting Offers',
-  //     cost: '320 EGP',
-  //     image: tempImage,
-  //   ),
-  // ];
+
 
   final List<ChooseCategory> categories = [
     ChooseCategory(category: 'All'),
@@ -85,10 +21,7 @@ class AppointmentsScreen extends StatelessWidget {
     ChooseCategory(category: 'Waiting'),
   ];
 
-  // List<Appointment> deleteItem(index) {
-  //   appointments = List.from(index)..removeAt(index);
-  //   return appointments;
-  // }
+
 
   AppointmentsScreen({super.key});
 

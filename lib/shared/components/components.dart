@@ -319,6 +319,7 @@ Widget defaultSuppliersItem({
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
                                 fontSize: 15,
+
                               )),
                         ),
                       ],

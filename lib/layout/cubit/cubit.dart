@@ -370,4 +370,5 @@ class LayoutCubit extends Cubit<LayoutStates> {
           .toList();
     });
   }
+
 }
