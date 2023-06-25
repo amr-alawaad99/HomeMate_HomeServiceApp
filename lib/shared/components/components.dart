@@ -303,12 +303,15 @@ Widget defaultSuppliersItem({
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         Icon(
                           TablerIcons.map_pin,
                           size: 20,
                           color: secondaryColor,
+                        ),
+                        SizedBox(
+                          width: 5,
                         ),
                         Expanded(
                           child: Text(model.address!,
