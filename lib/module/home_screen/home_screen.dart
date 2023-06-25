@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
+import 'package:login_register_methods/layout/cubit/cubit.dart';
 
 
 import '../../model/category_model.dart';
+import '../../model/user_model.dart';
 import '../../shared/components/components.dart';
 import '../../shared/components/constants.dart';
 
@@ -43,56 +45,6 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<SupplierModel> suppliers = [
-      SupplierModel(
-      serviceName: 'Cleaning',
-      userName: 'Mohamed Mansour',
-      rate: '4.5/5',
-      address: 'Cairo, Nasr City',
-      distance: '2.5 km',
-      image: tempImage,
-    ),
-      SupplierModel(
-      serviceName: 'Cleaning',
-      userName: 'Mohamed Mansour',
-      rate: '4.5/5',
-      address: 'Cairo, Nasr City',
-      distance: '2.5 km',
-      image: tempImage,
-    ),
-      SupplierModel(
-        serviceName: 'Cleaning',
-        userName: 'Mohamed Mansour',
-        rate: '4.5/5',
-        address: 'Cairo, Nasr City',
-        distance: '2.5 km',
-        image: tempImage,
-      ),
-      SupplierModel(
-        serviceName: 'Cleaning',
-        userName: 'Mohamed Mansour',
-        rate: '4.5/5',
-        address: 'Cairo, Nasr City',
-        distance: '2.5 km',
-        image: tempImage,
-      ),
-      SupplierModel(
-        serviceName: 'Cleaning',
-        userName: 'Mohamed Mansour',
-        rate: '4.5/5',
-        address: 'Cairo, Nasr City',
-        distance: '2.5 km',
-        image: tempImage,
-      ),
-      SupplierModel(
-        serviceName: 'Cleaning',
-        userName: 'Mohamed Mansour',
-        rate: '4.5/5',
-        address: 'Cairo, Nasr City',
-        distance: '2.5 km',
-        image: tempImage,
-      ),
-    ];
     List<Categories> categories = [
       Categories(
         title: 'Cleaning',
@@ -183,15 +135,42 @@ class HomeScreen extends StatelessWidget {
               const SizedBox(
                 height: 15,
               ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height+100,
-                child: ListView.separated(
-                  physics: NeverScrollableScrollPhysics(),
-                  itemBuilder: (context, index) => defaultSupplierCard(suppliers[index]),
-                  separatorBuilder: (context, index) => Container(height: 2,),
-                  itemCount: 6,
-                ),
+              StreamBuilder<List<UserModel>>(
+                stream: LayoutCubit.get(context).techs(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasError) {
+                    return Text('Error No Data found! ${snapshot.error}');
+                  } else if (snapshot.hasData) {
+                    final techs = snapshot.data!.reversed;
+                    return ListView(
+                      physics: NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      children: techs
+                          .map(
+                            (e) => defaultSuppliersItem(
+                          model: e,
+                          context: context,
+                        ),
+                      )
+                          .toList(),
+                    );
+                  } else {
+                    return Center(
+                        child: CircularProgressIndicator(
+                          color: primaryColor,
+                        ));
+                  }
+                },
               ),
+              // SizedBox(
+              //   height: MediaQuery.of(context).size.height+100,
+              //   child: ListView.separated(
+              //     physics: NeverScrollableScrollPhysics(),
+              //     itemBuilder: (context, index) => defaultSupplierCard(suppliers[index]),
+              //     separatorBuilder: (context, index) => Container(height: 2,),
+              //     itemCount: 6,
+              //   ),
+              // ),
             ],
           )),
     );
