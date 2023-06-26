@@ -1,5 +1,6 @@
 import 'dart:io';
 
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -253,6 +254,7 @@ class LayoutCubit extends Cubit<LayoutStates> {
   uploadImage(
     List<XFile> images,
   ) async {
+    listOfUrls=[];
     print(images.length);
     for (int i = 0; i < images.length; i++) {
       var imageUrl = await uploadFile(
@@ -291,14 +293,10 @@ class LayoutCubit extends Cubit<LayoutStates> {
     emit(UploadOrderLoadingState());
     FirebaseFirestore.instance
         .collection('orders')
-        .doc(uId)
-        .collection('user Orders')
         .add(model.toMap())
         .then((value) {
       FirebaseFirestore.instance
           .collection('orders')
-          .doc(uId)
-          .collection('user Orders')
           .doc(value.id)
           .update({"orderUid": value.id});
       emit(UploadOrderSuccessState());
@@ -317,25 +315,21 @@ class LayoutCubit extends Cubit<LayoutStates> {
     uId = CacheHelper.getData(key: 'uid');
     FirebaseFirestore.instance
         .collection("orders")
-        .doc(uId)
-        .collection("user Orders")
         .get()
         .then((value) {
-      print(value.size);
+
       for (var element in value.docs) {
-        print(element.data()["date"]);
+
         myOrders.add(OrderModel.fromJson(element.data()));
       }
     }).catchError((error) {
-      print("FFFFFFFF $error");
+
     });
   }
 
   void removeOrder({required String orderUid}) {
     FirebaseFirestore.instance
         .collection('orders')
-        .doc(uId)
-        .collection('user Orders')
         .doc(orderUid)
         .delete();
   }
@@ -343,8 +337,6 @@ class LayoutCubit extends Cubit<LayoutStates> {
   Stream<List<OrderModel>> orders() {
     return FirebaseFirestore.instance
         .collection("orders")
-        .doc(uId)
-        .collection("user Orders")
         .orderBy('dateTimeForOrder')
         .snapshots()
         .map((snapshot) => snapshot.docs
@@ -359,7 +351,7 @@ class LayoutCubit extends Cubit<LayoutStates> {
     ntpTime = await NTP.now();
   }
 
-  Stream<List<UserModel>> techs() {
+  Stream<List<UserModel>> suppliers() {
     return FirebaseFirestore.instance
         .collection("Users")
         .snapshots()
@@ -370,5 +362,14 @@ class LayoutCubit extends Cubit<LayoutStates> {
           .toList();
     });
   }
+
+
+
+
+
+
+
+
+
 
 }
