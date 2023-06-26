@@ -10,6 +10,7 @@ import '../modules/history_screen/history_screen.dart';
 import '../modules/oder_tec_screen/order_tec_screen.dart';
 
 class LayoutTecCubit extends Cubit<LayoutTecStates> {
+
   LayoutTecCubit() : super(LayoutTechInitState());
 
   static LayoutTecCubit get(context) => BlocProvider.of(context);
