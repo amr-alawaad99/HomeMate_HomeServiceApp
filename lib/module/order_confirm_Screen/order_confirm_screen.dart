@@ -118,14 +118,15 @@ class OrderConfirmScreen extends StatelessWidget {
                   ),
                   child: MaterialButton(
                     onPressed: () async {
-                      await cubit.uploadImage(images,);
+                      await cubit.uploadImage(images);
                       String imgs = '';
                       List<String> urls = cubit.listOfUrls;
                       print(urls.length);
                       for (int i = 0; i < urls.length; i++) {
                         imgs += '${urls[i].toString()},';
                       }
-                      print(LayoutCubit.get(context).originalUser!.gpsLocation,);
+
+
                       cubit.orderCreate(
                         serviceName: cubit.categories[services].title,
                         date: date,
@@ -138,6 +139,7 @@ class OrderConfirmScreen extends StatelessWidget {
                         gpsLocation: LayoutCubit.get(context).originalUser!.gpsLocation,
 
                       );
+
                       navigateAndPush(context, widget: SuccessScreen());
                     },
                     child:
