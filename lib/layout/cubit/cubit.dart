@@ -2,6 +2,7 @@ import 'dart:io';
 
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,6 +18,7 @@ import '../../model/category_model.dart';
 import '../../model/orderModel.dart';
 import '../../model/user_model.dart';
 
+import '../../shared/components/components.dart';
 import '../../shared/components/constants.dart';
 import '../../shared/local/cache_helper.dart';
 
@@ -390,6 +392,52 @@ class LayoutCubit extends Cubit<LayoutStates> {
             .toList();
       });
   }
+  sendOTP() async {
+    FirebaseAuth.instance.verifyPhoneNumber(
+        phoneNumber: "+20${originalUser!.phoneNumber}",
+
+        verificationCompleted: (PhoneAuthCredential credential) async{
+          print("VERFICATION COMPLETED SUCCESSFULLLLLLLLLLLLLLLYYYYYYYYYYY");
+        },
+
+        verificationFailed: (FirebaseAuthException e) {
+          if(e.code == "invalid-phone-number"){
+            showToast(message: "Invalid phone number", toastColor: errorColor);
+          } else {
+            showToast(message: e.message.toString(), toastColor: errorColor);
+            emit(VerificationCodeSentErrorState(e.toString()));
+          }
+        },
+
+        codeSent: (verificationId, forceResendingToken) {
+          showToast(message: "a verification code has been sent to your phone number", toastColor: successColor);
+          emit(VerificationCodeSentSuccessState(verificationId));
+        },
+        codeAutoRetrievalTimeout: (verificationId) {
+
+        },
+        timeout: Duration(seconds: 60)
+    );
+  }
+
+  verifyOTP({
+    required String verificationId,
+    required String otpCode,
+  }) async {
+    PhoneAuthCredential credential = PhoneAuthProvider.credential(
+      verificationId: verificationId,
+      smsCode: otpCode,
+    );
+    FirebaseAuth.instance.currentUser!.linkWithCredential(credential).then((value) {
+      FirebaseFirestore.instance.collection("Users").doc(uId).update(
+          {"isVerified" : true});
+      emit(VerificationSuccessState());
+    }).catchError((error){
+      showToast(message: error.toString(), toastColor: errorColor);
+    });
+  }
+
+
 
 
 
