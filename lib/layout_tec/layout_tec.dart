@@ -294,15 +294,16 @@ class LayoutTecScreen extends StatelessWidget {
                 items: [
                   defaultBottomBarItem(context, "Home", TablerIcons.smart_home),
 
+
                   defaultBottomBarItem(
                     context,
-                    "Suppliers",
-                    TablerIcons.history,
+                    "Orders",
+                    TablerIcons.clipboard,
                   ),
                   defaultBottomBarItem(
                     context,
-                    "Appointment",
-                    TablerIcons.clipboard,
+                    "History",
+                    TablerIcons.history,
                   ),
                 ],
                 onTap: (value) {
