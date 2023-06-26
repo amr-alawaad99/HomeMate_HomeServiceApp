@@ -27,7 +27,7 @@ class EditProfileTechnicalScreen extends StatelessWidget {
           ),
           onPressed: () {
             // cubit.profilePic = null;
-            // Navigator.of(context).pop();
+            Navigator.of(context).pop();
           },
         ),
         title: Text(

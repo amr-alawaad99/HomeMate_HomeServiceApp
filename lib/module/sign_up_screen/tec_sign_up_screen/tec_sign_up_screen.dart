@@ -9,7 +9,6 @@ import 'package:login_register_methods/shared/local/cache_helper.dart';
 import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../../shared/components/constants.dart';
-import '../verification_screen.dart';
 
 class Services {
   final String icon;
@@ -330,6 +329,7 @@ class TecSignUpScreen extends StatelessWidget {
                                 'phone' : phoneController.text,
                                 'password' : passwordController.text,
                                 'isUser' : false,
+                                'serviceName':serviceList[cubit.serviceIndex].job
                               };
                               navigateAndPush(context, widget: Provider(
                                 create: (context) => SignupCubit(),

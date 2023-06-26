@@ -356,7 +356,7 @@ class LayoutCubit extends Cubit<LayoutStates> {
 
   Stream<List<OrderModel>> allOrders(String serviceName) {
     return FirebaseFirestore.instance
-        .collection("orders")
+        .collection("orders").orderBy('dateTimeForOrder')
         .snapshots()
         .map((snapshot) {
       return snapshot.docs

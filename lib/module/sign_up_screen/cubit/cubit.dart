@@ -1,4 +1,3 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -51,11 +50,13 @@ class SignupCubit extends Cubit<SignupStates> {
   }
 
   ///Select service on tech sign up screen
+  int serviceIndex = -1;
   void selectedService(List list, int index) {
     for (int i = 0; i < list.length; i++) {
       list[i].selected = false;
     }
     list[index].selected = true;
+    serviceIndex = index;
     emit(SelectedServiceChangeState());
   }
 
@@ -68,6 +69,7 @@ class SignupCubit extends Cubit<SignupStates> {
     required String uid,
     required bool isUser,
     bool isVerified = false,
+    String serviceName = '' ,
   }) {
     UserModel userModel = UserModel(
       uid: uid,
@@ -81,6 +83,7 @@ class SignupCubit extends Cubit<SignupStates> {
       profilePic:
           "https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?w=740&t=st=1683814060~exp=1683814660~hmac=4705fb79b3a531709bff00d930256c2bc9d17c0767e36d812dc2fefd9fc875ef",
       isUser: isUser,
+      serviceName: serviceName,
     );
 
     FirebaseFirestore.instance
@@ -104,6 +107,7 @@ class SignupCubit extends Cubit<SignupStates> {
     required String userName,
     required String phoneNumber,
     required bool isUser,
+    String serviceName ='',
   }) {
     emit(CreateUserLoadingState());
 
@@ -111,12 +115,14 @@ class SignupCubit extends Cubit<SignupStates> {
         .createUserWithEmailAndPassword(email: email, password: password)
         .then((value) {
       _createUserAccount(
-          name: name,
-          userName: userName,
-          phoneNumber: phoneNumber,
-          email: email,
-          uid: value.user!.uid,
-          isUser: isUser,
+        name: name,
+        userName: userName,
+        phoneNumber: phoneNumber,
+        email: email,
+        uid: value.user!.uid,
+        isUser: isUser,
+        serviceName: serviceName,
+
       );
     }).catchError((error) {
       emit(CreateUserErrorState(error.toString()));
@@ -125,6 +131,7 @@ class SignupCubit extends Cubit<SignupStates> {
 
   ///Check username
   bool? usernameExists;
+
   Future<void> checkUsername(String username) async {
     await FirebaseFirestore.instance.collection("Users").get().then((value) {
       if (value.size == 0) {
@@ -149,6 +156,7 @@ class SignupCubit extends Cubit<SignupStates> {
   /// Check if Google account exists or not
   OAuthCredential? credential;
   GoogleSignInAccount? googleUser;
+
   checkGoogleAccountExistence() async {
     FirebaseAuth auth = FirebaseAuth.instance;
 
@@ -183,7 +191,7 @@ class SignupCubit extends Cubit<SignupStates> {
   googleSignUp({
     required String userName,
     required String phoneNumber,
-}) async {
+  }) async {
     FirebaseAuth auth = FirebaseAuth.instance;
 
     // begin interactive sign in process
@@ -201,17 +209,14 @@ class SignupCubit extends Cubit<SignupStates> {
 
     // sign in
     await auth.signInWithCredential(credential!).then((value) {
-      _createUserAccount(name: googleUser!.displayName!, userName: userName,
-         isUser: true, phoneNumber: phoneNumber, email: googleUser!.email, uid: value.user!.uid,);
+      _createUserAccount(
+        name: googleUser!.displayName!,
+        userName: userName,
+        isUser: true,
+        phoneNumber: phoneNumber,
+        email: googleUser!.email,
+        uid: value.user!.uid,
+      );
     });
   }
-
-
-
-
-
-
-
-
-
 }

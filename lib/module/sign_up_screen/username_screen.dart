@@ -22,6 +22,7 @@ class UsernameScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(userinfo['serviceName']);
 
     var cubit = SignupCubit.get(context);
     ///Generate a random username
@@ -152,6 +153,8 @@ class UsernameScreen extends StatelessWidget {
                               userName: usernameController.text,
                               phoneNumber: userinfo['phone']!,
                               isUser: userinfo['isUser'],
+                              serviceName: userinfo['serviceName']
+
                             );
                           } else if(state is UsernameCheckingErrorState) {
                             showToast(message: "Error!", toastColor: errorColor);
