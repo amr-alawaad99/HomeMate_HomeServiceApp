@@ -10,6 +10,7 @@ import '../../../shared/components/components.dart';
 
 class OrderTechnicalScreen extends StatelessWidget {
   const OrderTechnicalScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     var cubit = LayoutCubit.get(context);
@@ -28,8 +29,7 @@ class OrderTechnicalScreen extends StatelessWidget {
                 shrinkWrap: true,
                 children: allOrders
                     .map(
-                      (e) =>
-                      defaultAppointmentCard(
+                      (e) => defaultAppointmentCard(
                           model: e,
                           context: context,
                           onTap: () {
@@ -37,16 +37,15 @@ class OrderTechnicalScreen extends StatelessWidget {
                                 widget: AppointmentDetails(
                                   model: e,
                                 ));
-                          }
-                      ),
-                )
+                          }),
+                    )
                     .toList(),
               );
             } else {
               return Center(
                   child: CircularProgressIndicator(
-                    color: primaryColor,
-                  ));
+                color: primaryColor,
+              ));
             }
           },
         ),
@@ -55,7 +54,7 @@ class OrderTechnicalScreen extends StatelessWidget {
   }
 
   Widget defaultAppointmentCard(
-      {required OrderModel model, required context, Function()? onTap}) =>
+          {required OrderModel model, required context, Function()? onTap}) =>
       Padding(
         padding: const EdgeInsets.only(left: 15.0, right: 15, top: 15),
         child: InkWell(
@@ -63,22 +62,14 @@ class OrderTechnicalScreen extends StatelessWidget {
           borderRadius: BorderRadius.circular(15.0),
           child: Container(
             padding: const EdgeInsets.all(15),
-
-            width: MediaQuery
-                .of(context)
-                .size
-                .width,
+            width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
-              color: SignInCubit
-                  .get(context)
-                  .isDark
+              color: SignInCubit.get(context).isDark
                   ? Color(0xff303030)
                   : Colors.white,
               boxShadow: <BoxShadow>[
                 BoxShadow(
-                  color: SignInCubit
-                      .get(context)
-                      .isDark
+                  color: SignInCubit.get(context).isDark
                       ? Colors.transparent
                       : Colors.black12,
                   blurRadius: 20.0,
@@ -91,7 +82,7 @@ class OrderTechnicalScreen extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
-              children:   [
+              children: [
                 Expanded(
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -104,8 +95,13 @@ class OrderTechnicalScreen extends StatelessWidget {
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
-                                Icon(TablerIcons.category,color: secondaryColor,),
-                                SizedBox(width: 5,),
+                                Icon(
+                                  TablerIcons.category,
+                                  color: primaryColor,
+                                ),
+                                SizedBox(
+                                  width: 5,
+                                ),
                                 Text(
                                   model.serviceName!,
                                   style: TextStyle(
@@ -121,8 +117,13 @@ class OrderTechnicalScreen extends StatelessWidget {
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
-                                Icon(TablerIcons.edit,color: secondaryColor,),
-                                SizedBox(width: 5,),
+                                Icon(
+                                  TablerIcons.edit,
+                                  color: primaryColor,
+                                ),
+                                SizedBox(
+                                  width: 5,
+                                ),
                                 Expanded(
                                   child: Text(
                                     model.notes!,
@@ -130,7 +131,6 @@ class OrderTechnicalScreen extends StatelessWidget {
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
                                       fontSize: 16.0,
-
                                     ),
                                   ),
                                 ),
@@ -142,8 +142,13 @@ class OrderTechnicalScreen extends StatelessWidget {
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
-                                Icon(TablerIcons.map_pin,color: secondaryColor,),
-                                SizedBox(width: 5,),
+                                Icon(
+                                  TablerIcons.map_pin,
+                                  color: primaryColor,
+                                ),
+                                SizedBox(
+                                  width: 5,
+                                ),
                                 Expanded(
                                   child: Text(
                                     model.location!,
@@ -152,7 +157,6 @@ class OrderTechnicalScreen extends StatelessWidget {
                                     style: TextStyle(fontSize: 16),
                                   ),
                                 ),
-
                               ],
                             ),
                             SizedBox(
@@ -161,14 +165,20 @@ class OrderTechnicalScreen extends StatelessWidget {
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
-                                Icon(TablerIcons.circle,color: warningColor,),
-                                SizedBox(width: 5,),
+                                Icon(
+                                  TablerIcons.circle,
+                                  color: warningColor,
+                                ),
+                                SizedBox(
+                                  width: 5,
+                                ),
                                 Expanded(
                                   child: Text(
                                     model.status!,
                                     maxLines: 1,
                                     overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(fontSize: 16,color: warningColor),
+                                    style: TextStyle(
+                                        fontSize: 16, color: warningColor),
                                   ),
                                 ),
                                 Spacer(),
@@ -191,20 +201,15 @@ class OrderTechnicalScreen extends StatelessWidget {
                                 ),
                               ],
                             ),
-
                           ],
                         ),
                       ),
-
-
                     ],
                   ),
                 ),
-
               ],
             ),
           ),
         ),
       );
-
 }

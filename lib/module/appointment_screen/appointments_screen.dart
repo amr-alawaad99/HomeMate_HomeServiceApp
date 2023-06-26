@@ -87,7 +87,7 @@ class AppointmentsScreen extends StatelessWidget {
             Column(
               children: [
                 StreamBuilder<List<OrderModel>>(
-                  stream: cubit.orders(),
+                  stream: cubit.orders(cubit.originalUser!.uid!),
                   builder: (context, snapshot) {
                     if (snapshot.hasError) {
                       return Text('Error No Data found! ${snapshot.error}');
