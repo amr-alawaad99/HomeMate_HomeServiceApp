@@ -222,37 +222,6 @@ class EditProfileTechnicalScreen extends StatelessWidget {
                           const SizedBox(
                             height: 24,
                           ),
-                          // Edit Service
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Service Name",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium!
-                                    .copyWith(fontSize: 15),
-                              ),
-                              const SizedBox(
-                                height: 8,
-                              ),
-                              defaultTextFormField(
-                                hintText: 'Service',
-                                maxLength: 50,
-                                controller: nameController,
-                                keyboardType: TextInputType.name,
-                                validator: (value) {
-                                  if (value!.isEmpty) {
-                                    return 'Service can not be empty!';
-                                  }
-                                  return null;
-                                },
-                              ),
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 24,
-                          ),
                           // Edit Email
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,

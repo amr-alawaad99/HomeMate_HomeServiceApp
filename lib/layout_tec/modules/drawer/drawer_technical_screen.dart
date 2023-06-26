@@ -8,6 +8,7 @@ import 'package:login_register_methods/shared/components/constants.dart';
 import '../../../module/onboarding_screen/onboarding_screen.dart';
 import '../../../module/sign_in_screen/cubit/cubit.dart';
 import '../../cubit/cubit.dart';
+import '../messages_technical/chats_tech_screen.dart';
 import '../profile_technical/profile_tech_screen.dart';
 
 
@@ -200,7 +201,7 @@ class _DrawerTechnicalScreenState extends State<DrawerTechnicalScreen> {
                                     width: 15,
                                   ),
                                   Expanded(
-                                    child: Text("Messages"),
+                                    child: Text("Chat"),
                                   ),
                                   Icon(
                                     TablerIcons.chevron_right,
@@ -211,15 +212,12 @@ class _DrawerTechnicalScreenState extends State<DrawerTechnicalScreen> {
                             ),
                             onTap: () {
                               print("message");
-                              // Navigator.push(
-                              //     context,
-                              //     MaterialPageRoute(
-                              //       builder: (BuildContext context)=>  ChatsTechnicalScreen(
-                              //         chat: chatData[0],
-                              //         press: () {  },
-                              //       ),
-                              //     ),
-                              // );
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (BuildContext context)=>  ChatsTechnicalScreen(),
+                                  ),
+                              );
                             },
                           ),
                           InkWell(

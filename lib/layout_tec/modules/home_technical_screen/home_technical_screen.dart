@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:login_register_methods/shared/components/constants.dart';
 
+import '../../../module/sign_in_screen/cubit/cubit.dart';
+
 class HomeTechnicalScreen extends StatefulWidget {
   const HomeTechnicalScreen({super.key});
 
@@ -34,39 +36,47 @@ class _HomeTechnicalScreenState extends State<HomeTechnicalScreen> with SingleTi
 
     return Column(
       children: [
-        Card(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
-          ),
-          elevation: 0,
-          shadowColor: Colors.black,
-          child: Container(
-            margin: EdgeInsets.symmetric(horizontal: 16),
-            decoration: BoxDecoration(
-              color: Colors.white,
+        Container(
+          margin: EdgeInsets.symmetric(horizontal: 16),
+          child: Card(
+            shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8),
             ),
-            child: TabBar(
-              controller: tabController,
-              labelPadding: EdgeInsets.symmetric(horizontal: 30),
-              indicator: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                color: primaryColor,
+            elevation: 0,
+            shadowColor: Colors.black,
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(8),
               ),
-              tabs:  const [
-                Tab(
-                  child: Text(
-                    'Progress',
-                    style: TextStyle(color: Colors.black),
-                  ),
+              child: TabBar(
+                controller: tabController,
+                labelPadding: EdgeInsets.symmetric(horizontal: 30),
+                indicator: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  color: primaryColor,
                 ),
-                Tab(
-                  child: Text(
-                    'Accepted',
-                    style: TextStyle(color: Colors.black),
+                tabs:  const [
+                  Tab(
+                    child: Text(
+                      'Progress',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 20,
+                      ),
+                    ),
                   ),
-                ),
-              ],
+                  Tab(
+                    child: Text(
+                      'Accepted',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 20,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -78,142 +88,272 @@ class _HomeTechnicalScreenState extends State<HomeTechnicalScreen> with SingleTi
           child: TabBarView(
             controller: tabController,
             children: [
+              //For Progress Orders
               ListView.builder(
                 itemCount: 12,
                 shrinkWrap: true,
-                scrollDirection: Axis.vertical,
+                physics: NeverScrollableScrollPhysics(),
                 itemBuilder: (BuildContext context, int index){
-                  return Container(
-                    height: 80,
-                    width: double.infinity,
-                    margin: EdgeInsets.only(left: 16, right: 16, bottom: 8),
-                    padding: EdgeInsets.symmetric(horizontal: 8,vertical: 12),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        Row(
-                          children: [
-                            Text(
-                              'Client Name',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 20,
+                  return InkWell(
+                    onTap: (){},
+                    borderRadius: BorderRadius.circular(15.0),
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      padding: const EdgeInsets.all(12),
+                      margin: EdgeInsets.only(bottom: 16,left: 16, right: 16),
+                      decoration: BoxDecoration(
+                        color: SignInCubit.get(context).isDark
+                            ? Color(0xff303030)
+                            : Colors.white,
+                        boxShadow: <BoxShadow>[
+                          BoxShadow(
+                            color: SignInCubit.get(context).isDark
+                                ? Colors.transparent
+                                : Colors.black12,
+                            blurRadius: 20.0,
+                            offset: Offset(0.0, 0.75),
+                          ),
+                        ],
+                        // color: Colors.white,
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: const [
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Icon(
+                                TablerIcons.category,
+                                color: primaryColor,
                               ),
-                            ),
-                            Spacer(),
-                            Text(
-                              '10:0 AM : 2:30 PM',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 12,
+                              SizedBox(
+                                width: 8,
                               ),
-                            ),
-                          ],
-                        ),
-                        Spacer(),
-                        Row(
-                          children: [
-                            Text(
-                              'location',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.w300,
-                                fontSize: 16,
+                              Text(
+                                'model.serviceName!',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 19.0,
+                                ),
                               ),
-                            ),
-                            Spacer(),
-                            Text(
-                              'Status',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 14,
+                              Spacer(),
+                              Text(
+                                'model.date!',
+                                // model.date!,
+                                style: TextStyle(
+                                  fontSize: 12.0,
+                                ),
                               ),
-                            ),
-                            SizedBox(
-                              width: 4,
-                            ),
-                            Icon(
-                              TablerIcons.circle,
-                              color: Colors.grey,
-                            ),
-                          ],
-                        ),
-                      ],
+                            ],
+                          ),
+                          SizedBox(
+                            height: 12.0,
+                          ),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Icon(
+                                TablerIcons.edit,
+                                color: primaryColor,
+                              ),
+                              SizedBox(
+                                width: 8,
+                              ),
+                              Text(
+                                'model.notes!',
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                  fontSize: 16.0,
+                                ),
+                              ),
+                              Spacer(),
+                              Text(
+                                'model.time!',
+                                // model.time!,
+                                style: TextStyle(
+                                  fontSize: 12.0,
+                                ),
+                              ),
+
+                            ],
+                          ),
+                          SizedBox(
+                            height: 12.0,
+                          ),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Icon(
+                                TablerIcons.map_pin,
+                                color: primaryColor,
+                              ),
+                              SizedBox(
+                                width: 8,
+                              ),
+                              Expanded(
+                                child: Text(
+                                  'model.location!',
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(fontSize: 16),
+                                ),
+                              ),
+                              Spacer(),
+                              Text(
+                                'Status',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                ),
+                              ),
+                              SizedBox(
+                                width: 8,
+                              ),
+                              Icon(
+                                TablerIcons.circle,
+                                color: Colors.grey,
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   );
                 },
               ),
+              //For Accepted Orders
               ListView.builder(
                 itemCount: 12,
                 shrinkWrap: true,
-                scrollDirection: Axis.vertical,
+                physics: NeverScrollableScrollPhysics(),
                 itemBuilder: (BuildContext context, int index){
-                  return Container(
-                    height: 80,
-                    width: double.infinity,
-                    margin: EdgeInsets.only(left: 16, right: 16, bottom: 8),
-                    padding: EdgeInsets.symmetric(horizontal: 8,vertical: 12),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        Row(
-                          children: [
-                            Text(
-                              'Client Name',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 20,
+                  return InkWell(
+                    onTap: (){},
+                    borderRadius: BorderRadius.circular(15.0),
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      padding: const EdgeInsets.all(12),
+                      margin: EdgeInsets.only(bottom: 16,left: 16, right: 16),
+                      decoration: BoxDecoration(
+                        color: SignInCubit.get(context).isDark
+                            ? Color(0xff303030)
+                            : Colors.white,
+                        boxShadow: <BoxShadow>[
+                          BoxShadow(
+                            color: SignInCubit.get(context).isDark
+                                ? Colors.transparent
+                                : Colors.black12,
+                            blurRadius: 20.0,
+                            offset: Offset(0.0, 0.75),
+                          ),
+                        ],
+                        // color: Colors.white,
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: const [
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Icon(
+                                TablerIcons.category,
+                                color: primaryColor,
                               ),
-                            ),
-                            Spacer(),
-                            Text(
-                              '10:0 AM : 2:30 PM',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 12,
+                              SizedBox(
+                                width: 8,
                               ),
-                            ),
-                          ],
-                        ),
-                        Spacer(),
-                        Row(
-                          children: [
-                            Text(
-                              'location',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.w300,
-                                fontSize: 16,
+                              Text(
+                                'model.serviceName!',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 19.0,
+                                ),
                               ),
-                            ),
-                            Spacer(),
-                            Text(
-                              'Status',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 14,
+                              Spacer(),
+                              Text(
+                                'model.date!',
+                                // model.date!,
+                                style: TextStyle(
+                                  fontSize: 12.0,
+                                ),
                               ),
-                            ),
-                            SizedBox(
-                              width: 4,
-                            ),
-                            Icon(
-                              TablerIcons.circle,
-                              color: Colors.cyanAccent,
-                            ),
-                          ],
-                        ),
-                      ],
+                            ],
+                          ),
+                          SizedBox(
+                            height: 12.0,
+                          ),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Icon(
+                                TablerIcons.edit,
+                                color: primaryColor,
+                              ),
+                              SizedBox(
+                                width: 8,
+                              ),
+                              Text(
+                                'model.notes!',
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                  fontSize: 16.0,
+                                ),
+                              ),
+                              Spacer(),
+                              Text(
+                                'model.time!',
+                                // model.time!,
+                                style: TextStyle(
+                                  fontSize: 12.0,
+                                ),
+                              ),
+
+                            ],
+                          ),
+                          SizedBox(
+                            height: 12.0,
+                          ),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Icon(
+                                TablerIcons.map_pin,
+                                color: primaryColor,
+                              ),
+                              SizedBox(
+                                width: 8,
+                              ),
+                              Expanded(
+                                child: Text(
+                                  'model.location!',
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(fontSize: 16),
+                                ),
+                              ),
+                              Spacer(),
+                              Text(
+                                'Status',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                ),
+                              ),
+                              SizedBox(
+                                width: 8,
+                              ),
+                              Icon(
+                                TablerIcons.circle,
+                                color: Colors.cyan,
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   );
                 },

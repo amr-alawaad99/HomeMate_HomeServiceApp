@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:login_register_methods/shared/components/constants.dart';
-
 import '../../../layout/cubit/cubit.dart';
 import '../../../model/orderModel.dart';
-
 import '../../../module/sign_in_screen/cubit/cubit.dart';
 import '../../../shared/components/components.dart';
 import '../tec_order_details/tec_order_details.dart';
@@ -28,19 +26,17 @@ class OrderTechnicalScreen extends StatelessWidget {
               return ListView(
                 physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
-                children: allOrders
-                    .map(
-                      (e) => defaultAppointmentCard(
+                children: allOrders.map(
+                  (e) => defaultAppointmentCard(
+                    model: e,
+                    context: context,
+                    onTap: () {
+                      navigateAndPush(context,
+                        widget: TechnicalOrderDetails(
                           model: e,
-                          context: context,
-                          onTap: () {
-                            navigateAndPush(context,
-                                widget: TechnicalOrderDetails(
-                                  model: e,
-                                ));
-                          }),
-                    )
-                    .toList(),
+                        ));
+                    }),
+                  ).toList(),
               );
             } else {
               return Center(
@@ -54,15 +50,17 @@ class OrderTechnicalScreen extends StatelessWidget {
     );
   }
 
-  Widget defaultAppointmentCard(
-          {required OrderModel model, required context, Function()? onTap}) =>
-      Padding(
-        padding: const EdgeInsets.only(left: 15.0, right: 15, top: 15),
+  Widget defaultAppointmentCard({
+    required OrderModel model,
+    required context,
+    Function()? onTap
+  }) => Padding(
+        padding: const EdgeInsets.only(left: 16, right: 16, top: 16),
         child: InkWell(
           onTap: onTap,
-          borderRadius: BorderRadius.circular(15.0),
+          borderRadius: BorderRadius.circular(16),
           child: Container(
-            padding: const EdgeInsets.all(15),
+            padding: const EdgeInsets.all(16),
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
               color: SignInCubit.get(context).isDark
@@ -78,135 +76,107 @@ class OrderTechnicalScreen extends StatelessWidget {
                 ),
               ],
               // color: Colors.white,
-              borderRadius: BorderRadius.circular(10.0),
+              borderRadius: BorderRadius.circular(12),
             ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Expanded(
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                Icon(
-                                  TablerIcons.category,
-                                  color: primaryColor,
-                                ),
-                                SizedBox(
-                                  width: 5,
-                                ),
-                                Text(
-                                  model.serviceName!,
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 19.0,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                Icon(
-                                  TablerIcons.edit,
-                                  color: primaryColor,
-                                ),
-                                SizedBox(
-                                  width: 5,
-                                ),
-                                Expanded(
-                                  child: Text(
-                                    model.notes!,
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(
-                                      fontSize: 16.0,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 10.0,
-                            ),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                Icon(
-                                  TablerIcons.map_pin,
-                                  color: primaryColor,
-                                ),
-                                SizedBox(
-                                  width: 5,
-                                ),
-                                Expanded(
-                                  child: Text(
-                                    model.location!,
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(fontSize: 16),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 10.0,
-                            ),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                Icon(
-                                  TablerIcons.circle,
-                                  color: warningColor,
-                                ),
-                                SizedBox(
-                                  width: 5,
-                                ),
-                                Expanded(
-                                  child: Text(
-                                    model.status!,
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(
-                                        fontSize: 16, color: warningColor),
-                                  ),
-                                ),
-                                Spacer(),
-                                Text(
-                                  model.date!,
-                                  // model.date!,
-                                  style: TextStyle(
-                                    fontSize: 12.0,
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 2,
-                                ),
-                                Text(
-                                  model.time!,
-                                  // model.time!,
-                                  style: TextStyle(
-                                    fontSize: 12.0,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Icon(
+                      TablerIcons.category,
+                      color: primaryColor,
+                    ),
+                    SizedBox(
+                      width: 8,
+                    ),
+                    Text(
+                      model.serviceName!,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 19.0,
                       ),
-                    ],
-                  ),
+                    ),
+                    Spacer(),
+                    Icon(
+                      TablerIcons.circle,
+                      color: warningColor,
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Text(
+                      model.status!,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                          fontSize: 16, color: warningColor),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 12.0,
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Icon(
+                      TablerIcons.edit,
+                      color: primaryColor,
+                    ),
+                    SizedBox(
+                      width: 8,
+                    ),
+                    Text(
+                      model.notes!,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        fontSize: 16.0,
+                      ),
+                    ),
+                    Spacer(),
+                    Text(
+                      model.date!,
+                      // model.date!,
+                      style: TextStyle(
+                        fontSize: 12.0,
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 12.0,
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Icon(
+                      TablerIcons.map_pin,
+                      color: primaryColor,
+                    ),
+                    SizedBox(
+                      width: 8,
+                    ),
+                    Expanded(
+                      child: Text(
+                        model.location!,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(fontSize: 16),
+                      ),
+                    ),
+                    Spacer(),
+                    Text(
+                      model.time!,
+                      // model.time!,
+                      style: TextStyle(
+                        fontSize: 12.0,
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),

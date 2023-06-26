@@ -50,7 +50,7 @@ class ProfileTechnicalScreen extends StatelessWidget {
                     height: 130,
                     child: Stack(
                       alignment: Alignment.center,
-                      children: const [
+                      children:  [
                         // AVATAR WHITE BORDER
                         CircleAvatar(
                           radius: 60,
@@ -59,7 +59,7 @@ class ProfileTechnicalScreen extends StatelessWidget {
                         // AVATAR
                         CircleAvatar(
                           backgroundColor: Colors.white,
-                          backgroundImage: NetworkImage('cubit.originalUser!.profilePic!'),
+                          backgroundImage: tempImage,
                           radius: 55,
                         ),
                       ],
@@ -200,6 +200,77 @@ class ProfileTechnicalScreen extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(height: 20,),
+                    Row(
+                      children: [
+                        //Icon
+                        const Padding(
+                          padding: EdgeInsets.only(bottom: 5),
+                          child: Icon(TablerIcons.home_cog, color: secondaryColor,),
+                        ),
+                        const SizedBox(width: 16),
+                        //Text
+                        Expanded(
+                          child: Text(
+                            'Service Name',
+                            style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 15),
+                          ),
+                        ),
+
+                        //Verification check Icon
+                        // if(FirebaseAuth.instance.currentUser!.emailVerified)
+                        //   Padding(
+                        //     padding: EdgeInsets.only(bottom: 5),
+                        //     child: IconButton(
+                        //       onPressed: () {
+                        //         navigateAndPush(context,
+                        //           widget: Dialog(
+                        //             child: Padding(
+                        //               padding: const EdgeInsets.all(8.0),
+                        //               child: Text("Your email is verified"),
+                        //             ),
+                        //           ),
+                        //         );
+                        //       },
+                        //       icon: Icon(TablerIcons.circle_check, color: successColor,),
+                        //     ),
+                        //   ),
+                        // if(!FirebaseAuth.instance.currentUser!.emailVerified)
+                        //   Padding(
+                        //     padding: EdgeInsets.only(bottom: 5),
+                        //     child: IconButton(
+                        //       onPressed: () {
+                        //         navigateAndPush(context, widget: Dialog(
+                        //           child: Column(
+                        //             mainAxisSize: MainAxisSize.min,
+                        //             children: [
+                        //               SizedBox(height: 10,),
+                        //               Row(
+                        //                 mainAxisAlignment: MainAxisAlignment.center,
+                        //                 children: const [
+                        //                   Icon(TablerIcons.alert_circle, color: errorColor,),
+                        //                   SizedBox(width: 10,),
+                        //                   Text("Your email is not verified!"),
+                        //                 ],
+                        //               ),
+                        //               TextButton(onPressed: () async {
+                        //                 try {
+                        //                   await FirebaseAuth.instance.currentUser!.sendEmailVerification();
+                        //                   showToast(message: "Verification link sent\nCheck your email", toastColor: successColor);
+                        //                 } on FirebaseAuthException catch (e) {
+                        //                   showToast(message: e.message.toString(), toastColor: errorColor);
+                        //                 }
+                        //               }, child: Text("resend verification link"),),
+                        //             ],
+                        //           ),
+                        //         ));
+                        //       },
+                        //       icon: Icon(TablerIcons.alert_circle, color: errorColor,),
+                        //     ),
+                        //   ),
+
+                      ],
+                    ),
+                    const SizedBox(height: 20,),
                     // Phone Number
                     // Text(
                     //   "Phone Number",
@@ -263,37 +334,7 @@ class ProfileTechnicalScreen extends StatelessWidget {
                     SizedBox(
                       height: 50,
                     ),
-                    Divider(),
-                    InkWell(
-                      child: Padding(
-                        padding: EdgeInsets.only(bottom: 16),
-                        child: Row(
-                          children: const [
-                            RotatedBox(
-                              quarterTurns: 2,
-                              child: Icon(
-                                TablerIcons.logout,
-                                color: errorColor,
-                              ),
-                            ),
-                            SizedBox(
-                              width: 16,
-                            ),
-                            Expanded(
-                              child: Text(
-                                "Log Out",
-                                style: TextStyle(
-                                  color: errorColor,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      onTap: () {
-                        LayoutTecCubit.get(context).singOut();
-                      },
-                    ),
+
                   ],
                 ),
               ),

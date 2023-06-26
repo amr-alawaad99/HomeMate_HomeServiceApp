@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:login_register_methods/shared/components/constants.dart';
-
 import '../../../layout/cubit/cubit.dart';
 import '../../../model/orderModel.dart';
 import '../../../module/appointment_details/appointment_detials_screen.dart';
@@ -87,120 +86,108 @@ class HistoryScreen extends StatelessWidget {
               // color: Colors.white,
               borderRadius: BorderRadius.circular(10.0),
             ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
-              children:   [
-                Expanded(
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                Icon(TablerIcons.category,color: primaryColor,),
-                                SizedBox(width: 5,),
-                                Text(
-                                  model.serviceName!,
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 19.0,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                Icon(TablerIcons.edit,color: primaryColor,),
-                                SizedBox(width: 5,),
-                                Expanded(
-                                  child: Text(
-                                    model.notes!,
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(
-                                      fontSize: 16.0,
-
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 10.0,
-                            ),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                Icon(TablerIcons.map_pin,color: primaryColor,),
-                                SizedBox(width: 5,),
-                                Expanded(
-                                  child: Text(
-                                    model.location!,
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(fontSize: 16),
-                                  ),
-                                ),
-
-                              ],
-                            ),
-                            SizedBox(
-                              height: 10.0,
-                            ),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                Icon(TablerIcons.circle,color: successColor,),
-                                SizedBox(width: 5,),
-                                Expanded(
-                                  child: Text(
-                                    model.status!,
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(fontSize: 16,color: successColor),
-                                  ),
-                                ),
-                                Spacer(),
-                                Text(
-                                  model.date!,
-                                  // model.date!,
-                                  style: TextStyle(
-                                    fontSize: 12.0,
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 2,
-                                ),
-                                Text(
-                                  model.time!,
-                                  // model.time!,
-                                  style: TextStyle(
-                                    fontSize: 12.0,
-                                  ),
-                                ),
-                              ],
-                            ),
-
-
-                          ],
-                        ),
+              children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Icon(
+                      TablerIcons.category,
+                      color: primaryColor,
+                    ),
+                    SizedBox(
+                      width: 8,
+                    ),
+                    Text(
+                      model.serviceName!,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 19.0,
                       ),
-
-
-                    ],
-                  ),
+                    ),
+                    Spacer(),
+                    Icon(
+                      TablerIcons.circle,
+                      color: successColor,
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Text(
+                      model.status!,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                          fontSize: 16,
+                          color: successColor,
+                      ),
+                    ),
+                  ],
                 ),
-
+                SizedBox(
+                  height: 12.0,
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Icon(
+                      TablerIcons.edit,
+                      color: primaryColor,
+                    ),
+                    SizedBox(
+                      width: 8,
+                    ),
+                    Text(
+                      model.notes!,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        fontSize: 16.0,
+                      ),
+                    ),
+                    Spacer(),
+                    Text(
+                      model.date!,
+                      // model.date!,
+                      style: TextStyle(
+                        fontSize: 12.0,
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 12.0,
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Icon(
+                      TablerIcons.map_pin,
+                      color: primaryColor,
+                    ),
+                    SizedBox(
+                      width: 8,
+                    ),
+                    Expanded(
+                      child: Text(
+                        model.location!,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(fontSize: 16),
+                      ),
+                    ),
+                    Spacer(),
+                    Text(
+                      model.time!,
+                      // model.time!,
+                      style: TextStyle(
+                        fontSize: 12.0,
+                      ),
+                    ),
+                  ],
+                ),
               ],
             ),
           ),
