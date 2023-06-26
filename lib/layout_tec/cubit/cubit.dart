@@ -32,7 +32,7 @@ class LayoutTecCubit extends Cubit<LayoutTecStates> {
 
   UserModel? originalUser;
 
-  void getUserData() {
+  void getUserData( ) {
     emit(GetUserDataLoadingState());
     FirebaseFirestore.instance.collection("Users").doc(uId).get().then((value) {
       originalUser = UserModel.fromJson(value.data()!);

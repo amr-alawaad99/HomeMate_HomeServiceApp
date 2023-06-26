@@ -17,7 +17,7 @@ class OrderTechnicalScreen extends StatelessWidget {
     return Column(
       children: [
         StreamBuilder<List<OrderModel>>(
-          stream: cubit.allOrders(),
+          stream: cubit.allOrders(cubit.originalUser!.serviceName!),
           builder: (context, snapshot) {
             if (snapshot.hasError) {
               return Text('Error No Data found! ${snapshot.error}');
@@ -63,7 +63,7 @@ class OrderTechnicalScreen extends StatelessWidget {
           borderRadius: BorderRadius.circular(15.0),
           child: Container(
             padding: const EdgeInsets.all(15),
-            height: 150,
+
             width: MediaQuery
                 .of(context)
                 .size
@@ -152,6 +152,25 @@ class OrderTechnicalScreen extends StatelessWidget {
                                     style: TextStyle(fontSize: 16),
                                   ),
                                 ),
+
+                              ],
+                            ),
+                            SizedBox(
+                              height: 10.0,
+                            ),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                Icon(TablerIcons.circle,color: warningColor,),
+                                SizedBox(width: 5,),
+                                Expanded(
+                                  child: Text(
+                                    model.status!,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(fontSize: 16,color: warningColor),
+                                  ),
+                                ),
                                 Spacer(),
                                 Text(
                                   model.date!,
@@ -172,7 +191,6 @@ class OrderTechnicalScreen extends StatelessWidget {
                                 ),
                               ],
                             ),
-
 
                           ],
                         ),

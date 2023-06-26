@@ -364,16 +364,31 @@ class LayoutCubit extends Cubit<LayoutStates> {
   }
 
 
-  Stream<List<OrderModel>> allOrders() {
+  Stream<List<OrderModel>> allOrders(String serviceName) {
     return FirebaseFirestore.instance
         .collection("orders")
         .snapshots()
         .map((snapshot) {
       return snapshot.docs
-          .where((element) => element.data()["serviceName"] == "Electricity")
+          .where((element) => element.data()["serviceName"] == "$serviceName")
+          .where((element) => element.data()["status"] == "waiting")
           .map((e) => OrderModel.fromJson(e.data()))
           .toList();
     });
+  }
+
+
+    Stream<List<OrderModel>> finishedOrders(String serviceName) {
+      return FirebaseFirestore.instance
+          .collection("orders")
+          .snapshots()
+          .map((snapshot) {
+        return snapshot.docs
+            .where((element) => element.data()["serviceName"] == "$serviceName")
+            .where((element) => element.data()["status"] == "finished")
+            .map((e) => OrderModel.fromJson(e.data()))
+            .toList();
+      });
   }
 
 

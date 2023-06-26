@@ -114,6 +114,12 @@ class MyApp extends StatelessWidget {
 
 
               darkTheme: ThemeData(
+                textTheme: const TextTheme(
+                  bodyMedium: TextStyle(
+                    fontSize: 18.0,
+                    fontFamily: "Roboto",
+                  ),
+                ),
                 colorScheme: ColorScheme.dark(),
                 scaffoldBackgroundColor: dark1,
                 appBarTheme: AppBarTheme(
