@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:login_register_methods/layout/cubit/cubit.dart';
 import 'package:login_register_methods/layout/cubit/states.dart';
 import 'package:login_register_methods/layout/main_layout_screen.dart';
 import 'package:login_register_methods/module/sign_in_screen/cubit/cubit.dart';
 import 'package:login_register_methods/module/sign_in_screen/cubit/states.dart';
+import 'package:login_register_methods/module/sign_in_screen/reset_password_screen.dart';
 import 'package:login_register_methods/shared/components/components.dart';
 import 'package:login_register_methods/shared/components/constants.dart';
 import 'package:login_register_methods/shared/local/cache_helper.dart';
+
+
 import '../../layout_tec/layout_tech.dart';
 import '../../model/user_model.dart';
 import '../sign_up_screen/google_facebook_signup_info.dart';
@@ -38,7 +42,7 @@ class SignInScreen extends StatelessWidget {
           if (state is LoginSuccessState) {
             CacheHelper.saveData(key: "uid", value: state.uid).then((value) {
 
-                // navigatePushDelete(context, widget: MainLayoutScreen());
+              // navigatePushDelete(context, widget: MainLayoutScreen());
 
 
               //TO GET THE NEW LOGGED IN ACCOUNT IMMEDIATELY RATHER THAN THE PREVIOUS ACCOUNT!!
@@ -76,6 +80,7 @@ class SignInScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        // Title Text
                         RichText(
                           text: TextSpan(
                               style: Theme.of(context)
@@ -92,15 +97,16 @@ class SignInScreen extends StatelessWidget {
                                       .textTheme
                                       .bodyMedium!
                                       .copyWith(
-                                          fontSize: 22.0,
-                                          color: secondaryColor,
-                                          fontStyle: FontStyle.italic),
+                                      fontSize: 22.0,
+                                      color: secondaryColor,
+                                      fontStyle: FontStyle.italic),
                                 ),
                               ]),
                         ),
                         SizedBox(
                           height: screenHeight * 0.02,
                         ),
+                        // Caption Text
                         Text(
                           "Sign in and enjoy all the services of the application",
                           style: Theme.of(context)
@@ -111,6 +117,7 @@ class SignInScreen extends StatelessWidget {
                         SizedBox(
                           height: screenHeight * 0.05,
                         ),
+                        // Email input
                         Container(
                           child: defaultTextFormField(
                             hintText: "Email",
@@ -127,6 +134,7 @@ class SignInScreen extends StatelessWidget {
                         const SizedBox(
                           height: 10,
                         ),
+                        // Password input
                         Container(
                           child: defaultTextFormField(
                             hintText: "Password",
@@ -146,9 +154,14 @@ class SignInScreen extends StatelessWidget {
                             },
                           ),
                         ),
-                        const SizedBox(
-                          height: 20,
+                        // Forgot Password
+                        TextButton(
+                          onPressed: () {
+                            navigateAndPush(context, widget: ResetPasswordScreen());
+                          },
+                          child: Text("Forgot your password?"),
                         ),
+                        // Sign in button
                         Container(
                           child: defaultButton(
                             text: "Sign In",
@@ -182,10 +195,8 @@ class SignInScreen extends StatelessWidget {
                                   await SignInCubit.get(context)
                                       .checkGoogleAccountExistence();
                                 },
-                                text: "G",
+                                child: Icon(TablerIcons.brand_google, color: Colors.red, size: 30),
                                 buttonColor: Colors.white,
-                                textColor: Colors.red.shade400,
-                                fontSize: 30.0,
                               ),
                             ),
                             const SizedBox(
@@ -193,12 +204,11 @@ class SignInScreen extends StatelessWidget {
                             ),
                             Expanded(
                               child: defaultButton(
-                                onPress: () {},
-                                text: "f",
+                                onPress: () {
+                                  navigateAndPush(context, widget: comingSoonDialog());
+                                },
+                                child: Icon(TablerIcons.brand_facebook, color: Colors.blue.shade900, size: 30,),
                                 buttonColor: Colors.white,
-                                textColor: Colors.blue.shade900,
-                                isBold: true,
-                                fontSize: 30.0,
                               ),
                             ),
                           ],

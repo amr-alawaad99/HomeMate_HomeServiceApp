@@ -359,7 +359,7 @@ class LayoutCubit extends Cubit<LayoutStates> {
         .snapshots()
         .map((snapshot) {
       return snapshot.docs
-          .where((element) => element.data()["serviceName"] == "$serviceName")
+          .where((element) => element.data()["serviceName"] == serviceName)
           .where((element) => element.data()["status"] == "waiting")
           .map((e) => OrderModel.fromJson(e.data()))
           .toList();

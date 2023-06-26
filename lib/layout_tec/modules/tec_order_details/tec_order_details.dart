@@ -6,12 +6,13 @@ import 'package:login_register_methods/layout/cubit/cubit.dart';
 import 'package:login_register_methods/shared/components/components.dart';
 
 import '../../../model/orderModel.dart';
-import '../../../module/google_maps_widget/google_maps_widget.dart';
+
 import '../../../module/sign_in_screen/cubit/cubit.dart';
 import '../../../shared/components/constants.dart';
 
 class TechnicalOrderDetails extends StatelessWidget {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+
   final OrderModel model;
   var costController = TextEditingController();
 
@@ -372,16 +373,16 @@ Widget defaultContainer({
             overflow: TextOverflow.ellipsis,
             maxLines: 6,
           ),
-          GoogleMapsWidget()
         ],
       ),
     );
 
-Widget offerCostDialog(
-        {required controller,
-        required context,
-        required OrderModel model,
-        required Function()? onTap,}) =>
+Widget offerCostDialog({
+  required controller,
+  required context,
+  required OrderModel model,
+  required Function()? onTap,
+}) =>
     Dialog(
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 20),
