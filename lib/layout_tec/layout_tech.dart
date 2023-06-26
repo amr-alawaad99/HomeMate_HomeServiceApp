@@ -10,7 +10,7 @@ import '../module/sign_in_screen/cubit/states.dart';
 import '../shared/components/constants.dart';
 import 'cubit/cubit.dart';
 import 'cubit/states.dart';
-import 'modules/notifications_tech/notifications_tech_screen.dart';
+
 
 
 class LayoutTecScreen extends StatelessWidget {
@@ -133,12 +133,7 @@ class LayoutTecScreen extends StatelessWidget {
                                         ),
                                         onPressed: () {
                                           print("N");
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context)=> NotificationsTechnicalScreen()
-                                              )
-                                          );
+
                                         },
                                       ),
                                     ],

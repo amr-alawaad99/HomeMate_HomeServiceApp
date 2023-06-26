@@ -17,7 +17,7 @@ class HistoryScreen extends StatelessWidget {
     return Column(
       children: [
         StreamBuilder<List<OrderModel>>(
-          stream: cubit.finishedOrders(cubit.originalUser!.serviceName!),
+          stream: cubit.finishedOrders(cubit.originalUser!.serviceName!,cubit.originalUser!.uid!),
           builder: (context, snapshot) {
             if (snapshot.hasError) {
               return Text('Error No Data found! ${snapshot.error}');

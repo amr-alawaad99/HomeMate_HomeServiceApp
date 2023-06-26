@@ -4,9 +4,10 @@ import 'package:login_register_methods/shared/components/constants.dart';
 
 import '../../../layout/cubit/cubit.dart';
 import '../../../model/orderModel.dart';
-import '../../../module/appointment_details/appointment_detials_screen.dart';
+
 import '../../../module/sign_in_screen/cubit/cubit.dart';
 import '../../../shared/components/components.dart';
+import '../tec_order_details/tec_order_details.dart';
 
 class OrderTechnicalScreen extends StatelessWidget {
   const OrderTechnicalScreen({super.key});
@@ -34,7 +35,7 @@ class OrderTechnicalScreen extends StatelessWidget {
                           context: context,
                           onTap: () {
                             navigateAndPush(context,
-                                widget: AppointmentDetails(
+                                widget: TechnicalOrderDetails(
                                   model: e,
                                 ));
                           }),

@@ -256,7 +256,6 @@ class LayoutCubit extends Cubit<LayoutStates> {
     List<XFile> images,
   ) async {
     listOfUrls = [];
-    print(images.length);
     for (int i = 0; i < images.length; i++) {
       var imageUrl = await uploadFile(
         images[i],
@@ -367,14 +366,14 @@ class LayoutCubit extends Cubit<LayoutStates> {
     });
   }
 
-  Stream<List<OrderModel>> finishedOrders(String serviceName) {
+  Stream<List<OrderModel>> finishedOrders(String serviceName,String uId) {
     return FirebaseFirestore.instance
         .collection("orders")
         .snapshots()
         .map((snapshot) {
       return snapshot.docs
-          .where((element) => element.data()["serviceName"] == "$serviceName")
-          .where((element) => element.data()["status"] == "finished")
+          .where((element) => element.data()["serviceName"] == serviceName)
+          .where((element) => element.data()["status"] == "finished").where((element) => element.data()['uId'] == uId)
           .map((e) => OrderModel.fromJson(e.data()))
           .toList();
     });
