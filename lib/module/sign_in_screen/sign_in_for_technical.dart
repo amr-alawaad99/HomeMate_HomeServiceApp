@@ -1,8 +1,8 @@
 // import 'package:flutter/material.dart';
 // import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:login_register_methods/layou_tec/layout_tec.dart';
-// import 'package:login_register_methods/layou_tec/layout_tec.dart';
-// import 'package:login_register_methods/layou_tec/layout_tec.dart';
+// import 'package:login_register_methods/layou_tec/layout_tech.dart';
+// import 'package:login_register_methods/layou_tec/layout_tech.dart';
+// import 'package:login_register_methods/layou_tec/layout_tech.dart';
 // import 'package:login_register_methods/layout/cubit/cubit.dart';
 // import 'package:login_register_methods/layout/main_layout_screen.dart';
 // import 'package:login_register_methods/module/new_order_screen/new_order_screen.dart';

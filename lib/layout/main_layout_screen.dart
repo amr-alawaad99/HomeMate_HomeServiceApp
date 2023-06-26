@@ -10,7 +10,6 @@ import 'package:login_register_methods/layout/cubit/states.dart';
 import 'package:login_register_methods/module/drawer/my_drawer.dart';
 import 'package:login_register_methods/module/new_order_screen/new_order_screen.dart';
 import 'package:login_register_methods/module/sign_in_screen/cubit/cubit.dart';
-import 'package:login_register_methods/module/sign_up_screen/cubit/states.dart';
 import 'package:login_register_methods/shared/components/components.dart';
 import 'package:login_register_methods/shared/components/constants.dart';
 

@@ -2,7 +2,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:login_register_methods/layout_tec/layout_tec.dart';
 import 'package:login_register_methods/layout/cubit/cubit.dart';
 import 'package:login_register_methods/layout/main_layout_screen.dart';
 import 'package:login_register_methods/module/google_maps_widget/app_data.dart';
@@ -13,6 +12,8 @@ import 'package:login_register_methods/shared/bloc_observer.dart';
 import 'package:login_register_methods/shared/components/constants.dart';
 import 'package:login_register_methods/shared/local/cache_helper.dart';
 import 'package:provider/provider.dart';
+
+import 'layout_tech/layout_tech.dart';
 
 
 void main() async {
@@ -36,7 +37,7 @@ void main() async {
   } else if(uId != '' && isUser == true) {
     widget = MainLayoutScreen();
   }else{
-    widget = LayoutTecScreen();
+    widget = LayoutTechScreen();
   }
   runApp(MyApp(widget, isDark,));
 }
@@ -63,7 +64,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) =>
           LayoutCubit()
-            ..getUserData()..getOrders()..loadDateTime(),
+            ..getUserData()..getOrders(),
         ),
         ChangeNotifierProvider(
           create: (context) => AppData(),

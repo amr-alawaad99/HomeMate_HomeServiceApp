@@ -4,29 +4,28 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
-import 'package:login_register_methods/layout_tec/cubit/cubit.dart';
-import 'package:login_register_methods/layout_tec/cubit/states.dart';
-
+import 'package:login_register_methods/layout_tech/cubit/cubit.dart';
+import 'package:login_register_methods/layout_tech/cubit/states.dart';
 
 import '../module/sign_in_screen/cubit/cubit.dart';
 import '../module/sign_in_screen/cubit/states.dart';
-
 import '../shared/components/constants.dart';
 import 'modules/drawer/drawer_technical_screen.dart';
+import 'modules/notifications_tech/notifications_tech_screen.dart';
 
-class LayoutTecScreen extends StatelessWidget {
+class LayoutTechScreen extends StatelessWidget {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   var searchController = TextEditingController();
-   LayoutTecScreen({super.key});
+  LayoutTechScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => LayoutTecCubit(),
-      child: BlocConsumer<LayoutTecCubit,LayoutTecStates>(
+      create: (context) => LayoutTechCubit(),
+      child: BlocConsumer<LayoutTechCubit,LayoutTechStates>(
         listener: (context, state) {},
         builder: (context, state) {
-          var cubit = LayoutTecCubit.get(context);
+          var cubit = LayoutTechCubit.get(context);
           return ColorfulSafeArea(
             color: primaryColor,
             child: Scaffold(
@@ -49,11 +48,12 @@ class LayoutTecScreen extends StatelessWidget {
                               : primaryColor,
                           shape: const RoundedRectangleBorder(
                               borderRadius: BorderRadius.vertical(
-                                  bottom: Radius.circular(15))),
+                                  bottom: Radius.circular(15)
+                              )
+                          ),
                           automaticallyImplyLeading: false,
                           flexibleSpace: Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                15, 25, 15, 25),
+                            padding: const EdgeInsetsDirectional.fromSTEB(15, 20, 15, 20),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -67,7 +67,7 @@ class LayoutTecScreen extends StatelessWidget {
                                         backgroundColor: Colors.white,
                                         backgroundImage: NetworkImage(
                                             'https://img.freepik.com/free-vector/self-care-concept_23-2148523717.jpg?w=740&t=st=1678538562~exp=1678539162~hmac=a7d5a1db32b0d9a70e2ebbf68ab260a7ff455a23edb61284689ea8c3559233dd'
-                                            // cubit.originalUser!.profilePic!
+                                          // cubit.originalUser!.profilePic!
                                         ),
                                         radius: 25,
                                       ),
@@ -77,10 +77,8 @@ class LayoutTecScreen extends StatelessWidget {
                                       // NAME AND LOCATION
                                       Expanded(
                                         child: Column(
-                                          crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                          mainAxisAlignment:
-                                          MainAxisAlignment.center,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          mainAxisAlignment: MainAxisAlignment.center,
                                           children: [
                                             // PROFILE NAME
                                             Text(
@@ -114,8 +112,7 @@ class LayoutTecScreen extends StatelessWidget {
                                                   child: Text(
                                                     'not found',
                                                     // cubit.originalUser!.address!,
-                                                    overflow:
-                                                    TextOverflow.ellipsis,
+                                                    overflow: TextOverflow.ellipsis,
                                                     style: TextStyle(
                                                       fontFamily: "Roboto",
                                                       color: Colors.grey.shade400,
@@ -130,128 +127,72 @@ class LayoutTecScreen extends StatelessWidget {
                                       ),
                                       // NOTIFICATION ICON
                                       IconButton(
-                                        onPressed: () {
-                                          print("N");
-                                        },
                                         icon: const Icon(
                                           TablerIcons.bell,
                                           color: Colors.white,
                                         ),
+                                        onPressed: () {
+                                          print("N");
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context)=> NotificationsTechnicalScreen()
+                                              )
+                                          );
+                                        },
                                       ),
                                     ],
                                   ),
                                 ),
-                                if (LayoutTecCubit.get(context).currentIndex == 0)
+                                if (LayoutTechCubit.get(context).currentIndex == 0)
                                   Padding(
                                     padding:
                                     const EdgeInsets.symmetric(horizontal: 2),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                      CrossAxisAlignment.start,
-                                      children: [
-                                        const SizedBox(
-                                          height: 15,
-                                        ),
-                                        const Text(
-                                          'What are you\nlooking for?',
-                                          style: TextStyle(
+                                    child: Container(
+                                      margin: EdgeInsets.symmetric(vertical: 16),
+                                      decoration: BoxDecoration(
+                                        color: SignInCubit.get(context).isDark
+                                            ? Colors.grey[700]
+                                            : scaffoldLightColor,
+                                        borderRadius: const BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(10.0),
+                                        child: TextFormField(
+                                          style: const TextStyle(
                                             fontFamily: "Roboto",
-                                            fontSize: 22.0,
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold,
-                                            height: 1.5,
+                                            fontSize: 16.0,
                                           ),
-                                        ),
-                                        const SizedBox(
-                                          height: 15,
-                                        ),
-                                        Container(
-                                          decoration: BoxDecoration(
-                                            color: SignInCubit.get(context).isDark
-                                                ? Colors.grey[700]
-                                                : scaffoldLightColor,
-                                            borderRadius: const BorderRadius.all(
-                                                Radius.circular(10.0)),
-                                          ),
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(10.0),
-                                            child: TextFormField(
-                                              style: const TextStyle(
-                                                fontFamily: "Roboto",
-                                                fontSize: 16.0,
-                                              ),
-                                              controller: searchController,
-                                              keyboardType: TextInputType.text,
-                                              decoration: const InputDecoration(
-                                                hintStyle: TextStyle(
-                                                  color: Colors.grey,
-                                                ),
-                                                hintText:
-                                                "Search for services or suppliers",
-                                                border: InputBorder.none,
-                                                prefixIcon: Padding(
-                                                  padding:
-                                                  EdgeInsets.only(bottom: 5),
-                                                  child: Icon(TablerIcons.search),
-                                                ),
-                                              ),
+                                          controller: searchController,
+                                          keyboardType: TextInputType.text,
+                                          decoration: const InputDecoration(
+                                            hintStyle: TextStyle(
+                                              color: Colors.grey,
+                                            ),
+                                            hintText:
+                                            "Search for Orders ",
+                                            border: InputBorder.none,
+                                            prefixIcon: Padding(
+                                              padding:
+                                              EdgeInsets.only(bottom: 5),
+                                              child: Icon(TablerIcons.search),
                                             ),
                                           ),
                                         ),
-                                      ],
+                                      ),
                                     ),
-                                  ),
-                                if (LayoutTecCubit.get(context).currentIndex == 1)
-                                  Column(
-                                    children: [
-                                      const SizedBox(
-                                        height: 15,
-                                      ),
-                                      Container(
-                                        decoration: BoxDecoration(
-                                          color:  SignInCubit.get(context).isDark
-                                              ? Colors.grey[700]
-                                              : scaffoldLightColor,
-                                          borderRadius: const BorderRadius.all(
-                                              Radius.circular(10.0)),
-                                        ),
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(10.0),
-                                          child: TextFormField(
-                                            style: const TextStyle(
-                                              fontFamily: "Roboto",
-                                              fontSize: 16.0,
-                                            ),
-                                            controller: searchController,
-                                            keyboardType: TextInputType.text,
-                                            decoration: const InputDecoration(
-                                              hintStyle: TextStyle(
-                                                color: Colors.grey,
-                                              ),
-                                              hintText:
-                                              "What service do you need",
-                                              border: InputBorder.none,
-                                              prefixIcon: Padding(
-                                                padding:
-                                                EdgeInsets.only(bottom: 5),
-                                                child: Icon(TablerIcons.search),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
                                   ),
                               ],
                             ),
                           ),
-                          bottom: LayoutTecCubit.get(context).currentIndex == 0
+                          bottom: LayoutTechCubit.get(context).currentIndex == 0
                               ? const PreferredSize(
-                              preferredSize: Size.fromHeight(210),
+                              preferredSize: Size.fromHeight(135),
                               child: SizedBox())
-                              : LayoutTecCubit.get(context).currentIndex == 1
+                              : LayoutTechCubit.get(context).currentIndex == 1
                               ? const PreferredSize(
-                              preferredSize: Size.fromHeight(130),
+                              preferredSize: Size.fromHeight(50),
                               child: SizedBox())
                               : const PreferredSize(
                               preferredSize: Size.fromHeight(50),
@@ -263,56 +204,35 @@ class LayoutTecScreen extends StatelessWidget {
                   body: SingleChildScrollView(
                     child: Padding(
                       padding: const EdgeInsets.only(bottom: 56),
-                      child: LayoutTecCubit.get(context)
-                          .screens[LayoutTecCubit.get(context).currentIndex],
+                      child: LayoutTechCubit.get(context)
+                          .screens[LayoutTechCubit.get(context).currentIndex],
                     ),
                   ),
                 ),
                 fallback: (context) =>
                 const Center(child: CircularProgressIndicator()),
               ),
-              // floatingActionButton: FloatingActionButton(
-              //   onPressed: () {
-              //     navigateAndPush(context, widget: NewOrderScreen());
-              //   },
-              //   child: const Icon(
-              //     TablerIcons.plus,
-              //     color: Colors.white,
-              //   ),
-              // ),
-              // floatingActionButtonLocation:
-              // FloatingActionButtonLocation.endDocked,
+
               bottomNavigationBar: BubbleBottomBar(
                 backgroundColor: SignInCubit.get(context).isDark
-                    ? Color(0xff303030)
-                    : Colors.white,
+                  ? Color(0xff303030)
+                  : Colors.white,
                 opacity: 0.2,
-                currentIndex: LayoutTecCubit.get(context).currentIndex,
+                currentIndex: LayoutTechCubit.get(context).currentIndex,
                 hasInk: true,
                 hasNotch: false,
-                // fabLocation: BubbleBottomBarFabLocation.end,
                 items: [
                   defaultBottomBarItem(context, "Home", TablerIcons.smart_home),
-
-                  defaultBottomBarItem(
-                    context,
-                    "Suppliers",
-                    TablerIcons.history,
-                  ),
-                  defaultBottomBarItem(
-                    context,
-                    "Appointment",
-                    TablerIcons.clipboard,
-                  ),
+                  defaultBottomBarItem(context, "Orders", TablerIcons.list),
+                  defaultBottomBarItem(context, "History", TablerIcons.history),
                 ],
                 onTap: (value) {
-                  LayoutTecCubit.get(context).changeBottomNav(value!);
+                  LayoutTechCubit.get(context).changeBottomNav(value!);
                 },
               ),
             ),
           );
         },
-
       ),
     );
   }
@@ -339,7 +259,7 @@ class LayoutTecScreen extends StatelessWidget {
                 text,
                 style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     color: SignInCubit.get(context).isDark ? Colors.white : primaryColor,
-                    fontSize: MediaQuery.of(context).size.width * 0.03,
+                    fontSize: MediaQuery.of(context).size.width * 0.04,
                     fontWeight: FontWeight.bold,
                     overflow: TextOverflow.ellipsis),
               ),
@@ -348,7 +268,7 @@ class LayoutTecScreen extends StatelessWidget {
               height: 3,
             ),
             Container(
-              width: 15,
+              width: 20,
               height: 3,
               decoration: BoxDecoration(
                 color:  SignInCubit.get(context).isDark ? Colors.white : primaryColor,
