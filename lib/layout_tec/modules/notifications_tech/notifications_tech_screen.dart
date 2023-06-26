@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
-
 import '../../../shared/components/constants.dart';
 
 class NotificationsTechnicalScreen extends StatelessWidget {
