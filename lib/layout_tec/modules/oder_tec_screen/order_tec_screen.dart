@@ -1,10 +1,15 @@
+
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
-import 'package:login_register_methods/shared/components/constants.dart';
+import 'package:login_register_methods/layout/cubit/states.dart';
+
 import '../../../layout/cubit/cubit.dart';
 import '../../../model/orderModel.dart';
 import '../../../module/sign_in_screen/cubit/cubit.dart';
 import '../../../shared/components/components.dart';
+import '../../../shared/components/constants.dart';
 import '../tec_order_details/tec_order_details.dart';
 
 class OrderTechnicalScreen extends StatelessWidget {
@@ -13,7 +18,6 @@ class OrderTechnicalScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var cubit = LayoutCubit.get(context);
-
     return Column(
       children: [
         StreamBuilder<List<OrderModel>>(
@@ -27,22 +31,22 @@ class OrderTechnicalScreen extends StatelessWidget {
                 physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 children: allOrders.map(
-                  (e) => defaultAppointmentCard(
-                    model: e,
-                    context: context,
-                    onTap: () {
-                      navigateAndPush(context,
-                        widget: TechnicalOrderDetails(
-                          model: e,
-                        ));
-                    }),
-                  ).toList(),
+                      (e) => defaultAppointmentCard(
+                      model: e,
+                      context: context,
+                      onTap: () {
+                        navigateAndPush(context,
+                            widget: TechnicalOrderDetails(
+                              model: e,
+                            ));
+                      }),
+                ).toList(),
               );
             } else {
               return Center(
                   child: CircularProgressIndicator(
-                color: primaryColor,
-              ));
+                    color: primaryColor,
+                  ));
             }
           },
         ),

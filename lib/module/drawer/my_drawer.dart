@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
@@ -10,7 +9,7 @@ import 'package:login_register_methods/module/profile_screen/profile_screen.dart
 import 'package:login_register_methods/module/sign_in_screen/cubit/states.dart';
 import 'package:login_register_methods/shared/components/components.dart';
 import 'package:login_register_methods/shared/components/constants.dart';
-
+import 'package:login_register_methods/shared/local/cache_helper.dart';
 import '../sign_in_screen/cubit/cubit.dart';
 
 class MyDrawer extends StatelessWidget {
@@ -22,6 +21,7 @@ class MyDrawer extends StatelessWidget {
       listener: (context, state) {
         if (state is SignOutSuccessState) {
           navigatePushDelete(context, widget: OnBoardingScreen());
+          CacheHelper.removeData(key: "isUser");
         }
       },
       builder: (context, state) {

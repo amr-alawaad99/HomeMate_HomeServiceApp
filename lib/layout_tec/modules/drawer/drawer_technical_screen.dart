@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
+import 'package:login_register_methods/layout/cubit/cubit.dart';
+import 'package:login_register_methods/layout/cubit/cubit.dart';
+import 'package:login_register_methods/layout/cubit/cubit.dart';
+import 'package:login_register_methods/layout/cubit/states.dart';
 import 'package:login_register_methods/layout_tec/cubit/states.dart';
 import 'package:login_register_methods/module/sign_in_screen/cubit/states.dart';
 import 'package:login_register_methods/shared/components/components.dart';
@@ -28,14 +32,14 @@ class _DrawerTechnicalScreenState extends State<DrawerTechnicalScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<LayoutTecCubit, LayoutTecStates>(
+    return BlocConsumer<LayoutCubit, LayoutStates>(
       listener: (context, state) {
         if (state is SignOutSuccessState) {
           navigatePushDelete(context, widget: OnBoardingScreen());
         }
       },
       builder: (context, state) {
-        var cubit = LayoutTecCubit.get(context);
+        var cubit = LayoutCubit.get(context);
         return BlocConsumer<SignInCubit,SignInStates>(
           listener: (context, state) {
 
@@ -427,7 +431,7 @@ class _DrawerTechnicalScreenState extends State<DrawerTechnicalScreen> {
                               ),
                             ),
                             onTap: () {
-                              LayoutTecCubit.get(context).singOut();
+                              LayoutCubit.get(context).singOut();
                             },
                           ),
                         ],

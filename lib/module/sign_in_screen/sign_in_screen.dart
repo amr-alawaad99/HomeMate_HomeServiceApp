@@ -29,9 +29,11 @@ class SignInScreen extends StatelessWidget {
     return BlocListener<LayoutCubit,LayoutStates>(
       listener: (context, state) {
         if(state is GetUserDataSuccessState){
-          if(state.isUser ){
+          if(state.isUser){
+            CacheHelper.saveData(key: "isUser", value: true);
             navigatePushDelete(context, widget: MainLayoutScreen());
           }else{
+            CacheHelper.saveData(key: "isUser", value: false);
             navigatePushDelete(context, widget: LayoutTecScreen());
           }
         }

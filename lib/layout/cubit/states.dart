@@ -89,3 +89,9 @@ class VerificationCodeSentErrorState extends LayoutStates{
 
 class VerificationSuccessState extends LayoutStates{}
 class VerificationErrorState extends LayoutStates{}
+
+//////// upload  offer to firebase
+
+class UploadOfferLoadingState extends LayoutStates{}
+class UploadOfferSuccessState extends LayoutStates{}
+class UploadOfferErrorState extends LayoutStates{}

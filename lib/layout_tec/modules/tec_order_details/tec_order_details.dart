@@ -14,7 +14,6 @@ class TechnicalOrderDetails extends StatelessWidget {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   final OrderModel model;
-  var costController = TextEditingController();
 
   TechnicalOrderDetails({
     super.key,
@@ -23,6 +22,7 @@ class TechnicalOrderDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var costController = TextEditingController();
     var cubit = LayoutCubit.get(context);
     String urlText = model.image!;
     List<String> urls = urlText.split(',');
@@ -75,7 +75,13 @@ class TechnicalOrderDetails extends StatelessWidget {
               context,
               widget: offerCostDialog(
                 onTap: () {
-                  Navigator.pop(context);
+                  cubit.offerCreate(
+                    username: cubit.originalUser!.profileName,
+                    uId: cubit.originalUser!.uid,
+                    orderUId: model.orderUid,
+                    image: cubit.originalUser!.profilePic,
+                    cost: costController.text,
+                  );
                 },
                 controller: costController,
                 context: context,

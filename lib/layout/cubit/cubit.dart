@@ -13,7 +13,11 @@ import 'package:login_register_methods/module/home_screen/home_screen.dart';
 import 'package:login_register_methods/module/suppliers_screen/suppliers_screen.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:ntp/ntp.dart';
+import '../../layout_tec/modules/history_screen/history_screen.dart';
+import '../../layout_tec/modules/home_technical_screen/home_technical_screen.dart';
+import '../../layout_tec/modules/oder_tec_screen/order_tec_screen.dart';
 import '../../model/category_model.dart';
+import '../../model/cost_model.dart';
 import '../../model/orderModel.dart';
 import '../../model/user_model.dart';
 
@@ -39,6 +43,12 @@ class LayoutCubit extends Cubit<LayoutStates> {
     CategoriesScreen(),
     SuppliersScreen(),
     AppointmentsScreen(),
+  ];
+
+  List<Widget> tecScreens = [
+    const HomeTechnicalScreen(),
+    OrderTechnicalScreen(),
+    HistoryScreen(),
   ];
 
   //////////////////////////////////
@@ -425,4 +435,44 @@ class LayoutCubit extends Cubit<LayoutStates> {
       showToast(message: error.toString(), toastColor: errorColor);
     });
   }
+
+
+
+  void offerCreate({
+    String? cost,
+    String? username,
+    String? image,
+    String? orderUId,
+    String? uId,
+  }) {
+    OfferModel model = OfferModel(
+      orderUId: orderUId,
+      cost: cost,
+      image: image,
+      profileName: username,
+      uId: uId,
+    );
+    emit(UploadOfferLoadingState());
+    FirebaseFirestore.instance
+        .collection('offers')
+        .add(model.toMap())
+        .then((value) {
+      FirebaseFirestore.instance
+          .collection('offers')
+          .doc(value.id)
+          .update({"offerUId": value.id});
+      emit(UploadOfferSuccessState());
+    }).catchError((onError) {
+      emit(UploadOfferErrorState());
+    });
+  }
+
+  void checkOffers(String orderUId, String techUId) {
+    FirebaseFirestore.instance.collection('offers').snapshots().map((event) {
+      event.docs
+          .where((element) => element.data()['orderUId'] == orderUId)
+          .contains(['uId'] == techUId);
+    });
+  }
+
 }

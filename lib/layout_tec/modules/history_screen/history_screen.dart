@@ -12,7 +12,6 @@ class HistoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var cubit = LayoutCubit.get(context);
-
     return Column(
       children: [
         StreamBuilder<List<OrderModel>>(

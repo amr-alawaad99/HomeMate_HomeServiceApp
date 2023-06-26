@@ -32,6 +32,8 @@ void main() async {
 
   Widget widget;
 
+  print("is user????????? $isUser");
+
   if (uId == '') {
     widget = OnBoardingScreen();
   } else if(uId != '' && isUser == true) {
