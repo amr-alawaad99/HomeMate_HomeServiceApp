@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:login_register_methods/layout/main_layout_screen.dart';
-import 'package:login_register_methods/layout_tech/layout_tech.dart';
+import 'package:login_register_methods/layout_tec/layout_tech.dart';
 import 'package:login_register_methods/module/sign_up_screen/cubit/cubit.dart';
 import 'package:login_register_methods/module/sign_up_screen/cubit/states.dart';
 import 'package:username_generator/username_generator.dart';
@@ -41,7 +41,7 @@ class UsernameScreen extends StatelessWidget {
             if(isUser == true){
               navigatePushDelete(context, widget: MainLayoutScreen());
             }else if (isUser == false){
-              navigatePushDelete(context, widget: LayoutTechScreen());
+              navigatePushDelete(context, widget: LayoutTecScreen());
             }
 
             //TO GET THE NEW LOGGED IN ACCOUNT IMMEDIATELY RATHER THAN THE PREVIOUS ACCOUNT!!

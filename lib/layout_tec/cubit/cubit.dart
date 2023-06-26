@@ -3,16 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:login_register_methods/layout_tec/cubit/states.dart';
 import 'package:login_register_methods/layout_tec/modules/home_technical_screen/home_technical_screen.dart';
-
 import '../../model/user_model.dart';
-
 import '../../shared/components/constants.dart';
 import '../../shared/local/cache_helper.dart';
 import '../modules/history_screen/history_screen.dart';
 import '../modules/oder_tec_screen/order_tec_screen.dart';
 
 class LayoutTecCubit extends Cubit<LayoutTecStates> {
-  LayoutTecCubit() : super(LayoutTecInitState());
+  LayoutTecCubit() : super(LayoutTechInitState());
 
   static LayoutTecCubit get(context) => BlocProvider.of(context);
 

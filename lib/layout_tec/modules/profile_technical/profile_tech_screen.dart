@@ -1,7 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
-import 'package:login_register_methods/module/google_maps_widget/google_maps_widget.dart';
+
 import 'package:login_register_methods/shared/components/components.dart';
 import 'package:login_register_methods/shared/components/constants.dart';
 
@@ -291,7 +291,7 @@ class ProfileTechnicalScreen extends StatelessWidget {
                         ),
                       ),
                       onTap: () {
-                        LayoutTechCubit.get(context).singOut();
+                        LayoutTecCubit.get(context).singOut();
                       },
                     ),
                   ],

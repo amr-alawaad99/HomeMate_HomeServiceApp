@@ -13,7 +13,7 @@ import 'package:login_register_methods/shared/components/constants.dart';
 import 'package:login_register_methods/shared/local/cache_helper.dart';
 import 'package:provider/provider.dart';
 
-import 'layout_tech/layout_tech.dart';
+import 'layout_tec/layout_tech.dart';
 
 
 void main() async {
@@ -37,7 +37,7 @@ void main() async {
   } else if(uId != '' && isUser == true) {
     widget = MainLayoutScreen();
   }else{
-    widget = LayoutTechScreen();
+    widget = LayoutTecScreen();
   }
   runApp(MyApp(widget, isDark,));
 }

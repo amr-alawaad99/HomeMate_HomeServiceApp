@@ -8,8 +8,7 @@ import 'package:login_register_methods/module/sign_in_screen/cubit/states.dart';
 import 'package:login_register_methods/shared/components/components.dart';
 import 'package:login_register_methods/shared/components/constants.dart';
 import 'package:login_register_methods/shared/local/cache_helper.dart';
-
-import '../../layout_tech/layout_tech.dart';
+import '../../layout_tec/layout_tech.dart';
 import '../../model/user_model.dart';
 import '../sign_up_screen/google_facebook_signup_info.dart';
 
@@ -29,7 +28,7 @@ class SignInScreen extends StatelessWidget {
           if(state.isUser ){
             navigatePushDelete(context, widget: MainLayoutScreen());
           }else{
-            navigatePushDelete(context, widget: LayoutTechScreen());
+            navigatePushDelete(context, widget: LayoutTecScreen());
           }
         }
       },

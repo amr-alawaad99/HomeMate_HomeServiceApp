@@ -4,28 +4,28 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
-import 'package:login_register_methods/layout_tech/cubit/cubit.dart';
-import 'package:login_register_methods/layout_tech/cubit/states.dart';
-
+import 'package:login_register_methods/layout_tec/modules/drawer/drawer_technical_screen.dart';
 import '../module/sign_in_screen/cubit/cubit.dart';
 import '../module/sign_in_screen/cubit/states.dart';
 import '../shared/components/constants.dart';
-import 'modules/drawer/drawer_technical_screen.dart';
+import 'cubit/cubit.dart';
+import 'cubit/states.dart';
 import 'modules/notifications_tech/notifications_tech_screen.dart';
 
-class LayoutTechScreen extends StatelessWidget {
+
+class LayoutTecScreen extends StatelessWidget {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   var searchController = TextEditingController();
-  LayoutTechScreen({super.key});
+  LayoutTecScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => LayoutTechCubit(),
-      child: BlocConsumer<LayoutTechCubit,LayoutTechStates>(
+      create: (context) => LayoutTecCubit(),
+      child: BlocConsumer<LayoutTecCubit,LayoutTecStates>(
         listener: (context, state) {},
         builder: (context, state) {
-          var cubit = LayoutTechCubit.get(context);
+          var cubit = LayoutTecCubit.get(context);
           return ColorfulSafeArea(
             color: primaryColor,
             child: Scaffold(
@@ -144,7 +144,7 @@ class LayoutTechScreen extends StatelessWidget {
                                     ],
                                   ),
                                 ),
-                                if (LayoutTechCubit.get(context).currentIndex == 0)
+                                if (LayoutTecCubit.get(context).currentIndex == 0)
                                   Padding(
                                     padding:
                                     const EdgeInsets.symmetric(horizontal: 2),
@@ -186,11 +186,11 @@ class LayoutTechScreen extends StatelessWidget {
                               ],
                             ),
                           ),
-                          bottom: LayoutTechCubit.get(context).currentIndex == 0
+                          bottom: LayoutTecCubit.get(context).currentIndex == 0
                               ? const PreferredSize(
                               preferredSize: Size.fromHeight(135),
                               child: SizedBox())
-                              : LayoutTechCubit.get(context).currentIndex == 1
+                              : LayoutTecCubit.get(context).currentIndex == 1
                               ? const PreferredSize(
                               preferredSize: Size.fromHeight(50),
                               child: SizedBox())
@@ -204,8 +204,8 @@ class LayoutTechScreen extends StatelessWidget {
                   body: SingleChildScrollView(
                     child: Padding(
                       padding: const EdgeInsets.only(bottom: 56),
-                      child: LayoutTechCubit.get(context)
-                          .screens[LayoutTechCubit.get(context).currentIndex],
+                      child: LayoutTecCubit.get(context)
+                          .screens[LayoutTecCubit.get(context).currentIndex],
                     ),
                   ),
                 ),
@@ -218,7 +218,7 @@ class LayoutTechScreen extends StatelessWidget {
                   ? Color(0xff303030)
                   : Colors.white,
                 opacity: 0.2,
-                currentIndex: LayoutTechCubit.get(context).currentIndex,
+                currentIndex: LayoutTecCubit.get(context).currentIndex,
                 hasInk: true,
                 hasNotch: false,
                 items: [
@@ -227,7 +227,7 @@ class LayoutTechScreen extends StatelessWidget {
                   defaultBottomBarItem(context, "History", TablerIcons.history),
                 ],
                 onTap: (value) {
-                  LayoutTechCubit.get(context).changeBottomNav(value!);
+                  LayoutTecCubit.get(context).changeBottomNav(value!);
                 },
               ),
             ),

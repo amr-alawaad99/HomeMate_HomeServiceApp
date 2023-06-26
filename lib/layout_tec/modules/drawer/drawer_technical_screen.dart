@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
-import 'package:login_register_methods/layout_tech/cubit/cubit.dart';
-import 'package:login_register_methods/layout_tech/cubit/states.dart';
-import 'package:login_register_methods/layout_tech/modules/messages_technical/chats_tech_screen.dart';
-import 'package:login_register_methods/model_tech/chat_tech.dart';
+import 'package:login_register_methods/layout_tec/cubit/states.dart';
 import 'package:login_register_methods/module/sign_in_screen/cubit/states.dart';
 import 'package:login_register_methods/shared/components/components.dart';
 import 'package:login_register_methods/shared/components/constants.dart';
 import '../../../module/onboarding_screen/onboarding_screen.dart';
 import '../../../module/sign_in_screen/cubit/cubit.dart';
+import '../../cubit/cubit.dart';
 import '../profile_technical/profile_tech_screen.dart';
 
 
@@ -29,14 +27,14 @@ class _DrawerTechnicalScreenState extends State<DrawerTechnicalScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<LayoutTechCubit, LayoutTechStates>(
+    return BlocConsumer<LayoutTecCubit, LayoutTecStates>(
       listener: (context, state) {
         if (state is SignOutSuccessState) {
           navigatePushDelete(context, widget: OnBoardingScreen());
         }
       },
       builder: (context, state) {
-        var cubit = LayoutTechCubit.get(context);
+        var cubit = LayoutTecCubit.get(context);
         return BlocConsumer<SignInCubit,SignInStates>(
           listener: (context, state) {
 
@@ -431,7 +429,7 @@ class _DrawerTechnicalScreenState extends State<DrawerTechnicalScreen> {
                               ),
                             ),
                             onTap: () {
-                              LayoutTechCubit.get(context).singOut();
+                              LayoutTecCubit.get(context).singOut();
                             },
                           ),
                         ],
