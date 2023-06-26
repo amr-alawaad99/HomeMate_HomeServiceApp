@@ -1,32 +1,36 @@
 class OfferModel{
   String? cost;
-  String? username;
+  String? profileName;
+  String? uId;
   String? image;
   String? orderUId;
   String? offerUId;
 
   OfferModel({
-    this.username,
+    this.profileName,
     this.cost,
     this.image,
     this.orderUId,
     this.offerUId,
+    this.uId,
 });
 
   OfferModel.fromJson(Map<String, dynamic> json){
-    username = json['username'];
+    profileName = json['profileName'];
     cost = json['cost'];
     image = json['image'];
     orderUId = json['orderUId'];
     offerUId = json['offerUId'];
+    uId = json['uId'];
   }
   Map<String, dynamic> toMap(){
     return{
-      'username':username,
+      'profileName':profileName,
       'cost':cost,
       'image':image,
       'orderUId':orderUId,
       'offerUId':offerUId,
+      'uId':uId,
     };
   }
 

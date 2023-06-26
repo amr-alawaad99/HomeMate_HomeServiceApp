@@ -211,7 +211,7 @@ class AppointmentsScreen extends StatelessWidget {
                                           .get(context)
                                           .originalUser!
                                           .isUser == false
-                                          ? model.userName!
+                                          ? model.profileName!
                                           : 'waiting for technical offers!',
                                       style: const TextStyle(
                                         fontSize: 15.0,

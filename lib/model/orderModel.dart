@@ -3,7 +3,7 @@
 class OrderModel{
 
   String? uId;
-  String? userName;
+  String? profileName;
   String? serviceName;
   String? date;
   String? time;
@@ -15,6 +15,7 @@ class OrderModel{
   String? image;
   String? dateTimeForOrder;
   String? orderUid;
+  String? profilePic;
 
 
 
@@ -27,11 +28,12 @@ class OrderModel{
     this.image,
     this.uId,
     this.status,
-    this.userName,
+    this.profileName,
     this.cost,
     this.dateTimeForOrder,
     this.gpsLocation,
     this.orderUid,
+    this.profilePic,
 
 });
   OrderModel.fromJson(Map<String, dynamic> json){
@@ -43,11 +45,12 @@ class OrderModel{
     location = json['location'];
     image = json['image'];
     status = json['status'];
-    userName = json['userName'];
+    profileName = json['profileName'];
     cost = json['cost'];
     dateTimeForOrder = json['dateTimeForOrder'];
     gpsLocation = json['gpsLocation'];
     orderUid = json['orderUid'];
+    profilePic = json['profilePic'];
   }
   Map<String, dynamic> toMap(){
     return {
@@ -59,11 +62,12 @@ class OrderModel{
       'location': location,
       'image': image,
       'status': status,
-      'userName': userName,
+      'profileName': profileName,
       'cost': cost,
       'dateTimeForOrder': dateTimeForOrder,
       'gpsLocation': gpsLocation,
       'orderUid': orderUid,
+      'profilePic': profilePic,
 
     };
   }

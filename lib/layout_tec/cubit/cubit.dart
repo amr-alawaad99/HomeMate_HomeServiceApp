@@ -13,12 +13,7 @@ import '../modules/history_screen/history_screen.dart';
 import '../modules/oder_tec_screen/order_tec_screen.dart';
 
 class LayoutTecCubit extends Cubit<LayoutTecStates> {
-
   LayoutTecCubit() : super(LayoutTechInitState());
-
-
-
-
 
   static LayoutTecCubit get(context) => BlocProvider.of(context);
 
@@ -58,13 +53,15 @@ class LayoutTecCubit extends Cubit<LayoutTecStates> {
     String? username,
     String? image,
     String? orderUId,
+    String? uId,
   }) {
     OfferModel model = OfferModel(
       orderUId: orderUId,
       cost: cost,
       image: image,
-      username: username,
+      profileName: username,
       offerUId: "",
+      uId: uId,
     );
     emit(UploadOfferLoadingState());
     FirebaseFirestore.instance
@@ -76,9 +73,16 @@ class LayoutTecCubit extends Cubit<LayoutTecStates> {
           .doc(value.id)
           .update({"offerUid": value.id});
       emit(UploadOfferSuccessState());
-    }).catchError((onError){
+    }).catchError((onError) {
       emit(UploadOfferErrorState());
     });
+  }
 
+  void checkOffers(String orderUId, String techUId) {
+    FirebaseFirestore.instance.collection('offers').snapshots().map((event) {
+      event.docs
+          .where((element) => element.data()['orderUId'] == orderUId)
+          .contains(['uId'] == techUId);
+    });
   }
 }

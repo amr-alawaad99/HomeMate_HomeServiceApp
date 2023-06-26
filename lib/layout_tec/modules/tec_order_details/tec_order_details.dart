@@ -50,6 +50,7 @@ class TechnicalOrderDetails extends StatelessWidget {
         backgroundColor:
             SignInCubit.get(context).isDark ? Color(0xff303030) : primaryColor,
       ),
+
       bottomNavigationBar: Container(
         margin: EdgeInsets.all(10),
         width: MediaQuery.of(context).size.width / 2,
@@ -70,14 +71,17 @@ class TechnicalOrderDetails extends StatelessWidget {
         ),
         child: MaterialButton(
           onPressed: () {
-            navigateAndPush(context,
-                widget: offerCostDialog(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    controller: costController,
-                    context: context,
-                    model: model));
+            navigateAndPush(
+              context,
+              widget: offerCostDialog(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                controller: costController,
+                context: context,
+                model: model,
+              ),
+            );
           },
           child:
               // state is NewOrderUploadImageToFirebaseLoadingState ||

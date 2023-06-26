@@ -329,7 +329,8 @@ class LayoutCubit extends Cubit<LayoutStates> {
         .collection("orders")
         .orderBy('dateTimeForOrder')
         .snapshots()
-        .map((snapshot) => snapshot.docs.where((element) => element.data()["uId"] == uId)
+        .map((snapshot) => snapshot.docs
+            .where((element) => element.data()["uId"] == uId)
             .map((doc) => OrderModel.fromJson(doc.data()))
             .toList());
   }
@@ -366,14 +367,15 @@ class LayoutCubit extends Cubit<LayoutStates> {
     });
   }
 
-  Stream<List<OrderModel>> finishedOrders(String serviceName,String uId) {
+  Stream<List<OrderModel>> finishedOrders(String serviceName, String uId) {
     return FirebaseFirestore.instance
         .collection("orders")
         .snapshots()
         .map((snapshot) {
       return snapshot.docs
           .where((element) => element.data()["serviceName"] == serviceName)
-          .where((element) => element.data()["status"] == "finished").where((element) => element.data()['uId'] == uId)
+          .where((element) => element.data()["status"] == "finished")
+          .where((element) => element.data()['uId'] == uId)
           .map((e) => OrderModel.fromJson(e.data()))
           .toList();
     });
