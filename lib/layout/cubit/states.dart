@@ -72,3 +72,20 @@ class GetOrderDataErrorState extends LayoutStates{
 
   GetOrderDataErrorState(this.error);
 }
+
+
+
+class VerificationCodeSentSuccessState extends LayoutStates{
+  final String verificationId;
+
+  VerificationCodeSentSuccessState(this.verificationId);
+}
+class VerificationCodeSentErrorState extends LayoutStates{
+  final String error;
+
+  VerificationCodeSentErrorState(this.error);
+}
+
+
+class VerificationSuccessState extends LayoutStates{}
+class VerificationErrorState extends LayoutStates{}

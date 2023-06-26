@@ -202,7 +202,7 @@ class SignupCubit extends Cubit<SignupStates> {
     // sign in
     await auth.signInWithCredential(credential!).then((value) {
       _createUserAccount(name: googleUser!.displayName!, userName: userName,
-         isUser: true, phoneNumber: phoneNumber, email: googleUser!.email, uid: value.user!.uid, isVerified: true);
+         isUser: true, phoneNumber: phoneNumber, email: googleUser!.email, uid: value.user!.uid,);
     });
   }
 

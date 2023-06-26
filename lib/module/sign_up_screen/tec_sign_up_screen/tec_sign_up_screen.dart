@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:login_register_methods/module/sign_up_screen/cubit/cubit.dart';
 import 'package:login_register_methods/module/sign_up_screen/cubit/states.dart';
+import 'package:login_register_methods/module/sign_up_screen/username_screen.dart';
 import 'package:login_register_methods/shared/components/components.dart';
 import 'package:login_register_methods/shared/local/cache_helper.dart';
 import 'package:provider/provider.dart';
@@ -332,7 +333,7 @@ class TecSignUpScreen extends StatelessWidget {
                               };
                               navigateAndPush(context, widget: Provider(
                                 create: (context) => SignupCubit(),
-                                builder: (context, child) => VerificationScreen(userInfo),
+                                builder: (context, child) => UsernameScreen(userInfo),
                               ),);
                             } else if(!cubit.isClicked){
                               cubit.errorCheckBox();
