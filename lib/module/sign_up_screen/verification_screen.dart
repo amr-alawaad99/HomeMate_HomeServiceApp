@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:login_register_methods/layout/cubit/cubit.dart';
+import 'package:login_register_methods/layout/cubit/states.dart';
 import 'package:login_register_methods/module/sign_up_screen/cubit/cubit.dart';
 import 'package:login_register_methods/module/sign_up_screen/cubit/states.dart';
 import 'package:login_register_methods/module/sign_up_screen/username_screen.dart';
@@ -11,13 +13,18 @@ import '../../shared/components/constants.dart';
 class VerificationScreen extends StatelessWidget {
   final formKey = GlobalKey<FormState>();
   var verificationController = TextEditingController();
-  Map<String, dynamic> userInfo;
-  VerificationScreen(this.userInfo, {super.key});
+  String verificationId;
+  VerificationScreen(this.verificationId, {super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<SignupCubit, SignupStates>(
-      listener: (context, state) {},
+    return BlocConsumer<LayoutCubit, LayoutStates>(
+      listener: (context, state) {
+        if(state is VerificationSuccessState){
+          LayoutCubit.get(context).getUserData();
+          Navigator.pop(context);
+        }
+      },
       builder: (context, state) => Scaffold(
         appBar: AppBar(),
         body: Padding(
@@ -50,7 +57,7 @@ class VerificationScreen extends StatelessWidget {
                   height: 20,
                 ),
                 Text(
-                  "Enter it below to verify +20${userInfo['phone']}",
+                  "Enter it below to verify +20${LayoutCubit.get(context).originalUser!.phoneNumber}",
                   style: Theme.of(context)
                       .textTheme
                       .bodySmall!
@@ -84,14 +91,9 @@ class VerificationScreen extends StatelessWidget {
                 const Spacer(),
                 Container(
                   child: defaultButton(
-                    text: "Next",
+                    text: "Confirm",
                     onPress: () {
-                      if (formKey.currentState!.validate()) {
-                        navigateAndPush(context, widget: Provider(
-                          create: (context) => SignupCubit(),
-                          builder: (context, child) => UsernameScreen(userInfo),
-                        ),);
-                      }
+                      LayoutCubit.get(context).verifyOTP(verificationId: verificationId, otpCode: verificationController.text);
                     },
                   ),
                 ),

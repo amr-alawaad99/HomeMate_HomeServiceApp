@@ -7,6 +7,7 @@ class UserModel{
   String? address;
   String? gpsLocation;
   String? phoneNumber;
+  String? serviceName;
   bool? isVerified;
   bool? isUser;
 
@@ -19,6 +20,7 @@ class UserModel{
     this.address,
     this.gpsLocation,
     this.phoneNumber,
+    this.serviceName,
     this.isVerified,
     this.isUser,
 });
@@ -32,6 +34,7 @@ class UserModel{
     address = json['address'];
     gpsLocation = json['gpsLocation'];
     phoneNumber = json['phoneNumber'];
+    serviceName = json['serviceName'];
     isVerified = json['isVerified'];
     isUser = json['isUser'];
   }
@@ -46,6 +49,7 @@ class UserModel{
       'address' : address,
       'gpsLocation' : gpsLocation,
       'phoneNumber' : phoneNumber,
+      'serviceName' : serviceName,
       'isVerified' : isVerified,
       'isUser' : isUser,
     };

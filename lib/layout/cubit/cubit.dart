@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,6 +17,7 @@ import '../../model/category_model.dart';
 import '../../model/orderModel.dart';
 import '../../model/user_model.dart';
 
+import '../../shared/components/components.dart';
 import '../../shared/components/constants.dart';
 import '../../shared/local/cache_helper.dart';
 
@@ -253,6 +255,7 @@ class LayoutCubit extends Cubit<LayoutStates> {
   uploadImage(
     List<XFile> images,
   ) async {
+    listOfUrls = [];
     print(images.length);
     for (int i = 0; i < images.length; i++) {
       var imageUrl = await uploadFile(
@@ -291,14 +294,10 @@ class LayoutCubit extends Cubit<LayoutStates> {
     emit(UploadOrderLoadingState());
     FirebaseFirestore.instance
         .collection('orders')
-        .doc(uId)
-        .collection('user Orders')
         .add(model.toMap())
         .then((value) {
       FirebaseFirestore.instance
           .collection('orders')
-          .doc(uId)
-          .collection('user Orders')
           .doc(value.id)
           .update({"orderUid": value.id});
       emit(UploadOrderSuccessState());
@@ -315,39 +314,23 @@ class LayoutCubit extends Cubit<LayoutStates> {
       return;
     }
     uId = CacheHelper.getData(key: 'uid');
-    FirebaseFirestore.instance
-        .collection("orders")
-        .doc(uId)
-        .collection("user Orders")
-        .get()
-        .then((value) {
-      print(value.size);
+    FirebaseFirestore.instance.collection("orders").get().then((value) {
       for (var element in value.docs) {
-        print(element.data()["date"]);
         myOrders.add(OrderModel.fromJson(element.data()));
       }
-    }).catchError((error) {
-      print("FFFFFFFF $error");
-    });
+    }).catchError((error) {});
   }
 
   void removeOrder({required String orderUid}) {
-    FirebaseFirestore.instance
-        .collection('orders')
-        .doc(uId)
-        .collection('user Orders')
-        .doc(orderUid)
-        .delete();
+    FirebaseFirestore.instance.collection('orders').doc(orderUid).delete();
   }
 
-  Stream<List<OrderModel>> orders() {
+  Stream<List<OrderModel>> orders(String uId) {
     return FirebaseFirestore.instance
         .collection("orders")
-        .doc(uId)
-        .collection("user Orders")
         .orderBy('dateTimeForOrder')
         .snapshots()
-        .map((snapshot) => snapshot.docs
+        .map((snapshot) => snapshot.docs.where((element) => element.data()["uId"] == uId)
             .map((doc) => OrderModel.fromJson(doc.data()))
             .toList());
   }
@@ -359,7 +342,7 @@ class LayoutCubit extends Cubit<LayoutStates> {
     ntpTime = await NTP.now();
   }
 
-  Stream<List<UserModel>> techs() {
+  Stream<List<UserModel>> suppliers() {
     return FirebaseFirestore.instance
         .collection("Users")
         .snapshots()
@@ -368,6 +351,77 @@ class LayoutCubit extends Cubit<LayoutStates> {
           .where((element) => element.data()["isUser"] == false)
           .map((e) => UserModel.fromJson(e.data()))
           .toList();
+    });
+  }
+
+  Stream<List<OrderModel>> allOrders(String serviceName) {
+    return FirebaseFirestore.instance
+        .collection("orders")
+        .snapshots()
+        .map((snapshot) {
+      return snapshot.docs
+          .where((element) => element.data()["serviceName"] == "$serviceName")
+          .where((element) => element.data()["status"] == "waiting")
+          .map((e) => OrderModel.fromJson(e.data()))
+          .toList();
+    });
+  }
+
+  Stream<List<OrderModel>> finishedOrders(String serviceName) {
+    return FirebaseFirestore.instance
+        .collection("orders")
+        .snapshots()
+        .map((snapshot) {
+      return snapshot.docs
+          .where((element) => element.data()["serviceName"] == "$serviceName")
+          .where((element) => element.data()["status"] == "finished")
+          .map((e) => OrderModel.fromJson(e.data()))
+          .toList();
+    });
+  }
+
+  sendOTP() async {
+    FirebaseAuth.instance.verifyPhoneNumber(
+        phoneNumber: "+20${originalUser!.phoneNumber}",
+        verificationCompleted: (PhoneAuthCredential credential) async {
+          print("VERFICATION COMPLETED SUCCESSFULLLLLLLLLLLLLLLYYYYYYYYYYY");
+        },
+        verificationFailed: (FirebaseAuthException e) {
+          if (e.code == "invalid-phone-number") {
+            showToast(message: "Invalid phone number", toastColor: errorColor);
+          } else {
+            showToast(message: e.message.toString(), toastColor: errorColor);
+            emit(VerificationCodeSentErrorState(e.toString()));
+          }
+        },
+        codeSent: (verificationId, forceResendingToken) {
+          showToast(
+              message: "a verification code has been sent to your phone number",
+              toastColor: successColor);
+          emit(VerificationCodeSentSuccessState(verificationId));
+        },
+        codeAutoRetrievalTimeout: (verificationId) {},
+        timeout: Duration(seconds: 60));
+  }
+
+  verifyOTP({
+    required String verificationId,
+    required String otpCode,
+  }) async {
+    PhoneAuthCredential credential = PhoneAuthProvider.credential(
+      verificationId: verificationId,
+      smsCode: otpCode,
+    );
+    FirebaseAuth.instance.currentUser!
+        .linkWithCredential(credential)
+        .then((value) {
+      FirebaseFirestore.instance
+          .collection("Users")
+          .doc(uId)
+          .update({"isVerified": true});
+      emit(VerificationSuccessState());
+    }).catchError((error) {
+      showToast(message: error.toString(), toastColor: errorColor);
     });
   }
 }

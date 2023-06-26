@@ -32,9 +32,6 @@ class NewOrderScreen extends StatelessWidget {
         child: BlocConsumer<LayoutCubit, LayoutStates>(
           listener: (context, state) {},
           builder: (context, state) {
-
-
-
             var cubit = LayoutCubit.get(context);
 
             return BlocConsumer<SignInCubit, SignInStates>(
@@ -102,10 +99,17 @@ class NewOrderScreen extends StatelessWidget {
                           text: 'Send Request',
                           width: MediaQuery.of(context).size.width / 2,
                           onPress: () {
-                            if(cubit.selectedIndex == -1 ){
-                              showToast(message: 'You must choose service', toastColor: errorColor);
+                            if (cubit.selectedIndex == -1) {
+                              showToast(
+                                  message: 'You must choose service',
+                                  toastColor: errorColor);
+                            }if(locationController.text == 'Not defined'){
+                              showToast(
+                                  message: 'You must enter Correct Location',
+                                  toastColor: errorColor);
                             }
-                            if (formKey.currentState!.validate()&& cubit.selectedIndex != -1) {
+                            if (formKey.currentState!.validate() &&
+                                cubit.selectedIndex != -1 &&locationController.text != 'Not defined' ) {
                               navigateAndPush(
                                 context,
                                 widget: OrderConfirmScreen(

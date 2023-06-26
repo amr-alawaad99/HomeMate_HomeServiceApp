@@ -18,6 +18,9 @@ class AppointmentDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     String urlText = model.image!;
     List<String> urls = urlText.split(',');
+
+    urls.removeLast();
+
     return Scaffold(
       backgroundColor: SignInCubit.get(context).isDark
           ? Color(0xff212121)
@@ -204,9 +207,8 @@ class AppointmentDetails extends StatelessWidget {
               SizedBox(
                 height: 15,
               ),
-              urls[0] == ''
-                  ? SizedBox()
-                  : Text(
+              if(urls.isNotEmpty)
+                Text(
                       'Order Photos'.toUpperCase(),
                       style: TextStyle(
                         color: Colors.grey,
@@ -217,9 +219,8 @@ class AppointmentDetails extends StatelessWidget {
               SizedBox(
                 height: 5,
               ),
-              urls[0] == ''
-                  ? SizedBox()
-                  : Container(
+              if(urls.isNotEmpty)
+                Container(
                       padding: EdgeInsets.all(10),
                       height: 117,
                       decoration: BoxDecoration(
