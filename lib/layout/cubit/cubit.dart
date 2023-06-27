@@ -366,7 +366,8 @@ class LayoutCubit extends Cubit<LayoutStates> {
 
   Stream<List<OrderModel>> allOrders(String serviceName) {
     return FirebaseFirestore.instance
-        .collection("orders").orderBy('dateTimeForOrder')
+        .collection("orders")
+        .orderBy('dateTimeForOrder')
         .snapshots()
         .map((snapshot) {
       return snapshot.docs
@@ -436,8 +437,6 @@ class LayoutCubit extends Cubit<LayoutStates> {
     });
   }
 
-
-
   void offerCreate({
     String? cost,
     String? username,
@@ -468,27 +467,59 @@ class LayoutCubit extends Cubit<LayoutStates> {
   }
 
   bool? isOffered;
+
   checkOffers(String orderUId, String techUId) async {
     emit(CheckOfferLoadingState());
     await FirebaseFirestore.instance.collection('offers').get().then((value) {
-      isOffered = value.docs.where((element) => element.data()['orderUId'] == orderUId)
-      .where((element) => element.data()['uId'] == techUId).isNotEmpty;
+      isOffered = value.docs
+          .where((element) => element.data()['orderUId'] == orderUId)
+          .where((element) => element.data()['uId'] == techUId)
+          .isNotEmpty;
     }).then((value) {
       emit(CheckOfferSuccessState());
-    }).catchError((error){
+    }).catchError((error) {
       emit(CheckOfferSuccessState());
     });
   }
-
 
   void updateUserAppointment({
     String? orderUid,
     String? cost,
-}){
+  }) {
     FirebaseFirestore.instance.collection('orders').doc(orderUid).update({
-      'cost' : cost,
-
+      'cost': cost,
     });
   }
+
+  Stream<List<OfferModel>> userOffer(String orderUId, String techUId) {
+    return FirebaseFirestore.instance
+        .collection("offers")
+        .snapshots()
+        .map((snapshot) {
+      return snapshot.docs
+          .where((element) => element.data()['orderUId'] == orderUId)
+          .where((element) => element.data()['uId'] == techUId)
+          .map((e) => OfferModel.fromJson(e.data()))
+          .toList();
+    });
+  }
+
+
+
+  Stream<List<OfferModel>> allOrderOffers(String orderUId, String techUId) {
+    return FirebaseFirestore.instance
+        .collection("offers")
+        .snapshots()
+        .map((snapshot) {
+      return snapshot.docs
+          .where((element) => element.data()['orderUId'] == orderUId)
+          .where((element) => element.data()['uId'] == techUId)
+          .map((e) => OfferModel.fromJson(e.data()))
+          .toList();
+    });
+  }
+
+
+
 
 }

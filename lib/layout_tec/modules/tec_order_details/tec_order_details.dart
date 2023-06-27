@@ -8,6 +8,7 @@ import 'package:login_register_methods/layout/cubit/states.dart';
 
 import 'package:login_register_methods/shared/components/components.dart';
 
+import '../../../model/cost_model.dart';
 import '../../../model/orderModel.dart';
 
 import '../../../module/sign_in_screen/cubit/cubit.dart';
@@ -17,6 +18,7 @@ class TechnicalOrderDetails extends StatelessWidget {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   final OrderModel model;
+  OfferModel offerModel = OfferModel();
 
   TechnicalOrderDetails({
     super.key,
@@ -24,7 +26,6 @@ class TechnicalOrderDetails extends StatelessWidget {
   });
 
   final TextEditingController costController = TextEditingController();
-
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +35,7 @@ class TechnicalOrderDetails extends StatelessWidget {
     urls.removeLast();
     return BlocConsumer<LayoutCubit, LayoutStates>(
       listener: (context, state) {
-        if(state is UploadOfferSuccessState){
+        if (state is UploadOfferSuccessState) {
           cubit.checkOffers(model.orderUid!, cubit.originalUser!.uid!);
           Navigator.pop(context);
         }
@@ -51,10 +52,12 @@ class TechnicalOrderDetails extends StatelessWidget {
             appBar: AppBar(
               elevation: SignInCubit.get(context).isDark ? 0 : 3,
               iconTheme: const IconThemeData(color: Colors.white),
-              leading: IconButton(onPressed: () {
-                cubit.isOffered == null;
-                Navigator.pop(context);
-              }, icon: Icon(Icons.arrow_back)),
+              leading: IconButton(
+                  onPressed: () {
+                    cubit.isOffered == null;
+                    Navigator.pop(context);
+                  },
+                  icon: Icon(Icons.arrow_back)),
               title: const Text(
                 'Order Details',
                 style: TextStyle(color: Colors.white, fontFamily: "Roboto"),
@@ -64,69 +67,71 @@ class TechnicalOrderDetails extends StatelessWidget {
                   bottom: Radius.circular(15),
                 ),
               ),
-              backgroundColor:
-              SignInCubit.get(context).isDark ? Color(0xff303030) : primaryColor,
+              backgroundColor: SignInCubit.get(context).isDark
+                  ? Color(0xff303030)
+                  : primaryColor,
             ),
-
-            bottomNavigationBar: !cubit.isOffered!? Container(
-              margin: EdgeInsets.all(10),
-              width: MediaQuery.of(context).size.width / 2,
-              height: 60,
-              clipBehavior: Clip.antiAlias,
-              decoration: BoxDecoration(
-                color: primaryColor,
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(10.0),
-                ),
-                boxShadow: const <BoxShadow>[
-                  BoxShadow(
-                    color: Colors.black26,
-                    blurRadius: 10.0,
-                    offset: Offset(0.0, 0.75),
-                  ),
-                ],
-              ),
-              child: MaterialButton(
-                onPressed: () {
-                  navigateAndPush(
-                    context,
-                    widget: offerCostDialog(
-                      controller: costController,
-                      onTap: () {
-                        cubit.offerCreate(
-                          username: cubit.originalUser!.profileName,
-                          uId: cubit.originalUser!.uid,
-                          orderUId: model.orderUid,
-                          image: cubit.originalUser!.profilePic,
-                          cost: costController.text,
+            bottomNavigationBar: !cubit.isOffered!
+                ? Container(
+                    margin: EdgeInsets.all(10),
+                    width: MediaQuery.of(context).size.width / 2,
+                    height: 60,
+                    clipBehavior: Clip.antiAlias,
+                    decoration: BoxDecoration(
+                      color: primaryColor,
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(10.0),
+                      ),
+                      boxShadow: const <BoxShadow>[
+                        BoxShadow(
+                          color: Colors.black26,
+                          blurRadius: 10.0,
+                          offset: Offset(0.0, 0.75),
+                        ),
+                      ],
+                    ),
+                    child: MaterialButton(
+                      onPressed: () {
+                        navigateAndPush(
+                          context,
+                          widget: offerCostDialog(
+                            controller: costController,
+                            onTap: () {
+                              cubit.offerCreate(
+                                username: cubit.originalUser!.profileName,
+                                uId: cubit.originalUser!.uid,
+                                orderUId: model.orderUid,
+                                image: cubit.originalUser!.profilePic,
+                                cost: costController.text,
+                              );
+                            },
+                            context: context,
+                            model: model,
+                          ),
                         );
                       },
-                      context: context,
-                      model: model,
+                      child:
+                          // state is NewOrderUploadImageToFirebaseLoadingState ||
+                          //     state is UploadOrderLoadingState
+                          //     ?
+                          // const SizedBox(
+                          //     width: 25,
+                          //     height: 25,
+                          //     child: CircularProgressIndicator(
+                          //       color: Colors.white,
+                          //     ))
+                          //     :
+                          const Text(
+                        "Offer Cost",
+                        style: TextStyle(
+                          fontFamily: 'Roboto',
+                          color: Colors.white,
+                          fontSize: 18.0,
+                        ),
+                      ),
                     ),
-                  );
-                },
-                child:
-                // state is NewOrderUploadImageToFirebaseLoadingState ||
-                //     state is UploadOrderLoadingState
-                //     ?
-                // const SizedBox(
-                //     width: 25,
-                //     height: 25,
-                //     child: CircularProgressIndicator(
-                //       color: Colors.white,
-                //     ))
-                //     :
-                const Text(
-                  "Offer Cost",
-                  style: TextStyle(
-                    fontFamily: 'Roboto',
-                    color: Colors.white,
-                    fontSize: 18.0,
-                  ),
-                ),
-              ),
-            ) : Container(),
+                  )
+                : Container(),
             body: SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
@@ -209,7 +214,7 @@ class TechnicalOrderDetails extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      height: 15,
+                      height: 12,
                     ),
                     defaultContainer(
                         textColor: SignInCubit.get(context).isDark
@@ -225,7 +230,7 @@ class TechnicalOrderDetails extends StatelessWidget {
                         mainText: 'date',
                         modelText: model.date!),
                     SizedBox(
-                      height: 15,
+                      height: 12,
                     ),
                     defaultContainer(
                         width: MediaQuery.of(context).size.width,
@@ -241,7 +246,7 @@ class TechnicalOrderDetails extends StatelessWidget {
                         mainText: 'time',
                         modelText: model.time!),
                     SizedBox(
-                      height: 15,
+                      height: 12,
                     ),
                     defaultContainer(
                       textColor: SignInCubit.get(context).isDark
@@ -258,7 +263,7 @@ class TechnicalOrderDetails extends StatelessWidget {
                       modelText: model.notes!,
                     ),
                     SizedBox(
-                      height: 15,
+                      height: 12,
                     ),
                     defaultContainer(
                         width: MediaQuery.of(context).size.width,
@@ -274,7 +279,7 @@ class TechnicalOrderDetails extends StatelessWidget {
                         mainText: 'location',
                         modelText: model.location!),
                     SizedBox(
-                      height: 15,
+                      height: 12,
                     ),
                     defaultContainer(
                         width: MediaQuery.of(context).size.width,
@@ -290,7 +295,7 @@ class TechnicalOrderDetails extends StatelessWidget {
                         mainText: 'status',
                         modelText: model.status!),
                     SizedBox(
-                      height: 15,
+                      height: 12,
                     ),
                     if (urls.isNotEmpty)
                       Text(
@@ -328,9 +333,10 @@ class TechnicalOrderDetails extends StatelessWidget {
                           colorOfNumberWidget: SignInCubit.get(context).isDark
                               ? Colors.white.withOpacity(0.2)
                               : Colors.black,
-                          galleryBackgroundColor: SignInCubit.get(context).isDark
-                              ? Color(0xff303030)
-                              : scaffoldLightColor,
+                          galleryBackgroundColor:
+                              SignInCubit.get(context).isDark
+                                  ? Color(0xff303030)
+                                  : scaffoldLightColor,
                           textStyleOfNumberWidget: TextStyle(
                             fontFamily: "Roboto",
                             color: SignInCubit.get(context).isDark
@@ -346,12 +352,65 @@ class TechnicalOrderDetails extends StatelessWidget {
                           childAspectRatio: 1.2,
                         ),
                       ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    cubit.isOffered!
+                        ? Text(
+                            'Your Offer'.toUpperCase(),
+                            style: TextStyle(
+                              color: Colors.grey,
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          )
+                        : Container(),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    cubit.isOffered!
+                        ? StreamBuilder<List<OfferModel>>(
+                            stream: cubit.userOffer(
+                                offerModel.orderUId!, cubit.originalUser!.uid!),
+                            builder: (context, snapshot) {
+                              if (snapshot.hasError) {
+                                return Text(
+                                    'Error No Data found! ${snapshot.error}');
+                              } else if (snapshot.hasData) {
+                                final userOffer = snapshot.data!.reversed;
+                                return ListView(
+                                  physics: NeverScrollableScrollPhysics(),
+                                  shrinkWrap: true,
+                                  children: userOffer
+                                      .map(
+                                        (e) => defaultOfferCard(
+                                          profilePic:
+                                              cubit.originalUser!.profilePic,
+                                          cost: offerModel.cost,
+                                          profileName:
+                                              cubit.originalUser!.profileName,
+                                          rating: '??/5',
+                                          context: context,
+                                          model: offerModel,
+                                        ),
+                                      )
+                                      .toList(),
+                                );
+                              } else {
+                                return Center(
+                                    child: CircularProgressIndicator(
+                                  color: primaryColor,
+                                ));
+                              }
+                            },
+                          )
+                        : Container(),
                   ],
                 ),
               ),
             ),
           ),
-          condition: state is !CheckOfferLoadingState,
+          condition: state is! CheckOfferLoadingState,
           fallback: (context) => Center(child: CircularProgressIndicator()),
         );
       },
@@ -394,7 +453,7 @@ Widget defaultContainer({
             ),
           ),
           SizedBox(
-            height: 10,
+            height: 7,
           ),
           Text(
             modelText.toUpperCase(),
@@ -481,4 +540,113 @@ Widget offerCostDialog({
           ],
         ),
       ),
+    );
+
+Widget defaultOfferCard({
+  required profilePic,
+  required cost,
+  required profileName,
+  required rating,
+  required context,
+  required OfferModel model,
+}) =>
+    Container(
+      padding: EdgeInsets.all(15),
+      decoration: BoxDecoration(
+        color: SignInCubit.get(context).isDark
+            ? Color(0xff303030)
+            : secondaryColor,
+        boxShadow: <BoxShadow>[
+          BoxShadow(
+            color: SignInCubit.get(context).isDark
+                ? Colors.transparent
+                : Colors.black12,
+            blurRadius: 20.0,
+            offset: Offset(0.0, 0.75),
+          ),
+        ],
+// color: Colors.white,
+        borderRadius: BorderRadius.circular(10.0),
+      ),
+      child: Row(children: [
+        ClipRRect(
+          borderRadius: BorderRadius.circular(5),
+          child: Image(
+            image: NetworkImage(
+              LayoutCubit.get(context).originalUser!.isUser == false
+                  ? profilePic
+                  : tempImage,
+            ),
+            width: 60,
+            height: 60,
+          ),
+        ),
+        SizedBox(
+          width: 5,
+        ),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                profileName.toUpperCase(),
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Image(
+                    image: AssetImage('assets/images/star.png'),
+                    width: 18.0,
+                    height: 18.0,
+                  ),
+                  SizedBox(
+                    width: 5,
+                  ),
+                  Text(
+                    rating,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 15,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Text(
+                'ex.cost'.toUpperCase(),
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Text(
+                "${model.cost} EGP".toUpperCase(),
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ]),
     );
