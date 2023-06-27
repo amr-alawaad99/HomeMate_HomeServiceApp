@@ -23,6 +23,7 @@ class LayoutTecScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var cubit = LayoutCubit.get(context);
     return BlocConsumer<LayoutCubit,LayoutStates>(
       listener: (context, state) {},
       builder: (context, state) {
@@ -33,9 +34,7 @@ class LayoutTecScreen extends StatelessWidget {
             drawer: const DrawerTechnicalScreen(),
             extendBody: true,
             body: ConditionalBuilder(
-              condition: true,
-              // cubit.originalUser != null &&
-              //     cubit.originalUser!.profilePic != null,
+              condition: cubit.originalUser != null && cubit.originalUser!.profilePic != null,
               builder: (context) => NestedScrollView(
                 floatHeaderSlivers: true,
                 headerSliverBuilder: (context, innerBoxIsScrolled) => <Widget>[

@@ -29,11 +29,9 @@ class SignInScreen extends StatelessWidget {
     return BlocListener<LayoutCubit,LayoutStates>(
       listener: (context, state) {
         if(state is GetUserDataSuccessState){
-          if(state.isUser){
-            CacheHelper.saveData(key: "isUser", value: true);
+          if(LayoutCubit.get(context).originalUser!.isUser!){
             navigatePushDelete(context, widget: MainLayoutScreen());
           }else{
-            CacheHelper.saveData(key: "isUser", value: false);
             navigatePushDelete(context, widget: LayoutTecScreen());
           }
         }
@@ -43,18 +41,12 @@ class SignInScreen extends StatelessWidget {
 
           if (state is LoginSuccessState) {
             CacheHelper.saveData(key: "uid", value: state.uid).then((value) {
-
-              // navigatePushDelete(context, widget: MainLayoutScreen());
-
-
               //TO GET THE NEW LOGGED IN ACCOUNT IMMEDIATELY RATHER THAN THE PREVIOUS ACCOUNT!!
               LayoutCubit.get(context).originalUser = UserModel();
               LayoutCubit.get(context).getUserData();
             });
           } else if (state is UserAlreadyExistsState) {
-            // navigateAndPush(context, widget: MainLayoutScreen());
             CacheHelper.saveData(key: "uid", value: state.uid).then((value) {
-              // navigatePushDelete(context, widget: MainLayoutScreen());
               //TO GET THE NEW LOGGED IN ACCOUNT IMMEDIATELY RATHER THAN THE PREVIOUS ACCOUNT!!
               LayoutCubit.get(context).originalUser = UserModel();
               LayoutCubit.get(context).getUserData();

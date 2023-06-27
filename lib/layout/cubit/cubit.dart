@@ -75,7 +75,8 @@ class LayoutCubit extends Cubit<LayoutStates> {
   ///Get User Data from Firebase FireStore
   UserModel? originalUser;
 
-  void getUserData() {
+  getUserData() {
+    currentIndex = 0;
     emit(GetUserDataLoadingState());
     if (CacheHelper.getData(key: 'uid') == null) {
       originalUser = UserModel();
@@ -85,7 +86,8 @@ class LayoutCubit extends Cubit<LayoutStates> {
     uId = CacheHelper.getData(key: 'uid');
     FirebaseFirestore.instance.collection("Users").doc(uId).get().then((value) {
       originalUser = UserModel.fromJson(value.data()!);
-      emit(GetUserDataSuccessState(originalUser!.isUser!));
+      CacheHelper.saveData(key: "isUser", value: originalUser!.isUser!);
+      emit(GetUserDataSuccessState());
     });
   }
 
