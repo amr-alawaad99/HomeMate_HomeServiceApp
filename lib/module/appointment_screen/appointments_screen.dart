@@ -12,16 +12,12 @@ import '../appointment_details/appointment_detials_screen.dart';
 import '../sign_in_screen/cubit/cubit.dart';
 
 class AppointmentsScreen extends StatelessWidget {
-
-
   final List<ChooseCategory> categories = [
     ChooseCategory(category: 'All'),
     ChooseCategory(category: 'Finished'),
     ChooseCategory(category: 'Underway'),
     ChooseCategory(category: 'Waiting'),
   ];
-
-
 
   AppointmentsScreen({super.key});
 
@@ -45,8 +41,7 @@ class AppointmentsScreen extends StatelessWidget {
                 child: ListView.separated(
                     physics: const BouncingScrollPhysics(),
                     scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, index) =>
-                        InkWell(
+                    itemBuilder: (context, index) => InkWell(
                           onTap: () {
                             cubit.changeAppointmentIndex(index);
                           },
@@ -56,9 +51,9 @@ class AppointmentsScreen extends StatelessWidget {
                             decoration: BoxDecoration(
                               border: cubit.appointmentSelectedIndex == index
                                   ? Border.all(
-                                width: 1.5,
-                                color: secondaryColor,
-                              )
+                                      width: 1.5,
+                                      color: secondaryColor,
+                                    )
                                   : null,
                               borderRadius: BorderRadius.circular(5),
                             ),
@@ -76,10 +71,9 @@ class AppointmentsScreen extends StatelessWidget {
                             ),
                           ),
                         ),
-                    separatorBuilder: (context, index) =>
-                    const SizedBox(
-                      width: 8,
-                    ),
+                    separatorBuilder: (context, index) => const SizedBox(
+                          width: 8,
+                        ),
                     itemCount: categories.length),
               ),
             ),
@@ -97,25 +91,23 @@ class AppointmentsScreen extends StatelessWidget {
                         shrinkWrap: true,
                         children: orders
                             .map(
-                              (e) =>
-                              defaultAppointmentCard(
+                              (e) => defaultAppointmentCard(
                                   model: e,
                                   context: context,
                                   onTap: () {
                                     navigateAndPush(context,
                                         widget: AppointmentDetails(
-                                           model: e,
-                                          ));
-                                  }
-                              ),
-                        )
+                                          model: e,
+                                        ));
+                                  }),
+                            )
                             .toList(),
                       );
                     } else {
                       return Center(
                           child: CircularProgressIndicator(
-                            color: primaryColor,
-                          ));
+                        color: primaryColor,
+                      ));
                     }
                   },
                 ),
@@ -128,7 +120,7 @@ class AppointmentsScreen extends StatelessWidget {
   }
 
   Widget defaultAppointmentCard(
-      {required OrderModel model, required context, Function()? onTap}) =>
+          {required OrderModel model, required context, Function()? onTap}) =>
       Padding(
         padding: const EdgeInsets.only(left: 15.0, right: 15, top: 15),
         child: InkWell(
@@ -137,21 +129,14 @@ class AppointmentsScreen extends StatelessWidget {
           child: Container(
             padding: const EdgeInsets.all(10),
             height: 150,
-            width: MediaQuery
-                .of(context)
-                .size
-                .width,
+            width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
-              color: SignInCubit
-                  .get(context)
-                  .isDark
+              color: SignInCubit.get(context).isDark
                   ? Color(0xff303030)
                   : Colors.white,
               boxShadow: <BoxShadow>[
                 BoxShadow(
-                  color: SignInCubit
-                      .get(context)
-                      .isDark
+                  color: SignInCubit.get(context).isDark
                       ? Colors.transparent
                       : Colors.black12,
                   blurRadius: 20.0,
@@ -189,11 +174,9 @@ class AppointmentsScreen extends StatelessWidget {
                                 ClipRRect(
                                   borderRadius: BorderRadius.circular(5),
                                   child: Image(
-                                    image: NetworkImage(LayoutCubit
-                                        .get(context)
-                                        .originalUser!
-                                        .isUser == false ? model.image! :
-                                    "https://img.freepik.com/free-vector/self-care-concept_23-2148523717.jpg?w=740&t=st=1678538562~exp=1678539162~hmac=a7d5a1db32b0d9a70e2ebbf68ab260a7ff455a23edb61284689ea8c3559233dd"),
+                                    image: model.status == 'waiting'?tempImage: NetworkImage(model.profilePic!),
+
+
                                     width: 30,
                                     height: 30,
                                   ),
@@ -205,13 +188,9 @@ class AppointmentsScreen extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-
-                                      LayoutCubit
-                                          .get(context)
-                                          .originalUser!
-                                          .isUser == false
-                                          ? model.profileName!
-                                          : 'waiting for technical offers!',
+                                      model.status == 'waiting'
+                                          ? 'waiting for technical offers!'
+                                          : model.profileName!,
                                       style: const TextStyle(
                                         fontSize: 15.0,
                                       ),
@@ -220,7 +199,8 @@ class AppointmentsScreen extends StatelessWidget {
                                       height: 5.0,
                                     ),
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
                                       children: const [
                                         Image(
                                           image: AssetImage(
@@ -324,14 +304,14 @@ class AppointmentsScreen extends StatelessWidget {
                               children: [
                                 InkWell(
                                   onTap: () {
-                                    LayoutCubit.get(context).removeOrder(orderUid: model.orderUid!);
+                                    LayoutCubit.get(context)
+                                        .removeOrder(orderUid: model.orderUid!);
                                   },
                                   child: Icon(
                                     TablerIcons.trash,
                                     color: errorColor,
                                   ),
                                 ),
-
                               ],
                             ),
                           ),

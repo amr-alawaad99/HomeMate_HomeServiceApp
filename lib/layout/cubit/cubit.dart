@@ -484,13 +484,31 @@ class LayoutCubit extends Cubit<LayoutStates> {
       emit(CheckOfferSuccessState());
     });
   }
-
+// update order in user screen
   void updateUserAppointment({
     String? orderUid,
     String? cost,
+    String? profileName,
+    String? profilePic,
+
+
   }) {
     FirebaseFirestore.instance.collection('orders').doc(orderUid).update({
       'cost': cost,
+      'profileName':profileName,
+      'profilePic':profilePic,
+      'status':'underway',
+    });
+  }
+
+  //update offer for technical
+
+  void updateTechnicalOrder({
+    String? offerUid,
+
+  }) {
+    FirebaseFirestore.instance.collection('offers').doc(offerUid).update({
+    'status': 'accepted'
     });
   }
 

@@ -28,17 +28,20 @@ class AppointmentDetails extends StatelessWidget {
     var cubit = LayoutCubit.get(context);
 
     return BlocConsumer<LayoutCubit, LayoutStates>(
-      listener: (context, state) {
-      },
+      listener: (context, state) {},
       builder: (context, state) {
         return Scaffold(
-          backgroundColor: SignInCubit.get(context).isDark
+          backgroundColor: SignInCubit
+              .get(context)
+              .isDark
               ? Color(0xff212121)
               : scaffoldLightColor,
           key: scaffoldKey,
           extendBody: true,
           appBar: AppBar(
-            elevation: SignInCubit.get(context).isDark ? 0 : 3,
+            elevation: SignInCubit
+                .get(context)
+                .isDark ? 0 : 3,
             iconTheme: const IconThemeData(color: Colors.white),
             title: const Text(
               'Appointment Details',
@@ -49,7 +52,9 @@ class AppointmentDetails extends StatelessWidget {
                 bottom: Radius.circular(15),
               ),
             ),
-            backgroundColor: SignInCubit.get(context).isDark
+            backgroundColor: SignInCubit
+                .get(context)
+                .isDark
                 ? Color(0xff303030)
                 : primaryColor,
           ),
@@ -138,14 +143,23 @@ class AppointmentDetails extends StatelessWidget {
                     height: 15,
                   ),
                   defaultContainer(
-                      textColor: SignInCubit.get(context).isDark
+                      textColor: SignInCubit
+                          .get(context)
+                          .isDark
                           ? Colors.white
                           : Colors.black,
-                      width: MediaQuery.of(context).size.width,
-                      color: SignInCubit.get(context).isDark
+                      width: MediaQuery
+                          .of(context)
+                          .size
+                          .width,
+                      color: SignInCubit
+                          .get(context)
+                          .isDark
                           ? Color(0xff303030)
                           : Colors.white,
-                      shadowColor: SignInCubit.get(context).isDark
+                      shadowColor: SignInCubit
+                          .get(context)
+                          .isDark
                           ? Colors.transparent
                           : Colors.black12,
                       mainText: 'date',
@@ -154,14 +168,23 @@ class AppointmentDetails extends StatelessWidget {
                     height: 15,
                   ),
                   defaultContainer(
-                      width: MediaQuery.of(context).size.width,
-                      color: SignInCubit.get(context).isDark
+                      width: MediaQuery
+                          .of(context)
+                          .size
+                          .width,
+                      color: SignInCubit
+                          .get(context)
+                          .isDark
                           ? Color(0xff303030)
                           : Colors.white,
-                      textColor: SignInCubit.get(context).isDark
+                      textColor: SignInCubit
+                          .get(context)
+                          .isDark
                           ? Colors.white
                           : Colors.black,
-                      shadowColor: SignInCubit.get(context).isDark
+                      shadowColor: SignInCubit
+                          .get(context)
+                          .isDark
                           ? Colors.transparent
                           : Colors.black12,
                       mainText: 'time',
@@ -170,14 +193,23 @@ class AppointmentDetails extends StatelessWidget {
                     height: 15,
                   ),
                   defaultContainer(
-                    textColor: SignInCubit.get(context).isDark
+                    textColor: SignInCubit
+                        .get(context)
+                        .isDark
                         ? Colors.white
                         : Colors.black,
-                    width: MediaQuery.of(context).size.width,
-                    color: SignInCubit.get(context).isDark
+                    width: MediaQuery
+                        .of(context)
+                        .size
+                        .width,
+                    color: SignInCubit
+                        .get(context)
+                        .isDark
                         ? Color(0xff303030)
                         : Colors.white,
-                    shadowColor: SignInCubit.get(context).isDark
+                    shadowColor: SignInCubit
+                        .get(context)
+                        .isDark
                         ? Colors.transparent
                         : Colors.black12,
                     mainText: 'details',
@@ -187,14 +219,23 @@ class AppointmentDetails extends StatelessWidget {
                     height: 15,
                   ),
                   defaultContainer(
-                      width: MediaQuery.of(context).size.width,
-                      color: SignInCubit.get(context).isDark
+                      width: MediaQuery
+                          .of(context)
+                          .size
+                          .width,
+                      color: SignInCubit
+                          .get(context)
+                          .isDark
                           ? Color(0xff303030)
                           : Colors.white,
-                      textColor: SignInCubit.get(context).isDark
+                      textColor: SignInCubit
+                          .get(context)
+                          .isDark
                           ? Colors.white
                           : Colors.black,
-                      shadowColor: SignInCubit.get(context).isDark
+                      shadowColor: SignInCubit
+                          .get(context)
+                          .isDark
                           ? Colors.transparent
                           : Colors.black12,
                       mainText: 'location',
@@ -203,14 +244,23 @@ class AppointmentDetails extends StatelessWidget {
                     height: 15,
                   ),
                   defaultContainer(
-                      width: MediaQuery.of(context).size.width,
-                      color: SignInCubit.get(context).isDark
+                      width: MediaQuery
+                          .of(context)
+                          .size
+                          .width,
+                      color: SignInCubit
+                          .get(context)
+                          .isDark
                           ? Color(0xff303030)
                           : Colors.white,
-                      textColor: SignInCubit.get(context).isDark
+                      textColor: SignInCubit
+                          .get(context)
+                          .isDark
                           ? Colors.white
                           : Colors.black,
-                      shadowColor: SignInCubit.get(context).isDark
+                      shadowColor: SignInCubit
+                          .get(context)
+                          .isDark
                           ? Colors.transparent
                           : Colors.black12,
                       mainText: 'status',
@@ -235,12 +285,16 @@ class AppointmentDetails extends StatelessWidget {
                       padding: EdgeInsets.all(10),
                       height: 117,
                       decoration: BoxDecoration(
-                        color: SignInCubit.get(context).isDark
+                        color: SignInCubit
+                            .get(context)
+                            .isDark
                             ? Color(0xff303030)
                             : Colors.white,
                         boxShadow: <BoxShadow>[
                           BoxShadow(
-                            color: SignInCubit.get(context).isDark
+                            color: SignInCubit
+                                .get(context)
+                                .isDark
                                 ? Colors.transparent
                                 : Colors.black12,
                             blurRadius: 20.0,
@@ -251,15 +305,21 @@ class AppointmentDetails extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10.0),
                       ),
                       child: GalleryImage(
-                        colorOfNumberWidget: SignInCubit.get(context).isDark
+                        colorOfNumberWidget: SignInCubit
+                            .get(context)
+                            .isDark
                             ? Colors.white.withOpacity(0.2)
                             : Colors.black,
-                        galleryBackgroundColor: SignInCubit.get(context).isDark
+                        galleryBackgroundColor: SignInCubit
+                            .get(context)
+                            .isDark
                             ? Color(0xff303030)
                             : scaffoldLightColor,
                         textStyleOfNumberWidget: TextStyle(
                           fontFamily: "Roboto",
-                          color: SignInCubit.get(context).isDark
+                          color: SignInCubit
+                              .get(context)
+                              .isDark
                               ? Colors.black
                               : Colors.white,
                           fontSize: 25,
@@ -272,31 +332,38 @@ class AppointmentDetails extends StatelessWidget {
                         childAspectRatio: 1.2,
                       ),
                     ),
-                  if(model.status== 'waiting')
-                   StreamBuilder<List<OfferModel>>(
-                    stream: LayoutCubit.get(context).allOrderOffers(
+                  if(model.status == 'waiting')
+                    StreamBuilder<List<OfferModel>>(
+                      stream: LayoutCubit.get(context).allOrderOffers(
                         model.orderUid!,
-                       ),
-                    builder: (context, snapshot) {
-                      if (snapshot.hasError) {
-                        return Text('Error No Data found! ${snapshot.error}');
-                      } else if (snapshot.hasData) {
-                        final userOffer = snapshot.data!.reversed;
-                        List<Widget> model = userOffer.map((e) => defaultOffersCard(context: context, model: e,),).toList();
-                        return ListView.builder(
-                          physics: NeverScrollableScrollPhysics(),
-                          shrinkWrap: true,
-                          itemBuilder: (context, index) => userOffer.map((e) => defaultOffersCard(context: context, model: e, list: model, index: index),).toList()[index],
-                          itemCount: model.length,
-                        );
-                      } else {
-                        return Center(
-                            child: CircularProgressIndicator(
-                          color: primaryColor,
-                        ));
-                      }
-                    },
-                  ),
+                      ),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasError) {
+                          return Text('Error No Data found! ${snapshot.error}');
+                        } else if (snapshot.hasData) {
+                          final userOffer = snapshot.data!.reversed;
+                          List<Widget> model = userOffer.map((e) =>
+                              defaultOffersCard(context: context, model: e,),)
+                              .toList();
+                          return ListView.builder(
+                            physics: NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            itemBuilder: (context, index) =>
+                            userOffer.map((e) => defaultOffersCard(
+                                context: context,
+                                model: e,
+                                list: model,
+                                index: index),).toList()[index],
+                            itemCount: model.length,
+                          );
+                        } else {
+                          return Center(
+                              child: CircularProgressIndicator(
+                                color: primaryColor,
+                              ));
+                        }
+                      },
+                    ),
                   if(model.status != 'waiting')
                     StreamBuilder<List<OfferModel>>(
                       stream: LayoutCubit.get(context).acceptedOffer(
@@ -307,11 +374,18 @@ class AppointmentDetails extends StatelessWidget {
                           return Text('Error No Data found! ${snapshot.error}');
                         } else if (snapshot.hasData) {
                           final userOffer = snapshot.data!.reversed;
-                          List<Widget> model = userOffer.map((e) => defaultOffersCard(context: context, model: e,),).toList();
+                          List<Widget> model = userOffer.map((e) =>
+                              defaultOffersCard(context: context, model: e,),)
+                              .toList();
                           return ListView.builder(
                             physics: NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
-                            itemBuilder: (context, index) => userOffer.map((e) => defaultOffersCard(context: context, model: e, list: model, index: index),).toList()[index],
+                            itemBuilder: (context, index) =>
+                            userOffer.map((e) => defaultOffersCard(
+                                context: context,
+                                model: e,
+                                list: model,
+                                index: index),).toList()[index],
                             itemCount: model.length,
                           );
                         } else {
@@ -399,12 +473,16 @@ Widget defaultOffersCard({
         child: AnimatedContainer(
           padding: EdgeInsets.all(15),
           decoration: BoxDecoration(
-            color: SignInCubit.get(context).isDark
+            color: SignInCubit
+                .get(context)
+                .isDark
                 ? Color(0xff303030)
                 : secondaryColor,
             boxShadow: <BoxShadow>[
               BoxShadow(
-                color: SignInCubit.get(context).isDark
+                color: SignInCubit
+                    .get(context)
+                    .isDark
                     ? Colors.transparent
                     : Colors.black12,
                 blurRadius: 20.0,
@@ -497,20 +575,29 @@ Widget defaultOffersCard({
               SizedBox(
                 height: 10,
               ),
-              if (index == LayoutCubit.get(context).offerIndex)
+              if (index == LayoutCubit
+                  .get(context)
+                  .offerIndex)
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    if(model.status != 'waiting')
-                     defaultButton(
-                        buttonColor: successColor,
-                        width: 100,
-                        height: 30,
-                        text: 'accept'.toUpperCase(),
-                        fontSize: 12,
-                        onPress: () {
-                          onPressAccept;
-                        }),
+                    if(model.status == 'waiting')
+                      defaultButton(
+                          buttonColor: successColor,
+                          width: 100,
+                          height: 30,
+                          text: 'accept'.toUpperCase(),
+                          fontSize: 12,
+                          onPress: () {
+                            LayoutCubit.get(context).updateUserAppointment(
+                                cost: model.cost,
+                                orderUid: model.orderUId,
+                                profileName
+                                :model.profileName,
+                                profilePic
+                                :model.image,);
+                            LayoutCubit.get(context).updateTechnicalOrder(offerUid: model.offerUId);
+                          }),
                     SizedBox(
                       width: 10,
                     ),
