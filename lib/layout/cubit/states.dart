@@ -95,3 +95,8 @@ class VerificationErrorState extends LayoutStates{}
 class UploadOfferLoadingState extends LayoutStates{}
 class UploadOfferSuccessState extends LayoutStates{}
 class UploadOfferErrorState extends LayoutStates{}
+
+
+class CheckOfferLoadingState extends LayoutStates{}
+class CheckOfferSuccessState extends LayoutStates{}
+class CheckOfferErrorState extends LayoutStates{}

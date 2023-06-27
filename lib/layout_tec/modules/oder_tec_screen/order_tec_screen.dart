@@ -1,10 +1,7 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
-import 'package:login_register_methods/layout/cubit/states.dart';
-
 import '../../../layout/cubit/cubit.dart';
 import '../../../model/orderModel.dart';
 import '../../../module/sign_in_screen/cubit/cubit.dart';
@@ -35,6 +32,7 @@ class OrderTechnicalScreen extends StatelessWidget {
                       model: e,
                       context: context,
                       onTap: () {
+                        cubit.checkOffers(e.orderUid!, cubit.originalUser!.uid!);
                         navigateAndPush(context,
                             widget: TechnicalOrderDetails(
                               model: e,

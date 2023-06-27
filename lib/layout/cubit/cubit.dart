@@ -467,11 +467,27 @@ class LayoutCubit extends Cubit<LayoutStates> {
     });
   }
 
-  void checkOffers(String orderUId, String techUId) {
-    FirebaseFirestore.instance.collection('offers').snapshots().map((event) {
-      event.docs
-          .where((element) => element.data()['orderUId'] == orderUId)
-          .contains(['uId'] == techUId);
+  bool? isOffered;
+  checkOffers(String orderUId, String techUId) async {
+    emit(CheckOfferLoadingState());
+    await FirebaseFirestore.instance.collection('offers').get().then((value) {
+      isOffered = value.docs.where((element) => element.data()['orderUId'] == orderUId)
+      .where((element) => element.data()['uId'] == techUId).isNotEmpty;
+    }).then((value) {
+      emit(CheckOfferSuccessState());
+    }).catchError((error){
+      emit(CheckOfferSuccessState());
+    });
+  }
+
+
+  void updateUserAppointment({
+    String? orderUid,
+    String? cost,
+}){
+    FirebaseFirestore.instance.collection('orders').doc(orderUid).update({
+      'cost' : cost,
+
     });
   }
 
