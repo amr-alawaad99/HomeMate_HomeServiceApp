@@ -5,13 +5,14 @@ import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:galleryimage/galleryimage.dart';
 import 'package:login_register_methods/layout/cubit/cubit.dart';
 import 'package:login_register_methods/layout/cubit/states.dart';
-import 'package:login_register_methods/module/google_maps_widget/order_tracking_screen.dart';
+
 
 import 'package:login_register_methods/shared/components/components.dart';
 
 import '../../../model/cost_model.dart';
 import '../../../model/orderModel.dart';
 
+import '../../../module/google_maps_widget/order_tracking_screen.dart';
 import '../../../module/sign_in_screen/cubit/cubit.dart';
 import '../../../shared/components/constants.dart';
 
@@ -394,7 +395,7 @@ Widget defaultContainer({
             height: 7,
           ),
           Text(
-            modelText.toUpperCase(),
+            modelText,
             style: TextStyle(
               color: textColor,
               fontSize: 15,
