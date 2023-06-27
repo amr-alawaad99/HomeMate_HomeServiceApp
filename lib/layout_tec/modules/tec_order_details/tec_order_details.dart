@@ -130,12 +130,13 @@ class TechnicalOrderDetails extends StatelessWidget {
                       ),
                     ),
                   )
-                : Container(),
+                : null,
             body: SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     Container(
                       width: double.infinity,
@@ -265,18 +266,19 @@ class TechnicalOrderDetails extends StatelessWidget {
                       height: 12,
                     ),
                     defaultContainer(
-                        width: MediaQuery.of(context).size.width,
-                        color: SignInCubit.get(context).isDark
-                            ? Color(0xff303030)
-                            : Colors.white,
-                        textColor: SignInCubit.get(context).isDark
-                            ? Colors.white
-                            : Colors.black,
-                        shadowColor: SignInCubit.get(context).isDark
-                            ? Colors.transparent
-                            : Colors.black12,
-                        mainText: 'location',
-                        modelText: model.location!),
+                      width: MediaQuery.of(context).size.width,
+                      color: SignInCubit.get(context).isDark
+                          ? Color(0xff303030)
+                          : Colors.white,
+                      textColor: SignInCubit.get(context).isDark
+                          ? Colors.white
+                          : Colors.black,
+                      shadowColor: SignInCubit.get(context).isDark
+                          ? Colors.transparent
+                          : Colors.black12,
+                      mainText: 'location',
+                      modelText: model.location!,
+                    ),
                     SizedBox(
                       height: 12,
                     ),
@@ -367,8 +369,8 @@ class TechnicalOrderDetails extends StatelessWidget {
                     SizedBox(
                       height: 10,
                     ),
-                    cubit.isOffered! ?
-                    StreamBuilder<List<OfferModel>>(
+                    cubit.isOffered!
+                        ? StreamBuilder<List<OfferModel>>(
                             stream: cubit.userOffer(
                                 model.orderUid!, cubit.originalUser!.uid!),
                             builder: (context, snapshot) {
@@ -449,7 +451,7 @@ Widget defaultContainer({
             height: 7,
           ),
           Text(
-            modelText.toUpperCase(),
+            modelText,
             style: TextStyle(
               color: textColor,
               fontSize: 15,
@@ -586,7 +588,7 @@ Widget defaultOfferCard({
               ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
+                children: const [
                   Image(
                     image: AssetImage('assets/images/star.png'),
                     width: 18.0,

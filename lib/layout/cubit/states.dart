@@ -97,3 +97,9 @@ class UploadOfferErrorState extends LayoutStates{}
 class CheckOfferLoadingState extends LayoutStates{}
 class CheckOfferSuccessState extends LayoutStates{}
 class CheckOfferErrorState extends LayoutStates{}
+
+
+//////////////////////////////////////////////////
+//offers state in user layout
+class IsSelectedState extends LayoutStates{}
+class IsNotSelectedState extends LayoutStates{}

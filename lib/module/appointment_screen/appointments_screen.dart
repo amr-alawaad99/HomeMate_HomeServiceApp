@@ -83,7 +83,6 @@ class AppointmentsScreen extends StatelessWidget {
                     itemCount: categories.length),
               ),
             ),
-
             Column(
               children: [
                 StreamBuilder<List<OrderModel>>(

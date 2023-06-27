@@ -505,7 +505,22 @@ class LayoutCubit extends Cubit<LayoutStates> {
           .toList();
     });
   }
-
+////////////////////////////////////////////////
+//   appointment offer in user appointment details
+  bool isContainerSelected = false;
+  void changeContainerState(){
+    isContainerSelected = !isContainerSelected;
+    emit(IsSelectedState());
+  }
+  int offerIndex = -1;
+  void selectedOffer(List list, int index) {
+    for (int i = 0; i < list.length; i++) {
+      list[i].selected = false;
+    }
+    list[index].selected = true;
+    offerIndex = index;
+    emit(IsSelectedState());
+  }
 
 
   Stream<List<OfferModel>> allOrderOffers(String orderUId, String techUId) {
@@ -515,7 +530,7 @@ class LayoutCubit extends Cubit<LayoutStates> {
         .map((snapshot) {
       return snapshot.docs
           .where((element) => element.data()['orderUId'] == orderUId)
-          .where((element) => element.data()['uId'] == techUId)
+          // .where((element) => element.data()['uId'] == techUId)
           .map((e) => OfferModel.fromJson(e.data()))
           .toList();
     });
