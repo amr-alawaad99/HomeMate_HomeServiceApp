@@ -16,6 +16,7 @@ ImageProvider tempImage = const NetworkImage('https://img.freepik.com/free-vecto
 
 String uId = '';
 bool? isUser;
+String googleMapsAPIKey = "AIzaSyACWn0PuCuZ4YxN6Vyxjvgv1xhGIW_p-6M";
 
 
 Widget comingSoonDialog() => Dialog(
