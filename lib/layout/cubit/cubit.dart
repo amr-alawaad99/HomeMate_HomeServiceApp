@@ -507,18 +507,14 @@ class LayoutCubit extends Cubit<LayoutStates> {
   }
 ////////////////////////////////////////////////
 //   appointment offer in user appointment details
-  bool isContainerSelected = false;
-  void changeContainerState(){
-    isContainerSelected = !isContainerSelected;
-    emit(IsSelectedState());
-  }
+
   int offerIndex = -1;
   void selectedOffer(List list, int index) {
-    for (int i = 0; i < list.length; i++) {
-      list[i].selected = false;
+    if(offerIndex != index) {
+      offerIndex = index;
+    } else {
+      offerIndex = -1;
     }
-    list[index].selected = true;
-    offerIndex = index;
     emit(IsSelectedState());
   }
 

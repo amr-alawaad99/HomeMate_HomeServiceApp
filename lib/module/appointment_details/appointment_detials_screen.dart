@@ -281,21 +281,12 @@ class AppointmentDetails extends StatelessWidget {
                         return Text('Error No Data found! ${snapshot.error}');
                       } else if (snapshot.hasData) {
                         final userOffer = snapshot.data!.reversed;
-                        return ListView(
+                        List<Widget> model = userOffer.map((e) => defaultOffersCard(context: context, model: e,),).toList();
+                        return ListView.builder(
                           physics: NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
-                          children: userOffer
-                              .map(
-                                (e) => defaultOffersCard(
-                                  onTap: () {
-                                    cubit.changeContainerState();
-                                    print(cubit.isContainerSelected);
-                                  },
-                                  context: context,
-                                  model: e, isSelected: cubit.isContainerSelected,
-                                ),
-                              )
-                              .toList(),
+                          itemBuilder: (context, index) => userOffer.map((e) => defaultOffersCard(context: context, model: e, list: model, index: index),).toList()[index],
+                          itemCount: model.length,
                         );
                       } else {
                         return Center(
@@ -304,7 +295,7 @@ class AppointmentDetails extends StatelessWidget {
                         ));
                       }
                     },
-                  )
+                  ),
                 ],
               ),
             ),
@@ -366,17 +357,19 @@ Widget defaultContainer({
     );
 
 Widget defaultOffersCard({
-  required bool isSelected,
+  int? index,
+  List? list,
   required context,
   required OfferModel model,
-  Function()? onTap,
   Function()? onPressAccept,
   Function()? onPressViewTechnicalInfo,
 }) =>
     Padding(
       padding: const EdgeInsets.only(top: 10.0),
       child: InkWell(
-        onTap: onTap,
+        onTap: () {
+          LayoutCubit.get(context).selectedOffer(list!, index!);
+        },
         child: AnimatedContainer(
           padding: EdgeInsets.all(15),
           decoration: BoxDecoration(
@@ -478,7 +471,7 @@ Widget defaultOffersCard({
               SizedBox(
                 height: 10,
               ),
-              if (isSelected )
+              if (index == LayoutCubit.get(context).offerIndex)
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
