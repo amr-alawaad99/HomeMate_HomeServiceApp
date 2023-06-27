@@ -452,6 +452,7 @@ class LayoutCubit extends Cubit<LayoutStates> {
       image: image,
       profileName: username,
       uId: uId,
+      status: 'waiting',
     );
     emit(UploadOfferLoadingState());
     FirebaseFirestore.instance
@@ -519,14 +520,27 @@ class LayoutCubit extends Cubit<LayoutStates> {
   }
 
 
-  Stream<List<OfferModel>> allOrderOffers(String orderUId, String techUId) {
+  Stream<List<OfferModel>> allOrderOffers(String orderUId,  ) {
     return FirebaseFirestore.instance
         .collection("offers")
         .snapshots()
         .map((snapshot) {
       return snapshot.docs
           .where((element) => element.data()['orderUId'] == orderUId)
-          // .where((element) => element.data()['uId'] == techUId)
+          // .where((element) => element.data()['status'] == 'accepted')
+          .map((e) => OfferModel.fromJson(e.data()))
+          .toList();
+    });
+  }
+
+  Stream<List<OfferModel>> acceptedOffer(String orderUId,) {
+    return FirebaseFirestore.instance
+        .collection("offers")
+        .snapshots()
+        .map((snapshot) {
+      return snapshot.docs
+          .where((element) => element.data()['orderUId'] == orderUId)
+          .where((element) => element.data()['status'] == 'accepted')
           .map((e) => OfferModel.fromJson(e.data()))
           .toList();
     });

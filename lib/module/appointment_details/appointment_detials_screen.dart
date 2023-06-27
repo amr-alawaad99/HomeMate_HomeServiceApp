@@ -272,10 +272,11 @@ class AppointmentDetails extends StatelessWidget {
                         childAspectRatio: 1.2,
                       ),
                     ),
-                  StreamBuilder<List<OfferModel>>(
+                  if(model.status== 'waiting')
+                   StreamBuilder<List<OfferModel>>(
                     stream: LayoutCubit.get(context).allOrderOffers(
                         model.orderUid!,
-                        LayoutCubit.get(context).originalUser!.uid!),
+                       ),
                     builder: (context, snapshot) {
                       if (snapshot.hasError) {
                         return Text('Error No Data found! ${snapshot.error}');
@@ -296,6 +297,31 @@ class AppointmentDetails extends StatelessWidget {
                       }
                     },
                   ),
+                  if(model.status != 'waiting')
+                    StreamBuilder<List<OfferModel>>(
+                      stream: LayoutCubit.get(context).acceptedOffer(
+                        model.orderUid!,
+                      ),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasError) {
+                          return Text('Error No Data found! ${snapshot.error}');
+                        } else if (snapshot.hasData) {
+                          final userOffer = snapshot.data!.reversed;
+                          List<Widget> model = userOffer.map((e) => defaultOffersCard(context: context, model: e,),).toList();
+                          return ListView.builder(
+                            physics: NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            itemBuilder: (context, index) => userOffer.map((e) => defaultOffersCard(context: context, model: e, list: model, index: index),).toList()[index],
+                            itemCount: model.length,
+                          );
+                        } else {
+                          return Center(
+                              child: CircularProgressIndicator(
+                                color: primaryColor,
+                              ));
+                        }
+                      },
+                    ),
                 ],
               ),
             ),
@@ -475,7 +501,8 @@ Widget defaultOffersCard({
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    defaultButton(
+                    if(model.status != 'waiting')
+                     defaultButton(
                         buttonColor: successColor,
                         width: 100,
                         height: 30,
