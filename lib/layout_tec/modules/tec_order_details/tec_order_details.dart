@@ -18,7 +18,6 @@ class TechnicalOrderDetails extends StatelessWidget {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   final OrderModel model;
-  OfferModel offerModel = OfferModel();
 
   TechnicalOrderDetails({
     super.key,
@@ -368,10 +367,10 @@ class TechnicalOrderDetails extends StatelessWidget {
                     SizedBox(
                       height: 10,
                     ),
-                    cubit.isOffered!
-                        ? StreamBuilder<List<OfferModel>>(
+                    cubit.isOffered! ?
+                    StreamBuilder<List<OfferModel>>(
                             stream: cubit.userOffer(
-                                offerModel.orderUId!, cubit.originalUser!.uid!),
+                                model.orderUid!, cubit.originalUser!.uid!),
                             builder: (context, snapshot) {
                               if (snapshot.hasError) {
                                 return Text(
@@ -384,14 +383,8 @@ class TechnicalOrderDetails extends StatelessWidget {
                                   children: userOffer
                                       .map(
                                         (e) => defaultOfferCard(
-                                          profilePic:
-                                              cubit.originalUser!.profilePic,
-                                          cost: offerModel.cost,
-                                          profileName:
-                                              cubit.originalUser!.profileName,
-                                          rating: '??/5',
                                           context: context,
-                                          model: offerModel,
+                                          model: e,
                                         ),
                                       )
                                       .toList(),
@@ -543,10 +536,6 @@ Widget offerCostDialog({
     );
 
 Widget defaultOfferCard({
-  required profilePic,
-  required cost,
-  required profileName,
-  required rating,
   required context,
   required OfferModel model,
 }) =>
@@ -572,11 +561,7 @@ Widget defaultOfferCard({
         ClipRRect(
           borderRadius: BorderRadius.circular(5),
           child: Image(
-            image: NetworkImage(
-              LayoutCubit.get(context).originalUser!.isUser == false
-                  ? profilePic
-                  : tempImage,
-            ),
+            image: NetworkImage(model.image!),
             width: 60,
             height: 60,
           ),
@@ -589,7 +574,7 @@ Widget defaultOfferCard({
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                profileName.toUpperCase(),
+                model.profileName!.toUpperCase(),
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 15,
@@ -611,7 +596,7 @@ Widget defaultOfferCard({
                     width: 5,
                   ),
                   Text(
-                    rating,
+                    "??/5",
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 15,
