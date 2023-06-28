@@ -175,8 +175,6 @@ class AppointmentsScreen extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(5),
                                   child: Image(
                                     image: model.status == 'waiting'?tempImage: NetworkImage(model.profilePic!),
-
-
                                     width: 30,
                                     height: 30,
                                   ),
@@ -282,11 +280,12 @@ class AppointmentsScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         Text(
-                          'Ex.Cost',
+                          'Estimated Cost',
                           style: TextStyle(
                             fontSize: 15.0,
                           ),
                         ),
+                        SizedBox(height: 5,),
                         Text(
                           model.cost!,
                           style: TextStyle(

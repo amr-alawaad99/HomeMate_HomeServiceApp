@@ -46,7 +46,7 @@ class LayoutCubit extends Cubit<LayoutStates> {
   ];
 
   List<Widget> tecScreens = [
-    const HomeTechnicalScreen(),
+     HomeTechnicalScreen(),
     OrderTechnicalScreen(),
     HistoryScreen(),
   ];
@@ -562,6 +562,15 @@ class LayoutCubit extends Cubit<LayoutStates> {
           .map((e) => OfferModel.fromJson(e.data()))
           .toList();
     });
+  }
+
+  // handle tabView
+
+  int currentTabIndex = 0;
+
+  void changeTabView(int index) {
+    currentTabIndex = index;
+    emit(ChangeTabview());
   }
 
 

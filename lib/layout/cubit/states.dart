@@ -103,3 +103,7 @@ class CheckOfferErrorState extends LayoutStates{}
 //offers state in user layout
 class IsSelectedState extends LayoutStates{}
 class IsNotSelectedState extends LayoutStates{}
+
+// tab bar state
+class ChangeTabview extends LayoutStates{}
+
