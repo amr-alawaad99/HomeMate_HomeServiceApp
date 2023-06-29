@@ -107,3 +107,5 @@ class IsNotSelectedState extends LayoutStates{}
 // tab bar state
 class ChangeTabview extends LayoutStates{}
 
+//
+class GetWaitingOrdersUidSuccessState extends LayoutStates{}

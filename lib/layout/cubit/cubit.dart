@@ -573,7 +573,22 @@ class LayoutCubit extends Cubit<LayoutStates> {
     emit(ChangeTabview());
   }
 
-
-
+  List<String> ordersUid = [];
+  ss() async {
+    await FirebaseFirestore.instance.collection("offers").get().then((value) {
+      value.docs.where((element) => element.data()['uId'] == originalUser!.uid)
+          .where((element) => element.data()['status'] == 'waiting').forEach((element) {
+        print(element.data()['orderUId']);
+        ordersUid.add(element.data()['orderUId']);
+      });
+      emit(GetWaitingOrdersUidSuccessState());
+    }).catchError((error){
+      print(error);
+    });
+  }
+  Stream<List<OrderModel>> onWaitingOrders(List<String> uids) {
+    return FirebaseFirestore.instance.collection('orders').where('orderUid', whereIn: uids)
+        .snapshots().map((event) => event.docs.map((e) => OrderModel.fromJson(e.data())).toList());
+  }
 
 }
