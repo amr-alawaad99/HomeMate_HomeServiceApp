@@ -403,11 +403,7 @@ class ProfileScreen extends StatelessWidget {
                         width: double.infinity,
                         decoration: BoxDecoration(
                             border: Border.all(color: Colors.red)),
-                        child: GoogleMapsWidget(
-                            isScrollable: false,
-                            isZoomable: false,
-                            isRotatable: false,
-                            myLocationButtonEnabled: false),
+                        child: GoogleMapsWidget(isEdit: false,),
                       ),
                       const SizedBox(
                         height: 20,

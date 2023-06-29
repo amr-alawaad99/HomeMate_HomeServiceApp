@@ -59,9 +59,7 @@ dependencies:
   google_sign_in: ^6.1.4
   ntp: ^2.0.0
   galleryimage: ^2.0.1
-  flutter_sms: ^2.3.3
-  flutter_polyline_points: ^1.0.0
-  location: ^4.4.0
+  permission_handler: ^10.3.0
 
 
 

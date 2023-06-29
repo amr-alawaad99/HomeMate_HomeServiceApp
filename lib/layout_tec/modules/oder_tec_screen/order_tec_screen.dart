@@ -1,5 +1,7 @@
 
 
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import '../../../layout/cubit/cubit.dart';
@@ -102,6 +104,14 @@ class OrderTechnicalScreen extends StatelessWidget {
                       ),
                     ),
                     Spacer(),
+                    Text(
+                      "${calculateDistance(
+                          double.parse(model.gpsLocation!.split(',')[0]),
+                          double.parse(model.gpsLocation!.split(',')[1]),
+                          double.parse(LayoutCubit.get(context).originalUser!.gpsLocation!.split(',')[0]),
+                          double.parse(LayoutCubit.get(context).originalUser!.gpsLocation!.split(',')[1])
+                      )}"
+                    ),
                     Icon(
                       TablerIcons.circle,
                       color: warningColor,
@@ -185,4 +195,14 @@ class OrderTechnicalScreen extends StatelessWidget {
           ),
         ),
       );
+
+
+  String calculateDistance(lat1, lon1, lat2, lon2){
+    double p = 0.017453292519943295;
+    double a = 0.5 - cos((lat2 - lat1) * p)/2 +
+        cos(lat1 * p) * cos(lat2 * p) *
+            (1 - cos((lon2 - lon1) * p))/2;
+    double result = 12742 * asin(sqrt(a));
+    return "${result.toStringAsFixed(2)}Km";
+  }
 }

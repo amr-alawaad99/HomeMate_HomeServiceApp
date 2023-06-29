@@ -158,6 +158,9 @@ class SignupCubit extends Cubit<SignupStates> {
   GoogleSignInAccount? googleUser;
 
   checkGoogleAccountExistence() async {
+
+    emit(GoogleAccountLoadingState());
+
     FirebaseAuth auth = FirebaseAuth.instance;
 
     // begin interactive sign in process

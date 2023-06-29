@@ -35,7 +35,7 @@ class UsernameCheckingErrorState extends SignupStates{
   UsernameCheckingErrorState(this.error);
 }
 
-
+class GoogleAccountLoadingState extends SignupStates{}
 class UserAlreadyExistsState extends SignupStates{
   final String uid;
 

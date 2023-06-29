@@ -133,7 +133,8 @@ class OnBoardingScreen extends StatelessWidget {
                                 onPress: () async {
                                   await SignupCubit.get(context).checkGoogleAccountExistence();
                                 },
-                                child: Icon(TablerIcons.brand_google, color: Colors.red, size: 30),
+                                child: state is GoogleAccountLoadingState? CircularProgressIndicator()
+                                    : Icon(TablerIcons.brand_google, color: Colors.red, size: 30),
                                 buttonColor: Colors.white,
                               ),
                             ),

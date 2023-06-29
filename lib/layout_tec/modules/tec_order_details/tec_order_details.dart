@@ -30,10 +30,16 @@ class TechnicalOrderDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     var cubit = LayoutCubit.get(context);
     String urlText = model.image!;
     List<String> urls = urlText.split(',');
     urls.removeLast();
+
+    List<String> location = model.gpsLocation!.split(',');
+    double latitude = double.parse(location[0]);
+    double longitude = double.parse(location[1]);
+
     return BlocConsumer<LayoutCubit, LayoutStates>(
       listener: (context, state) {
         if (state is UploadOfferSuccessState) {
@@ -269,7 +275,7 @@ class TechnicalOrderDetails extends StatelessWidget {
                           SizedBox(
                             height: 20,
                           ),
-                          OrderTrackingScreen(),
+                          OrderTrackingScreen(lat: latitude, lng: longitude,),
                           SizedBox(
                             height: 20,
                           ),
