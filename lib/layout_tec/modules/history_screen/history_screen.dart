@@ -3,9 +3,10 @@ import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:login_register_methods/shared/components/constants.dart';
 import '../../../layout/cubit/cubit.dart';
 import '../../../model/orderModel.dart';
-import '../../../module/appointment_details/appointment_detials_screen.dart';
+
 import '../../../module/sign_in_screen/cubit/cubit.dart';
 import '../../../shared/components/components.dart';
+import '../tec_order_details/tec_order_details.dart';
 
 class HistoryScreen extends StatelessWidget {
   const HistoryScreen({super.key});
@@ -24,21 +25,18 @@ class HistoryScreen extends StatelessWidget {
               return ListView(
                 physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
-                children: allOrders
-                    .map(
-                      (e) =>
-                      defaultAppointmentCard(
-                          model: e,
-                          context: context,
-                          onTap: () {
-                            navigateAndPush(context,
-                                widget: AppointmentDetails(
-                                  model: e,
-                                ));
-                          }
-                      ),
-                )
-                    .toList(),
+                children: allOrders.map(
+                      (e) => defaultAppointmentCard(
+                      model: e,
+                      context: context,
+                      onTap: () {
+                        cubit.checkOffers(e.orderUid!, cubit.originalUser!.uid!);
+                        navigateAndPush(context,
+                            widget: TechnicalOrderDetails(
+                              model: e,
+                            ));
+                      }),
+                ).toList(),
               );
             } else {
               return Center(

@@ -105,12 +105,12 @@ class OrderTechnicalScreen extends StatelessWidget {
                     ),
                     Spacer(),
                     Text(
-                      "${calculateDistance(
+                      calculateDistance(
                           double.parse(model.gpsLocation!.split(',')[0]),
                           double.parse(model.gpsLocation!.split(',')[1]),
                           double.parse(LayoutCubit.get(context).originalUser!.gpsLocation!.split(',')[0]),
                           double.parse(LayoutCubit.get(context).originalUser!.gpsLocation!.split(',')[1])
-                      )}"
+                      )
                     ),
                     Icon(
                       TablerIcons.circle,

@@ -294,7 +294,7 @@ Widget defaultSuppliersItem({
                     SizedBox(
                       height: 10,
                     ),
-                    Text('jop',
+                    Text(model.serviceName!,
                         style: TextStyle(
                           fontSize: 15,
                         )),

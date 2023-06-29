@@ -18,8 +18,7 @@ class InProgressScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var cubit = LayoutCubit.get(context);
     return BlocConsumer<LayoutCubit, LayoutStates>(
-      listener: (context, state) {
-      },
+      listener: (context, state) {      },
       builder: (context, state) {
         if(cubit.ordersUid.isEmpty){
           LayoutCubit.get(context).ss();
@@ -130,10 +129,10 @@ Widget defaultAppointmentCard(
                   Spacer(),
                   Icon(
                     TablerIcons.circle,
-                    color: successColor,
+                    color: warningColor,
                   ),
                   SizedBox(
-                    width: 5,
+                    width: 2,
                   ),
                   Text(
                     model.status!,
@@ -141,7 +140,7 @@ Widget defaultAppointmentCard(
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                       fontSize: 16,
-                      color: successColor,
+                      color: warningColor,
                     ),
                   ),
                 ],
