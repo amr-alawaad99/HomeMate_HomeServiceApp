@@ -2,16 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:login_register_methods/layout/cubit/cubit.dart';
-import 'package:login_register_methods/layout/cubit/cubit.dart';
-import 'package:login_register_methods/layout/cubit/cubit.dart';
 import 'package:login_register_methods/layout/cubit/states.dart';
-import 'package:login_register_methods/layout_tec/cubit/states.dart';
+
 import 'package:login_register_methods/module/sign_in_screen/cubit/states.dart';
 import 'package:login_register_methods/shared/components/components.dart';
 import 'package:login_register_methods/shared/components/constants.dart';
 import '../../../module/onboarding_screen/onboarding_screen.dart';
 import '../../../module/sign_in_screen/cubit/cubit.dart';
-import '../../cubit/cubit.dart';
+
 import '../messages_technical/chats_tech_screen.dart';
 import '../profile_technical/profile_tech_screen.dart';
 
@@ -64,9 +62,7 @@ class _DrawerTechnicalScreenState extends State<DrawerTechnicalScreen> {
                             children: [
                               CircleAvatar(
                                 backgroundColor: Colors.white,
-                                backgroundImage:
-                                NetworkImage('https://img.freepik.com/free-vector/self-care-concept_23-2148523717.jpg?w=740&t=st=1678538562~exp=1678539162~hmac=a7d5a1db32b0d9a70e2ebbf68ab260a7ff455a23edb61284689ea8c3559233dd'),
-                                //cubit.originalUser!.profilePic!
+                                backgroundImage:NetworkImage(cubit.originalUser!.profilePic!),
                                 radius: 35,
                               ),
                               InkWell(
@@ -87,8 +83,7 @@ class _DrawerTechnicalScreenState extends State<DrawerTechnicalScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                "Technical Name",
-                                //${cubit.originalUser!.profileName}
+                                "Hi, ${cubit.originalUser!.profileName}",
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                                 style: Theme.of(context)
@@ -101,8 +96,8 @@ class _DrawerTechnicalScreenState extends State<DrawerTechnicalScreen> {
                               ),
                               // LOCATION ICON AND LOCATION TEXT
                               Text(
-                                'Not found',
-                                // cubit.originalUser!.address!,
+
+                                cubit.originalUser!.address!,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
                                   fontFamily: "Roboto",

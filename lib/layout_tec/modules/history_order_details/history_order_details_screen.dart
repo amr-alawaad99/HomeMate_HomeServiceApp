@@ -23,7 +23,7 @@ class HistoryOrderDetailsScreen extends StatelessWidget {
     required this.model,
   });
 
-  final TextEditingController costController = TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
