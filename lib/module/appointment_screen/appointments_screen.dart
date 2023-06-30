@@ -351,6 +351,8 @@ class AppointmentsScreen extends StatelessWidget {
                       onTap: () {
                         LayoutCubit.get(context)
                             .removeOrder(orderUid: model.orderUid!);
+                        LayoutCubit.get(context).removeOfferWithOrder(orderUId: model.orderUid!);
+
                       },
                       child: Icon(
                         TablerIcons.trash,

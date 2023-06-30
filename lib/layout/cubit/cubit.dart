@@ -662,4 +662,36 @@ class LayoutCubit extends Cubit<LayoutStates> {
             .map((e) => OrderModel.fromJson(e.data()))
             .toList());
   }
+
+//remove offer
+  void removeOfferWithOrder({required String orderUId}) {
+    FirebaseFirestore.instance.collection('offers').get().then((value) {
+      value.docs.where((element) => element.data()['orderUId']== orderUId).forEach((element) {
+        print(element.id);
+        FirebaseFirestore.instance.collection('offers').doc(element.id).delete();
+      });
+    });
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
