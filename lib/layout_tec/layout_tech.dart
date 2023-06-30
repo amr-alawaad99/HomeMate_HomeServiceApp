@@ -65,8 +65,8 @@ class LayoutTecScreen extends StatelessWidget {
                                     CircleAvatar(
                                       backgroundColor: Colors.white,
                                       backgroundImage: NetworkImage(
-                                          'https://img.freepik.com/free-vector/self-care-concept_23-2148523717.jpg?w=740&t=st=1678538562~exp=1678539162~hmac=a7d5a1db32b0d9a70e2ebbf68ab260a7ff455a23edb61284689ea8c3559233dd'
-                                        // cubit.originalUser!.profilePic!
+
+                                        cubit.originalUser!.profilePic!
                                       ),
                                       radius: 25,
                                     ),
@@ -81,8 +81,7 @@ class LayoutTecScreen extends StatelessWidget {
                                         children: [
                                           // PROFILE NAME
                                           Text(
-                                            "Hi, ",
-                                            //${cubit.originalUser!.profileName!}
+                                            "Hi, ${cubit.originalUser!.profileName!}",
                                             maxLines: 1,
                                             overflow: TextOverflow.ellipsis,
                                             style: const TextStyle(
@@ -109,8 +108,8 @@ class LayoutTecScreen extends StatelessWidget {
                                               ),
                                               Expanded(
                                                 child: Text(
-                                                  'not found',
-                                                  // cubit.originalUser!.address!,
+
+                                                  cubit.originalUser!.address!,
                                                   overflow: TextOverflow.ellipsis,
                                                   style: TextStyle(
                                                     fontFamily: "Roboto",

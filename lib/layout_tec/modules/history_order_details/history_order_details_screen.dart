@@ -1,13 +1,10 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:galleryimage/galleryimage.dart';
 import 'package:login_register_methods/layout/cubit/cubit.dart';
 import 'package:login_register_methods/layout/cubit/states.dart';
 
-
-import 'package:login_register_methods/shared/components/components.dart';
 
 import '../../../model/cost_model.dart';
 import '../../../model/orderModel.dart';
@@ -16,21 +13,20 @@ import '../../../module/google_maps_widget/order_tracking_screen.dart';
 import '../../../module/sign_in_screen/cubit/cubit.dart';
 import '../../../shared/components/constants.dart';
 
-class TechnicalOrderDetails extends StatelessWidget {
+class HistoryOrderDetailsScreen extends StatelessWidget {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   final OrderModel model;
 
-  TechnicalOrderDetails({
+  HistoryOrderDetailsScreen({
     super.key,
     required this.model,
   });
 
-  final TextEditingController costController = TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
-
     var cubit = LayoutCubit.get(context);
     String urlText = model.image!;
     List<String> urls = urlText.split(',');
@@ -78,7 +74,6 @@ class TechnicalOrderDetails extends StatelessWidget {
                   ? Color(0xff303030)
                   : primaryColor,
             ),
-
             body: Column(
               children: [
                 Expanded(
@@ -250,9 +245,10 @@ class TechnicalOrderDetails extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
                               child: GalleryImage(
-                                colorOfNumberWidget: SignInCubit.get(context).isDark
-                                    ? Colors.white.withOpacity(0.2)
-                                    : Colors.black,
+                                colorOfNumberWidget:
+                                    SignInCubit.get(context).isDark
+                                        ? Colors.white.withOpacity(0.2)
+                                        : Colors.black,
                                 galleryBackgroundColor:
                                     SignInCubit.get(context).isDark
                                         ? Color(0xff303030)
@@ -267,91 +263,78 @@ class TechnicalOrderDetails extends StatelessWidget {
                                 imageUrls: urls,
                                 errorWidget: SizedBox(),
                                 crossAxisCount: 3,
-                                numOfShowImages: urls.length >= 3 ? 3 : urls.length,
+                                numOfShowImages:
+                                    urls.length >= 3 ? 3 : urls.length,
                                 titleGallery: 'Order photos'.toUpperCase(),
                                 childAspectRatio: 1.2,
                               ),
                             ),
                           SizedBox(
-                            height: 20,
+                            height: 10,
                           ),
-                          OrderTrackingScreen(lat: latitude, lng: longitude,),
-                          SizedBox(
-                            height: 20,
+                          Text(
+                            'Location on map'.toUpperCase(),
+                            style: TextStyle(
+                              color: Colors.grey,
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                          if(cubit.isOffered!)
-                            Text(
-                                  'Your Offer'.toUpperCase(),
-                                  style: TextStyle(
-                                    color: Colors.grey,
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
                           SizedBox(
                             height: 10,
                           ),
-                          if(cubit.isOffered!)
-                            StreamBuilder<List<OfferModel>>(
-                                  stream: cubit.userOffer(
-                                      model.orderUid!, cubit.originalUser!.uid!),
-                                  builder: (context, snapshot) {
-                                    if (snapshot.hasError) {
-                                      return Text(
-                                          'Error No Data found! ${snapshot.error}');
-                                    } else if (snapshot.hasData) {
-                                      final userOffer = snapshot.data!.reversed;
-                                      return ListView(
-                                        physics: NeverScrollableScrollPhysics(),
-                                        shrinkWrap: true,
-                                        children: userOffer
-                                            .map(
-                                              (e) => defaultOfferCard(
-                                                context: context,
-                                                model: e,
-                                              ),
-                                            )
-                                            .toList(),
-                                      );
-                                    } else {
-                                      return Center(
-                                          child: CircularProgressIndicator(
-                                        color: primaryColor,
-                                      ));
-                                    }
-                                  },
-                                ),
+                          OrderTrackingScreen(
+                            lat: latitude,
+                            lng: longitude,
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Text(
+                            'Chosen Offer'.toUpperCase(),
+                            style: TextStyle(
+                              color: Colors.grey,
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          StreamBuilder<List<OfferModel>>(
+                            stream: cubit.userOffer(
+                                model.orderUid!, cubit.originalUser!.uid!),
+                            builder: (context, snapshot) {
+                              if (snapshot.hasError) {
+                                return Text(
+                                    'Error No Data found! ${snapshot.error}');
+                              } else if (snapshot.hasData) {
+                                final userOffer = snapshot.data!.reversed;
+                                return ListView(
+                                  physics: NeverScrollableScrollPhysics(),
+                                  shrinkWrap: true,
+                                  children: userOffer
+                                      .map(
+                                        (e) => defaultOfferCard(
+                                          context: context,
+                                          model: e,
+                                        ),
+                                      )
+                                      .toList(),
+                                );
+                              } else {
+                                return Center(
+                                    child: CircularProgressIndicator(
+                                  color: primaryColor,
+                                ));
+                              }
+                            },
+                          ),
                         ],
                       ),
                     ),
                   ),
                 ),
-                if(!cubit.isOffered!)
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: defaultButton(
-                      onPress: () {
-                      navigateAndPush(
-                        context,
-                        widget: offerCostDialog(
-                          controller: costController,
-                          onTap: () {
-                            cubit.offerCreate(
-                              username: cubit.originalUser!.profileName,
-                              uId: cubit.originalUser!.uid,
-                              orderUId: model.orderUid,
-                              image: cubit.originalUser!.profilePic,
-                              cost: costController.text,
-                            );
-                          },
-                          context: context,
-                          model: model,
-                        ),
-                      );
-                    },
-                      text: "Offer Cost"
-                    ),
-                  ),
               ],
             ),
           ),
@@ -410,80 +393,6 @@ Widget defaultContainer({
             maxLines: 6,
           ),
         ],
-      ),
-    );
-
-Widget offerCostDialog({
-  required controller,
-  required context,
-  required OrderModel model,
-  required Function()? onTap,
-}) =>
-    Dialog(
-      child: Container(
-        padding: EdgeInsets.symmetric(vertical: 20),
-        decoration: BoxDecoration(
-          color: SignInCubit.get(context).isDark
-              ? Color(0xff303030)
-              : Colors.white,
-          boxShadow: <BoxShadow>[
-            BoxShadow(
-              color: SignInCubit.get(context).isDark
-                  ? Colors.transparent
-                  : Colors.black12,
-              blurRadius: 20.0,
-              offset: Offset(0.0, 0.75),
-            ),
-          ],
-// color: Colors.white,
-          borderRadius: BorderRadius.circular(20.0),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              "Offer Cost!",
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Container(
-              decoration: BoxDecoration(
-                color: SignInCubit.get(context).isDark
-                    ? Color(0xff303030)
-                    : Colors.grey[300],
-                boxShadow: <BoxShadow>[
-                  BoxShadow(
-                    color: SignInCubit.get(context).isDark
-                        ? Colors.transparent
-                        : Colors.black12,
-                    blurRadius: 20.0,
-                    offset: Offset(0.0, 0.75),
-                  ),
-                ],
-// color: Colors.white,
-                borderRadius: BorderRadius.circular(20.0),
-              ),
-              margin: EdgeInsets.all(10),
-              child: TextFormField(
-                controller: controller,
-                keyboardType: TextInputType.number,
-                decoration: InputDecoration(
-                  hintText: 'Enter Expected cost',
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20)),
-                  suffixIcon: IconButton(
-                    onPressed: onTap,
-                    icon: Icon(TablerIcons.send),
-                    color: primaryColor,
-                  ),
-                ),
-              ),
-            )
-          ],
-        ),
       ),
     );
 
@@ -564,18 +473,18 @@ Widget defaultOfferCard({
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Text(
-                'Estimated cost'.toUpperCase(),
+                'ex.cost'.toUpperCase(),
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 15,
-
+                  fontWeight: FontWeight.bold,
                 ),
               ),
               SizedBox(
-                height: 5,
+                height: 10,
               ),
               Text(
-                "${model.cost} EGP",
+                "${model.cost} EGP".toUpperCase(),
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 15,

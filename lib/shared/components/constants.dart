@@ -17,6 +17,7 @@ ImageProvider tempImage = const NetworkImage('https://img.freepik.com/free-vecto
 String uId = '';
 bool? isUser;
 String googleMapsAPIKey = "AIzaSyACWn0PuCuZ4YxN6Vyxjvgv1xhGIW_p-6M";
+ const IconData home_repair_service_rounded = IconData(0xf7f4, fontFamily: 'MaterialIcons');
 
 
 Widget comingSoonDialog() => Dialog(

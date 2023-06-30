@@ -334,7 +334,7 @@ class AppointmentDetails extends StatelessWidget {
                     ),
                   if(model.status == 'waiting')
                     StreamBuilder<List<OfferModel>>(
-                      stream: LayoutCubit.get(context).allOrderOffers(
+                      stream: cubit.allOrderOffers(
                         model.orderUid!,
                       ),
                       builder: (context, snapshot) {
@@ -595,7 +595,9 @@ Widget defaultOffersCard({
                                 profileName
                                 :model.profileName,
                                 profilePic
-                                :model.image,);
+                                :model.image,
+                              technicalUId: model.uId
+                            );
                             LayoutCubit.get(context).updateTechnicalOrder(offerUid: model.offerUId);
                           }),
                     SizedBox(

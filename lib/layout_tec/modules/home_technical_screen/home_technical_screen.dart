@@ -15,6 +15,7 @@ class HomeTechnicalScreen extends StatelessWidget {
       listener: (context, state) {},
       builder: (context, state) {
         return DefaultTabController(
+          animationDuration: Duration(seconds: 1),
           initialIndex: LayoutCubit.get(context).currentTabIndex,
           length: 2,
           child: Column(

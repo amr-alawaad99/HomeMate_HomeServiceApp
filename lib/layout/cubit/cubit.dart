@@ -46,7 +46,7 @@ class LayoutCubit extends Cubit<LayoutStates> {
   ];
 
   List<Widget> tecScreens = [
-     HomeTechnicalScreen(),
+    HomeTechnicalScreen(),
     OrderTechnicalScreen(),
     HistoryScreen(),
   ];
@@ -301,6 +301,7 @@ class LayoutCubit extends Cubit<LayoutStates> {
       cost: cost,
       gpsLocation: gpsLocation,
       orderUid: "",
+      technicalUId: '',
     );
     emit(UploadOrderLoadingState());
     FirebaseFirestore.instance
@@ -385,11 +386,12 @@ class LayoutCubit extends Cubit<LayoutStates> {
         .collection("orders")
         .snapshots()
         .map((snapshot) {
+
       return snapshot.docs
           .where((element) => element.data()["serviceName"] == serviceName)
           .where((element) => element.data()["status"] == "finished")
-          .where((element) => element.data()['uId'] == uId)
-          .map((e) => OrderModel.fromJson(e.data()))
+          .where((element) => element.data()['technicalUId'] == uId)
+          .map((e) => OrderModel.fromJson(e.data(),),)
           .toList();
     });
   }
@@ -418,10 +420,7 @@ class LayoutCubit extends Cubit<LayoutStates> {
         timeout: Duration(seconds: 60));
   }
 
-  verifyOTP({
-    required String verificationId,
-    required String otpCode,
-  }) async {
+  verifyOTP({required String verificationId,required String otpCode,}) async {
     PhoneAuthCredential credential = PhoneAuthProvider.credential(
       verificationId: verificationId,
       smsCode: otpCode,
@@ -484,20 +483,21 @@ class LayoutCubit extends Cubit<LayoutStates> {
       emit(CheckOfferSuccessState());
     });
   }
+
 // update order in user screen
   void updateUserAppointment({
     String? orderUid,
     String? cost,
     String? profileName,
     String? profilePic,
-
-
+    String? technicalUId,
   }) {
     FirebaseFirestore.instance.collection('orders').doc(orderUid).update({
       'cost': cost,
-      'profileName':profileName,
-      'profilePic':profilePic,
-      'status':'underway',
+      'profileName': profileName,
+      'profilePic': profilePic,
+      'status': 'underway',
+      'technicalUId': technicalUId,
     });
   }
 
@@ -505,11 +505,11 @@ class LayoutCubit extends Cubit<LayoutStates> {
 
   void updateTechnicalOrder({
     String? offerUid,
-
   }) {
-    FirebaseFirestore.instance.collection('offers').doc(offerUid).update({
-    'status': 'accepted'
-    });
+    FirebaseFirestore.instance
+        .collection('offers')
+        .doc(offerUid)
+        .update({'status': 'accepted'});
   }
 
   Stream<List<OfferModel>> userOffer(String orderUId, String techUId) {
@@ -524,12 +524,14 @@ class LayoutCubit extends Cubit<LayoutStates> {
           .toList();
     });
   }
+
 ////////////////////////////////////////////////
 //   appointment offer in user appointment details
 
   int offerIndex = -1;
+
   void selectedOffer(List list, int index) {
-    if(offerIndex != index) {
+    if (offerIndex != index) {
       offerIndex = index;
     } else {
       offerIndex = -1;
@@ -537,8 +539,9 @@ class LayoutCubit extends Cubit<LayoutStates> {
     emit(IsSelectedState());
   }
 
-
-  Stream<List<OfferModel>> allOrderOffers(String orderUId,  ) {
+  Stream<List<OfferModel>> allOrderOffers(
+    String orderUId,
+  ) {
     return FirebaseFirestore.instance
         .collection("offers")
         .snapshots()
@@ -551,7 +554,9 @@ class LayoutCubit extends Cubit<LayoutStates> {
     });
   }
 
-  Stream<List<OfferModel>> acceptedOffer(String orderUId,) {
+  Stream<List<OfferModel>> acceptedOffer(
+    String orderUId,
+  ) {
     return FirebaseFirestore.instance
         .collection("offers")
         .snapshots()
@@ -574,6 +579,43 @@ class LayoutCubit extends Cubit<LayoutStates> {
   }
 
 
+  ////////////////////////
+// accepted orders
+
+  Stream<List<OrderModel>> acceptedOrders(String serviceName, String uId) {
+    return FirebaseFirestore.instance
+        .collection("orders")
+        .snapshots()
+        .map((snapshot) {
+      return snapshot.docs
+          .where((element) => element.data()["serviceName"] == serviceName)
+          .where((element) => element.data()["status"] == "underway")
+          .where((element) => element.data()['technicalUId'] == uId)
+          .map((e) => OrderModel.fromJson(e.data()))
+          .toList();
+    });
+  }
+
+
+
+
+  List<String> ordersUid = [];
+  ss() async {
+    await FirebaseFirestore.instance.collection("offers").get().then((value) {
+      value.docs.where((element) => element.data()['uId'] == originalUser!.uid)
+          .where((element) => element.data()['status'] == 'waiting').forEach((element) {
+        print(element.data()['orderUId']);
+        ordersUid.add(element.data()['orderUId']);
+      });
+      emit(GetWaitingOrdersUidSuccessState());
+    }).catchError((error){
+      print(error);
+    });
+  }
+  Stream<List<OrderModel>> onWaitingOrders(List<String> uids) {
+    return FirebaseFirestore.instance.collection('orders').where('orderUid', whereIn: uids)
+        .snapshots().map((event) => event.docs.map((e) => OrderModel.fromJson(e.data())).toList());
+  }
 
 
 }
