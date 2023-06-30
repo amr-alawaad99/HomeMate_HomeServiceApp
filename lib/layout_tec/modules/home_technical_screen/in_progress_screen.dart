@@ -10,6 +10,7 @@ import '../../../module/appointment_details/appointment_detials_screen.dart';
 import '../../../module/sign_in_screen/cubit/cubit.dart';
 import '../../../shared/components/components.dart';
 import '../../../shared/components/constants.dart';
+import '../tec_order_details/tec_order_details.dart';
 
 class InProgressScreen extends StatelessWidget {
   const InProgressScreen({super.key});
@@ -46,7 +47,7 @@ class InProgressScreen extends StatelessWidget {
                                 context: context,
                                 onTap: () {
                                   navigateAndPush(context,
-                                      widget: AppointmentDetails(
+                                      widget: TechnicalOrderDetails(
                                         model: e,
                                       ));
                                 }
