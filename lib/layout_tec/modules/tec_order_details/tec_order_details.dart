@@ -538,7 +538,7 @@ Widget defaultOfferCard({
               ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
+                children: const [
                   Image(
                     image: AssetImage('assets/images/star.png'),
                     width: 18.0,

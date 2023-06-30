@@ -167,6 +167,13 @@ class LayoutCubit extends Cubit<LayoutStates> {
     }).catchError((error) {
       emit(UpdateUserDataErrorState(error.toString()));
     });
+    FirebaseFirestore.instance.collection('offers').get().then((value) {
+      value.docs.where((element) => element.data()['uId']==originalUser!.uid).forEach((element) { 
+        FirebaseFirestore.instance.collection('offers').doc(element.id).update({'image':profilePic ?? originalUser!.profilePic,'profileName':profileName ?? originalUser!.profileName});
+      });
+    }).catchError((error){
+      
+    });
   }
 
   String? currentPosition;
@@ -671,6 +678,11 @@ class LayoutCubit extends Cubit<LayoutStates> {
         FirebaseFirestore.instance.collection('offers').doc(element.id).delete();
       });
     });
+    
+    
+    
+    
+    
   }
 
 
