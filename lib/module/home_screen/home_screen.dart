@@ -136,7 +136,7 @@ class HomeScreen extends StatelessWidget {
                 height: 15,
               ),
               StreamBuilder<List<UserModel>>(
-                stream: LayoutCubit.get(context).suppliers(),
+                stream: LayoutCubit.get(context).allSuppliers(),
                 builder: (context, snapshot) {
                   if (snapshot.hasError) {
                     return Text('Error No Data found! ${snapshot.error}');

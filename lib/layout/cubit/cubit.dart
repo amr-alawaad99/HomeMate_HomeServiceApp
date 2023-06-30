@@ -356,7 +356,18 @@ class LayoutCubit extends Cubit<LayoutStates> {
     ntpTime = await NTP.now();
   }
 
-  Stream<List<UserModel>> suppliers() {
+  Stream<List<UserModel>> suppliers(String service) {
+    return FirebaseFirestore.instance
+        .collection("Users")
+        .snapshots()
+        .map((snapshot) {
+      return snapshot.docs
+          .where((element) => element.data()["isUser"] == false).where((element) => element.data()['serviceName']== service)
+          .map((e) => UserModel.fromJson(e.data()))
+          .toList();
+    });
+  }
+  Stream<List<UserModel>> allSuppliers() {
     return FirebaseFirestore.instance
         .collection("Users")
         .snapshots()

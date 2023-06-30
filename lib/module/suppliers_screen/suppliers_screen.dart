@@ -42,6 +42,7 @@ class SuppliersScreen extends StatelessWidget {
                     itemBuilder: (context, index) => InkWell(
                           onTap: () {
                             cubit.changeSuppliersIndex(index);
+                            print(index);
                           },
                           child: Container(
                             width: 90,
@@ -116,7 +117,8 @@ class SuppliersScreen extends StatelessWidget {
               // )
 
               StreamBuilder<List<UserModel>>(
-                stream: cubit.suppliers(),
+
+                stream: cubit.suppliersSelectedIndex==0?cubit.allSuppliers():cubit.suppliers(categories[cubit.suppliersSelectedIndex].category),
                 builder: (context, snapshot) {
                   if (snapshot.hasError) {
                     return Text('Error No Data found! ${snapshot.error}');
