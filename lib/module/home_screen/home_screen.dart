@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:login_register_methods/layout/cubit/cubit.dart';
-
-
 import '../../model/category_model.dart';
 import '../../model/user_model.dart';
 import '../../shared/components/components.dart';
 import '../../shared/components/constants.dart';
+import '../technical_details_screen/technical_details_screen.dart';
 
 class ItemCatModel {
   String? image;
@@ -38,13 +37,12 @@ class SupplierModel {
 
 }
 
-
-
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+
     List<Categories> categories = [
       Categories(
         title: 'Cleaning',
@@ -71,17 +69,20 @@ class HomeScreen extends StatelessWidget {
         img: AssetImage('assets/images/electrician.png'),
       )
     ];
+
     return SingleChildScrollView(
       child: Padding(
           padding: const EdgeInsets.all(15.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              //Offers are here
               ClipRRect(
                 borderRadius: BorderRadius.circular(10),
                 child: const Image(
                   image: AssetImage('assets/images/carpenter.jpg'),
                 ),
+
               ),
               const SizedBox(
                 height: 15,
@@ -108,7 +109,8 @@ class HomeScreen extends StatelessWidget {
                       width: 100,
                       height: 100,
                       child: defaultCategoriesBox(
-                          onTap: (){},
+                          onTap: (){
+                          },
                           elevation: 3,
                           width: 50,
                           height: 50,
@@ -148,6 +150,15 @@ class HomeScreen extends StatelessWidget {
                             (e) => defaultSuppliersItem(
                           model: e,
                           context: context,
+                          /// Navigator to Technical Details Screen
+                          press: (){
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context){
+                                return TechnicalDetailsScreen();
+                              }),
+                            );
+                          },
                         ),
                       )
                           .toList(),
@@ -179,6 +190,7 @@ class HomeScreen extends StatelessWidget {
       ) => InkWell(
             onTap: () {
               /**navigateAndPush(context, widget: );**/
+
             },
             child: SizedBox(
               height: 145,
@@ -186,7 +198,6 @@ class HomeScreen extends StatelessWidget {
                 padding:
                     const EdgeInsets.only(bottom: 8, top: 8, right: 5, left: 5),
                 child: Material(
-
                   elevation: 3,
                   borderRadius: const BorderRadius.all(Radius.circular(10)),
                   child: Padding(

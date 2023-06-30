@@ -8,6 +8,7 @@ import 'package:login_register_methods/module/sign_in_screen/cubit/cubit.dart';
 import 'package:login_register_methods/module/sign_in_screen/cubit/states.dart';
 import 'package:login_register_methods/shared/components/constants.dart';
 
+
 /// BUTTON
 Widget defaultButton({
   double height = 60.0,
@@ -249,119 +250,124 @@ Widget defaultCategoryChooser({required String text}) => InkWell(
 //
 
 Widget defaultSuppliersItem({
-  required UserModel model,required context,
+  required UserModel model,
+  required context,
+  void Function()? press,
 }) {
   return Padding(
     padding: const EdgeInsets.only(top: 15.0,),
-    child: SizedBox(
-      height: 130,
-      child: Container(
-        decoration: BoxDecoration(
-            color: SignInCubit.get(context).isDark
-                ? Color(0xff303030)
-                : Colors.white,
-            boxShadow: <BoxShadow>[
-              BoxShadow(
-                color: SignInCubit.get(context).isDark
-                    ? Colors.transparent
-                    : Colors.black12,
-                blurRadius: 20.0,
-                offset: Offset(0.0, 0.75),
-              ),
-            ],
-            // color: Colors.white,
-            borderRadius: BorderRadius.circular(10.0)),
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(5),
-                child: Image(image: NetworkImage("${model.profilePic}"),)
-              ),
-              const SizedBox(
-                width: 20,
-              ),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(model.profileName!,
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                        )),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text('jop',
-                        style: TextStyle(
-                          fontSize: 15,
-                        )),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Icon(
-                          TablerIcons.map_pin,
-                          size: 20,
-                          color: secondaryColor,
-                        ),
-                        SizedBox(
-                          width: 5,
-                        ),
-                        Expanded(
-                          child: Text(model.address!,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                fontSize: 15,
-
-                              )),
-                        ),
-                      ],
-                    ),
-                  ],
+    child: InkWell(
+      onTap: press,
+      child: SizedBox(
+        height: 130,
+        child: Container(
+          decoration: BoxDecoration(
+              color: SignInCubit.get(context).isDark
+                  ? Color(0xff303030)
+                  : Colors.white,
+              boxShadow: <BoxShadow>[
+                BoxShadow(
+                  color: SignInCubit.get(context).isDark
+                      ? Colors.transparent
+                      : Colors.black12,
+                  blurRadius: 20.0,
+                  offset: Offset(0.0, 0.75),
                 ),
-              ),
-              SizedBox(
-                width: 10,
-              ),
-              Column(
-                children: [
-                  Row(
+              ],
+              // color: Colors.white,
+              borderRadius: BorderRadius.circular(10.0)),
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(5),
+                  child: Image(image: NetworkImage("${model.profilePic}"),)
+                ),
+                const SizedBox(
+                  width: 20,
+                ),
+                Expanded(
+                  child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Icon(
-                        Icons.star,
-                        size: 20,
-                        color: Colors.amber,
-                      ),
+                      Text(model.profileName!,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          )),
                       SizedBox(
-                        width: 4,
+                        height: 10,
                       ),
-                      Text(
-                        '??/5',
-                        style: TextStyle(
-                          fontSize: 15,
-                        ),
+                      Text('jop',
+                          style: TextStyle(
+                            fontSize: 15,
+                          )),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Icon(
+                            TablerIcons.map_pin,
+                            size: 20,
+                            color: secondaryColor,
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Expanded(
+                            child: Text(model.address!,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                  fontSize: 15,
+
+                                )),
+                          ),
+                        ],
                       ),
                     ],
                   ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  Text('distance',
-                      style: TextStyle(
-                        fontSize: 15,
-                      )),
-                ],
-              )
-            ],
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                Column(
+                  children: const [
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Icon(
+                          Icons.star,
+                          size: 20,
+                          color: Colors.amber,
+                        ),
+                        SizedBox(
+                          width: 4,
+                        ),
+                        Text(
+                          '??/5',
+                          style: TextStyle(
+                            fontSize: 15,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    Text('distance',
+                        style: TextStyle(
+                          fontSize: 15,
+                        )),
+                  ],
+                )
+              ],
+            ),
           ),
         ),
       ),
