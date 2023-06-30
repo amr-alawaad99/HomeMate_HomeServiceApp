@@ -48,6 +48,8 @@ class SuppliersScreen extends StatelessWidget {
                             width: 90,
                             height: 100,
                             decoration: BoxDecoration(
+                              color:cubit.suppliersSelectedIndex == index
+                                  ?secondaryColor.withOpacity(0.1):Colors.transparent,
                               border: cubit.suppliersSelectedIndex == index
                                   ? Border.all(
                                       width: 1.5,
@@ -64,7 +66,8 @@ class SuppliersScreen extends StatelessWidget {
                                       ? secondaryColor
                                       : Colors.grey,
                                   fontSize: 18,
-                                  fontWeight: FontWeight.w500,
+                                  fontWeight: cubit.suppliersSelectedIndex == index
+                                      ?FontWeight.bold:FontWeight.normal,
                                 ),
                               ),
                             ),

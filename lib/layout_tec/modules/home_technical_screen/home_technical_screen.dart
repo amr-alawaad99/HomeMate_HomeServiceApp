@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:login_register_methods/layout/cubit/cubit.dart';
 import 'package:login_register_methods/layout/cubit/states.dart';
 import 'package:login_register_methods/layout_tec/modules/home_technical_screen/in_progress_screen.dart';
-
 import '../../../shared/components/constants.dart';
 import 'accepted_screen.dart';
 
@@ -15,7 +13,7 @@ class HomeTechnicalScreen extends StatelessWidget {
       listener: (context, state) {},
       builder: (context, state) {
         return DefaultTabController(
-          animationDuration: Duration(seconds: 1),
+          animationDuration: Duration(milliseconds: 300),
           initialIndex: LayoutCubit.get(context).currentTabIndex,
           length: 2,
           child: Column(
@@ -34,6 +32,7 @@ class HomeTechnicalScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: TabBar(
+
                       onTap: (currentIndex) {
                         LayoutCubit.get(context).changeTabView(currentIndex);
                       },
@@ -78,6 +77,7 @@ class HomeTechnicalScreen extends StatelessWidget {
               SizedBox(
                 height: MediaQuery.of(context).size.height,
                 child: TabBarView(
+
                   physics: NeverScrollableScrollPhysics(),
                   children: const [
                   //For Progress Orders

@@ -338,13 +338,23 @@ class LayoutCubit extends Cubit<LayoutStates> {
     FirebaseFirestore.instance.collection('orders').doc(orderUid).delete();
   }
 
-  Stream<List<OrderModel>> orders(String uId) {
+  Stream<List<OrderModel>> allUserOrders(String uId) {
     return FirebaseFirestore.instance
         .collection("orders")
         .orderBy('dateTimeForOrder')
         .snapshots()
         .map((snapshot) => snapshot.docs
             .where((element) => element.data()["uId"] == uId)
+            .map((doc) => OrderModel.fromJson(doc.data()))
+            .toList());
+  }
+  Stream<List<OrderModel>> orders(String uId,String status) {
+    return FirebaseFirestore.instance
+        .collection("orders")
+        .orderBy('dateTimeForOrder')
+        .snapshots()
+        .map((snapshot) => snapshot.docs
+            .where((element) => element.data()["uId"] == uId).where((element) => element.data()['status']== status)
             .map((doc) => OrderModel.fromJson(doc.data()))
             .toList());
   }

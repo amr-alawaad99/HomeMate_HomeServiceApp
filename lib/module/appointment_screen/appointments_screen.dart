@@ -14,9 +14,9 @@ import '../sign_in_screen/cubit/cubit.dart';
 class AppointmentsScreen extends StatelessWidget {
   final List<ChooseCategory> categories = [
     ChooseCategory(category: 'All'),
-    ChooseCategory(category: 'Finished'),
-    ChooseCategory(category: 'Underway'),
-    ChooseCategory(category: 'Waiting'),
+    ChooseCategory(category: 'waiting'),
+    ChooseCategory(category: 'underway'),
+    ChooseCategory(category: 'finished'),
   ];
 
   AppointmentsScreen({super.key});
@@ -44,11 +44,14 @@ class AppointmentsScreen extends StatelessWidget {
                     itemBuilder: (context, index) => InkWell(
                           onTap: () {
                             cubit.changeAppointmentIndex(index);
+                            print(categories[index].category);
                           },
                           child: Container(
                             width: 90,
                             height: 100,
                             decoration: BoxDecoration(
+                              color: cubit.appointmentSelectedIndex == index
+                                  ?secondaryColor.withOpacity(0.1):Colors.transparent,
                               border: cubit.appointmentSelectedIndex == index
                                   ? Border.all(
                                       width: 1.5,
@@ -61,11 +64,13 @@ class AppointmentsScreen extends StatelessWidget {
                               child: Text(
                                 categories[index].category,
                                 style: TextStyle(
+
                                   color: cubit.appointmentSelectedIndex == index
                                       ? secondaryColor
                                       : Colors.grey,
                                   fontSize: 18,
-                                  fontWeight: FontWeight.w500,
+                                  fontWeight: cubit.appointmentSelectedIndex == index
+                                      ?FontWeight.bold:FontWeight.normal,
                                 ),
                               ),
                             ),
@@ -80,7 +85,9 @@ class AppointmentsScreen extends StatelessWidget {
             Column(
               children: [
                 StreamBuilder<List<OrderModel>>(
-                  stream: cubit.orders(cubit.originalUser!.uid!),
+                  stream: cubit.appointmentSelectedIndex == 0?
+                      cubit.allUserOrders(cubit.originalUser!.uid!):cubit.orders(cubit.originalUser!.uid!,
+                      categories[cubit.appointmentSelectedIndex].category),
                   builder: (context, snapshot) {
                     if (snapshot.hasError) {
                       return Text('Error No Data found! ${snapshot.error}');
@@ -168,7 +175,9 @@ class AppointmentsScreen extends StatelessWidget {
                           ClipRRect(
                             borderRadius: BorderRadius.circular(5),
                             child: Image(
-                              image: model.status == 'waiting'?tempImage: NetworkImage(model.profilePic!),
+                              image: model.status == 'waiting'
+                                  ? tempImage
+                                  : NetworkImage(model.profilePic!),
                               width: 50,
                               height: 50,
                             ),
@@ -194,10 +203,13 @@ class AppointmentsScreen extends StatelessWidget {
                                   height: 5.0,
                                 ),
                                 Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.start,
                                   children: const [
-                                    Icon(Icons.star, color: Colors.amber, size: 20,),
+                                    Icon(
+                                      Icons.star,
+                                      color: Colors.amber,
+                                      size: 20,
+                                    ),
                                     SizedBox(
                                       width: 5,
                                     ),
@@ -217,14 +229,25 @@ class AppointmentsScreen extends StatelessWidget {
                       const SizedBox(
                         height: 15,
                       ),
-                      Text(
-                        "Notes: ${model.notes!}",
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                          fontSize: 12.0,
-
-                        ),
+                      Row(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 5.0),
+                            child: Icon(
+                              TablerIcons.edit,
+                              color: primaryColor,
+                            ),
+                          ),
+                          SizedBox(width: 5,),
+                          Text(
+                            model.notes!,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(
+                              fontSize: 12.0,
+                            ),
+                          ),
+                        ],
                       ),
                       const SizedBox(
                         height: 15,
@@ -258,7 +281,9 @@ class AppointmentsScreen extends StatelessWidget {
                           Icon(
                             TablerIcons.circle,
                             size: 20,
-                            color: model.status == 'finished'?successColor:warningColor,
+                            color: model.status == 'finished'
+                                ? successColor
+                                : warningColor,
                           ),
                           const SizedBox(
                             width: 5,
@@ -267,7 +292,9 @@ class AppointmentsScreen extends StatelessWidget {
                             model.status!.toUpperCase(),
                             style: TextStyle(
                                 fontSize: 12.0,
-                                color: model.status == 'finished'?successColor:warningColor,
+                                color: model.status == 'finished'
+                                    ? successColor
+                                    : warningColor,
                                 fontWeight: FontWeight.bold),
                           ),
                         ],
@@ -284,7 +311,9 @@ class AppointmentsScreen extends StatelessWidget {
                         fontSize: 15.0,
                       ),
                     ),
-                    SizedBox(height: 5,),
+                    SizedBox(
+                      height: 5,
+                    ),
                     Text(
                       model.cost!,
                       style: TextStyle(
@@ -295,17 +324,25 @@ class AppointmentsScreen extends StatelessWidget {
                     ),
                     SizedBox(height: 40),
                     StreamBuilder<int>(
-                      stream: LayoutCubit.get(context).allOrderOffersLength(model.orderUid!),
+                      stream: LayoutCubit.get(context)
+                          .allOrderOffersLength(model.orderUid!),
                       builder: (context, snapshot) {
                         if (snapshot.hasError) {
-                        return Text('Error No Data found! ${snapshot.error}');
+                          return Text('Error No Data found! ${snapshot.error}');
                         } else if (snapshot.hasData) {
-                          return CircleAvatar(backgroundColor: secondaryColor, radius: 15,child: Text('${snapshot.data}', style: TextStyle(color: Colors.white),),);
+                          return CircleAvatar(
+                            backgroundColor: secondaryColor,
+                            radius: 15,
+                            child: Text(
+                              '${snapshot.data}',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          );
                         } else {
                           return Center(
                               child: CircularProgressIndicator(
-                                color: primaryColor,
-                              ));
+                            color: primaryColor,
+                          ));
                         }
                       },
                     ),
