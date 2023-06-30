@@ -154,6 +154,7 @@ class LayoutCubit extends Cubit<LayoutStates> {
       isVerified: originalUser!.isVerified,
       username: originalUser!.username,
       uid: originalUser!.uid,
+      serviceName: originalUser!.serviceName,
     );
 
     FirebaseFirestore.instance
@@ -557,6 +558,22 @@ class LayoutCubit extends Cubit<LayoutStates> {
           // .where((element) => element.data()['status'] == 'accepted')
           .map((e) => OfferModel.fromJson(e.data()))
           .toList();
+    });
+  }
+
+
+  Stream<int> allOrderOffersLength(
+      String orderUId,
+      ) {
+    return FirebaseFirestore.instance
+        .collection("offers")
+        .snapshots()
+        .map((snapshot) {
+      return snapshot.docs
+          .where((element) => element.data()['orderUId'] == orderUId)
+      // .where((element) => element.data()['status'] == 'accepted')
+          .map((e) => OfferModel.fromJson(e.data()))
+          .toList().length;
     });
   }
 

@@ -128,8 +128,7 @@ class AppointmentsScreen extends StatelessWidget {
           borderRadius: BorderRadius.circular(10.0),
           child: Container(
             padding: const EdgeInsets.all(10),
-            height: 150,
-            width: MediaQuery.of(context).size.width,
+            width: double.infinity,
             decoration: BoxDecoration(
               color: SignInCubit.get(context).isDark
                   ? Color(0xff303030)
@@ -147,187 +146,179 @@ class AppointmentsScreen extends StatelessWidget {
               borderRadius: BorderRadius.circular(10.0),
             ),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Expanded(
-                  child: Row(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      Text(
+                        model.serviceName!,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 19.0,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Row(
                         children: [
-                          Text(
-                            model.serviceName!,
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 19.0,
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(5),
+                            child: Image(
+                              image: model.status == 'waiting'?tempImage: NetworkImage(model.profilePic!),
+                              width: 50,
+                              height: 50,
                             ),
                           ),
                           const SizedBox(
-                            height: 10,
+                            width: 10,
                           ),
                           Expanded(
-                            child: Row(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(5),
-                                  child: Image(
-                                    image: model.status == 'waiting'?tempImage: NetworkImage(model.profilePic!),
-                                    width: 30,
-                                    height: 30,
+                                Text(
+                                  model.status == 'waiting'
+                                      ? 'waiting for technical offers!'
+                                      : model.profileName!,
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: const TextStyle(
+                                    fontSize: 15.0,
                                   ),
                                 ),
                                 const SizedBox(
-                                  width: 10,
+                                  height: 5.0,
                                 ),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      model.status == 'waiting'
-                                          ? 'waiting for technical offers!'
-                                          : model.profileName!,
-                                      style: const TextStyle(
-                                        fontSize: 15.0,
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      height: 5.0,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: const [
-                                        Image(
-                                          image: AssetImage(
-                                              'assets/images/star.png'),
-                                          width: 15.0,
-                                          height: 15.0,
-                                        ),
-                                        SizedBox(
-                                          width: 5,
-                                        ),
-                                        Text(
-                                          '??/5',
-                                          style: TextStyle(
-                                            fontSize: 12.0,
-                                          ),
-                                        ),
-                                      ],
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.start,
+                                  children: const [
+                                    Icon(Icons.star, color: Colors.amber, size: 20,),
+                                    SizedBox(
+                                      width: 5,
                                     ),
                                     Text(
-                                      model.notes!,
-                                      maxLines: 1,
-                                      style: const TextStyle(
+                                      '??/5',
+                                      style: TextStyle(
                                         fontSize: 12.0,
-
                                       ),
-                                    ),
-                                    const SizedBox(
-                                      height: 15,
                                     ),
                                   ],
                                 ),
                               ],
                             ),
                           ),
-                          const SizedBox(
-                            height: 15,
-                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      Text(
+                        "Notes: ${model.notes!}",
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                          fontSize: 12.0,
 
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                model.date!,
-                                style: const TextStyle(
-                                  fontSize: 12.0,
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              Text(
-                                model.time!,
-                                style: const TextStyle(
-                                  fontSize: 12.0,
-                                ),
-                              ),
-                            ],
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            model.date!,
+                            style: const TextStyle(
+                              fontSize: 12.0,
+                            ),
                           ),
                           const SizedBox(
-                            height: 10,
+                            width: 10,
                           ),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Icon(
-                                TablerIcons.circle,
-                                size: 20,
+                          Text(
+                            model.time!,
+                            style: const TextStyle(
+                              fontSize: 12.0,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Icon(
+                            TablerIcons.circle,
+                            size: 20,
+                            color: model.status == 'finished'?successColor:warningColor,
+                          ),
+                          const SizedBox(
+                            width: 5,
+                          ),
+                          Text(
+                            model.status!.toUpperCase(),
+                            style: TextStyle(
+                                fontSize: 12.0,
                                 color: model.status == 'finished'?successColor:warningColor,
-                              ),
-                              const SizedBox(
-                                width: 5,
-                              ),
-                              Text(
-                                model.status!.toUpperCase(),
-                                style: TextStyle(
-                                    fontSize: 12.0,
-                                    color: model.status == 'finished'?successColor:warningColor,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ],
+                                fontWeight: FontWeight.bold),
                           ),
                         ],
                       ),
                     ],
                   ),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Text(
-                          'Estimated Cost',
-                          style: TextStyle(
-                            fontSize: 15.0,
-                          ),
-                        ),
-                        SizedBox(height: 5,),
-                        Text(
-                          model.cost!,
-                          style: TextStyle(
-                            fontSize: 15.0,
-                            fontWeight: FontWeight.bold,
-                            color: secondaryColor,
-                          ),
-                        ),
-                        Expanded(
-                          child: SizedBox(
-                            height: double.infinity,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                InkWell(
-                                  onTap: () {
-                                    LayoutCubit.get(context)
-                                        .removeOrder(orderUid: model.orderUid!);
-                                  },
-                                  child: Icon(
-                                    TablerIcons.trash,
-                                    color: errorColor,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
+                    Text(
+                      'Estimated Cost',
+                      style: TextStyle(
+                        fontSize: 15.0,
+                      ),
+                    ),
+                    SizedBox(height: 5,),
+                    Text(
+                      model.cost!,
+                      style: TextStyle(
+                        fontSize: 15.0,
+                        fontWeight: FontWeight.bold,
+                        color: secondaryColor,
+                      ),
+                    ),
+                    SizedBox(height: 40),
+                    StreamBuilder<int>(
+                      stream: LayoutCubit.get(context).allOrderOffersLength(model.orderUid!),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasError) {
+                        return Text('Error No Data found! ${snapshot.error}');
+                        } else if (snapshot.hasData) {
+                          return CircleAvatar(backgroundColor: secondaryColor, radius: 15,child: Text('${snapshot.data}', style: TextStyle(color: Colors.white),),);
+                        } else {
+                          return Center(
+                              child: CircularProgressIndicator(
+                                color: primaryColor,
+                              ));
+                        }
+                      },
+                    ),
+                    SizedBox(height: 40),
+                    InkWell(
+                      onTap: () {
+                        LayoutCubit.get(context)
+                            .removeOrder(orderUid: model.orderUid!);
+                      },
+                      child: Icon(
+                        TablerIcons.trash,
+                        color: errorColor,
+                      ),
                     ),
                   ],
                 ),

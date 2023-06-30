@@ -6,7 +6,6 @@ import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import '../../../layout/cubit/cubit.dart';
 import '../../../layout/cubit/states.dart';
 import '../../../model/orderModel.dart';
-import '../../../module/appointment_details/appointment_detials_screen.dart';
 import '../../../module/sign_in_screen/cubit/cubit.dart';
 import '../../../shared/components/components.dart';
 import '../../../shared/components/constants.dart';
@@ -15,8 +14,10 @@ import '../tec_order_details/tec_order_details.dart';
 class InProgressScreen extends StatelessWidget {
   const InProgressScreen({super.key});
 
+
   @override
   Widget build(BuildContext context) {
+
     var cubit = LayoutCubit.get(context);
     return Column(
       children: [

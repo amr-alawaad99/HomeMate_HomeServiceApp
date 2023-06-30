@@ -290,11 +290,16 @@ Widget defaultSuppliersItem({
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(model.profileName!,
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                          )),
+                      Expanded(
+                        child: Text(model.profileName!,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            )),
+                      ),
                       SizedBox(
                         height: 10,
                       ),
@@ -305,28 +310,30 @@ Widget defaultSuppliersItem({
                       SizedBox(
                         height: 10,
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Icon(
-                            TablerIcons.map_pin,
-                            size: 20,
-                            color: secondaryColor,
-                          ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Expanded(
-                            child: Text(model.address!,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                  fontSize: 15,
+                      Expanded(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Icon(
+                              TablerIcons.map_pin,
+                              size: 20,
+                              color: secondaryColor,
+                            ),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Expanded(
+                              child: Text(model.address!,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                    fontSize: 15,
 
-                                )),
-                          ),
-                        ],
+                                  )),
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),

@@ -41,7 +41,12 @@ class MyDrawer extends StatelessWidget {
                     color: SignInCubit.get(context).isDark ? Color(0xff212121) : primaryColor, ///********************
                     height: MediaQuery.of(context).size.height * 0.2,
                     child: Padding(
-                      padding: const EdgeInsets.fromLTRB(15, 45, 15, 45),
+                      padding: EdgeInsets.fromLTRB(
+                        MediaQuery.of(context).size.height * 0.02,
+                        MediaQuery.of(context).size.height * 0.05,
+                        MediaQuery.of(context).size.height * 0.02,
+                        MediaQuery.of(context).size.height * 0.05,
+                      ),
                       child: InkWell(
                         child: Row(
                           children: [
@@ -100,11 +105,11 @@ class MyDrawer extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Expanded(
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.75,
                     child: Padding(
                       padding: const EdgeInsets.all(15.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      child: ListView(
                         children: [
                           Row(
                             children: [
@@ -298,7 +303,7 @@ class MyDrawer extends StatelessWidget {
                             ),
                             onTap: () {},
                           ),
-                          const Spacer(),
+                          SizedBox(height: MediaQuery.of(context).size.height * 0.04,),
                           InkWell(
                             child: const Padding(
                               padding: EdgeInsets.symmetric(vertical: 15),
@@ -328,7 +333,7 @@ class MyDrawer extends StatelessWidget {
                         ],
                       ),
                     ),
-                  )
+                  ),
                 ],
               ),
             );
