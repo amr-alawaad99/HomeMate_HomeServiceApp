@@ -8,7 +8,6 @@ import 'package:login_register_methods/module/sign_in_screen/cubit/cubit.dart';
 import 'package:login_register_methods/module/sign_in_screen/cubit/states.dart';
 import 'package:login_register_methods/shared/components/constants.dart';
 
-
 /// BUTTON
 Widget defaultButton({
   double height = 60.0,
