@@ -3,10 +3,10 @@ import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:login_register_methods/layout/cubit/cubit.dart';
 
 import '../../../model/orderModel.dart';
-import '../../../module/appointment_details/appointment_detials_screen.dart';
 import '../../../module/sign_in_screen/cubit/cubit.dart';
 import '../../../shared/components/components.dart';
 import '../../../shared/components/constants.dart';
+import '../history_order_details/history_order_details_screen.dart';
 
 class AcceptedScreen extends StatelessWidget {
   const AcceptedScreen({super.key});
@@ -37,7 +37,7 @@ class AcceptedScreen extends StatelessWidget {
                           context: context,
                           onTap: () {
                             navigateAndPush(context,
-                                widget: AppointmentDetails(
+                                widget: HistoryOrderDetailsScreen(
                                   model: e,
                                 ));
                           });
@@ -97,17 +97,19 @@ class AcceptedScreen extends StatelessWidget {
                     SizedBox(
                       width: 8,
                     ),
-                    Text(
-                      model.serviceName!,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 19.0,
+                    Expanded(
+                      child: Text(
+                        model.serviceName!,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 19.0,
+                        ),
                       ),
                     ),
                     SizedBox(width: 5,),
                     Icon(
                       TablerIcons.circle,
-                      color: successColor,
+                      color: warningColor,
                     ),
                     SizedBox(
                       width: 5,
@@ -118,7 +120,7 @@ class AcceptedScreen extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                         fontSize: 16,
-                        color: successColor,
+                        color: warningColor,
                       ),
                     ),
                   ],
@@ -136,12 +138,14 @@ class AcceptedScreen extends StatelessWidget {
                     SizedBox(
                       width: 8,
                     ),
-                    Text(
-                      model.notes!,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        fontSize: 16.0,
+                    Expanded(
+                      child: Text(
+                        model.notes!,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          fontSize: 16.0,
+                        ),
                       ),
                     ),
                     SizedBox(width: 10,),

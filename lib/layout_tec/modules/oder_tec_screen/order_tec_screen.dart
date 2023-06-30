@@ -1,5 +1,3 @@
-
-
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -29,24 +27,27 @@ class OrderTechnicalScreen extends StatelessWidget {
               return ListView(
                 physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
-                children: allOrders.map(
+                children: allOrders
+                    .map(
                       (e) => defaultAppointmentCard(
-                      model: e,
-                      context: context,
-                      onTap: () {
-                        cubit.checkOffers(e.orderUid!, cubit.originalUser!.uid!);
-                        navigateAndPush(context,
-                            widget: TechnicalOrderDetails(
-                              model: e,
-                            ));
-                      }),
-                ).toList(),
+                          model: e,
+                          context: context,
+                          onTap: () {
+                            cubit.checkOffers(
+                                e.orderUid!, cubit.originalUser!.uid!);
+                            navigateAndPush(context,
+                                widget: TechnicalOrderDetails(
+                                  model: e,
+                                ));
+                          }),
+                    )
+                    .toList(),
               );
             } else {
               return Center(
                   child: CircularProgressIndicator(
-                    color: primaryColor,
-                  ));
+                color: primaryColor,
+              ));
             }
           },
         ),
@@ -54,17 +55,15 @@ class OrderTechnicalScreen extends StatelessWidget {
     );
   }
 
-  Widget defaultAppointmentCard({
-    required OrderModel model,
-    required context,
-    Function()? onTap
-  }) => Padding(
+  Widget defaultAppointmentCard(
+          {required OrderModel model, required context, Function()? onTap}) =>
+      Padding(
         padding: const EdgeInsets.only(left: 16, right: 16, top: 16),
         child: InkWell(
           onTap: onTap,
           borderRadius: BorderRadius.circular(16),
           child: Container(
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.all(10),
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
               color: SignInCubit.get(context).isDark
@@ -86,6 +85,8 @@ class OrderTechnicalScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+
+
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -104,14 +105,6 @@ class OrderTechnicalScreen extends StatelessWidget {
                       ),
                     ),
                     Spacer(),
-                    Text(
-                      calculateDistance(
-                          double.parse(model.gpsLocation!.split(',')[0]),
-                          double.parse(model.gpsLocation!.split(',')[1]),
-                          double.parse(LayoutCubit.get(context).originalUser!.gpsLocation!.split(',')[0]),
-                          double.parse(LayoutCubit.get(context).originalUser!.gpsLocation!.split(',')[1])
-                      )
-                    ),
                     Icon(
                       TablerIcons.circle,
                       color: warningColor,
@@ -123,8 +116,7 @@ class OrderTechnicalScreen extends StatelessWidget {
                       model.status!,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                          fontSize: 16, color: warningColor),
+                      style: TextStyle(fontSize: 16, color: warningColor),
                     ),
                   ],
                 ),
@@ -190,18 +182,37 @@ class OrderTechnicalScreen extends StatelessWidget {
                     ),
                   ],
                 ),
+                SizedBox(height: 10,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text(
+                      calculateDistance(
+                          double.parse(model.gpsLocation!.split(',')[0]),
+                          double.parse(model.gpsLocation!.split(',')[1]),
+                          double.parse(LayoutCubit.get(context)
+                              .originalUser!
+                              .gpsLocation!
+                              .split(',')[0]),
+                          double.parse(LayoutCubit.get(context)
+                              .originalUser!
+                              .gpsLocation!
+                              .split(',')[1])),
+                      style: TextStyle(fontSize: 12,color: primaryColor),
+                    ),
+                  ],
+                ),
               ],
             ),
           ),
         ),
       );
 
-
-  String calculateDistance(lat1, lon1, lat2, lon2){
+  String calculateDistance(lat1, lon1, lat2, lon2) {
     double p = 0.017453292519943295;
-    double a = 0.5 - cos((lat2 - lat1) * p)/2 +
-        cos(lat1 * p) * cos(lat2 * p) *
-            (1 - cos((lon2 - lon1) * p))/2;
+    double a = 0.5 -
+        cos((lat2 - lat1) * p) / 2 +
+        cos(lat1 * p) * cos(lat2 * p) * (1 - cos((lon2 - lon1) * p)) / 2;
     double result = 12742 * asin(sqrt(a));
     return "${result.toStringAsFixed(2)}Km";
   }

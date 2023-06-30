@@ -6,6 +6,7 @@ import '../../../model/orderModel.dart';
 
 import '../../../module/sign_in_screen/cubit/cubit.dart';
 import '../../../shared/components/components.dart';
+import '../history_order_details/history_order_details_screen.dart';
 import '../tec_order_details/tec_order_details.dart';
 
 class HistoryScreen extends StatelessWidget {
@@ -32,7 +33,7 @@ class HistoryScreen extends StatelessWidget {
                       onTap: () {
                         cubit.checkOffers(e.orderUid!, cubit.originalUser!.uid!);
                         navigateAndPush(context,
-                            widget: TechnicalOrderDetails(
+                            widget: HistoryOrderDetailsScreen(
                               model: e,
                             ));
                       }),
