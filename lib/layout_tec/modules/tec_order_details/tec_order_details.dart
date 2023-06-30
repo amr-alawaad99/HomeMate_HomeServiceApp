@@ -526,7 +526,7 @@ Widget defaultOfferCard({
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                model.profileName!.toUpperCase(),
+                model.profileName!,
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 15,

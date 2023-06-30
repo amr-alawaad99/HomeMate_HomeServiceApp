@@ -25,7 +25,8 @@ class InProgressScreen extends StatelessWidget {
           stream: cubit.onWaitingOrders(),
           builder: (context, snapshot) {
             if (snapshot.hasError) {
-              return Text('Error No Data found! ${snapshot.error}');
+              print('Error No Data found! ${snapshot.error}');
+              return Container();
             } else if (snapshot.hasData) {
               final allOrders = snapshot.data!.reversed;
               return ListView(
