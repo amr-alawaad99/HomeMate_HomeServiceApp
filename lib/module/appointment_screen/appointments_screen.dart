@@ -200,11 +200,16 @@ class AppointmentsScreen extends StatelessWidget {
                                       mainAxisAlignment:
                                           MainAxisAlignment.start,
                                       children: const [
-                                        Image(
-                                          image: AssetImage(
-                                              'assets/images/star.png'),
-                                          width: 15.0,
-                                          height: 15.0,
+                                        // Image(
+                                        //   image: AssetImage(
+                                        //       'assets/images/star.png'),
+                                        //   width: 15.0,
+                                        //   height: 15.0,
+                                        // ),
+                                        Icon(
+                                          Icons.star,
+                                          size: 20,
+                                          color: Colors.amber,
                                         ),
                                         SizedBox(
                                           width: 5,
@@ -217,17 +222,15 @@ class AppointmentsScreen extends StatelessWidget {
                                         ),
                                       ],
                                     ),
-                                    Text(
-                                      model.notes!,
-                                      maxLines: 1,
-                                      style: const TextStyle(
-                                        fontSize: 12.0,
+                                    // Text(
+                                    //   model.notes!,
+                                    //   maxLines: 1,
+                                    //   style: const TextStyle(
+                                    //     fontSize: 12.0,
+                                    //
+                                    //   ),
+                                    // ),
 
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      height: 15,
-                                    ),
                                   ],
                                 ),
                               ],

@@ -254,7 +254,7 @@ Widget defaultSuppliersItem({
    Function()? press,
 }) {
   return Padding(
-    padding: const EdgeInsets.only(top: 15.0,),
+    padding: const EdgeInsets.only(top: 15.0),
     child: InkWell(
       onTap: press,
       child: SizedBox(

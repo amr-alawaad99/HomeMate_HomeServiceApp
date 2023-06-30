@@ -1,4 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:login_register_methods/layout/cubit/cubit.dart';
@@ -29,11 +29,11 @@ class SuppliersScreen extends StatelessWidget {
       listener: (context, state) {},
       builder: (context, state) {
         var cubit = LayoutCubit.get(context);
-        return Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 15, left: 15),
-              child: SizedBox(
+        return Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: Column(
+            children: [
+              SizedBox(
                 height: 30,
                 width: double.infinity,
                 child: ListView.separated(
@@ -74,85 +74,85 @@ class SuppliersScreen extends StatelessWidget {
                         ),
                     itemCount: categories.length),
               ),
-            ),
-            // StreamBuilder<QuerySnapshot>(
-            //   stream:
-            //       FirebaseFirestore.instance.collection('orders').snapshots(),
-            //   builder: (BuildContext context,
-            //       AsyncSnapshot<QuerySnapshot> snapshot) {
-            //     if (snapshot.hasError) {
-            //       return Text('Error: ${snapshot.error}');
-            //     }
-            //
-            //     if (snapshot.connectionState == ConnectionState.waiting) {
-            //       return Text('Loading...');
-            //     }
-            //
-            //     if (snapshot.hasData) {
-            //       final orders = snapshot.data!.docs;
-            //       print(orders[0].data());
-            //
-            //       return SizedBox(
-            //         height: 30,
-            //         width: double.infinity,
-            //         child: ListView.builder(
-            //           itemCount: orders.length,
-            //           itemBuilder: (BuildContext context, int index) {
-            //             final order = orders[index];
-            //             final orderUId = order.id;
-            //             final orderData = order.data(); // Replace with your specific field names
-            //             print(orderData);
-            //             return ListTile(
-            //               title: Text('Order ID: $orderUId'),
-            //               subtitle: Text(
-            //                   'Order data: $orderData'), // Replace with your specific field names
-            //             );
-            //           },
-            //         ),
-            //       );
-            //     }
-            //
-            //     return Text('No orders found.');
-            //   },
-            // )
+              // StreamBuilder<QuerySnapshot>(
+              //   stream:
+              //       FirebaseFirestore.instance.collection('orders').snapshots(),
+              //   builder: (BuildContext context,
+              //       AsyncSnapshot<QuerySnapshot> snapshot) {
+              //     if (snapshot.hasError) {
+              //       return Text('Error: ${snapshot.error}');
+              //     }
+              //
+              //     if (snapshot.connectionState == ConnectionState.waiting) {
+              //       return Text('Loading...');
+              //     }
+              //
+              //     if (snapshot.hasData) {
+              //       final orders = snapshot.data!.docs;
+              //       print(orders[0].data());
+              //
+              //       return SizedBox(
+              //         height: 30,
+              //         width: double.infinity,
+              //         child: ListView.builder(
+              //           itemCount: orders.length,
+              //           itemBuilder: (BuildContext context, int index) {
+              //             final order = orders[index];
+              //             final orderUId = order.id;
+              //             final orderData = order.data(); // Replace with your specific field names
+              //             print(orderData);
+              //             return ListTile(
+              //               title: Text('Order ID: $orderUId'),
+              //               subtitle: Text(
+              //                   'Order data: $orderData'), // Replace with your specific field names
+              //             );
+              //           },
+              //         ),
+              //       );
+              //     }
+              //
+              //     return Text('No orders found.');
+              //   },
+              // )
 
-            StreamBuilder<List<UserModel>>(
-              stream: cubit.suppliers(),
-              builder: (context, snapshot) {
-                if (snapshot.hasError) {
-                  return Text('Error No Data found! ${snapshot.error}');
-                } else if (snapshot.hasData) {
-                  final techs = snapshot.data!.reversed;
-                  return ListView(
-                    physics: NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    children: techs
-                        .map(
-                          (e) => defaultSuppliersItem(
-                            model: e,
-                            context: context,
-                            /// Navigator to Technical Details Screen
-                            press: (){
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context){
-                                  return TechnicalDetailsScreen(model: e,);
-                                }),
-                              );
-                            },
-                          ),
-                        )
-                        .toList(),
-                  );
-                } else {
-                  return Center(
-                      child: CircularProgressIndicator(
-                    color: primaryColor,
-                  ));
-                }
-              },
-            ),
-          ],
+              StreamBuilder<List<UserModel>>(
+                stream: cubit.suppliers(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasError) {
+                    return Text('Error No Data found! ${snapshot.error}');
+                  } else if (snapshot.hasData) {
+                    final techs = snapshot.data!.reversed;
+                    return ListView(
+                      physics: NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      children: techs
+                          .map(
+                            (e) => defaultSuppliersItem(
+                              model: e,
+                              context: context,
+                              /// Navigator to Technical Details Screen
+                              press: (){
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context){
+                                    return TechnicalDetailsScreen(model: e,);
+                                  }),
+                                );
+                              },
+                            ),
+                          )
+                          .toList(),
+                    );
+                  } else {
+                    return Center(
+                        child: CircularProgressIndicator(
+                      color: primaryColor,
+                    ));
+                  }
+                },
+              ),
+            ],
+          ),
         );
       },
     );
