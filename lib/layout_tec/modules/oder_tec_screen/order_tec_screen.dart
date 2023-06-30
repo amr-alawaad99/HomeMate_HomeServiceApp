@@ -85,8 +85,6 @@ class OrderTechnicalScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-
-
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -182,24 +180,28 @@ class OrderTechnicalScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: 10,),
+                SizedBox(
+                  height: 10,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Text(
-                      calculateDistance(
-                          double.parse(model.gpsLocation!.split(',')[0]),
-                          double.parse(model.gpsLocation!.split(',')[1]),
-                          double.parse(LayoutCubit.get(context)
-                              .originalUser!
-                              .gpsLocation!
-                              .split(',')[0]),
-                          double.parse(LayoutCubit.get(context)
-                              .originalUser!
-                              .gpsLocation!
-                              .split(',')[1])),
-                      style: TextStyle(fontSize: 12,color: primaryColor),
-                    ),
+                    if (LayoutCubit.get(context).originalUser!.gpsLocation !=
+                        '')
+                      Text(
+                        calculateDistance(
+                            double.parse(model.gpsLocation!.split(',')[0]),
+                            double.parse(model.gpsLocation!.split(',')[1]),
+                            double.parse(LayoutCubit.get(context)
+                                .originalUser!
+                                .gpsLocation!
+                                .split(',')[0]),
+                            double.parse(LayoutCubit.get(context)
+                                .originalUser!
+                                .gpsLocation!
+                                .split(',')[1])),
+                        style: TextStyle(fontSize: 12, color: primaryColor),
+                      ),
                   ],
                 ),
               ],
