@@ -1,13 +1,18 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
+import 'package:login_register_methods/layout/cubit/cubit.dart';
 
+import '../../model/user_model.dart';
 import '../../shared/components/constants.dart';
 
 class TechnicalDetailsScreen extends StatelessWidget {
-  const TechnicalDetailsScreen({super.key});
+  final UserModel model;
 
+  const TechnicalDetailsScreen({super.key, required this.model});
   @override
   Widget build(BuildContext context) {
+    var cubit = LayoutCubit.get(context);
     return Scaffold(
       backgroundColor: scaffoldLightColor,
       appBar: AppBar(
@@ -37,16 +42,16 @@ class TechnicalDetailsScreen extends StatelessWidget {
                 child: CircleAvatar(
                   radius: 92,
                   backgroundColor: Colors.grey,
-                  backgroundImage: tempImage,
+                  backgroundImage: NetworkImage(model.profilePic!),
                 ),
               ),
             ),
             SizedBox(
-              height: 16,
+              height: 10,
             ),
             Center(
               child: Text(
-                'Technical Name',
+                model.profileName!,
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 24,
@@ -58,6 +63,51 @@ class TechnicalDetailsScreen extends StatelessWidget {
             SizedBox(
               height: 32,
             ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Row(
+                children: [
+                  //Icon
+                  const Padding(
+                    padding: EdgeInsets.only(bottom: 5),
+                    child: Icon(TablerIcons.mail, color: secondaryColor,),
+                  ),
+                  const SizedBox(width: 16),
+                  //Text
+                  Expanded(
+                    child: Text(
+                      model.email!,
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 15),
+                    ),
+                  ),
+
+
+                ],
+              ),
+            ),
+            SizedBox(height: 5,),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Row(
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.only(bottom: 5),
+                    child: Icon(TablerIcons.home_cog, color: secondaryColor,),
+                  ),
+                  const SizedBox(width: 16),
+                  //Text
+                  Expanded(
+                    child: Text(
+                      model.serviceName!,
+
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 15),
+                    ),
+                  ),
+
+                ],
+              ),
+            ),
+            SizedBox(height: 5,),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Row(

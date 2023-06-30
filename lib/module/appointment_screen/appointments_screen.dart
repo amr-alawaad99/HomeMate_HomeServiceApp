@@ -254,16 +254,16 @@ class AppointmentsScreen extends StatelessWidget {
                               Icon(
                                 TablerIcons.circle,
                                 size: 20,
-                                color: successColor,
+                                color: model.status == 'finished'?successColor:warningColor,
                               ),
                               const SizedBox(
                                 width: 5,
                               ),
                               Text(
-                                model.status!,
+                                model.status!.toUpperCase(),
                                 style: TextStyle(
                                     fontSize: 12.0,
-                                    color: errorColor,
+                                    color: model.status == 'finished'?successColor:warningColor,
                                     fontWeight: FontWeight.bold),
                               ),
                             ],

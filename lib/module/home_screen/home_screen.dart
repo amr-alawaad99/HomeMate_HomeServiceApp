@@ -155,7 +155,7 @@ class HomeScreen extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(builder: (context){
-                                return TechnicalDetailsScreen();
+                                return TechnicalDetailsScreen(model: e,);
                               }),
                             );
                           },
@@ -185,118 +185,118 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget defaultSupplierCard(
-      SupplierModel model,
-      ) => InkWell(
-            onTap: () {
-              /**navigateAndPush(context, widget: );**/
-
-            },
-            child: SizedBox(
-              height: 145,
-              child: Padding(
-                padding:
-                    const EdgeInsets.only(bottom: 8, top: 8, right: 5, left: 5),
-                child: Material(
-                  elevation: 3,
-                  borderRadius: const BorderRadius.all(Radius.circular(10)),
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(5),
-                          child: Image(
-                            image:model.image,
-                            height: 60,
-                            width: 60,
-                          ),
-                        ),
-                        SizedBox(
-                          width: 20,
-                        ),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(model.userName,
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                  )),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Text(model.serviceName,
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                  )),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Icon(
-                                    TablerIcons.map_pin,
-                                    size: 20,
-                                    color: secondaryColor,
-                                  ),
-                                  Expanded(
-                                    child: Text(model.address,
-                                        maxLines: 2,
-                                        overflow: TextOverflow.ellipsis,
-                                        style: TextStyle(
-                                          fontSize: 15,
-                                        )),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Column(
-                          children: [
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Icon(
-                                  Icons.star,
-                                  size: 20,
-                                  color: Colors.amber,
-                                ),
-                                SizedBox(
-                                  width: 4,
-                                ),
-                                Text(
-                                  model.rate,
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 30,
-                            ),
-                            Text(model.distance,
-                                style: TextStyle(
-                                  fontSize: 15,
-                                )),
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          );
+  // Widget defaultSupplierCard(
+  //     SupplierModel model,
+  //     ) => InkWell(
+  //           onTap: () {
+  //             /**navigateAndPush(context, widget: );**/
+  //
+  //           },
+  //           child: SizedBox(
+  //             height: 145,
+  //             child: Padding(
+  //               padding:
+  //                   const EdgeInsets.only(bottom: 8, top: 8, right: 5, left: 5),
+  //               child: Material(
+  //                 elevation: 3,
+  //                 borderRadius: const BorderRadius.all(Radius.circular(10)),
+  //                 child: Padding(
+  //                   padding: const EdgeInsets.all(16.0),
+  //                   child: Row(
+  //                     crossAxisAlignment: CrossAxisAlignment.start,
+  //                     children: [
+  //                       ClipRRect(
+  //                         borderRadius: BorderRadius.circular(5),
+  //                         child: Image(
+  //                           image:model.image,
+  //                           height: 60,
+  //                           width: 60,
+  //                         ),
+  //                       ),
+  //                       SizedBox(
+  //                         width: 20,
+  //                       ),
+  //                       Expanded(
+  //                         child: Column(
+  //                           crossAxisAlignment: CrossAxisAlignment.start,
+  //                           children: [
+  //                             Text(model.userName,
+  //                                 maxLines: 1,
+  //                                 overflow: TextOverflow.ellipsis,
+  //                                 style: TextStyle(
+  //                                   fontWeight: FontWeight.bold,
+  //                                 )),
+  //                             SizedBox(
+  //                               height: 10,
+  //                             ),
+  //                             Text(model.serviceName,
+  //                                 style: TextStyle(
+  //                                   fontSize: 15,
+  //                                 )),
+  //                             SizedBox(
+  //                               height: 10,
+  //                             ),
+  //                             Row(
+  //                               mainAxisAlignment: MainAxisAlignment.start,
+  //                               crossAxisAlignment: CrossAxisAlignment.start,
+  //                               children: [
+  //                                 Icon(
+  //                                   TablerIcons.map_pin,
+  //                                   size: 20,
+  //                                   color: secondaryColor,
+  //                                 ),
+  //                                 Expanded(
+  //                                   child: Text(model.address,
+  //                                       maxLines: 2,
+  //                                       overflow: TextOverflow.ellipsis,
+  //                                       style: TextStyle(
+  //                                         fontSize: 15,
+  //                                       )),
+  //                                 ),
+  //                               ],
+  //                             ),
+  //                           ],
+  //                         ),
+  //                       ),
+  //                       SizedBox(
+  //                         width: 10,
+  //                       ),
+  //                       Column(
+  //                         children: [
+  //                           Row(
+  //                             crossAxisAlignment: CrossAxisAlignment.start,
+  //                             mainAxisAlignment: MainAxisAlignment.start,
+  //                             children: [
+  //                               Icon(
+  //                                 Icons.star,
+  //                                 size: 20,
+  //                                 color: Colors.amber,
+  //                               ),
+  //                               SizedBox(
+  //                                 width: 4,
+  //                               ),
+  //                               Text(
+  //                                 model.rate,
+  //                                 style: TextStyle(
+  //                                   fontSize: 15,
+  //                                 ),
+  //                               ),
+  //                             ],
+  //                           ),
+  //                           SizedBox(
+  //                             height: 30,
+  //                           ),
+  //                           Text(model.distance,
+  //                               style: TextStyle(
+  //                                 fontSize: 15,
+  //                               )),
+  //                         ],
+  //                       )
+  //                     ],
+  //                   ),
+  //                 ),
+  //               ),
+  //             ),
+  //           ),
+  //         );
 }

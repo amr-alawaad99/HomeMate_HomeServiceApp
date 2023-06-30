@@ -8,6 +8,7 @@ import '../../model/appointment.dart';
 import '../../model/user_model.dart';
 import '../../shared/components/components.dart';
 import '../../shared/components/constants.dart';
+import '../technical_details_screen/technical_details_screen.dart';
 
 class SuppliersScreen extends StatelessWidget {
   List<ChooseCategory> categories = [
@@ -130,6 +131,15 @@ class SuppliersScreen extends StatelessWidget {
                           (e) => defaultSuppliersItem(
                             model: e,
                             context: context,
+                            /// Navigator to Technical Details Screen
+                            press: (){
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context){
+                                  return TechnicalDetailsScreen(model: e,);
+                                }),
+                              );
+                            },
                           ),
                         )
                         .toList(),

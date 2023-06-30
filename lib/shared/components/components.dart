@@ -251,7 +251,7 @@ Widget defaultCategoryChooser({required String text}) => InkWell(
 Widget defaultSuppliersItem({
   required UserModel model,
   required context,
-  void Function()? press,
+   Function()? press,
 }) {
   return Padding(
     padding: const EdgeInsets.only(top: 15.0,),
@@ -298,7 +298,7 @@ Widget defaultSuppliersItem({
                       SizedBox(
                         height: 10,
                       ),
-                      Text('jop',
+                      Text(model.serviceName!,
                           style: TextStyle(
                             fontSize: 15,
                           )),
@@ -359,10 +359,7 @@ Widget defaultSuppliersItem({
                     SizedBox(
                       height: 30,
                     ),
-                    Text('distance',
-                        style: TextStyle(
-                          fontSize: 15,
-                        )),
+
                   ],
                 )
               ],
