@@ -358,6 +358,45 @@ class ProfileScreen extends StatelessWidget {
                       const SizedBox(
                         height: 20,
                       ),
+                      if (cubit.originalUser!.isUser == false)
+                        Text(
+                          "Service",
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodySmall!
+                              .copyWith(fontSize: 15),
+                        ),
+                      if (cubit.originalUser!.isUser == false)
+                        const SizedBox(
+                          height: 10,
+                        ),
+                      if (cubit.originalUser!.isUser == false)
+                        Row(
+                          children: [
+                            //Icon
+                            const Padding(
+                              padding: EdgeInsets.only(bottom: 5),
+                              child: Icon(
+                                TablerIcons.home_cog,
+                                color: secondaryColor,
+                              ),
+                            ),
+                            const SizedBox(width: 16),
+                            //Text
+                            Expanded(
+                              child: Text(
+                                cubit.originalUser!.serviceName!,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium!
+                                    .copyWith(fontSize: 15),
+                              ),
+                            ),
+                          ],
+                        ),
+                      const SizedBox(
+                        height: 20,
+                      ),
                       // Address
                       Text(
                         "Address",
@@ -403,7 +442,9 @@ class ProfileScreen extends StatelessWidget {
                         width: double.infinity,
                         decoration: BoxDecoration(
                             border: Border.all(color: Colors.red)),
-                        child: GoogleMapsWidget(isEdit: false,),
+                        child: GoogleMapsWidget(
+                          isEdit: false,
+                        ),
                       ),
                       const SizedBox(
                         height: 20,

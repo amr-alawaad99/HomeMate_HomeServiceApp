@@ -10,6 +10,7 @@ import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 
 import '../layout/cubit/cubit.dart';
 import '../layout/cubit/states.dart';
+import '../module/drawer/my_drawer.dart';
 import '../module/sign_in_screen/cubit/cubit.dart';
 import '../module/sign_in_screen/cubit/states.dart';
 import '../shared/components/constants.dart';
@@ -31,7 +32,7 @@ class LayoutTecScreen extends StatelessWidget {
           color: primaryColor,
           child: Scaffold(
             key: scaffoldKey,
-            drawer: const DrawerTechnicalScreen(),
+            drawer: const MyDrawer(),
             extendBody: true,
             body: ConditionalBuilder(
               condition: cubit.originalUser != null && cubit.originalUser!.profilePic != null,

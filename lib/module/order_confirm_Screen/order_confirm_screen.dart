@@ -309,8 +309,7 @@ class OrderConfirmScreen extends StatelessWidget {
                             color: primaryColor,
                           ),
                           onPressed: () {
-                            navigatePushDelete(context,
-                                widget: NewOrderScreen());
+                            Navigator.pop(context);
                           },
                         ),
                       ],
@@ -383,7 +382,7 @@ class OrderConfirmScreen extends StatelessWidget {
                             TablerIcons.edit,
                             color: primaryColor,
                           ),
-                          onPressed: () {},
+                          onPressed: () {Navigator.pop(context);},
                         ),
                       ],
                     ),
@@ -484,7 +483,9 @@ class OrderConfirmScreen extends StatelessWidget {
                             TablerIcons.edit,
                             color: primaryColor,
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
                         ),
                       ],
                     ),

@@ -564,7 +564,7 @@ Widget defaultOfferCard({
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Text(
-                'Estimated cost'.toUpperCase(),
+                'Estimated cost',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 15,

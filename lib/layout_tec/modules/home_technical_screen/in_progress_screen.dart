@@ -18,56 +18,43 @@ class InProgressScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var cubit = LayoutCubit.get(context);
-    return BlocConsumer<LayoutCubit, LayoutStates>(
-      listener: (context, state) {      },
-      builder: (context, state) {
-        if(cubit.ordersUid.isEmpty){
-          LayoutCubit.get(context).ss();
-        }
-        return Column(
-          children: [
-            ConditionalBuilder(
-              condition: cubit.ordersUid.isNotEmpty,
-              builder: (context) => StreamBuilder<List<OrderModel>>(
-                stream: cubit.onWaitingOrders(cubit.ordersUid),
-                builder: (context, snapshot) {
-                  if (snapshot.hasError) {
-                    return Text('Error No Data found! ${snapshot.error}');
-                  } else if (snapshot.hasData) {
-                    final allOrders = snapshot.data!.reversed;
-                    print("///////////////////${allOrders.length}");
-                    return ListView(
-                      physics: NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      children: allOrders
-                          .map(
-                            (e) =>
-                            defaultAppointmentCard(
-                                model: e,
-                                context: context,
-                                onTap: () {
-                                  navigateAndPush(context,
-                                      widget: TechnicalOrderDetails(
-                                        model: e,
-                                      ));
-                                }
-                            ),
-                      )
-                          .toList(),
-                    );
-                  } else {
-                    return Center(
-                        child: CircularProgressIndicator(
-                          color: primaryColor,
-                        ));
-                  }
-                },
-              ),
-              fallback: (context) => Container(),
-            ),
-          ],
-        );
-      },
+    return Column(
+      children: [
+        StreamBuilder<List<OrderModel>>(
+          stream: cubit.onWaitingOrders(),
+          builder: (context, snapshot) {
+            if (snapshot.hasError) {
+              return Text('Error No Data found! ${snapshot.error}');
+            } else if (snapshot.hasData) {
+              final allOrders = snapshot.data!.reversed;
+              return ListView(
+                physics: NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                children: allOrders
+                    .map(
+                      (e) =>
+                      defaultAppointmentCard(
+                          model: e,
+                          context: context,
+                          onTap: () {
+                            navigateAndPush(context,
+                                widget: TechnicalOrderDetails(
+                                  model: e,
+                                ));
+                          }
+                      ),
+                )
+                    .toList(),
+              );
+            } else {
+              return Center(
+                  child: CircularProgressIndicator(
+                    color: primaryColor,
+                  ));
+            }
+          },
+        ),
+      ],
     );
   }
 }

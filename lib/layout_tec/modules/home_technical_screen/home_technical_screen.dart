@@ -78,10 +78,11 @@ class HomeTechnicalScreen extends StatelessWidget {
               SizedBox(
                 height: MediaQuery.of(context).size.height,
                 child: TabBarView(
-                  children: [
-//For Progress Orders
+                  physics: NeverScrollableScrollPhysics(),
+                  children: const [
+                  //For Progress Orders
                     InProgressScreen(),
-//For Accepted Orders
+                  //For Accepted Orders
                     AcceptedScreen(),
                   ],
                 ),

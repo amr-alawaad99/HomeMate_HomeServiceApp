@@ -217,6 +217,17 @@ class AppointmentsScreen extends StatelessWidget {
                                         ),
                                       ],
                                     ),
+                                    Text(
+                                      model.notes!,
+                                      maxLines: 1,
+                                      style: const TextStyle(
+                                        fontSize: 12.0,
+
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      height: 15,
+                                    ),
                                   ],
                                 ),
                               ],
@@ -225,6 +236,7 @@ class AppointmentsScreen extends StatelessWidget {
                           const SizedBox(
                             height: 15,
                           ),
+
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [

@@ -386,12 +386,15 @@ class LayoutCubit extends Cubit<LayoutStates> {
         .collection("orders")
         .snapshots()
         .map((snapshot) {
-
       return snapshot.docs
           .where((element) => element.data()["serviceName"] == serviceName)
           .where((element) => element.data()["status"] == "finished")
           .where((element) => element.data()['technicalUId'] == uId)
-          .map((e) => OrderModel.fromJson(e.data(),),)
+          .map(
+            (e) => OrderModel.fromJson(
+              e.data(),
+            ),
+          )
           .toList();
     });
   }
@@ -420,7 +423,10 @@ class LayoutCubit extends Cubit<LayoutStates> {
         timeout: Duration(seconds: 60));
   }
 
-  verifyOTP({required String verificationId,required String otpCode,}) async {
+  verifyOTP({
+    required String verificationId,
+    required String otpCode,
+  }) async {
     PhoneAuthCredential credential = PhoneAuthProvider.credential(
       verificationId: verificationId,
       smsCode: otpCode,
@@ -578,7 +584,6 @@ class LayoutCubit extends Cubit<LayoutStates> {
     emit(ChangeTabview());
   }
 
-
   ////////////////////////
 // accepted orders
 
@@ -596,26 +601,27 @@ class LayoutCubit extends Cubit<LayoutStates> {
     });
   }
 
+  Stream<List<OrderModel>> onWaitingOrders() async* {
+    List<String> ordersUid = [];
 
+    final offersSnapshot =
+        await FirebaseFirestore.instance.collection("offers").get();
 
-
-  List<String> ordersUid = [];
-  ss() async {
-    await FirebaseFirestore.instance.collection("offers").get().then((value) {
-      value.docs.where((element) => element.data()['uId'] == originalUser!.uid)
-          .where((element) => element.data()['status'] == 'waiting').forEach((element) {
-        print(element.data()['orderUId']);
-        ordersUid.add(element.data()['orderUId']);
-      });
-      emit(GetWaitingOrdersUidSuccessState());
-    }).catchError((error){
-      print(error);
+    offersSnapshot.docs
+        .where((element) => element.data()['uId'] == originalUser!.uid)
+        .where((element) => element.data()['status'] == 'waiting')
+        .forEach((element) {
+      print(element.data()['orderUId']);
+      ordersUid.add(element.data()['orderUId']);
     });
-  }
-  Stream<List<OrderModel>> onWaitingOrders(List<String> uids) {
-    return FirebaseFirestore.instance.collection('orders').where('orderUid', whereIn: uids)
-        .snapshots().map((event) => event.docs.map((e) => OrderModel.fromJson(e.data())).toList());
-  }
 
-
+    yield* FirebaseFirestore.instance
+        .collection('orders')
+        .where('orderUid', whereIn: ordersUid)
+        .snapshots()
+        .map((snapshot) => snapshot.docs
+            .where((element) => element.data()['status'] == 'waiting')
+            .map((e) => OrderModel.fromJson(e.data()))
+            .toList());
+  }
 }
