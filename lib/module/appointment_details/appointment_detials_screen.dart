@@ -1,14 +1,17 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:galleryimage/galleryimage.dart';
 import 'package:login_register_methods/layout/cubit/cubit.dart';
 import 'package:login_register_methods/layout/cubit/states.dart';
+import 'package:login_register_methods/model/user_model.dart';
 import 'package:login_register_methods/shared/components/components.dart';
 
 import '../../model/cost_model.dart';
 import '../../model/orderModel.dart';
 import '../../shared/components/constants.dart';
 import '../sign_in_screen/cubit/cubit.dart';
+import '../technical_details_screen/technical_details_screen.dart';
 
 class AppointmentDetails extends StatelessWidget {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
@@ -353,7 +356,7 @@ class AppointmentDetails extends StatelessWidget {
                                 context: context,
                                 model: e,
                                 list: model,
-                                index: index),).toList()[index],
+                                index: index,),).toList()[index],
                             itemCount: model.length,
                           );
                         } else {
@@ -608,8 +611,13 @@ Widget defaultOffersCard({
                         height: 30,
                         text: 'view profile'.toUpperCase(),
                         fontSize: 12,
-                        onPress: () {
-                          onPressViewTechnicalInfo;
+                        onPress: () async {
+                          UserModel userModel;
+                          await FirebaseFirestore.instance.collection('Users').doc(model.uId).get().then((value) {
+                            userModel = UserModel.fromJson(value.data()!);
+                            navigateAndPush(context, widget: TechnicalDetailsScreen(model: userModel));
+                          });
+
                         }),
                   ],
                 ),
