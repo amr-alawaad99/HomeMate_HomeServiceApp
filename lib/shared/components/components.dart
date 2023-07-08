@@ -6,7 +6,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:login_register_methods/model/user_model.dart';
 import 'package:login_register_methods/module/sign_in_screen/cubit/cubit.dart';
 import 'package:login_register_methods/module/sign_in_screen/cubit/states.dart';
-import 'package:login_register_methods/shared/components/constants.dart';
+import 'package:login_register_methods/shared/resources/constants_manager.dart';
 
 /// BUTTON
 Widget defaultButton({

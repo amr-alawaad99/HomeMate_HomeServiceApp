@@ -11,7 +11,7 @@ import '../../../model/orderModel.dart';
 
 import '../../../module/google_maps_widget/order_tracking_screen.dart';
 import '../../../module/sign_in_screen/cubit/cubit.dart';
-import '../../../shared/components/constants.dart';
+import '../../../shared/resources/constants_manager.dart';
 
 class HistoryOrderDetailsScreen extends StatelessWidget {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();

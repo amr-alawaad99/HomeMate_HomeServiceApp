@@ -3,13 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:login_register_methods/layout/cubit/cubit.dart';
 import 'package:login_register_methods/layout/cubit/states.dart';
-
 import 'package:login_register_methods/module/sign_in_screen/cubit/states.dart';
 import 'package:login_register_methods/shared/components/components.dart';
-import 'package:login_register_methods/shared/components/constants.dart';
+import 'package:login_register_methods/shared/resources/constants_manager.dart';
 import '../../../module/onboarding_screen/onboarding_screen.dart';
 import '../../../module/sign_in_screen/cubit/cubit.dart';
-
 import '../messages_technical/chats_tech_screen.dart';
 import '../profile_technical/profile_tech_screen.dart';
 

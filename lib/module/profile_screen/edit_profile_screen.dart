@@ -6,7 +6,7 @@ import 'package:login_register_methods/module/google_maps_widget/google_maps_wid
 import '../../layout/cubit/cubit.dart';
 import '../../layout/cubit/states.dart';
 import '../../shared/components/components.dart';
-import '../../shared/components/constants.dart';
+import '../../shared/resources/constants_manager.dart';
 
 class EditProfileScreen extends StatelessWidget {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();

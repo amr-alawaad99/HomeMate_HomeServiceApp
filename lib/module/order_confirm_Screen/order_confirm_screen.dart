@@ -8,7 +8,7 @@ import 'package:login_register_methods/module/success_screen/success_screen.dart
 
 import '../../layout/cubit/cubit.dart';
 import '../../shared/components/components.dart';
-import '../../shared/components/constants.dart';
+import '../../shared/resources/constants_manager.dart';
 import 'dart:io';
 
 class OrderConfirmScreen extends StatelessWidget {

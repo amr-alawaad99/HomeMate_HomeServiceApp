@@ -9,7 +9,7 @@ import 'package:login_register_methods/module/google_maps_widget/google_maps_wid
 import 'package:login_register_methods/module/profile_screen/edit_profile_screen.dart';
 import 'package:login_register_methods/module/sign_up_screen/verification_screen.dart';
 import 'package:login_register_methods/shared/components/components.dart';
-import 'package:login_register_methods/shared/components/constants.dart';
+import 'package:login_register_methods/shared/resources/constants_manager.dart';
 
 class ProfileScreen extends StatelessWidget {
   ProfileScreen({Key? key}) : super(key: key);

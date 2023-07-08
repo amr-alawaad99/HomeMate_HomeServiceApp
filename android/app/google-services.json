@@ -14,11 +14,43 @@
       },
       "oauth_client": [
         {
+          "client_id": "220209510896-1hqur7a35kv6chivlmqn9rjrnahm03d7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "homemate_homeservice.com.home_mate",
+            "certificate_hash": "8cda06bf1ebc7881fc507c5fec4056267952ae5e"
+          }
+        },
+        {
+          "client_id": "220209510896-7cen6oectht70f1hklmnfj8rjog1e7ng.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "homemate_homeservice.com.home_mate",
+            "certificate_hash": "95cdcd3d69829aff44252561a5075e9f5e7a1acd"
+          }
+        },
+        {
+          "client_id": "220209510896-oqhumosg20p5alctf49c37h1gr9mg5md.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "homemate_homeservice.com.home_mate",
+            "certificate_hash": "f70ed152ad308f1340b51501ed52ff0ebb534e36"
+          }
+        },
+        {
           "client_id": "220209510896-trt01ojhdm4vrr5c63bfu54nn7ehk5m8.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "homemate_homeservice.com.home_mate",
             "certificate_hash": "7af818d7fe916bbc24a66ed2281cdd4e3f6bb16c"
+          }
+        },
+        {
+          "client_id": "220209510896-tuuii98a9f2a66mjj4ate9gpnp4rk3bl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "homemate_homeservice.com.home_mate",
+            "certificate_hash": "b576dc543e2feb5c885bedbf90874b5637346e29"
           }
         },
         {

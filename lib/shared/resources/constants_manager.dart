@@ -3,6 +3,7 @@ import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 
 const Color primaryColor = Color(0xff734BA4);
 const Color secondaryColor = Color(0xff28b5cd);
+const Color informationColor = Color(0xff0063F8);
 const Color successColor = Color(0xff00cf90);
 const Color warningColor = Color(0xffffb300);
 const Color errorColor = Color(0xffee4646);

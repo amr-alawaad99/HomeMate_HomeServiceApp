@@ -4,7 +4,7 @@ import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:login_register_methods/layout/cubit/cubit.dart';
 
 import '../../model/user_model.dart';
-import '../../shared/components/constants.dart';
+import '../../shared/resources/constants_manager.dart';
 import '../sign_in_screen/cubit/cubit.dart';
 
 class TechnicalDetailsScreen extends StatelessWidget {

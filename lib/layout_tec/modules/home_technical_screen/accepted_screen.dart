@@ -5,7 +5,7 @@ import 'package:login_register_methods/layout/cubit/cubit.dart';
 import '../../../model/orderModel.dart';
 import '../../../module/sign_in_screen/cubit/cubit.dart';
 import '../../../shared/components/components.dart';
-import '../../../shared/components/constants.dart';
+import '../../../shared/resources/constants_manager.dart';
 import '../history_order_details/history_order_details_screen.dart';
 
 class AcceptedScreen extends StatelessWidget {

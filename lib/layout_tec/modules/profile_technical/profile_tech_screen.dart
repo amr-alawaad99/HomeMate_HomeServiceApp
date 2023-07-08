@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 
 import 'package:login_register_methods/shared/components/components.dart';
-import 'package:login_register_methods/shared/components/constants.dart';
+import 'package:login_register_methods/shared/resources/constants_manager.dart';
 
 import '../../../layout/cubit/cubit.dart';
 import '../../../module/google_maps_widget/google_maps_widget.dart';

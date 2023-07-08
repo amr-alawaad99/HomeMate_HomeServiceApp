@@ -7,7 +7,7 @@ import 'package:login_register_methods/shared/components/components.dart';
 
 import '../../layout/cubit/cubit.dart';
 import '../../layout/cubit/states.dart';
-import '../../shared/components/constants.dart';
+import '../../shared/resources/constants_manager.dart';
 import '../appointment_details/appointment_detials_screen.dart';
 import '../sign_in_screen/cubit/cubit.dart';
 

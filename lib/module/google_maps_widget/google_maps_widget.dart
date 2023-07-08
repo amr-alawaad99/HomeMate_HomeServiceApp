@@ -13,7 +13,7 @@ import 'package:login_register_methods/module/google_maps_widget/cubit/cubit.dar
 import 'package:login_register_methods/module/google_maps_widget/cubit/states.dart';
 import 'package:login_register_methods/module/profile_screen/edit_profile_screen.dart';
 import 'package:login_register_methods/shared/components/components.dart';
-import 'package:login_register_methods/shared/components/constants.dart';
+import 'package:login_register_methods/shared/resources/constants_manager.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 

@@ -8,7 +8,7 @@ import '../../../layout/cubit/states.dart';
 import '../../../model/orderModel.dart';
 import '../../../module/sign_in_screen/cubit/cubit.dart';
 import '../../../shared/components/components.dart';
-import '../../../shared/components/constants.dart';
+import '../../../shared/resources/constants_manager.dart';
 import '../tec_order_details/tec_order_details.dart';
 
 class InProgressScreen extends StatelessWidget {

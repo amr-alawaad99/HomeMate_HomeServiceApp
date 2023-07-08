@@ -3,10 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:login_register_methods/layout/cubit/cubit.dart';
 import 'package:login_register_methods/layout/cubit/states.dart';
 import 'package:login_register_methods/layout_tec/modules/home_technical_screen/in_progress_screen.dart';
-import '../../../shared/components/constants.dart';
+import '../../../shared/resources/constants_manager.dart';
 import 'accepted_screen.dart';
 
 class HomeTechnicalScreen extends StatelessWidget {
+  const HomeTechnicalScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<LayoutCubit, LayoutStates>(
@@ -38,7 +40,7 @@ class HomeTechnicalScreen extends StatelessWidget {
                       },
                       labelPadding: EdgeInsets.symmetric(horizontal: 30),
                       indicator: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
+                        borderRadius: BorderRadius.circular(8),
                         color: primaryColor,
                       ),
                       tabs: [
@@ -47,9 +49,9 @@ class HomeTechnicalScreen extends StatelessWidget {
                             'Progress',
                             style: TextStyle(
                               color:
-                                  LayoutCubit.get(context).currentTabIndex == 0
-                                      ? Colors.white
-                                      : Colors.black,
+                                LayoutCubit.get(context).currentTabIndex == 0
+                                    ? Colors.white
+                                    : Colors.black,
                               fontSize: 20,
                             ),
                           ),

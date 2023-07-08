@@ -9,11 +9,12 @@ import 'package:login_register_methods/module/onboarding_screen/onboarding_scree
 import 'package:login_register_methods/module/sign_in_screen/cubit/cubit.dart';
 import 'package:login_register_methods/module/sign_in_screen/cubit/states.dart';
 import 'package:login_register_methods/shared/bloc_observer.dart';
-import 'package:login_register_methods/shared/components/constants.dart';
+import 'package:login_register_methods/shared/resources/constants_manager.dart';
 import 'package:login_register_methods/shared/local/cache_helper.dart';
+import 'package:login_register_methods/shared/resources/routes_manager.dart';
 import 'package:provider/provider.dart';
-
 import 'layout_tec/layout_tech.dart';
+import 'module/splash/splash_screen.dart';
 
 
 void main() async {
@@ -35,12 +36,13 @@ void main() async {
   print("is user????????? $isUser");
 
   if (uId == '') {
-    widget = OnBoardingScreen();
+    widget = SplashScreen();
   } else if(uId != '' && isUser == true) {
     widget = MainLayoutScreen();
   }else{
     widget = LayoutTecScreen();
   }
+
   runApp(MyApp(widget, isDark,));
 }
 
@@ -48,7 +50,11 @@ class MyApp extends StatelessWidget {
   final Widget startWidget;
   final bool isDark;
 
-  const MyApp(this.startWidget, this.isDark, {super.key});
+  const MyApp(
+    this.startWidget,
+    this.isDark,
+    {super.key}
+  );
 
   // This widget is the root of your application.
   @override
@@ -56,17 +62,13 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) =>
-          SignInCubit()
-            ..changeAppMode(
+          create: (context) => SignInCubit()..changeAppMode(
               fromShared: isDark,
             )
 
         ),
         BlocProvider(
-          create: (context) =>
-          LayoutCubit()
-            ..getUserData()..getOrders(),
+          create: (context) => LayoutCubit()..getUserData()..getOrders(),
         ),
         ChangeNotifierProvider(
           create: (context) => AppData(),
@@ -141,7 +143,11 @@ class MyApp extends StatelessWidget {
               themeMode: SignInCubit
                   .get(context)
                   .isDark ? ThemeMode.dark : ThemeMode.light,
-              home: startWidget,
+
+              //splash Screen
+              onGenerateRoute: RouteGenerator.getRoute,
+              initialRoute: Routes.splashRoute,
+              // home: startWidget,
             );
           }
       ),

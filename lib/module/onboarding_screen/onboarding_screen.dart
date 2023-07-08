@@ -10,43 +10,54 @@ import 'package:login_register_methods/module/sign_up_screen/cubit/cubit.dart';
 import 'package:login_register_methods/module/sign_up_screen/cubit/states.dart';
 import 'package:login_register_methods/module/sign_up_screen/google_facebook_signup_info.dart';
 import 'package:login_register_methods/shared/components/components.dart';
-import 'package:login_register_methods/shared/components/constants.dart';
+import 'package:login_register_methods/shared/resources/constants_manager.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-
 import '../../layout/cubit/cubit.dart';
 import '../../model/user_model.dart';
 import '../../shared/local/cache_helper.dart';
 
 class BoardingModel {
-  final String highlightedText;
+  final String title;
   final String text;
-  final String image;
+  final String imagePath;
 
   BoardingModel({
-    required this.highlightedText,
+    required this.title,
     required this.text,
-    required this.image,
+    required this.imagePath,
   });
 }
 
 class OnBoardingScreen extends StatelessWidget {
   final List<BoardingModel> boarding = [
     BoardingModel(
-      highlightedText: "You have a breakdown ",
-      text: "in electricity, plumbing, carpentry...etc.",
-      image: "assets/images/onboarding1.jpg",
+      title: 'HomeMate Community',
+      text: "HomeMate connects Users with Technicians (Services Suppliers) in one place",
+      imagePath: 'assets/images/onboarding_1.png',
     ),
     BoardingModel(
-      highlightedText: "Choose ",
-      text: "the maintenance service you want and send the request",
-      image: "assets/images/onboarding2.jpg",
+      title: 'High-Quality Services',
+      text: "Everything you need for your home; you can select from our available and trusted services",
+      imagePath: 'assets/images/onboarding_2.png',
     ),
     BoardingModel(
-      highlightedText: "A maintenance technical ",
-      text: "will come to you as soon as possible",
-      image: "assets/images/onboarding3.jpg",
+      title: 'Book a Service with a Best Cost',
+      text: "Choose your service as needed and confirm the right price for you from the technicians offers list",
+      imagePath: 'assets/images/onboarding_3.png',
+    ),
+    BoardingModel(
+      title: 'From the Nearest, Choose the Best',
+      text: "Find the best services supplier you want through their locations and rating",
+      imagePath: 'assets/images/onboarding_4.png',
+    ),
+    BoardingModel(
+      title: 'The Details in Chat',
+      text: "You can agree on more details with the chat feature",
+      imagePath: 'assets/images/onboarding_5.png',
     ),
   ];
+
+
   final PageController boardingController = PageController();
 
   OnBoardingScreen({super.key});
@@ -85,31 +96,34 @@ class OnBoardingScreen extends StatelessWidget {
                   Expanded(
                     child: PageView.builder(
                       itemBuilder: (context, index) =>
-                          onBoardingItem(boarding[index], context),
+                        onBoardingItem(boarding[index], context),
                       controller: boardingController,
                       itemCount: boarding.length,
                     ),
                   ),
 
                   /// Page Indicator
-                  Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: SmoothPageIndicator(
-                      controller: boardingController,
-                      count: boarding.length,
-                      effect: const ExpandingDotsEffect(
-                          dotColor: Colors.grey,
-                          dotHeight: 8.0,
-                          expansionFactor: 2.5,
-                          dotWidth: 8.0,
-                          spacing: 5.0,
-                          activeDotColor: secondaryColor),
+                  Center(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      child: SmoothPageIndicator(
+                        controller: boardingController,
+                        count: boarding.length,
+                        effect: const ExpandingDotsEffect(
+                            dotColor: Colors.grey,
+                            dotHeight: 8.0,
+                            expansionFactor: 2.5,
+                            dotWidth: 8.0,
+                            spacing: 5.0,
+                            activeDotColor: primaryColor,
+                        ),
+                      ),
                     ),
                   ),
 
                   /// Signup, Google, Facebook, Text and Text buttons
                   Padding(
-                    padding: const EdgeInsets.all(15.0),
+                    padding: const EdgeInsets.all(16.0),
                     child: Column(
                       children: [
                         // Sign up with Email and Password
@@ -207,42 +221,45 @@ class OnBoardingScreen extends StatelessWidget {
   Widget onBoardingItem(BoardingModel model, context) =>
       Column(
         children: [
+          //OnBoarding Image
+          Container(
+            height: MediaQuery.of(context).size.height * 0.45,
+            width: double.infinity,
+            padding: EdgeInsets.all(16),
+            child: Image(
+              image: AssetImage(model.imagePath),
+              fit: BoxFit.fill,
+            ),
+          ),
           //OnBoarding Text
           Padding(
-            padding: const EdgeInsets.all(15.0),
-            child: Row(
+            padding: const EdgeInsets.symmetric(horizontal: 24.0),
+            child: Column(
               children: [
-                Expanded(
-                  child: RichText(
-                    text: TextSpan(
-                      text: model.highlightedText,
-                      style: const TextStyle(
-                        fontFamily: "Roboto",
-                        fontSize: 22.0,
-                        color: secondaryColor,
-                      ),
-                      children: [
-                        TextSpan(
-                          text: model.text,
-                          style: TextStyle(
-                            fontFamily: "Roboto",
-                            fontSize: 22.0,
-                            color: Colors.grey.shade600,
-                          ),
-                        ),
-                      ],
+                Text(
+                  model.title,
+                  style: const TextStyle(
+                    fontFamily: "Roboto",
+                    fontSize: 24,
+                    color: Colors.black87,
+                    fontWeight: FontWeight.w500
+                  ),
+                ),
+                SizedBox(
+                  height: 8,
+                ),
+                RichText(
+                  textAlign: TextAlign.center,
+                  text: TextSpan(
+                    text: model.text,
+                    style: TextStyle(
+                      fontFamily: "Roboto",
+                      fontSize: 16.0,
+                      color: Colors.black54,
                     ),
                   ),
                 ),
               ],
-            ),
-          ),
-          //OnBoarding Image
-          Expanded(
-            child: Image(
-              image: AssetImage(model.image),
-              width: double.infinity,
-              fit: BoxFit.fill,
             ),
           ),
         ],

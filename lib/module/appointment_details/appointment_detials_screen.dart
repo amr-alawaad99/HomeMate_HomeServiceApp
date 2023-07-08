@@ -9,7 +9,7 @@ import 'package:login_register_methods/shared/components/components.dart';
 
 import '../../model/cost_model.dart';
 import '../../model/orderModel.dart';
-import '../../shared/components/constants.dart';
+import '../../shared/resources/constants_manager.dart';
 import '../sign_in_screen/cubit/cubit.dart';
 import '../technical_details_screen/technical_details_screen.dart';
 

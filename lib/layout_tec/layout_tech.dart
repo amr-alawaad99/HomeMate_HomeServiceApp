@@ -1,6 +1,3 @@
-
-
-
 import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
 import 'package:colorful_safe_area/colorful_safe_area.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
@@ -14,7 +11,7 @@ import '../layout/cubit/states.dart';
 import '../module/drawer/my_drawer.dart';
 import '../module/sign_in_screen/cubit/cubit.dart';
 import '../module/sign_in_screen/cubit/states.dart';
-import '../shared/components/constants.dart';
+import '../shared/resources/constants_manager.dart';
 import 'modules/drawer/drawer_technical_screen.dart';
 import 'modules/notifications_tech/notifications_tech_screen.dart';
 

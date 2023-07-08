@@ -9,7 +9,7 @@ import 'package:username_generator/username_generator.dart';
 import '../../layout/cubit/cubit.dart';
 import '../../model/user_model.dart';
 import '../../shared/components/components.dart';
-import '../../shared/components/constants.dart';
+import '../../shared/resources/constants_manager.dart';
 import '../../shared/local/cache_helper.dart';
 
 class GoogleFacebookSignUpInfo extends StatelessWidget {

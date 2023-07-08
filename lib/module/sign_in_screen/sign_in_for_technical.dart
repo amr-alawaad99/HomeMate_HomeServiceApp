@@ -9,7 +9,7 @@
 // import 'package:login_register_methods/module/sign_in_screen/cubit/cubit.dart';
 // import 'package:login_register_methods/module/sign_in_screen/cubit/states.dart';
 // import 'package:login_register_methods/shared/components/components.dart';
-// import 'package:login_register_methods/shared/components/constants.dart';
+// import 'package:login_register_methods/shared/components/constants_manager.dart';
 // import 'package:login_register_methods/shared/local/cache_helper.dart';
 //
 // import '../../model/user_model.dart';

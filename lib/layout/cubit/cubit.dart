@@ -22,7 +22,7 @@ import '../../model/orderModel.dart';
 import '../../model/user_model.dart';
 
 import '../../shared/components/components.dart';
-import '../../shared/components/constants.dart';
+import '../../shared/resources/constants_manager.dart';
 import '../../shared/local/cache_helper.dart';
 
 class LayoutCubit extends Cubit<LayoutStates> {

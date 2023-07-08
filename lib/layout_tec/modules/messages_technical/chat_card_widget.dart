@@ -1,6 +1,6 @@
 // import 'package:flutter/material.dart';
 // import '../../../model_tech/chat_tech.dart';
-// import '../../../shared/components/constants.dart';
+// import '../../../shared/components/constants_manager.dart';
 //
 //
 //

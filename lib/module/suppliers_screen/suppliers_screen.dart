@@ -7,7 +7,7 @@ import '../../layout/cubit/states.dart';
 import '../../model/appointment.dart';
 import '../../model/user_model.dart';
 import '../../shared/components/components.dart';
-import '../../shared/components/constants.dart';
+import '../../shared/resources/constants_manager.dart';
 import '../technical_details_screen/technical_details_screen.dart';
 
 class SuppliersScreen extends StatelessWidget {

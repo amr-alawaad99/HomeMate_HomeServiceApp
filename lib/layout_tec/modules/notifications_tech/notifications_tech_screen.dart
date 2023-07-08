@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../shared/components/constants.dart';
+import '../../../shared/resources/constants_manager.dart';
 
 class NotificationsTechnicalScreen extends StatelessWidget {
   const NotificationsTechnicalScreen({super.key});

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:login_register_methods/module/google_maps_widget/google_maps_widget.dart';
 import '../../../shared/components/components.dart';
-import '../../../shared/components/constants.dart';
+import '../../../shared/resources/constants_manager.dart';
 
 class EditProfileTechnicalScreen extends StatelessWidget {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();

@@ -8,7 +8,7 @@ import 'package:login_register_methods/module/sign_up_screen/username_screen.dar
 import 'package:provider/provider.dart';
 
 import '../../shared/components/components.dart';
-import '../../shared/components/constants.dart';
+import '../../shared/resources/constants_manager.dart';
 
 class VerificationScreen extends StatelessWidget {
   final formKey = GlobalKey<FormState>();
