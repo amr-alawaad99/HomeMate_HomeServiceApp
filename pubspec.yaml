@@ -60,6 +60,7 @@ dependencies:
   ntp: ^2.0.0
   galleryimage: ^2.0.1
   permission_handler: ^10.3.0
+  flutter_native_splash: ^2.3.1
 
 
 
@@ -74,6 +75,15 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
+
+
+
+flutter_native_splash:
+  android: true
+  ios: true
+
+  color: "#ffffff"
+  image: assets/images/splash.png
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
